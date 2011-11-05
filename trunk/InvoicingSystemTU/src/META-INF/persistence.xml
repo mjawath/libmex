@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="InvoicingSystemPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.biz.invoicesystem.entity.contacts.Address</class>
+    <class>org.biz.invoicesystem.entity.contacts.ContactDetail</class>
+    <class>org.biz.invoicesystem.entity.contacts.Email</class>
+    <class>org.biz.invoicesystem.entity.contacts.Fax</class>
+    <class>org.biz.invoicesystem.entity.contacts.Phone</class>
+    <class>org.biz.invoicesystem.entity.contacts.SocialWebsite</class>
+    <class>org.biz.invoicesystem.entity.contacts.Website</class>
+    <class>org.biz.invoicesystem.entity.inventory.GDN</class>
+    <class>org.biz.invoicesystem.entity.inventory.GDNLine</class>
+    <class>org.biz.invoicesystem.entity.inventory.GRN</class>
+    <class>org.biz.invoicesystem.entity.inventory.GRNLine</class>
+    <class>org.biz.invoicesystem.entity.inventory.InventoryJournal</class>
+    <class>org.biz.invoicesystem.entity.inventory.InventoryJournalLine</class>
+    <class>org.biz.invoicesystem.entity.inventory.InventoryMonthlySummery</class>
+    <class>org.biz.invoicesystem.entity.master.Customer</class>
+    <class>org.biz.invoicesystem.entity.master.Item</class>
+    <class>org.biz.invoicesystem.entity.master.PurchaseInvoice</class>
+    <class>org.biz.invoicesystem.entity.master.PurchaseInvoiceLineItem</class>
+    <class>org.biz.invoicesystem.entity.master.Supplier</class>
+    <class>org.biz.invoicesystem.entity.master.UOM</class>
+    <class>org.biz.invoicesystem.entity.transactions.CustomerStatement</class>
+    <class>org.biz.invoicesystem.entity.transactions.PurchaseInvoice</class>
+    <class>org.biz.invoicesystem.entity.transactions.PurchaseInvoiceLineItem</class>
+    <class>org.biz.invoicesystem.entity.transactions.SalesInvoice</class>
+    <class>org.biz.invoicesystem.entity.transactions.SalesInvoiceLineItem</class>
+    <class>org.biz.invoicesystem.entity.master.Staff</class>
+    <class>org.biz.invoicesystem.entity.master.Category</class>
+    <class>org.biz.invoicesystem.entity.master.ItemVariation</class>
+    <class>org.biz.invoicesystem.entity.master.Product</class>
+    <class>org.biz.invoicesystem.entity.master.Variation</class>
+    <class>org.biz.invoicesystem.entity.master.VariationType</class>
+    <class>org.biz.books.entity.accounts.bank.Bank</class>
+    <class>org.biz.books.entity.accounts.bank.BankBranch</class>
+    <class>org.biz.books.entity.accounts.bank.Cheques</class>
+    <class>org.biz.books.entity.accounts.journal.CashJournal</class>
+    <class>org.biz.books.entity.accounts.journal.Journal</class>
+    <class>org.biz.books.entity.accounts.journal.PurchaseJounal</class>
+    <class>org.biz.books.entity.accounts.journal.SalesJournal</class>
+    <class>org.biz.books.entity.accounts.ledger.Accounts</class>
+    <class>org.biz.books.entity.accounts.ledger.JounelEntry</class>
+    <class>org.biz.books.entity.accounts.ledger.TransactionEntry</class>
+    <class>org.biz.books.entity.accounts.payments.CustomerPayments</class>
+    <class>org.biz.books.entity.accounts.payments.PaymentDocument</class>
+    <class>org.biz.books.entity.accounts.payments.SupplierPayments</class>
+    <class>org.biz.invoicesystem.entity.master.CustomerStatement</class>
+    <class>org.biz.books.entity.accounts.ledger.TransactionEvent</class>
+    <class>org.biz.invoicesystem.entity.transactions.Payment</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/invoicesystem"/>
+      <property name="javax.persistence.jdbc.password" value="123"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+    </properties>
+  </persistence-unit>
+</persistence>
