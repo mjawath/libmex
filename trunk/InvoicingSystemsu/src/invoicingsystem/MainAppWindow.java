@@ -18,13 +18,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
-import org.biz.books.ui.accounts.AccountsCreationUI;
 import org.biz.invoicesystem.master.ui.CategoryMasterUI;
-import org.biz.invoicesystem.master.ui.ContactsUI;
-import org.biz.invoicesystem.master.ui.CustomerUI;
 import org.biz.invoicesystem.master.ui.ItemMasterUI;
 import org.biz.invoicesystem.master.ui.ProductMasterUI;
-import org.biz.invoicesystem.master.ui.SupplierUI;
 import org.components.util.Sessions;
 import org.components.windows.TabPanelUI;
 
@@ -123,7 +119,7 @@ public class MainAppWindow extends app.AppMainWindow {
 
         Sessions.addToSession("mainui", this);
         addToTabpanelToUI(new ItemMasterUI(), "Item master");
-        addToTabpanelToUI(new AccountsCreationUI(), "acoouts master");
+//        addToTabpanelToUI(new AccountsCreationUI(), "acoouts master");
         addToTabpanelToUI(new SalesInvoiceUI(), "Invoice master");
         addToTabpanelToUI(new PurchaseInvoiceUI(), " purchase Invoice ");
         addToTabpanelToUI(new ItemInventorySummary(), "item summery");
