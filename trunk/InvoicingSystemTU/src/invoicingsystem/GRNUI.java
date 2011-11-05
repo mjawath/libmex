@@ -28,7 +28,7 @@ import org.biz.invoicesystem.entity.inventory.GRNLine;
 import org.biz.invoicesystem.entity.inventory.InventoryJournal;
 import org.biz.invoicesystem.entity.inventory.InventoryJournalLine;
 import org.biz.invoicesystem.entity.master.Item;
-import org.biz.invoicesystem.master.ui.UOMPopUp;
+//import org.biz.invoicesystem.master.ui.UOMPopUp;
 import org.biz.invoicesystem.service.inventory.GRNService;
 import org.biz.invoicesystem.service.master.ItemService;
 import org.components.windows.TabPanelUI;
@@ -42,7 +42,7 @@ public class GRNUI extends TabPanelUI {
     GRN grn;
     List<GRN> lists;
     ItemPopUp dialog;
-    UOMPopUp uompopup;
+//    UOMPopUp uompopup;
     List<Item> items;
     ItemService itemService;
     GRNService service;
@@ -92,9 +92,9 @@ public class GRNUI extends TabPanelUI {
         };
         dialog.setSecTable(cxTable1);
         
-        uompopup = new UOMPopUp((JTextComponent)tuom.getEditor(), items){
-        
-        };
+//        uompopup = new UOMPopUp((JTextComponent)tuom.getEditor(), items){
+//        
+//        };
 
 
         cxTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
