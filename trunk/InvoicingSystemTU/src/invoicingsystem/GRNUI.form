@@ -154,7 +154,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CComboBox" name="tuom">
+    <Component class="org.components.controls.CComboBox" name="tunit">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
       </Properties>

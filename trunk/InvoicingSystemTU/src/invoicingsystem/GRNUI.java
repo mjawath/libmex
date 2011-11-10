@@ -29,6 +29,7 @@ import org.biz.invoicesystem.entity.inventory.InventoryJournal;
 import org.biz.invoicesystem.entity.inventory.InventoryJournalLine;
 import org.biz.invoicesystem.entity.master.Item;
 //import org.biz.invoicesystem.master.ui.UOMPopUp;
+import org.biz.invoicesystem.master.ui.UOMPopUp;
 import org.biz.invoicesystem.service.inventory.GRNService;
 import org.biz.invoicesystem.service.master.ItemService;
 import org.components.windows.TabPanelUI;
@@ -42,7 +43,7 @@ public class GRNUI extends TabPanelUI {
     GRN grn;
     List<GRN> lists;
     ItemPopUp dialog;
-//    UOMPopUp uompopup;
+    UOMPopUp uompopup;
     List<Item> items;
     ItemService itemService;
     GRNService service;
@@ -138,7 +139,7 @@ public class GRNUI extends TabPanelUI {
         cLabel5 = new org.components.controls.CLabel();
         cButton2 = new org.components.controls.CButton();
         cButton3 = new org.components.controls.CButton();
-        tuom = new org.components.controls.CComboBox();
+        tunit = new org.components.controls.CComboBox();
 
         setLayout(null);
 
@@ -218,9 +219,9 @@ public class GRNUI extends TabPanelUI {
         add(cButton3);
         cButton3.setBounds(373, 413, 57, 23);
 
-        tuom.setEditable(true);
-        add(tuom);
-        tuom.setBounds(470, 90, 90, 23);
+        tunit.setEditable(true);
+        add(tunit);
+        tunit.setBounds(470, 90, 90, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton2ActionPerformed
@@ -354,6 +355,6 @@ public class GRNUI extends TabPanelUI {
     private javax.swing.JScrollPane jScrollPane1;
     private org.components.controls.CTextField titem;
     private org.components.controls.CTextField tqty;
-    private org.components.controls.CComboBox tuom;
+    private org.components.controls.CComboBox tunit;
     // End of variables declaration//GEN-END:variables
 }
