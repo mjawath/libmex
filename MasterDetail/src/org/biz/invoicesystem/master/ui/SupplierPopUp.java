@@ -19,7 +19,7 @@ import org.biz.invoicesystem.entity.master.Supplier;
  *
  * @author mjawath
  */
-public class SupplierPopUp extends Popdialog<Supplier> {
+public class SupplierPopUp extends Popdialog {
 
     /** Creates new form ItemPopUp */
     public SupplierPopUp() {
@@ -29,7 +29,7 @@ public class SupplierPopUp extends Popdialog<Supplier> {
         setTextField(textField);
     }
 
-    public SupplierPopUp( JTextField field,List<Supplier> items) {
+    public SupplierPopUp( JTextField field,List items) {
         initComponents();
         super.setTable(table);
         super.setTextField(field);
@@ -111,8 +111,8 @@ public class SupplierPopUp extends Popdialog<Supplier> {
     @Override
     public void populateTable() {
         TableUtil.cleardata(getTable());
-        for (Supplier item : items) {
-
+        for (Object ob: items) {
+            Supplier item =(Supplier)ob;
             Object[] row = {item.getId(),item.getCode(),item.getName()};
             TableUtil.addrow(getTable(), row);
             System.out.println(item.getId());
