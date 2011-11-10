@@ -29,7 +29,7 @@ import org.components.controls.CxTable;
  *
  * @author mjawath
  */
-public abstract class Popdialog<T> extends javax.swing.JDialog {
+public abstract class Popdialog extends javax.swing.JDialog {
 
     JTextField textField;
     int column=0;
@@ -48,15 +48,15 @@ public abstract class Popdialog<T> extends javax.swing.JDialog {
         setUndecorated(true);
 //        initComponents();
     }
-    public Popdialog(JTextField field,List<T> list) {
+    public Popdialog(JTextField field,List list) {
         super();
         setUndecorated(true);
         
         textField=field;
 //        initComponents();
     }
-    public List<T> items;
-    private T selectedItem;
+    public List items;
+    private Object selectedItem;
 
     public void searchItem(String text, int... indice) {
         try {
@@ -247,11 +247,11 @@ public abstract class Popdialog<T> extends javax.swing.JDialog {
         return textField.getText();
     }
 
-    public T getSelectedItem() {
+    public Object getSelectedItem() {
         return selectedItem;
     }
 
-    public void setSelectedItem(T selectedItem) {
+    public void setSelectedItem(Object selectedItem) {
         this.selectedItem = selectedItem;
     }
 
@@ -263,16 +263,16 @@ public abstract class Popdialog<T> extends javax.swing.JDialog {
 
     }
 
-    public void populateTable(List<T> items) {
+    public void populateTable(List items) {
         this.items = items;
         populateTable();
     }
 
-    public List<T> getItems() {
+    public List getItems() {
         return items;
     }
 
-    public void setItems(List<T> items) {
+    public void setItems(List items) {
         this.items = items;
     }
 

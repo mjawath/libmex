@@ -13,29 +13,29 @@ package org.biz.invoicesystem.master.ui;
 import java.util.List;
 import javax.swing.JTextField;
 import org.biz.app.ui.util.TableUtil;
-import org.biz.invoicesystem.entity.master.Customer;
+import org.biz.invoicesystem.entity.master.Item;
 
 /**
  *
  * @author mjawath
  */
-public class CustomerPopUp extends Popdialog {
+public class UOMPopUp extends Popdialog {
 
     /** Creates new form ItemPopUp */
-    public CustomerPopUp() {
+    public UOMPopUp() {
         super();
         initComponents();
         setTable(table);
         setTextField(textField);
     }
 
-    public CustomerPopUp( JTextField field,List items) {
+    public UOMPopUp( JTextField field,List items) {
         initComponents();
         super.setTable(table);
         super.setTextField(field);
         setItems(items);
         populateTable();
-        
+        setSelectedColumn(1);
         init();
 
     }
@@ -56,14 +56,14 @@ public class CustomerPopUp extends Popdialog {
 
             },
             new String [] {
-                "id", "Code", "Name"
+                "id", "Code", "Name", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -78,6 +78,7 @@ public class CustomerPopUp extends Popdialog {
         table.getColumnModel().getColumn(0).setResizable(false);
         table.getColumnModel().getColumn(1).setResizable(false);
         table.getColumnModel().getColumn(2).setResizable(false);
+        table.getColumnModel().getColumn(3).setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,20 +106,24 @@ public class CustomerPopUp extends Popdialog {
     @Override
     protected void setItem() {
         Object ob = TableUtil.getSelectedModelsValueAt(getTable(), 0);
-        Customer i = Customer.find(ob.toString(), getItems());
-        setSelectedItem(i);    }
+        Item i = Item.find(ob.toString(), getItems());
+        setSelectedItem(i);
+
+
+    }
 
     @Override
     public void populateTable() {
         TableUtil.cleardata(getTable());
-        for (Object ob: items) {
-            Customer item =(Customer)ob;
-            Object[] row = {item.getId(),item.getCode(),item.getName()};
+        for (Object ob : items) {
+            Item item=(Item)ob;
+                    Object[] row = {item.getId(),item.getCode(),item.getName(),item.getDescription()};
             TableUtil.addrow(getTable(), row);
-            System.out.println(item.getId());
         }
 
     }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private org.components.controls.CxTable table;

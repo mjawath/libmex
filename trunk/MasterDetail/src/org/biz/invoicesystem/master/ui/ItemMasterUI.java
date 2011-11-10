@@ -66,7 +66,7 @@ public class ItemMasterUI extends TabPanelUI {
 
             @Override
             public void action() {
-                selectedItem = ipu.getSelectedItem();
+                selectedItem =(Item) ipu.getSelectedItem();
                 itemSelectedAction();
             }
         };
