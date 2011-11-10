@@ -40,7 +40,7 @@ import org.dao.util.JPAUtil;
  * @author Administrator
  */
 public class GDNUI extends TabPanelUI {
-
+    
     GDN gdn;
     List<Item> items;
     ItemService itemService;
@@ -131,7 +131,6 @@ public class GDNUI extends TabPanelUI {
         cLabel1 = new org.components.controls.CLabel();
         tqty = new org.components.controls.CTextField();
         cLabel4 = new org.components.controls.CLabel();
-        tunit = new org.components.controls.CLabel();
         cButton1 = new org.components.controls.CButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         cxTable1 = new org.components.controls.CxTable();
@@ -139,6 +138,7 @@ public class GDNUI extends TabPanelUI {
         cButton2 = new org.components.controls.CButton();
         cLabel6 = new org.components.controls.CLabel();
         cLabel7 = new org.components.controls.CLabel();
+        tunit = new org.components.controls.CComboBox();
 
         setLayout(null);
         add(titem);
@@ -153,12 +153,6 @@ public class GDNUI extends TabPanelUI {
         cLabel4.setText("Qty");
         add(cLabel4);
         cLabel4.setBounds(280, 20, 40, 20);
-
-        tunit.setBackground(new java.awt.Color(204, 255, 204));
-        tunit.setText("");
-        tunit.setOpaque(true);
-        add(tunit);
-        tunit.setBounds(450, 40, 80, 25);
 
         cButton1.setText("Add");
         cButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -223,6 +217,8 @@ public class GDNUI extends TabPanelUI {
         cLabel7.setText("unit");
         add(cLabel7);
         cLabel7.setBounds(450, 20, 80, 20);
+        add(tunit);
+        tunit.setBounds(430, 40, 100, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
@@ -367,6 +363,6 @@ em.getTransaction().commit();
     private javax.swing.JScrollPane jScrollPane1;
     private org.components.controls.CTextField titem;
     private org.components.controls.CTextField tqty;
-    private org.components.controls.CLabel tunit;
+    private org.components.controls.CComboBox tunit;
     // End of variables declaration//GEN-END:variables
 }
