@@ -212,7 +212,7 @@ public class testSalesInvoiceUI1 extends TabPanelUI {
 
             @Override
             public void action() {
-                selectedItem = dialog.getSelectedItem();
+                selectedItem = (Item)dialog.getSelectedItem();
             }
 
             @Override
@@ -246,7 +246,7 @@ public class testSalesInvoiceUI1 extends TabPanelUI {
 
             @Override
             public void action() {
-                selectedCustomer = cusdialog.getSelectedItem();
+                selectedCustomer =(Customer) cusdialog.getSelectedItem();
             }
         };
 

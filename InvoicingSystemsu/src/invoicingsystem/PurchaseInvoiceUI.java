@@ -95,7 +95,7 @@ public class PurchaseInvoiceUI extends TabPanelUI {
 
             @Override
             public void action() {
-                selectedItem = dialog.getSelectedItem();
+                selectedItem = (Item)dialog.getSelectedItem();
             }
 
             @Override
