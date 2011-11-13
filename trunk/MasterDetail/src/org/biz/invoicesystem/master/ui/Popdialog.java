@@ -10,6 +10,7 @@
  */
 package org.biz.invoicesystem.master.ui;
 
+import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -17,6 +18,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
+import javax.swing.ComboBoxEditor;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -32,6 +35,9 @@ import org.components.controls.CxTable;
 public abstract class Popdialog extends javax.swing.JDialog {
 
     JTextField textField;
+    JComboBox comboField;
+    Component component;
+    ComboBoxEditor  comboEditor;
     int column=0;
     int selectedColumn=0;
     JTable secTable;
@@ -51,8 +57,9 @@ public abstract class Popdialog extends javax.swing.JDialog {
     public Popdialog(JTextField field,List list) {
         super();
         setUndecorated(true);
-        
+        component = field;
         textField=field;
+        
 //        initComponents();
     }
     public List items;
@@ -68,8 +75,11 @@ public abstract class Popdialog extends javax.swing.JDialog {
         }
     }
 
-    public void init() {
+    public void init(JTextField field,List list) {
 
+        component =field;
+        textField=field;
+        items=list;
         setFocusableWindowState(false);
         table.setFocusable(false);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
@@ -142,12 +152,105 @@ public abstract class Popdialog extends javax.swing.JDialog {
 //                 if (!isVisible()) {
                     showPopup();
 //                }
+//                }                              
+            }
+        });
+        textField.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                closePopup();
+            }
+        });
+
+    }
+    
+    public void init(JComboBox jcb) {
+
+        comboField=jcb;
+        comboEditor=jcb.getEditor();
+        component = comboEditor.getEditorComponent();
+        setFocusableWindowState(false);
+        table.setFocusable(false);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
+        table.setRowSorter(sorter);
+        if(items!=null && !items.isEmpty()){
+        populateTable();
+        }
+        
+
+       comboEditor.getEditorComponent().addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER && Popdialog.this.isVisible()) {
+                    int x = table.getSelectedRow();
+                    if (x > -1) {
+                        selectItem();
+                        action();
+                        return;
+                    }
+                }if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP) && e.isControlDown()) {
+//                  int x=getSecTable().getSelectedRow();
+//                    System.out.println("dsfgmnsdfgsdkfgnsdngs");
+//                    TableUtil.selectNextRow(getSecTable(), e);
+//                    Object val = TableUtil.getSelectedValue(getSecTable(), 0);
+//                    if (val != null) {
+//                        textField.setText(val.toString());
+//                        textField.setCaretPosition(textField.getText().length());
+//                        textField.selectAll();
+//                    }
+//                  selectTableRow();
+                    if (secTable!=null) {
+                  TableUtil.selectNextRow(secTable, e);
+                }
+                  
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN) {
+             
+                    moveTableSelection(e);
+                   
+                    return;
+                }
+                
+                if (e.getKeyCode() == KeyEvent.VK_DELETE && e.isControlDown()) {
+                    System.out.println(e);
+                    deleteAction();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_ESCAPE) {                    
+                  closePopup();
+                    return;
+                }
+                  if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP) && e.isControlDown()) {
+                  closePopup();
+                  return;
+                  }
+                if (e.getKeyCode()==KeyEvent.VK_CONTROL) {
+                 closePopup();
+                   
+                 return;
+                 
+                }
+//                if (e.getKeyChar()!=KeyEvent.CHAR_UNDEFINED) {
+                    searchItem(comboField.getEditor().getItem().toString(), column);
+                int rc = table.getRowCount();
+                int sr = table.getSelectedRow();
+                if (sr == -1 && rc > 0) {
+                    table.getSelectionModel().setSelectionInterval(0, 0);
+                }
+//                 if (!isVisible()) {
+                    showPopup();
+//                }
 //                }
                
                 
             }
         });
-        textField.addFocusListener(new FocusAdapter() {
+        comboEditor.getEditorComponent().addFocusListener(new FocusAdapter() {
 
             @Override
             public void focusLost(FocusEvent e) {
@@ -163,7 +266,7 @@ public abstract class Popdialog extends javax.swing.JDialog {
 
     public void showPopup() {
         if (!this.isVisible()) {            
-            this.setLocation((int)textField.getLocationOnScreen().getX()+20,(int)textField.getLocationOnScreen().getY()+textField.getHeight());
+            this.setLocation((int)component.getLocationOnScreen().getX()+20,(int)component.getLocationOnScreen().getY()+component.getHeight());
             this.setVisible(true);
         }
     }
@@ -223,7 +326,13 @@ public abstract class Popdialog extends javax.swing.JDialog {
 
     public void selectItem() {
         Object ob = TableUtil.getSelectedModelsValueAt(table, selectedColumn);
+        if(component instanceof JComboBox){
+        comboField.setSelectedItem(ob.toString());
+        }
+        if(component instanceof JTextField){
         textField.setText(ob.toString());
+        }
+        
         setItem();
     }
 
@@ -244,7 +353,13 @@ public abstract class Popdialog extends javax.swing.JDialog {
     }
 
     public String selectedText() {
+         if(component instanceof JComboBox){
+        return  comboField.getSelectedItem().toString();
+        }
+        if(component instanceof JTextField){
         return textField.getText();
+        }       
+        return "";
     }
 
     public Object getSelectedItem() {
@@ -260,6 +375,7 @@ public abstract class Popdialog extends javax.swing.JDialog {
     }
 
     public void populateTable() {
+        
 
     }
 

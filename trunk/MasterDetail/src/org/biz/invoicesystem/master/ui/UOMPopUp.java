@@ -11,9 +11,11 @@
 package org.biz.invoicesystem.master.ui;
 
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import org.biz.app.ui.util.TableUtil;
 import org.biz.invoicesystem.entity.master.Item;
+import org.biz.invoicesystem.entity.master.UOM;
 
 /**
  *
@@ -26,17 +28,25 @@ public class UOMPopUp extends Popdialog {
         super();
         initComponents();
         setTable(table);
-        setTextField(textField);
+//        setTextField(textField);
     }
 
     public UOMPopUp( JTextField field,List items) {
         initComponents();
         super.setTable(table);
-        super.setTextField(field);
+        setSelectedColumn(1);
+        init(field,items);
+        populateTable();
+
+    }
+    public UOMPopUp( JComboBox field,List items) {
+        initComponents();
+        super.setTable(table);
+        //super.setTextField(field);
         setItems(items);
         populateTable();
         setSelectedColumn(1);
-        init();
+        init(field);
 
     }
 
@@ -106,7 +116,7 @@ public class UOMPopUp extends Popdialog {
     @Override
     protected void setItem() {
         Object ob = TableUtil.getSelectedModelsValueAt(getTable(), 0);
-        Item i = Item.find(ob.toString(), getItems());
+        UOM i = UOM.find(ob.toString(), getItems());
         setSelectedItem(i);
 
 
@@ -116,8 +126,8 @@ public class UOMPopUp extends Popdialog {
     public void populateTable() {
         TableUtil.cleardata(getTable());
         for (Object ob : items) {
-            Item item=(Item)ob;
-                    Object[] row = {item.getId(),item.getCode(),item.getName(),item.getDescription()};
+            UOM item=(UOM)ob;
+                    Object[] row = {item.getId(),item.getSimbol()};
             TableUtil.addrow(getTable(), row);
         }
 

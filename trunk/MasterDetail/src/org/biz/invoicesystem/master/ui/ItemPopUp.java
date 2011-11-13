@@ -31,13 +31,11 @@ public class ItemPopUp extends Popdialog {
 
     public ItemPopUp( JTextField field,List items) {
         initComponents();
-        super.setTable(table);
-        super.setTextField(field);
-        setItems(items);
-        populateTable();
+        super.setTable(table);    
+        
         setSelectedColumn(1);
-        init();
-
+        init(field,items);
+        populateTable();
     }
 
 

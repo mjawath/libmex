@@ -6,6 +6,9 @@
 package org.biz.invoicesystem.entity.master;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +30,28 @@ public class UOM implements Serializable {
     @OneToOne
     private UOM guom;
     private Double multi;
+   public static UOM find(String code, List<UOM> lst) {
 
+
+        Comparator<UOM> com = new Comparator<UOM>() {
+
+            public int compare(UOM o1, UOM o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        };
+
+        Collections.sort(lst, com);
+
+        UOM s = new UOM();
+        s.setId(code);
+        int num = Collections.binarySearch(lst, s, com);
+
+        if (num > -1) {
+            return lst.get(num);
+        } else {
+            return null;
+        }
+    }
     public String getId() {
         return id;
     }
