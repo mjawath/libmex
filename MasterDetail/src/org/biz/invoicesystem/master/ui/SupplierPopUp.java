@@ -32,11 +32,9 @@ public class SupplierPopUp extends Popdialog {
     public SupplierPopUp( JTextField field,List items) {
         initComponents();
         super.setTable(table);
-        super.setTextField(field);
-        setItems(items);
-        populateTable();
         
-        init();
+        init(field,items);
+        populateTable();
 
     }
 

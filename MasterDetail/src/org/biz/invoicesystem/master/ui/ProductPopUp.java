@@ -32,11 +32,10 @@ public class ProductPopUp extends Popdialog {
     public ProductPopUp( JTextField field,List<Product> items) {
         initComponents();
         super.setTable(table);
-        super.setTextField(field);
-        setItems(items);
-        populateTable();
+
         setSelectedColumn(1);
-        init();
+        init(field,items);
+                populateTable();
 
     }
 
