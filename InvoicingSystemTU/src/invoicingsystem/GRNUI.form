@@ -154,13 +154,10 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CComboBox" name="tunit">
-      <Properties>
-        <Property name="editable" type="boolean" value="true"/>
-      </Properties>
+    <Component class="org.components.controls.CTextField" name="tunit">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="470" y="90" width="90" height="-1"/>
+          <AbsoluteConstraints x="480" y="90" width="120" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -10,6 +10,8 @@
  */
 package invoicingsystem;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -84,6 +86,11 @@ public class GRNUI extends TabPanelUI {
             @Override
             public void action() {
                 selectedItem = (Item)dialog.getSelectedItem();
+                ArrayList ar =new ArrayList();
+                ar.add(selectedItem.getUnitOne());
+                ar.add(selectedItem.getUnitTwo());
+                uompopup.setItems(ar);
+                
             }
 
             @Override
@@ -92,11 +99,12 @@ public class GRNUI extends TabPanelUI {
             }
         };
         dialog.setSecTable(cxTable1);
-        
+        uompopup=new UOMPopUp(tunit,new ArrayList());        
 //        uompopup = new UOMPopUp((JTextComponent)tuom.getEditor(), items){
 //        
 //        };
 
+   
 
         cxTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -139,7 +147,7 @@ public class GRNUI extends TabPanelUI {
         cLabel5 = new org.components.controls.CLabel();
         cButton2 = new org.components.controls.CButton();
         cButton3 = new org.components.controls.CButton();
-        tunit = new org.components.controls.CComboBox();
+        tunit = new org.components.controls.CTextField();
 
         setLayout(null);
 
@@ -218,10 +226,8 @@ public class GRNUI extends TabPanelUI {
         });
         add(cButton3);
         cButton3.setBounds(373, 413, 57, 23);
-
-        tunit.setEditable(true);
         add(tunit);
-        tunit.setBounds(470, 90, 90, 23);
+        tunit.setBounds(480, 90, 120, 25);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton2ActionPerformed
@@ -355,6 +361,6 @@ public class GRNUI extends TabPanelUI {
     private javax.swing.JScrollPane jScrollPane1;
     private org.components.controls.CTextField titem;
     private org.components.controls.CTextField tqty;
-    private org.components.controls.CComboBox tunit;
+    private org.components.controls.CTextField tunit;
     // End of variables declaration//GEN-END:variables
 }
