@@ -8,11 +8,13 @@ package org.biz.invoicesystem.entity.master;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -20,13 +22,273 @@ import javax.persistence.Id;
  */
 @Entity
 public class Customer implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+  
+    @Id 
     private String id;
     private String name;
     private String code;
-public static Customer find(String code, List<Customer> lst) {
+      private String customerID;
+    private String warehouse;
+    private String customerName;
+    private String companyName;
+    private String designation;
+    private String type;
+    private Double creditLimit;
+    private String salesRep;
+    private String address;
+    private String city;
+    private String area;
+    private String district;
+    private String nicno;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date   crtDate;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date   uptDate;
+    Boolean isSentToMaster;
+    private Boolean isDeleted;
+    private String loggedinStaff;
+    private String religion;
+    private String groupOfCustomer;
+    private String signatureImage;
+    private String landPhone;
+    private String handPhone;
+    private String email;
+    private String picLocation;
+    private String loyaltyCardNo;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public Double getCreditLimit() {
+        return creditLimit;
+    }
+
+    public void setCreditLimit(Double creditLimit) {
+        this.creditLimit = creditLimit;
+    }
+
+    public Date getCrtDate() {
+        return crtDate;
+    }
+
+    public void setCrtDate(Date crtDate) {
+        this.crtDate = crtDate;
+    }
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGroupOfCustomer() {
+        return groupOfCustomer;
+    }
+
+    public void setGroupOfCustomer(String groupOfCustomer) {
+        this.groupOfCustomer = groupOfCustomer;
+    }
+
+    public String getHandPhone() {
+        return handPhone;
+    }
+
+    public void setHandPhone(String handPhone) {
+        this.handPhone = handPhone;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Boolean getIsSentToMaster() {
+        return isSentToMaster;
+    }
+
+    public void setIsSentToMaster(Boolean isSentToMaster) {
+        this.isSentToMaster = isSentToMaster;
+    }
+
+    public String getLandPhone() {
+        return landPhone;
+    }
+
+    public void setLandPhone(String landPhone) {
+        this.landPhone = landPhone;
+    }
+
+    public String getLoggedinStaff() {
+        return loggedinStaff;
+    }
+
+    public void setLoggedinStaff(String loggedinStaff) {
+        this.loggedinStaff = loggedinStaff;
+    }
+
+    public String getLoyaltyCardNo() {
+        return loyaltyCardNo;
+    }
+
+    public void setLoyaltyCardNo(String loyaltyCardNo) {
+        this.loyaltyCardNo = loyaltyCardNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNicno() {
+        return nicno;
+    }
+
+    public void setNicno(String nicno) {
+        this.nicno = nicno;
+    }
+
+    public String getPicLocation() {
+        return picLocation;
+    }
+
+    public void setPicLocation(String picLocation) {
+        this.picLocation = picLocation;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
+    }
+
+    public String getSalesRep() {
+        return salesRep;
+    }
+
+    public void setSalesRep(String salesRep) {
+        this.salesRep = salesRep;
+    }
+
+    public String getSignatureImage() {
+        return signatureImage;
+    }
+
+    public void setSignatureImage(String signatureImage) {
+        this.signatureImage = signatureImage;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Date getUptDate() {
+        return uptDate;
+    }
+
+    public void setUptDate(Date uptDate) {
+        this.uptDate = uptDate;
+    }
+
+    public String getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(String warehouse) {
+        this.warehouse = warehouse;
+    }
+    
+    public static Customer find(String code, List<Customer> lst) {
 
 
         Comparator<Customer> com = new Comparator<Customer>() {
@@ -48,55 +310,4 @@ public static Customer find(String code, List<Customer> lst) {
             return null;
         }
     }
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-    
-
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer)) {
-            return false;
-        }
-        Customer other = (Customer) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "org.biz.invoicesystem.master.item.Item[id=" + id + "]";
-    }
-
 }
