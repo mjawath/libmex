@@ -104,9 +104,9 @@ public class CustomerListUI extends TabPanelUI {
 
     public void addToTable() {
         TableUtil.cleardata(cxTable1);
-        for (Customer customer : customers) {
-            TableUtil.addrow(cxTable1, new Object[]{customer.getId(), customer.getCode(), customer.getName()});
-        }
+//        for (Customer customer : customers) {
+//            TableUtil.addrow(cxTable1, new Object[]{customer.getId(), customer.getCode(), customer.getName()});
+//        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CxTable cxTable1;
