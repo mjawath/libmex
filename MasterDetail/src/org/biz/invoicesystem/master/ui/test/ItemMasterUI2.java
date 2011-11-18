@@ -4,17 +4,16 @@
  */
 
 /*
- * ItemMaster.java
+ * ItemMasterUI2.java
  *
- * Created on Nov 17, 2011, 8:06:21 PM
+ * Created on Nov 18, 2011, 9:22:04 PM
  */
 package org.biz.invoicesystem.master.ui.test;
 
 import java.util.List;
 import javax.swing.JPanel;
-import org.biz.app.ui.util.TableUtil;
-import org.biz.app.ui.util.uiEty;
 import org.biz.dao.util.EntityService;
+import org.biz.invoicesystem.entity.master.Customer;
 import org.biz.invoicesystem.entity.master.Item;
 import org.biz.invoicesystem.master.ui.ItemPopUp;
 import org.biz.invoicesystem.service.master.ItemService;
@@ -22,33 +21,28 @@ import org.components.windows.TabPanelUI;
 
 /**
  *
- * @author jawath
- * @author zumri(18/11/2011 )
+ * @author Administrator
  */
-public class ItemMasterUi extends TabPanelUI {
+public class ItemMasterUI2 extends TabPanelUI  {
 
-    
+    /** Creates new form ItemMasterUI2 */
+    public ItemMasterUI2() {
+        initComponents();
+        init();
+    }
+
     List<Item> items;
     ItemService itemService;
     EntityService es;
     ItemPopUp ipu;
     Item selectedItem;
-    /** Creates new form ItemMaster */
-    public ItemMasterUi() {
-        
-        initComponents();
-        
-        init();
-    }
-
-    @Override
+    
+   @Override
     public void init() {
         es = EntityService.getEntityService();
         itemService = new ItemService();
         items = itemService.getDao().getAll();
     }
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,30 +99,32 @@ public class ItemMasterUi extends TabPanelUI {
         cButton3 = new org.components.controls.CButton();
         cButton4 = new org.components.controls.CButton();
         cButton5 = new org.components.controls.CButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        cxTable1 = new org.components.controls.CxTable();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(900, 600));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
 
         jLabel1.setText("Item Code");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 20));
+        add(jLabel1);
+        jLabel1.setBounds(30, 10, 50, 20);
 
         jLabel2.setText("Description ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 60, 20));
+        add(jLabel2);
+        jLabel2.setBounds(30, 40, 60, 20);
 
         jLabel4.setText("Category");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 60, -1));
+        add(jLabel4);
+        jLabel4.setBounds(30, 70, 60, 14);
 
         jLabel3.setText("Carton ");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        add(jLabel3);
+        jLabel3.setBounds(30, 100, 36, 14);
 
         jLabel5.setText("Sales Price");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 60, 20));
+        add(jLabel5);
+        jLabel5.setBounds(30, 160, 60, 20);
 
         jLabel6.setText("Unit");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 50, 20));
+        add(jLabel6);
+        jLabel6.setBounds(30, 130, 50, 20);
 
         jPanel1.setLayout(null);
 
@@ -161,37 +157,48 @@ public class ItemMasterUi extends TabPanelUI {
         jPanel1.add(cComboBox2);
         cComboBox2.setBounds(10, 70, 130, 23);
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 270, 190));
+        add(jPanel1);
+        jPanel1.setBounds(310, 130, 270, 190);
 
         jLabel9.setText("Min.Price");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 60, 20));
+        add(jLabel9);
+        jLabel9.setBounds(30, 220, 60, 20);
 
         jLabel10.setText("%");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 20, 20));
+        add(jLabel10);
+        jLabel10.setBounds(80, 250, 20, 20);
 
         jLabel11.setText("Cost Price");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 60, 20));
+        add(jLabel11);
+        jLabel11.setBounds(30, 190, 60, 20);
 
         jLabel12.setText("Discount ");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 60, 20));
+        add(jLabel12);
+        jLabel12.setBounds(30, 250, 60, 20);
 
         jLabel13.setText("$");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 10, 20));
+        add(jLabel13);
+        jLabel13.setBounds(200, 190, 10, 20);
 
         jLabel14.setText("Val");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 20, 20));
+        add(jLabel14);
+        jLabel14.setBounds(190, 250, 20, 20);
 
         jLabel15.setText("Location");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 60, 20));
+        add(jLabel15);
+        jLabel15.setBounds(30, 310, 60, 20);
 
         jLabel16.setText("Commission");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 60, 20));
+        add(jLabel16);
+        jLabel16.setBounds(30, 280, 60, 20);
 
         jLabel17.setText("Min.Stock");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 60, 20));
+        add(jLabel17);
+        jLabel17.setBounds(30, 340, 60, 20);
 
         jLabel18.setText("Image");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 60, 20));
+        add(jLabel18);
+        jLabel18.setBounds(30, 400, 60, 20);
 
         jLabel20.setText("Image");
 
@@ -212,33 +219,56 @@ public class ItemMasterUi extends TabPanelUI {
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 100, 110));
+        add(jPanel2);
+        jPanel2.setBounds(310, 10, 100, 110);
 
         jLabel19.setText("Re Order");
-        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 60, 20));
-        add(cTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 210, -1));
-        add(cTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 140, -1));
-        add(cComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 90, -1));
-        add(tdesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 210, -1));
-        add(tcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 210, -1));
-        add(cTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 90, -1));
-        add(cTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 90, -1));
-        add(cTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 90, -1));
-        add(cTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 90, -1));
-        add(cTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 90, -1));
-        add(cTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 90, -1));
-        add(cTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 90, -1));
-        add(cTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 90, 20));
-        add(cTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 210, -1));
-        add(cTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 210, -1));
-        add(cComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 210, -1));
-        add(cComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 210, -1));
-        add(cTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 30, -1));
-        add(cComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 70, -1));
+        add(jLabel19);
+        jLabel19.setBounds(30, 370, 60, 20);
+        add(cTextField1);
+        cTextField1.setBounds(90, 100, 210, 25);
+        add(cTextField2);
+        cTextField2.setBounds(80, 400, 140, 25);
+        add(cComboBox1);
+        cComboBox1.setBounds(210, 130, 90, 23);
+        add(tdesc);
+        tdesc.setBounds(90, 40, 210, 25);
+        add(tcode);
+        tcode.setBounds(90, 10, 210, 25);
+        add(cTextField5);
+        cTextField5.setBounds(90, 160, 90, 25);
+        add(cTextField6);
+        cTextField6.setBounds(200, 160, 90, 25);
+        add(cTextField7);
+        cTextField7.setBounds(210, 190, 90, 25);
+        add(cTextField8);
+        cTextField8.setBounds(90, 190, 90, 25);
+        add(cTextField9);
+        cTextField9.setBounds(90, 220, 90, 25);
+        add(cTextField10);
+        cTextField10.setBounds(90, 250, 90, 25);
+        add(cTextField11);
+        cTextField11.setBounds(210, 250, 90, 25);
+        add(cTextField12);
+        cTextField12.setBounds(90, 280, 90, 20);
+        add(cTextField13);
+        cTextField13.setBounds(90, 340, 210, 25);
+        add(cTextField14);
+        cTextField14.setBounds(90, 370, 210, 25);
+        add(cComboBox3);
+        cComboBox3.setBounds(90, 70, 210, 23);
+        add(cComboBox4);
+        cComboBox4.setBounds(90, 310, 210, 23);
+        add(cTextField18);
+        cTextField18.setBounds(170, 130, 30, 25);
+        add(cComboBox5);
+        cComboBox5.setBounds(90, 130, 70, 23);
 
         cButton1.setText("Close");
-        add(cButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, -1, -1));
-        add(cButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
+        add(cButton1);
+        cButton1.setBounds(530, 400, 59, 23);
+        add(cButton2);
+        cButton2.setBounds(230, 400, 65, 23);
 
         cButton3.setText("Save");
         cButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -246,89 +276,43 @@ public class ItemMasterUi extends TabPanelUI {
                 cButton3ActionPerformed(evt);
             }
         });
-        add(cButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, -1, -1));
+        add(cButton3);
+        cButton3.setBounds(350, 400, 57, 23);
 
         cButton4.setText("Clear");
-        add(cButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, -1, -1));
+        add(cButton4);
+        cButton4.setBounds(410, 400, 57, 23);
 
         cButton5.setText("Delete");
-        add(cButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, -1, -1));
-
-        cxTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "id", "Item Code", "Name"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(cxTable1);
-        cxTable1.getColumnModel().getColumn(0).setResizable(false);
-        cxTable1.getColumnModel().getColumn(2).setResizable(false);
-
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 340, -1));
+        add(cButton5);
+        cButton5.setBounds(470, 400, 63, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton3ActionPerformed
-
-              if (selectedItem != null) {
-            Item item = itemService.getDao().deatach(selectedItem, selectedItem.getId());
-            uiToEty(item);
-//            item.setProduct(selectedProd);
-            itemService.getDao().update(item);
-            items = itemService.getDao().getAll();
-            addToTable(items);
-            return;
-        }
-
+        
+//        if (selectedItem != null) {
+//            Item item = itemService.getDao().deatach(selectedItem, selectedItem.getId());
+//            uiToEty(item);
+//            //            item.setProduct(selectedProd);
+//            itemService.getDao().update(item);
+//            items = itemService.getDao().getAll();
+//            addToTable(items);
+//            return;
+//        }
+        
         Item item = new Item();
         item.setId(es.getKey());
-        uiToEty(item);
-//        item.setProduct(selectedProd);
+//        uiToEty(item)?;
+        //        item.setProduct(selectedProd);
+        
+//        Object [] ss= new Object[]{new Item(),new Customer()};
         itemService.getDao().save(item);
         items = itemService.getDao().getAll();
-        addToTable(items);
-        ipu.populateTable(items);
-        
+//        addToTable(items);?
+//        ipu.populateTable(items);
         
     }//GEN-LAST:event_cButton3ActionPerformed
 
-    
-        public void uiToEty(Item item) {
-//        item.setName(uiEty.tcToStr(tdesc));
-        item.setCode(uiEty.tcToStr(tcode));
-        item.setDescription(uiEty.tcToStr(tdesc));
-//        UOM uom1 = new UOM();
-//        uom1.setSimbol(uiEty.tcToStr(tuom1));
-//        UOM uom2 = new UOM();
-//        uom2.setSimbol(uiEty.tcToStr(tuom2));
-//        item.setUnitOne(uom1);
-//        item.setUnitTwo(uom2);
-
-    }
-        public void addToTable(List<Item> items) {
-        TableUtil.cleardata(cxTable1);
-        for (Item item : items) {
-            addToTable(item);
-        }
-        TableUtil.addrow(cxTable1, new Object[]{TableUtil.newRowID, ""});
-    }
-
-    public void addToTable(Item item) {
-        TableUtil.addrow(cxTable1, new Object[]{item.getId(), item.getCode(), item.getName(), item.getDescription()});
-    }
-    
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CButton cButton1;
     private org.components.controls.CButton cButton2;
@@ -356,7 +340,6 @@ public class ItemMasterUi extends TabPanelUI {
     private org.components.controls.CTextField cTextField7;
     private org.components.controls.CTextField cTextField8;
     private org.components.controls.CTextField cTextField9;
-    private org.components.controls.CxTable cxTable1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -380,22 +363,18 @@ public class ItemMasterUi extends TabPanelUI {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private org.components.controls.CTextField tcode;
     private org.components.controls.CTextField tdesc;
     // End of variables declaration//GEN-END:variables
 
-    //please specify the a name for this tab
     @Override
     public String getTabName() {
         return "Item Master";
     }
 
-    
-    //return this panel astab for the use of main window
     @Override
     public JPanel getJPanel() {
-        return this;
+        return this; 
     }
 }
