@@ -1,13 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+ 
 package org.biz.invoicesystem.entity.master;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -42,6 +40,44 @@ public class Item implements Serializable {
     //item has many mariation
     //variation has name value --colur = red/colur = yellow , size = 15 ,size = 20 
     
+    private String itemID;
+    private String warehouse;   
+    private String category;
+    private String extraCategory;
+    private String type;
+    private String sections;
+    private String vendorID;
+    private Double minimumSalesPrice;
+    private Double itemsDicount;
+    private Double difference;
+    private Double minimumStock;
+    private String location;
+    private Boolean manufacturingItem;
+    private String itemExtraInfo;
+    private String pic1;
+    private String pic2;
+    private String pic3;
+    private String measureUnit1;
+    private String measureUnit2;
+    private Double salesPrice2;
+    private Double landCost;
+    private Double avgCost;
+    private Double cost1;
+    private Double salesPrice1;
+    private Double reOrder;
+    private Double carton;
+    private Boolean nonStockItems;
+    private Boolean active;
+    private Boolean itemcol;
+    private Boolean trackingItem;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date crtDate;
+    private Boolean isSentToMaster;
+    private Boolean isDeleted;
+    private String loggedinStaff;
+    private List itemtexCollection;
+    private List extrasalespriceCollection;
+
 
     public static Item find(String code, List<Item> lst) {
 
@@ -139,22 +175,6 @@ public class Item implements Serializable {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Item)) {
-            return false;
-        }
-        Item other = (Item) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "org.biz.invoicesystem.master.item.Item[id=" + id + "]";
-    }
+  
 
 }
