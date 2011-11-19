@@ -16,51 +16,97 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="785" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cComboBox1" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
-                          <Component id="cLabel1" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cTextField1" alignment="0" max="32767" attributes="1"/>
-                          <Component id="cLabel2" alignment="0" pref="119" max="32767" attributes="1"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="cComboBox2" min="-2" pref="63" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cTextField2" pref="275" max="32767" attributes="1"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cComboBox1" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
+                                  <Component id="cLabel1" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cTextField1" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="cLabel2" alignment="0" pref="119" max="32767" attributes="1"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="cButton3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="3" pref="3" max="3" attributes="0"/>
+                                      <Component id="cButton4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="3" pref="3" max="3" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cButton5" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="60" pref="60" max="60" attributes="0"/>
+                                              <Component id="cButton1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cComboBox2" min="-2" pref="63" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cTextField2" pref="275" max="32767" attributes="1"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cLabel3" min="-2" pref="40" max="-2" attributes="1"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="cLabel4" min="-2" pref="119" max="-2" attributes="1"/>
+                                      <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cLabel5" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="cDatePicker1" alignment="0" max="32767" attributes="1"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="cLabel3" min="-2" pref="40" max="-2" attributes="1"/>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="cLabel4" min="-2" pref="119" max="-2" attributes="1"/>
-                              <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cLabel6" min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Component id="cLabel7" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cTextField5" min="-2" pref="284" max="-2" attributes="1"/>
+                                  <Component id="cTextField3" alignment="0" min="-2" pref="284" max="-2" attributes="1"/>
+                                  <Component id="cTextField4" alignment="0" min="-2" pref="284" max="-2" attributes="1"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cLabel8" min="-2" pref="48" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cTextField6" min="-2" pref="284" max="-2" attributes="1"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cLabel10" alignment="1" min="0" pref="0" max="32767" attributes="1"/>
+                                  <Component id="cLabel9" alignment="1" pref="48" max="32767" attributes="1"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cTextField8" min="-2" pref="284" max="-2" attributes="1"/>
+                                  <Component id="cTextField7" alignment="0" min="-2" pref="284" max="-2" attributes="1"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cLabel5" alignment="0" max="32767" attributes="1"/>
-                          <Component id="cDatePicker1" alignment="0" max="32767" attributes="1"/>
-                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="cLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="cLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="cLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="cLabel11" min="0" pref="0" max="32767" attributes="1"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cTextField9" min="-2" pref="284" max="-2" attributes="1"/>
+                      <EmptySpace min="-2" pref="549" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -81,12 +127,45 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Component id="cLabel6" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-              <Component id="cLabel7" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="cLabel8" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="73" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cTextField4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="88" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cButton3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cButton4" min="-2" max="-2" attributes="0"/>
+                  <Component id="cButton5" min="-2" max="-2" attributes="0"/>
+                  <Component id="cButton1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,7 +183,7 @@
     </Component>
     <Component class="org.components.controls.CLabel" name="cLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Address"/>
+        <Property name="text" type="java.lang.String" value="City"/>
       </Properties>
     </Component>
     <Component class="org.components.controls.CLabel" name="cLabel2">
@@ -114,7 +193,7 @@
     </Component>
     <Component class="org.components.controls.CLabel" name="cLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Address"/>
+        <Property name="text" type="java.lang.String" value="Phone"/>
       </Properties>
     </Component>
     <Component class="org.components.controls.CLabel" name="cLabel1">
@@ -153,6 +232,79 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="DOB"/>
       </Properties>
+    </Component>
+    <Component class="org.components.controls.CButton" name="cButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Close"/>
+      </Properties>
+    </Component>
+    <Component class="org.components.controls.CButton" name="cButton3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cButton3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.components.controls.CButton" name="cButton4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clear"/>
+      </Properties>
+    </Component>
+    <Component class="org.components.controls.CButton" name="cButton5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField3">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField4">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField4ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField5">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField5ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField6">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField6ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.components.controls.CLabel" name="cLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mobile"/>
+      </Properties>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField7">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField7ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.components.controls.CLabel" name="cLabel10">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Email"/>
+      </Properties>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField8">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField8ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.components.controls.CLabel" name="cLabel11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S.Rep"/>
+      </Properties>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField9">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField9ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
