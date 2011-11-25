@@ -123,15 +123,16 @@ public class MainAppWindow extends app.AppMainWindow {
 
         Sessions.addToSession("mainui", this);
         addToTabpanelToUI(new ItemMasterUI(), "Item master");
-        addToTabpanelToUI(new AccountsCreationUI(), "acoouts master");
-        addToTabpanelToUI(new SalesInvoiceUI(), "Invoice master");
-        addToTabpanelToUI(new PurchaseInvoiceUI(), " purchase Invoice ");
-        addToTabpanelToUI(new ItemInventorySummary(), "item summery");
-        addToTabpanelToUI(new CategoryMasterUI(), "cateogory ui");
-        addToTabpanelToUI(new ProductMasterUI(), "product master ui");
-        addToTabpanelToUI(new PostedSalesInvoiceUI(), "poseted sales invoice");
-        addToTabpanelToUI(new GRNUI(), "GRN invoice");
-        addToTabpanelToUI(new GDNUI(), "GDN invoice");
+        addToTabpanelToUI(new InvoiceTestUI() , "Invoice test");
+//        addToTabpanelToUI(new AccountsCreationUI(), "acoouts master");
+//        addToTabpanelToUI(new SalesInvoiceUI(), "Invoice master");
+//        addToTabpanelToUI(new PurchaseInvoiceUI(), " purchase Invoice ");
+//        addToTabpanelToUI(new ItemInventorySummary(), "item summery");
+//        addToTabpanelToUI(new CategoryMasterUI(), "cateogory ui");
+//        addToTabpanelToUI(new ProductMasterUI(), "product master ui");
+//        addToTabpanelToUI(new PostedSalesInvoiceUI(), "poseted sales invoice");
+//        addToTabpanelToUI(new GRNUI(), "GRN invoice");
+//        addToTabpanelToUI(new GDNUI(), "GDN invoice");
         events();
     }
 
