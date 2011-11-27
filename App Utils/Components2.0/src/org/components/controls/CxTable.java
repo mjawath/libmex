@@ -11,6 +11,10 @@
 
 package org.components.controls;
 
+import java.awt.Component;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.EventObject;
 import org.jdesktop.swingx.JXTable;
 
 /**
@@ -52,5 +56,13 @@ public class CxTable extends JXTable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    protected void processKeyEvent(KeyEvent e) {
+        super.processKeyEvent(e);
+        
+    }
+
+
 
 }
