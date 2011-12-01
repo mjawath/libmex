@@ -123,7 +123,7 @@ public class MainAppWindow extends app.AppMainWindow {
 
         Sessions.addToSession("mainui", this);
         addToTabpanelToUI(new ItemMasterUI(), "Item master");
-        addToTabpanelToUI(new InvoiceTestUI() , "Invoice test");
+        addToTabpanelToUI(new InvoiceTestUI2() , "Invoice test");
 //        addToTabpanelToUI(new AccountsCreationUI(), "acoouts master");
 //        addToTabpanelToUI(new SalesInvoiceUI(), "Invoice master");
 //        addToTabpanelToUI(new PurchaseInvoiceUI(), " purchase Invoice ");
