@@ -15,7 +15,7 @@ package invoicingsystem;
  * @author nnjj
  */
 public class CustomerStatementUI extends javax.swing.JPanel {
-
+int x; 
     /** Creates new form CustomerStatementUI */
     public CustomerStatementUI() {
         initComponents();

@@ -252,7 +252,7 @@ public class SalesInvoiceUI extends TabPanelUI {
             }
         });
         add(tdescription);
-        tdescription.setBounds(200, 50, 173, 25);
+        tdescription.setBounds(190, 50, 190, 25);
 
         cButton1.setText("Add");
         cButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -295,13 +295,13 @@ public class SalesInvoiceUI extends TabPanelUI {
             }
         });
         add(jButton1);
-        jButton1.setBounds(410, 330, 70, 23);
+        jButton1.setBounds(420, 330, 60, 23);
 
         cLabel1.setText("Item");
         add(cLabel1);
         cLabel1.setBounds(60, 30, 38, 20);
         add(tqty);
-        tqty.setBounds(380, 50, 154, 25);
+        tqty.setBounds(384, 50, 150, 25);
         add(tamount);
         tamount.setBounds(650, 50, 173, 25);
         add(tprice);
