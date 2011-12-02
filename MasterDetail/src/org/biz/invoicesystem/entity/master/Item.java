@@ -34,36 +34,37 @@ public class Item implements Serializable {
     private String description;
     private String inventoryType;
     @ManyToOne(cascade=CascadeType.ALL)
-    private UOM unitOne;
+    private String unitOne;
     @ManyToOne(cascade=CascadeType.ALL)
-    private UOM unitTwo;
+    private String unitTwo;
     //item has many mariation
     //variation has name value --colur = red/colur = yellow , size = 15 ,size = 20 
     
-    private String itemID;
-    private String warehouse;   
+  //  private String itemID;
+  //  private String warehouse;   
     private String category;
-    private String extraCategory;
+ //   private String extraCategory;
     private String type;
-    private String sections;
+ //   private String sections;
     private String vendorID;
-    private Double minimumSalesPrice;
-    private Double itemsDicount;
-    private Double difference;
-    private Double minimumStock;
+    private Double minSalesPrice;
+    private Double dicount;
+ //   private Double difference;
+    private Double minStock;
     private String location;
-    private Boolean manufacturingItem;
+    private Boolean manufactItem;
     private String itemExtraInfo;
     private String pic1;
-    private String pic2;
-    private String pic3;
-    private String measureUnit1;
-    private String measureUnit2;
-    private Double salesPrice2;
+//    private String pic2;
+//    private String pic3;
+   
+//    private Double salesPrice2;
     private Double landCost;
-    private Double avgCost;
-    private Double cost1;
-    private Double salesPrice1;
+ //   private Double avgCost;
+    private Double cost;
+    private Double salesPrice;
+    private Double wholesalePrice;
+    private Double retailPrice;
     private Double reOrder;
     private Double carton;
     private Boolean nonStockItems;
@@ -71,10 +72,10 @@ public class Item implements Serializable {
     private Boolean itemcol;
     private Boolean trackingItem;
     @Temporal(javax.persistence.TemporalType.DATE)
-    Date crtDate;
-    private Boolean isSentToMaster;
+    Date crDate;
+//    private Boolean isSentToMaster;
     private Boolean isDeleted;
-    private String loggedinStaff;
+//    private String loggedinStaff;
     private List itemtexCollection;
     private List extrasalespriceCollection;
 
@@ -146,27 +147,7 @@ public class Item implements Serializable {
     public void setInventoryType(String inventoryType) {
         this.inventoryType = inventoryType;
     }
-
-    public void setUnitOne(UOM unitOne) {
-        this.unitOne = unitOne;
-    }
-
-    public void setUnitTwo(UOM unitTwo) {
-        this.unitTwo = unitTwo;
-    }
-
-    public String getInventoryType() {
-        return inventoryType;
-    }
-
-    public UOM getUnitOne() {
-        return unitOne;
-    }
-
-    public UOM getUnitTwo() {
-        return unitTwo;
-    }
-    
+ 
     
     @Override
     public int hashCode() {
