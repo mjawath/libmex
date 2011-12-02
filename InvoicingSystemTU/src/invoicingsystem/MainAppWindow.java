@@ -10,7 +10,6 @@ package invoicingsystem;
  *
  * Created on Dec 13, 2010, 10:16:22 PM
  */
-import invoicingsystem.posted.PostedSalesInvoiceUI;
 import java.awt.Component;
 import javax.swing.JDialog;
 import javax.swing.UIManager;
@@ -18,13 +17,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
-import org.biz.books.ui.accounts.AccountsCreationUI;
-import org.biz.invoicesystem.master.ui.CategoryMasterUI;
-import org.biz.invoicesystem.master.ui.ContactsUI;
-import org.biz.invoicesystem.master.ui.CustomerUI;
-import org.biz.invoicesystem.master.ui.ItemMasterUI;
-import org.biz.invoicesystem.master.ui.ProductMasterUI;
-import org.biz.invoicesystem.master.ui.SupplierUI;
+
 import org.components.util.Sessions;
 import org.components.windows.TabPanelUI;
 
@@ -122,7 +115,7 @@ public class MainAppWindow extends app.AppMainWindow {
         Sessions.create();
 
         Sessions.addToSession("mainui", this);
-        addToTabpanelToUI(new ItemMasterUI(), "Item master");
+//        addToTabpanelToUI(new ItemMasterUI2(), "Item master");
         addToTabpanelToUI(new InvoiceTestUI2() , "Invoice test");
 //        addToTabpanelToUI(new AccountsCreationUI(), "acoouts master");
 //        addToTabpanelToUI(new SalesInvoiceUI(), "Invoice master");

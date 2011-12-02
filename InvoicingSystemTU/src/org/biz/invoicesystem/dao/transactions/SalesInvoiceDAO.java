@@ -60,7 +60,6 @@ public class SalesInvoiceDAO extends GenericDAO<SalesInvoice>{
     public void updateEV(SalesInvoice invoice,InventoryJournal uij){
         EntityManager em=null;
         try {
-        
         em= createEmNew();        
         em.getTransaction().begin();        
         

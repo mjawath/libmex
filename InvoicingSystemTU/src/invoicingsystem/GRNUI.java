@@ -86,10 +86,10 @@ public class GRNUI extends TabPanelUI {
             @Override
             public void action() {
                 selectedItem = (Item)dialog.getSelectedItem();
-                ArrayList ar =new ArrayList();
-                ar.add(selectedItem.getUnitOne());
-                ar.add(selectedItem.getUnitTwo());
-                uompopup.setItems(ar);
+//                ArrayList ar =new ArrayList();
+//                ar.add(selectedItem.getUnitOne());
+//                ar.add(selectedItem.getUnitTwo());
+//                uompopup.setItems(ar);
                 
             }
 
