@@ -8,7 +8,7 @@
  *
  * Created on Nov 18, 2011, 11:54:02 PM
  */
-package org.biz.invoicesystem.master.ui.testx;
+package org.biz.invoicesystem.master.ui;
 
 import java.util.ArrayList;
 import java.util.List;

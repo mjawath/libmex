@@ -1,4 +1,4 @@
- package org.biz.invoicesystem.master.ui.testx;
+ package org.biz.invoicesystem.master.ui;
 
 import java.util.List;
 import javax.swing.JPanel;
@@ -213,7 +213,7 @@ public class ItemMasterUI2 extends TabPanelUI  {
         );
 
         add(jPanel2);
-        jPanel2.setBounds(310, 10, 100, 110);
+        jPanel2.setBounds(310, 10, 0, 0);
 
         jLabel19.setText("Re Order");
         add(jLabel19);
