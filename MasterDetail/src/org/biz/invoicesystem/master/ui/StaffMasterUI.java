@@ -21,7 +21,7 @@ import org.components.windows.TabPanelUI;
  *
  * @author Administrator
  */
-public class CustomerMasterUI2 extends TabPanelUI  {
+public class StaffMasterUI extends TabPanelUI  {
 
     
      private CustomerService cService;
@@ -46,7 +46,7 @@ public class CustomerMasterUI2 extends TabPanelUI  {
         
     }
     /** Creates new form cust */
-    public CustomerMasterUI2() {
+    public StaffMasterUI() {
         initComponents();
     }
 
@@ -60,16 +60,11 @@ public class CustomerMasterUI2 extends TabPanelUI  {
     private void initComponents() {
 
         cLabel6 = new org.components.controls.CLabel();
-        cComboBox1 = new org.components.controls.CComboBox();
         cLabel7 = new org.components.controls.CLabel();
         cLabel2 = new org.components.controls.CLabel();
         cLabel8 = new org.components.controls.CLabel();
-        cLabel1 = new org.components.controls.CLabel();
         cLabel4 = new org.components.controls.CLabel();
         cTextField2 = new org.components.controls.CTextField();
-        cTextField1 = new org.components.controls.CTextField();
-        cLabel3 = new org.components.controls.CLabel();
-        cComboBox2 = new org.components.controls.CComboBox();
         cDatePicker1 = new org.components.controls.CDatePicker();
         cLabel5 = new org.components.controls.CLabel();
         cButton1 = new org.components.controls.CButton();
@@ -84,46 +79,46 @@ public class CustomerMasterUI2 extends TabPanelUI  {
         cTextField7 = new org.components.controls.CTextField();
         cLabel10 = new org.components.controls.CLabel();
         cTextField8 = new org.components.controls.CTextField();
-        cLabel11 = new org.components.controls.CLabel();
         cLabel12 = new org.components.controls.CLabel();
-        cComboBox3 = new org.components.controls.CComboBox();
         cTextField10 = new org.components.controls.CTextField();
-        cLabel13 = new org.components.controls.CLabel();
         cComboBox4 = new org.components.controls.CComboBox();
+        cDatePicker2 = new org.components.controls.CDatePicker();
+        cLabel16 = new org.components.controls.CLabel();
+        cLabel17 = new org.components.controls.CLabel();
+        cComboBox5 = new org.components.controls.CComboBox();
+        cLabel13 = new org.components.controls.CLabel();
+        cComboBox6 = new org.components.controls.CComboBox();
         cLabel14 = new org.components.controls.CLabel();
+        cComboBox7 = new org.components.controls.CComboBox();
+        cPanel1 = new org.components.containers.CPanel();
+        cLabel11 = new org.components.controls.CLabel();
         cTextField9 = new org.components.controls.CTextField();
         cLabel15 = new org.components.controls.CLabel();
-        cTextField11 = new org.components.controls.CTextField();
+        cLabel18 = new org.components.controls.CLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
 
         setLayout(null);
 
         cLabel6.setText("Address");
         add(cLabel6);
-        cLabel6.setBounds(410, 80, 63, 25);
-
-        cComboBox1.setEditable(true);
-        add(cComboBox1);
-        cComboBox1.setBounds(140, 110, 180, 23);
+        cLabel6.setBounds(390, 100, 63, 25);
 
         cLabel7.setText("City");
         add(cLabel7);
-        cLabel7.setBounds(410, 150, 31, 25);
+        cLabel7.setBounds(390, 180, 31, 25);
 
-        cLabel2.setText("Custmer Id");
+        cLabel2.setText("Staff Id");
         add(cLabel2);
-        cLabel2.setBounds(10, 10, 239, 25);
+        cLabel2.setBounds(10, 10, 70, 25);
 
         cLabel8.setText("Phone");
         add(cLabel8);
-        cLabel8.setBounds(410, 190, 48, 25);
-
-        cLabel1.setText("Discount (%)");
-        add(cLabel1);
-        cLabel1.setBounds(10, 150, 119, 25);
+        cLabel8.setBounds(390, 220, 48, 25);
 
         cLabel4.setText("Custmer Name ");
         add(cLabel4);
-        cLabel4.setBounds(330, 10, 119, 25);
+        cLabel4.setBounds(130, 10, 119, 25);
 
         cTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,33 +126,17 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField2);
-        cTextField2.setBounds(330, 40, 275, 25);
-
-        cTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cTextField1ActionPerformed(evt);
-            }
-        });
-        add(cTextField1);
-        cTextField1.setBounds(140, 150, 180, 25);
-
-        cLabel3.setText("Title");
-        add(cLabel3);
-        cLabel3.setBounds(260, 10, 40, 25);
-
-        cComboBox2.setEditable(true);
-        add(cComboBox2);
-        cComboBox2.setBounds(260, 40, 63, 23);
+        cTextField2.setBounds(90, 50, 250, 25);
         add(cDatePicker1);
-        cDatePicker1.setBounds(610, 40, 110, 22);
+        cDatePicker1.setBounds(610, 50, 130, 22);
 
-        cLabel5.setText("DOB");
+        cLabel5.setText("Work Started");
         add(cLabel5);
-        cLabel5.setBounds(610, 10, 110, 25);
+        cLabel5.setBounds(610, 10, 130, 25);
 
         cButton1.setText("Close");
         add(cButton1);
-        cButton1.setBounds(460, 320, 59, 23);
+        cButton1.setBounds(600, 340, 60, 30);
 
         cButton3.setText("Save");
         cButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -166,15 +145,15 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cButton3);
-        cButton3.setBounds(280, 320, 57, 23);
+        cButton3.setBounds(420, 340, 60, 30);
 
         cButton4.setText("Clear");
         add(cButton4);
-        cButton4.setBounds(340, 320, 57, 23);
+        cButton4.setBounds(480, 340, 60, 30);
 
         cButton5.setText("Delete");
         add(cButton5);
-        cButton5.setBounds(400, 320, 63, 23);
+        cButton5.setBounds(540, 340, 60, 30);
 
         cTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +161,7 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField3);
-        cTextField3.setBounds(480, 80, 284, 25);
+        cTextField3.setBounds(460, 100, 280, 25);
 
         cTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,7 +169,7 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField4);
-        cTextField4.setBounds(480, 110, 284, 25);
+        cTextField4.setBounds(460, 130, 280, 25);
 
         cTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +177,7 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField5);
-        cTextField5.setBounds(480, 150, 284, 25);
+        cTextField5.setBounds(460, 180, 280, 25);
 
         cTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,11 +185,11 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField6);
-        cTextField6.setBounds(480, 190, 284, 25);
+        cTextField6.setBounds(460, 220, 280, 25);
 
         cLabel9.setText("Mobile");
         add(cLabel9);
-        cLabel9.setBounds(410, 230, 48, 25);
+        cLabel9.setBounds(390, 260, 48, 25);
 
         cTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,11 +197,11 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField7);
-        cTextField7.setBounds(480, 230, 284, 25);
+        cTextField7.setBounds(460, 260, 280, 25);
 
         cLabel10.setText("Email");
         add(cLabel10);
-        cLabel10.setBounds(410, 270, 48, 25);
+        cLabel10.setBounds(390, 300, 48, 25);
 
         cTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,19 +209,11 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField8);
-        cTextField8.setBounds(480, 270, 284, 25);
-
-        cLabel11.setText("S.Rep");
-        add(cLabel11);
-        cLabel11.setBounds(10, 210, 130, 25);
+        cTextField8.setBounds(460, 300, 280, 25);
 
         cLabel12.setText("Religion");
         add(cLabel12);
-        cLabel12.setBounds(10, 80, 119, 25);
-
-        cComboBox3.setEditable(true);
-        add(cComboBox3);
-        cComboBox3.setBounds(140, 210, 180, 23);
+        cLabel12.setBounds(10, 170, 70, 25);
 
         cTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,48 +221,81 @@ public class CustomerMasterUI2 extends TabPanelUI  {
             }
         });
         add(cTextField10);
-        cTextField10.setBounds(10, 40, 239, 25);
-
-        cLabel13.setText("Type");
-        add(cLabel13);
-        cLabel13.setBounds(10, 110, 119, 25);
+        cTextField10.setBounds(10, 50, 70, 25);
 
         cComboBox4.setEditable(true);
         add(cComboBox4);
-        cComboBox4.setBounds(140, 80, 180, 23);
+        cComboBox4.setBounds(110, 170, 240, 23);
+        add(cDatePicker2);
+        cDatePicker2.setBounds(460, 50, 120, 22);
 
-        cLabel14.setText("Loyalty Card");
+        cLabel16.setText("DOB");
+        add(cLabel16);
+        cLabel16.setBounds(460, 10, 100, 25);
+
+        cLabel17.setText("Security Role");
+        add(cLabel17);
+        cLabel17.setBounds(10, 210, 100, 25);
+
+        cComboBox5.setEditable(true);
+        add(cComboBox5);
+        cComboBox5.setBounds(110, 210, 240, 23);
+
+        cLabel13.setText("Gender");
+        add(cLabel13);
+        cLabel13.setBounds(10, 90, 70, 25);
+
+        cComboBox6.setEditable(true);
+        add(cComboBox6);
+        cComboBox6.setBounds(110, 90, 110, 23);
+
+        cLabel14.setText("Initial");
         add(cLabel14);
-        cLabel14.setBounds(10, 240, 119, 25);
+        cLabel14.setBounds(10, 130, 70, 25);
+
+        cComboBox7.setEditable(true);
+        add(cComboBox7);
+        cComboBox7.setBounds(110, 130, 110, 23);
+
+        cPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        cPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        cPanel1.setLayout(null);
+
+        cLabel11.setText("Retype Password");
+        cPanel1.add(cLabel11);
+        cLabel11.setBounds(10, 90, 130, 25);
 
         cTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cTextField9ActionPerformed(evt);
             }
         });
-        add(cTextField9);
-        cTextField9.setBounds(140, 240, 230, 25);
+        cPanel1.add(cTextField9);
+        cTextField9.setBounds(160, 10, 160, 25);
 
-        cLabel15.setText("Credit Limit");
-        add(cLabel15);
-        cLabel15.setBounds(10, 180, 119, 25);
+        cLabel15.setText("Password");
+        cPanel1.add(cLabel15);
+        cLabel15.setBounds(10, 50, 70, 25);
 
-        cTextField11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cTextField11ActionPerformed(evt);
-            }
-        });
-        add(cTextField11);
-        cTextField11.setBounds(140, 180, 180, 25);
+        cLabel18.setText("Username");
+        cPanel1.add(cLabel18);
+        cLabel18.setBounds(10, 10, 90, 25);
+
+        jPasswordField1.setText("jPasswordField1");
+        cPanel1.add(jPasswordField1);
+        jPasswordField1.setBounds(160, 80, 160, 30);
+
+        jPasswordField2.setText("jPasswordField1");
+        cPanel1.add(jPasswordField2);
+        jPasswordField2.setBounds(160, 40, 160, 30);
+
+        add(cPanel1);
+        cPanel1.setBounds(10, 250, 340, 120);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField2ActionPerformed
         // TODO add your handling code here:
 }//GEN-LAST:event_cTextField2ActionPerformed
-
-    private void cTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField1ActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_cTextField1ActionPerformed
 
     private void cButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton3ActionPerformed
         
@@ -344,10 +348,6 @@ public class CustomerMasterUI2 extends TabPanelUI  {
         // TODO add your handling code here:
     }//GEN-LAST:event_cTextField9ActionPerformed
 
-    private void cTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cTextField11ActionPerformed
-
     
       /**
      * @param cService the cService to set
@@ -371,29 +371,30 @@ public class CustomerMasterUI2 extends TabPanelUI  {
     private org.components.controls.CButton cButton3;
     private org.components.controls.CButton cButton4;
     private org.components.controls.CButton cButton5;
-    private org.components.controls.CComboBox cComboBox1;
-    private org.components.controls.CComboBox cComboBox2;
-    private org.components.controls.CComboBox cComboBox3;
     private org.components.controls.CComboBox cComboBox4;
+    private org.components.controls.CComboBox cComboBox5;
+    private org.components.controls.CComboBox cComboBox6;
+    private org.components.controls.CComboBox cComboBox7;
     private org.components.controls.CDatePicker cDatePicker1;
-    private org.components.controls.CLabel cLabel1;
+    private org.components.controls.CDatePicker cDatePicker2;
     private org.components.controls.CLabel cLabel10;
     private org.components.controls.CLabel cLabel11;
     private org.components.controls.CLabel cLabel12;
     private org.components.controls.CLabel cLabel13;
     private org.components.controls.CLabel cLabel14;
     private org.components.controls.CLabel cLabel15;
+    private org.components.controls.CLabel cLabel16;
+    private org.components.controls.CLabel cLabel17;
+    private org.components.controls.CLabel cLabel18;
     private org.components.controls.CLabel cLabel2;
-    private org.components.controls.CLabel cLabel3;
     private org.components.controls.CLabel cLabel4;
     private org.components.controls.CLabel cLabel5;
     private org.components.controls.CLabel cLabel6;
     private org.components.controls.CLabel cLabel7;
     private org.components.controls.CLabel cLabel8;
     private org.components.controls.CLabel cLabel9;
-    private org.components.controls.CTextField cTextField1;
+    private org.components.containers.CPanel cPanel1;
     private org.components.controls.CTextField cTextField10;
-    private org.components.controls.CTextField cTextField11;
     private org.components.controls.CTextField cTextField2;
     private org.components.controls.CTextField cTextField3;
     private org.components.controls.CTextField cTextField4;
@@ -402,5 +403,7 @@ public class CustomerMasterUI2 extends TabPanelUI  {
     private org.components.controls.CTextField cTextField7;
     private org.components.controls.CTextField cTextField8;
     private org.components.controls.CTextField cTextField9;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     // End of variables declaration//GEN-END:variables
 }
