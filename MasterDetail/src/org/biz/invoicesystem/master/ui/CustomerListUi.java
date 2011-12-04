@@ -34,7 +34,7 @@ public class CustomerListUi extends TabPanelUI   {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cItmcode = new org.components.controls.CTextField();
+        CustomerSearch = new org.components.controls.CTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         cxTable1 = new org.components.controls.CxTable();
         cButton1 = new org.components.controls.CButton();
@@ -51,13 +51,13 @@ public class CustomerListUi extends TabPanelUI   {
         add(jLabel1);
         jLabel1.setBounds(10, 10, 112, 20);
 
-        cItmcode.addActionListener(new java.awt.event.ActionListener() {
+        CustomerSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cItmcodeActionPerformed(evt);
+                CustomerSearchActionPerformed(evt);
             }
         });
-        add(cItmcode);
-        cItmcode.setBounds(140, 10, 470, 25);
+        add(CustomerSearch);
+        CustomerSearch.setBounds(140, 10, 470, 25);
 
         cxTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,15 +162,16 @@ public class CustomerListUi extends TabPanelUI   {
         // TODO add your handling code here:
     }//GEN-LAST:event_cButton6ActionPerformed
 
-    private void cItmcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cItmcodeActionPerformed
+    private void CustomerSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cItmcodeActionPerformed
+    }//GEN-LAST:event_CustomerSearchActionPerformed
 
     private void cButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cButton7ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.components.controls.CTextField CustomerSearch;
     private org.components.controls.CButton cButton1;
     private org.components.controls.CButton cButton3;
     private org.components.controls.CButton cButton4;
@@ -178,7 +179,6 @@ public class CustomerListUi extends TabPanelUI   {
     private org.components.controls.CButton cButton6;
     private org.components.controls.CButton cButton7;
     private org.components.controls.CCheckBox cCheckBox1;
-    private org.components.controls.CTextField cItmcode;
     private org.components.controls.CxTable cxTable1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
