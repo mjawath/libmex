@@ -17,10 +17,10 @@ import org.components.windows.TabPanelUI;
  *
  * @author Administrator
  */
-public class InvoiceMasterUi extends TabPanelUI  {
+public class PurchaseMasterUi extends TabPanelUI  {
 
     /** Creates new form InvoiceMasterUi */
-    public InvoiceMasterUi() {
+    public PurchaseMasterUi() {
         initComponents();
     }
 
@@ -64,21 +64,17 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cLabel4 = new org.components.controls.CLabel();
         cPanel3 = new org.components.containers.CPanel();
         cLabel6 = new org.components.controls.CLabel();
-        cLabel11 = new org.components.controls.CLabel();
         cLabel12 = new org.components.controls.CLabel();
         cLabel13 = new org.components.controls.CLabel();
+        cLabel14 = new org.components.controls.CLabel();
+        cTextField8 = new org.components.controls.CTextField();
         cTextField9 = new org.components.controls.CTextField();
         cTextField10 = new org.components.controls.CTextField();
-        cPanel5 = new org.components.containers.CPanel();
+        cLabel11 = new org.components.controls.CLabel();
         cLabel16 = new org.components.controls.CLabel();
-        cLabel17 = new org.components.controls.CLabel();
-        cLabel18 = new org.components.controls.CLabel();
-        cLabel19 = new org.components.controls.CLabel();
-        cLabel20 = new org.components.controls.CLabel();
         cTextField12 = new org.components.controls.CTextField();
-        cTextField13 = new org.components.controls.CTextField();
-        cTextField14 = new org.components.controls.CTextField();
-        cTextField15 = new org.components.controls.CTextField();
+        cTextField7 = new org.components.controls.CTextField();
+        cLabel17 = new org.components.controls.CLabel();
 
         setLayout(null);
 
@@ -96,7 +92,7 @@ public class InvoiceMasterUi extends TabPanelUI  {
         jScrollPane1.setViewportView(tblInvoice);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(10, 130, 930, 210);
+        jScrollPane1.setBounds(10, 160, 950, 200);
 
         cPanel1.setLayout(null);
 
@@ -151,47 +147,51 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cLabel15.setBounds(10, 120, 70, 20);
 
         add(cPanel1);
-        cPanel1.setBounds(680, 360, 260, 160);
+        cPanel1.setBounds(630, 360, 330, 160);
         add(cComboBox1);
-        cComboBox1.setBounds(830, 70, 110, 23);
+        cComboBox1.setBounds(830, 130, 130, 23);
 
         cLabel2.setText("Salesman");
         cLabel2.setFont(new java.awt.Font("Tahoma", 0, 12));
         add(cLabel2);
-        cLabel2.setBounds(780, 70, 60, 25);
+        cLabel2.setBounds(780, 130, 60, 25);
 
-        cComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Invoice", "Quotation", "Credit Note", "Consignment Out" }));
+        cComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Purchase", "Purchase Order", "Cinsignment In" }));
         add(cComboBox2);
-        cComboBox2.setBounds(680, 10, 150, 23);
+        cComboBox2.setBounds(670, 10, 160, 23);
 
-        cTextField2.setText("Inv No manually");
+        cTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cTextField2ActionPerformed(evt);
+            }
+        });
         add(cTextField2);
-        cTextField2.setBounds(830, 10, 110, 25);
+        cTextField2.setBounds(830, 40, 130, 25);
 
         cPanel2.setLayout(null);
 
-        cLabel3.setText("Customer");
+        cLabel3.setText("Supplier Details");
         cLabel3.setFont(new java.awt.Font("Tahoma", 1, 10));
         cPanel2.add(cLabel3);
-        cLabel3.setBounds(10, 0, 60, 20);
+        cLabel3.setBounds(10, 0, 130, 20);
         cPanel2.add(cTextField3);
-        cTextField3.setBounds(70, 0, 150, 20);
+        cTextField3.setBounds(10, 20, 210, 20);
 
         cTextArea2.setColumns(20);
         cTextArea2.setRows(10);
         jScrollPane3.setViewportView(cTextArea2);
 
         cPanel2.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 20, 210, 70);
+        jScrollPane3.setBounds(10, 40, 210, 70);
 
         cCheckBox2.setText("Type");
         cPanel2.add(cCheckBox2);
-        cCheckBox2.setBounds(10, 90, 140, 23);
+        cCheckBox2.setBounds(10, 110, 140, 23);
 
         add(cPanel2);
-        cPanel2.setBounds(0, 11, 230, 110);
+        cPanel2.setBounds(0, 10, 230, 130);
         add(cDatePicker1);
-        cDatePicker1.setBounds(830, 40, 110, 22);
+        cDatePicker1.setBounds(830, 100, 130, 22);
 
         cPanel4.setLayout(null);
 
@@ -200,14 +200,14 @@ public class InvoiceMasterUi extends TabPanelUI  {
 
             },
             new String [] {
-                "Description", "Price Range"
+                "Item", "Cost"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -221,12 +221,12 @@ public class InvoiceMasterUi extends TabPanelUI  {
         jScrollPane4.setViewportView(cxTable2);
 
         cPanel4.add(jScrollPane4);
-        jScrollPane4.setBounds(10, 10, 210, 100);
+        jScrollPane4.setBounds(10, 10, 310, 100);
 
         add(cPanel4);
-        cPanel4.setBounds(10, 380, 230, 120);
+        cPanel4.setBounds(230, 20, 330, 120);
 
-        cLabel4.setText("Date");
+        cLabel4.setText("Ref No");
         cLabel4.setFont(new java.awt.Font("Tahoma", 0, 12));
         add(cLabel4);
         cLabel4.setBounds(780, 40, 60, 25);
@@ -238,78 +238,89 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cPanel3.add(cLabel6);
         cLabel6.setBounds(800, 70, 60, 25);
 
-        cLabel11.setText("Last Invoice");
-        cLabel11.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel3.add(cLabel11);
-        cLabel11.setBounds(60, 0, 70, 20);
-
-        cLabel12.setText("Invoice Date");
+        cLabel12.setText("First Month");
         cLabel12.setFont(new java.awt.Font("Tahoma", 0, 10));
         cPanel3.add(cLabel12);
-        cLabel12.setBounds(10, 20, 70, 20);
+        cLabel12.setBounds(10, 20, 90, 20);
 
-        cLabel13.setText("Invoice Total");
+        cLabel13.setText("Third Mo th");
         cLabel13.setFont(new java.awt.Font("Tahoma", 0, 10));
         cPanel3.add(cLabel13);
-        cLabel13.setBounds(10, 60, 70, 20);
+        cLabel13.setBounds(220, 20, 80, 20);
+
+        cLabel14.setText("Second month ");
+        cLabel14.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel3.add(cLabel14);
+        cLabel14.setBounds(110, 20, 100, 20);
+
+        cTextField8.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel3.add(cTextField8);
+        cTextField8.setBounds(10, 40, 90, 20);
 
         cTextField9.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cTextField9ActionPerformed(evt);
+            }
+        });
         cPanel3.add(cTextField9);
-        cTextField9.setBounds(10, 40, 150, 20);
+        cTextField9.setBounds(110, 40, 100, 20);
 
         cTextField10.setFont(new java.awt.Font("Tahoma", 0, 10));
         cPanel3.add(cTextField10);
-        cTextField10.setBounds(10, 80, 150, 20);
+        cTextField10.setBounds(220, 40, 80, 20);
+
+        cLabel11.setText("Sales Last 3 month of  selected supplier's product");
+        cLabel11.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel3.add(cLabel11);
+        cLabel11.setBounds(0, 0, 330, 20);
 
         add(cPanel3);
-        cPanel3.setBounds(490, 10, 180, 110);
+        cPanel3.setBounds(20, 370, 320, 70);
 
-        cPanel5.setLayout(null);
-
-        cLabel16.setText("Salesman");
+        cLabel16.setText("Date");
         cLabel16.setFont(new java.awt.Font("Tahoma", 0, 12));
-        cPanel5.add(cLabel16);
-        cLabel16.setBounds(800, 70, 60, 25);
+        add(cLabel16);
+        cLabel16.setBounds(780, 100, 60, 25);
 
-        cLabel17.setText("Credit Limit");
-        cLabel17.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cLabel17);
-        cLabel17.setBounds(10, 10, 70, 20);
+        cTextField12.setText("Purch no manually");
+        cTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cTextField12ActionPerformed(evt);
+            }
+        });
+        add(cTextField12);
+        cTextField12.setBounds(830, 10, 130, 25);
 
-        cLabel18.setText("Total Dues");
-        cLabel18.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cLabel18);
-        cLabel18.setBounds(10, 40, 70, 20);
+        cTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cTextField7ActionPerformed(evt);
+            }
+        });
+        add(cTextField7);
+        cTextField7.setBounds(830, 70, 130, 25);
 
-        cLabel19.setText("PD Chqs");
-        cLabel19.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cLabel19);
-        cLabel19.setBounds(10, 60, 70, 20);
-
-        cLabel20.setText("Bounced Chqs");
-        cLabel20.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cLabel20);
-        cLabel20.setBounds(10, 80, 70, 20);
-
-        cTextField12.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField12);
-        cTextField12.setBounds(90, 80, 150, 20);
-
-        cTextField13.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField13);
-        cTextField13.setBounds(90, 10, 150, 20);
-
-        cTextField14.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField14);
-        cTextField14.setBounds(90, 40, 150, 20);
-
-        cTextField15.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField15);
-        cTextField15.setBounds(90, 60, 150, 20);
-
-        add(cPanel5);
-        cPanel5.setBounds(240, 10, 250, 110);
+        cLabel17.setText("GRN No");
+        cLabel17.setFont(new java.awt.Font("Tahoma", 0, 12));
+        add(cLabel17);
+        cLabel17.setBounds(780, 70, 50, 25);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cTextField2ActionPerformed
+
+    private void cTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cTextField12ActionPerformed
+
+    private void cTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cTextField9ActionPerformed
+
+    private void cTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cTextField7ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CCheckBox cCheckBox2;
@@ -320,13 +331,11 @@ public class InvoiceMasterUi extends TabPanelUI  {
     private org.components.controls.CLabel cLabel11;
     private org.components.controls.CLabel cLabel12;
     private org.components.controls.CLabel cLabel13;
+    private org.components.controls.CLabel cLabel14;
     private org.components.controls.CLabel cLabel15;
     private org.components.controls.CLabel cLabel16;
     private org.components.controls.CLabel cLabel17;
-    private org.components.controls.CLabel cLabel18;
-    private org.components.controls.CLabel cLabel19;
     private org.components.controls.CLabel cLabel2;
-    private org.components.controls.CLabel cLabel20;
     private org.components.controls.CLabel cLabel3;
     private org.components.controls.CLabel cLabel4;
     private org.components.controls.CLabel cLabel5;
@@ -338,20 +347,18 @@ public class InvoiceMasterUi extends TabPanelUI  {
     private org.components.containers.CPanel cPanel2;
     private org.components.containers.CPanel cPanel3;
     private org.components.containers.CPanel cPanel4;
-    private org.components.containers.CPanel cPanel5;
     private org.components.controls.CTextArea cTextArea2;
     private org.components.controls.CTextField cTextField1;
     private org.components.controls.CTextField cTextField10;
     private org.components.controls.CTextField cTextField11;
     private org.components.controls.CTextField cTextField12;
-    private org.components.controls.CTextField cTextField13;
-    private org.components.controls.CTextField cTextField14;
-    private org.components.controls.CTextField cTextField15;
     private org.components.controls.CTextField cTextField2;
     private org.components.controls.CTextField cTextField3;
     private org.components.controls.CTextField cTextField4;
     private org.components.controls.CTextField cTextField5;
     private org.components.controls.CTextField cTextField6;
+    private org.components.controls.CTextField cTextField7;
+    private org.components.controls.CTextField cTextField8;
     private org.components.controls.CTextField cTextField9;
     private org.components.controls.CxTable cxTable2;
     private javax.swing.JScrollPane jScrollPane1;
