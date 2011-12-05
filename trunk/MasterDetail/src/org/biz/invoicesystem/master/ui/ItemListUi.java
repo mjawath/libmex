@@ -36,20 +36,18 @@ public class ItemListUi extends TabPanelUI   {
         jLabel1 = new javax.swing.JLabel();
         cItmcode = new org.components.controls.CTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        cxTable1 = new org.components.controls.CxTable();
-        cButton1 = new org.components.controls.CButton();
+        tblItemList = new org.components.controls.CxTable();
+        cNewBtn = new org.components.controls.CButton();
         cButton3 = new org.components.controls.CButton();
-        cButton4 = new org.components.controls.CButton();
-        cButton5 = new org.components.controls.CButton();
+        cDeleteItem = new org.components.controls.CButton();
         cButton6 = new org.components.controls.CButton();
-        cButton7 = new org.components.controls.CButton();
-        cCheckBox1 = new org.components.controls.CCheckBox();
+        cNewBtn1 = new org.components.controls.CButton();
 
         setLayout(null);
 
-        jLabel1.setText("Customer Name Search");
+        jLabel1.setText("Item Description Search");
         add(jLabel1);
-        jLabel1.setBounds(30, 10, 112, 20);
+        jLabel1.setBounds(30, 10, 130, 20);
 
         cItmcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +57,7 @@ public class ItemListUi extends TabPanelUI   {
         add(cItmcode);
         cItmcode.setBounds(160, 10, 470, 25);
 
-        cxTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblItemList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -75,49 +73,40 @@ public class ItemListUi extends TabPanelUI   {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(cxTable1);
-        cxTable1.getColumnModel().getColumn(1).setMinWidth(150);
-        cxTable1.getColumnModel().getColumn(1).setPreferredWidth(150);
-        cxTable1.getColumnModel().getColumn(1).setMaxWidth(150);
+        jScrollPane1.setViewportView(tblItemList);
+        tblItemList.getColumnModel().getColumn(1).setMinWidth(150);
+        tblItemList.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblItemList.getColumnModel().getColumn(1).setMaxWidth(150);
 
         add(jScrollPane1);
         jScrollPane1.setBounds(10, 47, 760, 278);
 
-        cButton1.setText("New ");
-        cButton1.addActionListener(new java.awt.event.ActionListener() {
+        cNewBtn.setText("Update");
+        cNewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton1ActionPerformed(evt);
+                cNewBtnActionPerformed(evt);
             }
         });
-        add(cButton1);
-        cButton1.setBounds(10, 350, 121, 49);
+        add(cNewBtn);
+        cNewBtn.setBounds(230, 340, 121, 49);
 
-        cButton3.setText("History");
+        cButton3.setText("Refresh");
         cButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cButton3ActionPerformed(evt);
             }
         });
         add(cButton3);
-        cButton3.setBounds(270, 350, 121, 49);
+        cButton3.setBounds(490, 340, 121, 49);
 
-        cButton4.setText("Delete");
-        cButton4.addActionListener(new java.awt.event.ActionListener() {
+        cDeleteItem.setText("Delete");
+        cDeleteItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton4ActionPerformed(evt);
+                cDeleteItemActionPerformed(evt);
             }
         });
-        add(cButton4);
-        cButton4.setBounds(140, 350, 121, 49);
-
-        cButton5.setText("Bulk Email");
-        cButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton5ActionPerformed(evt);
-            }
-        });
-        add(cButton5);
-        cButton5.setBounds(530, 350, 121, 49);
+        add(cDeleteItem);
+        cDeleteItem.setBounds(360, 340, 121, 49);
 
         cButton6.setText("Close");
         cButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -126,37 +115,29 @@ public class ItemListUi extends TabPanelUI   {
             }
         });
         add(cButton6);
-        cButton6.setBounds(660, 350, 110, 49);
+        cButton6.setBounds(620, 340, 110, 50);
 
-        cButton7.setText("Bulk Sms");
-        cButton7.addActionListener(new java.awt.event.ActionListener() {
+        cNewBtn1.setText("New ");
+        cNewBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton7ActionPerformed(evt);
+                cNewBtn1ActionPerformed(evt);
             }
         });
-        add(cButton7);
-        cButton7.setBounds(400, 350, 121, 49);
-
-        cCheckBox1.setText("Remove Selection");
-        add(cCheckBox1);
-        cCheckBox1.setBounds(650, 330, 120, 23);
+        add(cNewBtn1);
+        cNewBtn1.setBounds(100, 340, 121, 49);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
+    private void cNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton1ActionPerformed
+    }//GEN-LAST:event_cNewBtnActionPerformed
 
     private void cButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cButton3ActionPerformed
 
-    private void cButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton4ActionPerformed
+    private void cDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cDeleteItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton4ActionPerformed
-
-    private void cButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cButton5ActionPerformed
+    }//GEN-LAST:event_cDeleteItemActionPerformed
 
     private void cButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton6ActionPerformed
         // TODO add your handling code here:
@@ -166,22 +147,20 @@ public class ItemListUi extends TabPanelUI   {
         // TODO add your handling code here:
     }//GEN-LAST:event_cItmcodeActionPerformed
 
-    private void cButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton7ActionPerformed
+    private void cNewBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewBtn1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton7ActionPerformed
+    }//GEN-LAST:event_cNewBtn1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CButton cButton1;
     private org.components.controls.CButton cButton3;
-    private org.components.controls.CButton cButton4;
-    private org.components.controls.CButton cButton5;
     private org.components.controls.CButton cButton6;
-    private org.components.controls.CButton cButton7;
-    private org.components.controls.CCheckBox cCheckBox1;
+    private org.components.controls.CButton cDeleteItem;
     private org.components.controls.CTextField cItmcode;
-    private org.components.controls.CxTable cxTable1;
+    private org.components.controls.CButton cNewBtn;
+    private org.components.controls.CButton cNewBtn1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private org.components.controls.CxTable tblItemList;
     // End of variables declaration//GEN-END:variables
 
     @Override

@@ -61,10 +61,10 @@ public class ItemMasterUI2 extends TabPanelUI  {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        cTextField16 = new org.components.controls.CTextField();
-        cComboBox2 = new org.components.controls.CComboBox();
+        tRngeValue = new org.components.controls.CTextField();
+        tPriceRange = new org.components.controls.CComboBox();
         cLabel1 = new org.components.controls.CLabel();
-        cTextField17 = new org.components.controls.CTextField();
+        tWholesalePrice = new org.components.controls.CTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -99,12 +99,12 @@ public class ItemMasterUI2 extends TabPanelUI  {
         cSaveBtn = new org.components.controls.CButton();
         cClear = new org.components.controls.CButton();
         cDeleteBtn = new org.components.controls.CButton();
-        jLabel20 = new javax.swing.JLabel();
-        cCheckBox1 = new org.components.controls.CCheckBox();
-        cCheckBox2 = new org.components.controls.CCheckBox();
-        cCheckBox3 = new org.components.controls.CCheckBox();
-        cCheckBox4 = new org.components.controls.CCheckBox();
-        cCheckBox5 = new org.components.controls.CCheckBox();
+        lImage = new javax.swing.JLabel();
+        tChkInactive = new org.components.controls.CCheckBox();
+        tChkTrackSerial = new org.components.controls.CCheckBox();
+        TChkTrackExpiry = new org.components.controls.CCheckBox();
+        tChkNonStockItm = new org.components.controls.CCheckBox();
+        tChkManufactoring = new org.components.controls.CCheckBox();
         jLabel21 = new javax.swing.JLabel();
         cItmSupplier = new org.components.controls.CComboBox();
 
@@ -152,18 +152,18 @@ public class ItemMasterUI2 extends TabPanelUI  {
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(10, 120, 300, 80);
-        jPanel1.add(cTextField16);
-        cTextField16.setBounds(180, 90, 120, 25);
+        jPanel1.add(tRngeValue);
+        tRngeValue.setBounds(180, 90, 120, 25);
 
-        cComboBox2.setEditable(true);
-        jPanel1.add(cComboBox2);
-        cComboBox2.setBounds(10, 90, 130, 23);
+        tPriceRange.setEditable(true);
+        jPanel1.add(tPriceRange);
+        tPriceRange.setBounds(10, 90, 130, 23);
 
         cLabel1.setText("Feed Price Ranges For Wholesale Needs");
         jPanel1.add(cLabel1);
         cLabel1.setBounds(10, 60, 310, 25);
-        jPanel1.add(cTextField17);
-        cTextField17.setBounds(156, 11, 150, 25);
+        jPanel1.add(tWholesalePrice);
+        tWholesalePrice.setBounds(156, 11, 150, 25);
 
         add(jPanel1);
         jPanel1.setBounds(330, 180, 320, 210);
@@ -221,8 +221,14 @@ public class ItemMasterUI2 extends TabPanelUI  {
         cItmcode.setBounds(90, 10, 210, 25);
         add(cTextField5);
         cTextField5.setBounds(90, 190, 90, 25);
+
+        cTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cTextField6ActionPerformed(evt);
+            }
+        });
         add(cTextField6);
-        cTextField6.setBounds(200, 190, 90, 25);
+        cTextField6.setBounds(210, 190, 90, 25);
         add(cTextField7);
         cTextField7.setBounds(210, 220, 90, 25);
         add(cTextField8);
@@ -282,55 +288,55 @@ public class ItemMasterUI2 extends TabPanelUI  {
         add(cDeleteBtn);
         cDeleteBtn.setBounds(480, 400, 63, 23);
 
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Image");
-        add(jLabel20);
-        jLabel20.setBounds(490, 10, 160, 140);
+        lImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lImage.setText("Image");
+        add(lImage);
+        lImage.setBounds(490, 10, 160, 140);
 
-        cCheckBox1.setText("Inactive");
-        cCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        tChkInactive.setText("Inactive");
+        tChkInactive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cCheckBox1ActionPerformed(evt);
+                tChkInactiveActionPerformed(evt);
             }
         });
-        add(cCheckBox1);
-        cCheckBox1.setBounds(330, 130, 140, 23);
+        add(tChkInactive);
+        tChkInactive.setBounds(330, 130, 140, 23);
 
-        cCheckBox2.setText("Track Serial Number");
-        cCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        tChkTrackSerial.setText("Track Serial Number");
+        tChkTrackSerial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cCheckBox2ActionPerformed(evt);
+                tChkTrackSerialActionPerformed(evt);
             }
         });
-        add(cCheckBox2);
-        cCheckBox2.setBounds(330, 10, 150, 23);
+        add(tChkTrackSerial);
+        tChkTrackSerial.setBounds(330, 10, 150, 23);
 
-        cCheckBox3.setText("Track Expiry ");
-        cCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+        TChkTrackExpiry.setText("Track Expiry ");
+        TChkTrackExpiry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cCheckBox3ActionPerformed(evt);
+                TChkTrackExpiryActionPerformed(evt);
             }
         });
-        add(cCheckBox3);
-        cCheckBox3.setBounds(330, 40, 150, 23);
+        add(TChkTrackExpiry);
+        TChkTrackExpiry.setBounds(330, 40, 150, 23);
 
-        cCheckBox4.setText("Non Stock Item");
-        cCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+        tChkNonStockItm.setText("Non Stock Item");
+        tChkNonStockItm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cCheckBox4ActionPerformed(evt);
+                tChkNonStockItmActionPerformed(evt);
             }
         });
-        add(cCheckBox4);
-        cCheckBox4.setBounds(330, 70, 150, 23);
+        add(tChkNonStockItm);
+        tChkNonStockItm.setBounds(330, 70, 150, 23);
 
-        cCheckBox5.setText("Manufacturing Item");
-        cCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+        tChkManufactoring.setText("Manufacturing Item");
+        tChkManufactoring.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cCheckBox5ActionPerformed(evt);
+                tChkManufactoringActionPerformed(evt);
             }
         });
-        add(cCheckBox5);
-        cCheckBox5.setBounds(330, 100, 140, 23);
+        add(tChkManufactoring);
+        tChkManufactoring.setBounds(330, 100, 140, 23);
 
         jLabel21.setText("Supplier");
         add(jLabel21);
@@ -381,36 +387,35 @@ public class ItemMasterUI2 extends TabPanelUI  {
         // TODO add your handling code here:
     }//GEN-LAST:event_cButton2ActionPerformed
 
-    private void cCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCheckBox1ActionPerformed
+    private void tChkInactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkInactiveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cCheckBox1ActionPerformed
+    }//GEN-LAST:event_tChkInactiveActionPerformed
 
-    private void cCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCheckBox2ActionPerformed
+    private void tChkTrackSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkTrackSerialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cCheckBox2ActionPerformed
+    }//GEN-LAST:event_tChkTrackSerialActionPerformed
 
-    private void cCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCheckBox3ActionPerformed
+    private void TChkTrackExpiryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TChkTrackExpiryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cCheckBox3ActionPerformed
+    }//GEN-LAST:event_TChkTrackExpiryActionPerformed
 
-    private void cCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCheckBox4ActionPerformed
+    private void tChkNonStockItmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkNonStockItmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cCheckBox4ActionPerformed
+    }//GEN-LAST:event_tChkNonStockItmActionPerformed
 
-    private void cCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCheckBox5ActionPerformed
+    private void tChkManufactoringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkManufactoringActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cCheckBox5ActionPerformed
+    }//GEN-LAST:event_tChkManufactoringActionPerformed
+
+    private void cTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cTextField6ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.components.controls.CCheckBox TChkTrackExpiry;
     private org.components.controls.CButton cButton2;
-    private org.components.controls.CCheckBox cCheckBox1;
-    private org.components.controls.CCheckBox cCheckBox2;
-    private org.components.controls.CCheckBox cCheckBox3;
-    private org.components.controls.CCheckBox cCheckBox4;
-    private org.components.controls.CCheckBox cCheckBox5;
     private org.components.controls.CButton cClear;
     private org.components.controls.CButton cClose;
-    private org.components.controls.CComboBox cComboBox2;
     private org.components.controls.CComboBox cComboBox4;
     private org.components.controls.CButton cDeleteBtn;
     private org.components.controls.CTextField cItmCarton;
@@ -426,8 +431,6 @@ public class ItemMasterUI2 extends TabPanelUI  {
     private org.components.controls.CTextField cTextField12;
     private org.components.controls.CTextField cTextField13;
     private org.components.controls.CTextField cTextField14;
-    private org.components.controls.CTextField cTextField16;
-    private org.components.controls.CTextField cTextField17;
     private org.components.controls.CTextField cTextField18;
     private org.components.controls.CTextField cTextField5;
     private org.components.controls.CTextField cTextField6;
@@ -446,7 +449,6 @@ public class ItemMasterUI2 extends TabPanelUI  {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -457,6 +459,14 @@ public class ItemMasterUI2 extends TabPanelUI  {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lImage;
+    private org.components.controls.CCheckBox tChkInactive;
+    private org.components.controls.CCheckBox tChkManufactoring;
+    private org.components.controls.CCheckBox tChkNonStockItm;
+    private org.components.controls.CCheckBox tChkTrackSerial;
+    private org.components.controls.CComboBox tPriceRange;
+    private org.components.controls.CTextField tRngeValue;
+    private org.components.controls.CTextField tWholesalePrice;
     private org.components.controls.CTextField tdesc;
     // End of variables declaration//GEN-END:variables
 

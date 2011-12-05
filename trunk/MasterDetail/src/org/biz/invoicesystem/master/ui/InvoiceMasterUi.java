@@ -175,21 +175,21 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cPanel2.add(cLabel3);
         cLabel3.setBounds(10, 0, 60, 20);
         cPanel2.add(cTextField3);
-        cTextField3.setBounds(70, 0, 150, 20);
+        cTextField3.setBounds(60, 0, 150, 20);
 
         cTextArea2.setColumns(20);
         cTextArea2.setRows(10);
         jScrollPane3.setViewportView(cTextArea2);
 
         cPanel2.add(jScrollPane3);
-        jScrollPane3.setBounds(10, 20, 210, 70);
+        jScrollPane3.setBounds(10, 20, 230, 70);
 
         cCheckBox2.setText("Type");
         cPanel2.add(cCheckBox2);
         cCheckBox2.setBounds(10, 90, 140, 23);
 
         add(cPanel2);
-        cPanel2.setBounds(0, 11, 230, 110);
+        cPanel2.setBounds(0, 11, 240, 110);
         add(cDatePicker1);
         cDatePicker1.setBounds(830, 40, 110, 22);
 
