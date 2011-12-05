@@ -126,14 +126,14 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="org.components.controls.CTextField" name="cTextField16">
+        <Component class="org.components.controls.CTextField" name="tRngeValue">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="90" width="120" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CComboBox" name="cComboBox2">
+        <Component class="org.components.controls.CComboBox" name="tPriceRange">
           <Properties>
             <Property name="editable" type="boolean" value="true"/>
           </Properties>
@@ -153,7 +153,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField17">
+        <Component class="org.components.controls.CTextField" name="tWholesalePrice">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="156" y="11" width="150" height="-1"/>
@@ -308,9 +308,12 @@
       </Constraints>
     </Component>
     <Component class="org.components.controls.CTextField" name="cTextField6">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField6ActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="190" width="90" height="-1"/>
+          <AbsoluteConstraints x="210" y="190" width="90" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -460,7 +463,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel20">
+    <Component class="javax.swing.JLabel" name="lImage">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Image"/>
@@ -471,12 +474,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CCheckBox" name="cCheckBox1">
+    <Component class="org.components.controls.CCheckBox" name="tChkInactive">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inactive"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cCheckBox1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tChkInactiveActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -484,12 +487,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CCheckBox" name="cCheckBox2">
+    <Component class="org.components.controls.CCheckBox" name="tChkTrackSerial">
       <Properties>
         <Property name="text" type="java.lang.String" value="Track Serial Number"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cCheckBox2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tChkTrackSerialActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -497,12 +500,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CCheckBox" name="cCheckBox3">
+    <Component class="org.components.controls.CCheckBox" name="TChkTrackExpiry">
       <Properties>
         <Property name="text" type="java.lang.String" value="Track Expiry "/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cCheckBox3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TChkTrackExpiryActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -510,12 +513,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CCheckBox" name="cCheckBox4">
+    <Component class="org.components.controls.CCheckBox" name="tChkNonStockItm">
       <Properties>
         <Property name="text" type="java.lang.String" value="Non Stock Item"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cCheckBox4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tChkNonStockItmActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -523,12 +526,12 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CCheckBox" name="cCheckBox5">
+    <Component class="org.components.controls.CCheckBox" name="tChkManufactoring">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manufacturing Item"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cCheckBox5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tChkManufactoringActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
