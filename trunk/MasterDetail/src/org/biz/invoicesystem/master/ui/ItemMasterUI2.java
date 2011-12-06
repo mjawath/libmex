@@ -1,5 +1,7 @@
  package org.biz.invoicesystem.master.ui;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JPanel;
 import org.biz.app.ui.util.uiEty;
@@ -31,8 +33,278 @@ public class ItemMasterUI2 extends TabPanelUI  {
     public void keyListeners(){
     
         try {
+            //item code listener
+  tItemcode.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                 if(e.getKeyChar()==KeyEvent.VK_ENTER){
+             
+                     tItemDescription.requestFocus();  
+             
+                 }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                  
+                }
+  
+      
+  });//finished item code listener
+  
+  //item description listener
+  tItemDescription.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                 if(e.getKeyChar()==KeyEvent.VK_ENTER){
+             
+                tSupplierItem.getEditor().getEditorComponent().requestFocus();
+             
+                 }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+                    tItemcode.requestFocus();
+                
+                }  
+                }
+  
+      
+  });//finished item description listener                      
+  
+  //item category listener
+  tItemCategory.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+             
+                 tSupplierItem.getEditor().getEditorComponent().requestFocus();
+                }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+                    tItemDescription.requestFocus();
+                
+                }  
+                }
+  
+      
+  }); //item category listener finished
+  
+  //supplier listener
+   tSupplierItem.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+                    tCartonItem.requestFocus();  
+             
+                }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+                    tItemCategory.getEditor().getEditorComponent().requestFocus();
+                
+                }  
+                }
+  
+      
+  }); //suplier listener finished
+  //item carton keylistener started
+     tCartonItem.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+       tUnitItem1.getEditor().getEditorComponent().requestFocus();  
+             
+                }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+            tSupplierItem.getEditor().getEditorComponent().requestFocus();
+                
+                }  
+                }
+  
+      
+  });//carton listener finished.
+   
+  //unit 1 listener strtd
+  tUnitItem1.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+       tDifferentPerUnit.requestFocus();  
+             
+                }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+            tCartonItem.requestFocus();
+                
+                }  
+                }
+  
+      
+  });//unit1 listener finished   
+     
+  //unit different field listener strtd
+  tDifferentPerUnit.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+          if(!uiEty.tcToStr(tDifferentPerUnit).equals("")) {   
+       tUnitItem2.getEditor().getEditorComponent().requestFocus();  
             
-        } catch (Exception e) {
+                }else{
+          tItemSalesPriceUnit1.requestFocus();
+          }
+                
+                }
+                 
+                } 
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+            tUnitItem1.getEditor().getEditorComponent().requestFocus();
+                
+                }  
+                }
+  
+      
+  });//unit different field listener finished.
+          
+  // unit 2 comb listener strdtd.
+  tUnitItem2.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+       tItemSalesPriceUnit1.requestFocus();  
+             
+                }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+           tDifferentPerUnit.requestFocus();
+                
+                }  
+                }
+  
+      
+  });
+  ///unit 2 combo listener finished
+  tItemSalesPriceUnit1.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    
+                    
+                    try {
+                  double dif=uiEty.tcToDble0(tDifferentPerUnit);      
+                  
+                 if(dif!=0){
+           tItemSalesPriceUnit2.setText(""+uiEty.tcToDble0(tItemSalesPriceUnit1)/dif);                           
+                 }else{
+             tItemSalesPriceUnit2.setText("");
+                 } 
+                  
+                 if(e.getKeyChar()==KeyEvent.VK_ENTER){
+        tItemCostPrice.selectAll();      
+       tItemCostPrice.requestFocus();  
+             
+                }
+                           
+                    } catch (Exception exx) {
+                    exx.printStackTrace();
+            return;
+                    }
+                     
+             
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+               
+          
+          if(!uiEty.tcToStr(tDifferentPerUnit).equals("")) {   
+        tUnitItem2.getEditor().selectAll();      
+       tUnitItem2.getEditor().getEditorComponent().requestFocus();  
+            
+                }else{
+              tDifferentPerUnit.selectAll();
+          tDifferentPerUnit.requestFocus();
+          }      
+                }  
+                }
+  
+      
+  }); 
+  
+  //cost price listener strtd
+  tItemCostPrice.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+       tItemLandingCost.requestFocus();  
+             
+                }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+              tItemSalesPriceUnit1.selectAll(); 
+           tItemSalesPriceUnit1.requestFocus();
+                
+                }  
+                }
+  
+      
+  });
+  //cost price listener finished.
+          } catch (Exception e) {
         e.printStackTrace();
         }
     }
@@ -55,12 +327,11 @@ public class ItemMasterUI2 extends TabPanelUI  {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTblPriceRange = new javax.swing.JTable();
         tRngeValue = new org.components.controls.CTextField();
         tPriceRange = new org.components.controls.CComboBox();
         cLabel1 = new org.components.controls.CLabel();
@@ -74,28 +345,27 @@ public class ItemMasterUI2 extends TabPanelUI  {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        cItmCarton = new org.components.controls.CTextField();
-        cItmUnit2 = new org.components.controls.CComboBox();
-        tdesc = new org.components.controls.CTextField();
-        cItmcode = new org.components.controls.CTextField();
-        cTextField5 = new org.components.controls.CTextField();
-        cTextField6 = new org.components.controls.CTextField();
-        cTextField7 = new org.components.controls.CTextField();
-        cTextField8 = new org.components.controls.CTextField();
+        tCartonItem = new org.components.controls.CTextField();
+        tUnitItem2 = new org.components.controls.CComboBox();
+        tItemDescription = new org.components.controls.CTextField();
+        tItemcode = new org.components.controls.CTextField();
+        tItemSalesPriceUnit1 = new org.components.controls.CTextField();
+        tItemSalesPriceUnit2 = new org.components.controls.CTextField();
+        tItemLandingCost = new org.components.controls.CTextField();
+        tItemCostPrice = new org.components.controls.CTextField();
         cTextField9 = new org.components.controls.CTextField();
         cTextField10 = new org.components.controls.CTextField();
         cTextField11 = new org.components.controls.CTextField();
         cTextField12 = new org.components.controls.CTextField();
         cTextField13 = new org.components.controls.CTextField();
         cTextField14 = new org.components.controls.CTextField();
-        cItmCategory = new org.components.controls.CComboBox();
+        tItemCategory = new org.components.controls.CComboBox();
         cComboBox4 = new org.components.controls.CComboBox();
-        cTextField18 = new org.components.controls.CTextField();
-        cItmUnit1 = new org.components.controls.CComboBox();
+        tDifferentPerUnit = new org.components.controls.CTextField();
+        tUnitItem1 = new org.components.controls.CComboBox();
         cClose = new org.components.controls.CButton();
-        cButton2 = new org.components.controls.CButton();
+        cImgBrowse = new org.components.controls.CButton();
         cSaveBtn = new org.components.controls.CButton();
         cClear = new org.components.controls.CButton();
         cDeleteBtn = new org.components.controls.CButton();
@@ -106,7 +376,11 @@ public class ItemMasterUI2 extends TabPanelUI  {
         tChkNonStockItm = new org.components.controls.CCheckBox();
         tChkManufactoring = new org.components.controls.CCheckBox();
         jLabel21 = new javax.swing.JLabel();
-        cItmSupplier = new org.components.controls.CComboBox();
+        tSupplierItem = new org.components.controls.CComboBox();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
 
         setLayout(null);
 
@@ -124,15 +398,11 @@ public class ItemMasterUI2 extends TabPanelUI  {
 
         jLabel3.setText("Carton ");
         add(jLabel3);
-        jLabel3.setBounds(30, 130, 36, 14);
+        jLabel3.setBounds(30, 134, 60, 20);
 
-        jLabel5.setText("Sales Price");
-        add(jLabel5);
-        jLabel5.setBounds(30, 190, 60, 20);
-
-        jLabel6.setText("Unit");
+        jLabel6.setText("Landing Cost");
         add(jLabel6);
-        jLabel6.setBounds(30, 160, 50, 20);
+        jLabel6.setBounds(210, 240, 80, 20);
 
         jPanel1.setLayout(null);
 
@@ -140,7 +410,7 @@ public class ItemMasterUI2 extends TabPanelUI  {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(10, 15, 82, 20);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTblPriceRange.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -148,7 +418,7 @@ public class ItemMasterUI2 extends TabPanelUI  {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblTblPriceRange);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(10, 120, 300, 80);
@@ -170,106 +440,113 @@ public class ItemMasterUI2 extends TabPanelUI  {
 
         jLabel9.setText("Min.Price");
         add(jLabel9);
-        jLabel9.setBounds(30, 250, 60, 20);
+        jLabel9.setBounds(30, 290, 60, 20);
 
         jLabel10.setText("%");
         add(jLabel10);
-        jLabel10.setBounds(80, 280, 20, 20);
+        jLabel10.setBounds(80, 320, 20, 20);
 
-        jLabel11.setText("Cost Price");
+        jLabel11.setText("Sales Price");
         add(jLabel11);
-        jLabel11.setBounds(30, 220, 60, 20);
+        jLabel11.setBounds(30, 200, 60, 30);
 
         jLabel12.setText("Discount ");
         add(jLabel12);
-        jLabel12.setBounds(30, 280, 60, 20);
+        jLabel12.setBounds(30, 320, 60, 20);
 
         jLabel13.setText("$");
         add(jLabel13);
-        jLabel13.setBounds(200, 220, 10, 20);
+        jLabel13.setBounds(200, 260, 10, 20);
 
         jLabel14.setText("Val");
         add(jLabel14);
-        jLabel14.setBounds(190, 280, 20, 20);
+        jLabel14.setBounds(190, 320, 20, 20);
 
         jLabel15.setText("Location");
         add(jLabel15);
-        jLabel15.setBounds(30, 340, 60, 20);
+        jLabel15.setBounds(30, 380, 60, 20);
 
         jLabel16.setText("Commission");
         add(jLabel16);
-        jLabel16.setBounds(30, 310, 60, 20);
+        jLabel16.setBounds(30, 350, 60, 20);
 
         jLabel17.setText("Min.Stock");
         add(jLabel17);
-        jLabel17.setBounds(30, 370, 60, 20);
-
-        jLabel18.setText("Image");
-        add(jLabel18);
-        jLabel18.setBounds(30, 430, 60, 20);
+        jLabel17.setBounds(30, 410, 60, 20);
 
         jLabel19.setText("Re Order");
         add(jLabel19);
-        jLabel19.setBounds(30, 400, 60, 20);
-        add(cItmCarton);
-        cItmCarton.setBounds(90, 130, 210, 25);
-        add(cItmUnit2);
-        cItmUnit2.setBounds(210, 160, 90, 23);
-        add(tdesc);
-        tdesc.setBounds(90, 40, 210, 25);
-        add(cItmcode);
-        cItmcode.setBounds(90, 10, 210, 25);
-        add(cTextField5);
-        cTextField5.setBounds(90, 190, 90, 25);
+        jLabel19.setBounds(30, 440, 60, 20);
+        add(tCartonItem);
+        tCartonItem.setBounds(90, 130, 210, 25);
 
-        cTextField6.addActionListener(new java.awt.event.ActionListener() {
+        tUnitItem2.setEditable(true);
+        add(tUnitItem2);
+        tUnitItem2.setBounds(210, 180, 90, 23);
+        add(tItemDescription);
+        tItemDescription.setBounds(90, 40, 210, 25);
+        add(tItemcode);
+        tItemcode.setBounds(90, 10, 210, 25);
+        add(tItemSalesPriceUnit1);
+        tItemSalesPriceUnit1.setBounds(90, 205, 80, 20);
+
+        tItemSalesPriceUnit2.setBackground(new java.awt.Color(255, 255, 255));
+        tItemSalesPriceUnit2.setEditable(false);
+        tItemSalesPriceUnit2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cTextField6ActionPerformed(evt);
+                tItemSalesPriceUnit2ActionPerformed(evt);
             }
         });
-        add(cTextField6);
-        cTextField6.setBounds(210, 190, 90, 25);
-        add(cTextField7);
-        cTextField7.setBounds(210, 220, 90, 25);
-        add(cTextField8);
-        cTextField8.setBounds(90, 220, 90, 25);
+        add(tItemSalesPriceUnit2);
+        tItemSalesPriceUnit2.setBounds(210, 205, 90, 20);
+        add(tItemLandingCost);
+        tItemLandingCost.setBounds(210, 260, 90, 25);
+        add(tItemCostPrice);
+        tItemCostPrice.setBounds(90, 260, 90, 25);
         add(cTextField9);
-        cTextField9.setBounds(90, 250, 90, 25);
+        cTextField9.setBounds(90, 290, 90, 25);
         add(cTextField10);
-        cTextField10.setBounds(90, 280, 90, 25);
+        cTextField10.setBounds(90, 320, 90, 25);
         add(cTextField11);
-        cTextField11.setBounds(210, 280, 90, 25);
+        cTextField11.setBounds(210, 320, 90, 25);
         add(cTextField12);
-        cTextField12.setBounds(90, 310, 90, 20);
+        cTextField12.setBounds(90, 350, 90, 20);
         add(cTextField13);
-        cTextField13.setBounds(90, 370, 210, 25);
+        cTextField13.setBounds(90, 410, 210, 25);
         add(cTextField14);
-        cTextField14.setBounds(90, 400, 210, 25);
+        cTextField14.setBounds(90, 440, 210, 25);
 
-        cItmCategory.setEditable(true);
-        add(cItmCategory);
-        cItmCategory.setBounds(90, 70, 210, 23);
+        tItemCategory.setEditable(true);
+        add(tItemCategory);
+        tItemCategory.setBounds(90, 70, 210, 23);
 
         cComboBox4.setEditable(true);
         add(cComboBox4);
-        cComboBox4.setBounds(90, 340, 210, 23);
-        add(cTextField18);
-        cTextField18.setBounds(170, 160, 30, 25);
-        add(cItmUnit1);
-        cItmUnit1.setBounds(90, 160, 70, 23);
+        cComboBox4.setBounds(90, 380, 210, 23);
+        add(tDifferentPerUnit);
+        tDifferentPerUnit.setBounds(170, 180, 40, 25);
+
+        tUnitItem1.setEditable(true);
+        tUnitItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tUnitItem1ActionPerformed(evt);
+            }
+        });
+        add(tUnitItem1);
+        tUnitItem1.setBounds(90, 180, 80, 30);
 
         cClose.setText("Close");
         add(cClose);
         cClose.setBounds(540, 400, 59, 23);
 
-        cButton2.setText("Browse");
-        cButton2.addActionListener(new java.awt.event.ActionListener() {
+        cImgBrowse.setText("Browse");
+        cImgBrowse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton2ActionPerformed(evt);
+                cImgBrowseActionPerformed(evt);
             }
         });
-        add(cButton2);
-        cButton2.setBounds(90, 430, 160, 23);
+        add(cImgBrowse);
+        cImgBrowse.setBounds(490, 150, 160, 23);
 
         cSaveBtn.setText("Save");
         cSaveBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -342,16 +619,32 @@ public class ItemMasterUI2 extends TabPanelUI  {
         add(jLabel21);
         jLabel21.setBounds(30, 100, 60, 20);
 
-        cItmSupplier.setEditable(true);
-        add(cItmSupplier);
-        cItmSupplier.setBounds(90, 100, 210, 20);
+        tSupplierItem.setEditable(true);
+        add(tSupplierItem);
+        tSupplierItem.setBounds(90, 100, 210, 20);
+
+        jLabel18.setText("Diff");
+        add(jLabel18);
+        jLabel18.setBounds(170, 160, 50, 20);
+
+        jLabel20.setText("Unit 1");
+        add(jLabel20);
+        jLabel20.setBounds(90, 160, 50, 20);
+
+        jLabel8.setText("Unit 2");
+        add(jLabel8);
+        jLabel8.setBounds(220, 160, 60, 20);
+
+        jLabel22.setText("Cost Price");
+        add(jLabel22);
+        jLabel22.setBounds(30, 260, 60, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     public Item uiToEntity(Item i)throws Exception{
         try {
            
-         i.setCode(uiEty.tcToStr(cItmcode));
-         i.setDescription(uiEty.tcToStr(tdesc));               
+         i.setCode(uiEty.tcToStr(tItemcode));
+         i.setDescription(uiEty.tcToStr(tItemDescription));               
         } catch (Exception e) {
     e.printStackTrace();
     throw e;
@@ -383,9 +676,9 @@ public class ItemMasterUI2 extends TabPanelUI  {
         
     }//GEN-LAST:event_cSaveBtnActionPerformed
 
-    private void cButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton2ActionPerformed
+    private void cImgBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cImgBrowseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton2ActionPerformed
+    }//GEN-LAST:event_cImgBrowseActionPerformed
 
     private void tChkInactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkInactiveActionPerformed
         // TODO add your handling code here:
@@ -407,23 +700,21 @@ public class ItemMasterUI2 extends TabPanelUI  {
         // TODO add your handling code here:
     }//GEN-LAST:event_tChkManufactoringActionPerformed
 
-    private void cTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField6ActionPerformed
+    private void tItemSalesPriceUnit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemSalesPriceUnit2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cTextField6ActionPerformed
+    }//GEN-LAST:event_tItemSalesPriceUnit2ActionPerformed
+
+    private void tUnitItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tUnitItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tUnitItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CCheckBox TChkTrackExpiry;
-    private org.components.controls.CButton cButton2;
     private org.components.controls.CButton cClear;
     private org.components.controls.CButton cClose;
     private org.components.controls.CComboBox cComboBox4;
     private org.components.controls.CButton cDeleteBtn;
-    private org.components.controls.CTextField cItmCarton;
-    private org.components.controls.CComboBox cItmCategory;
-    private org.components.controls.CComboBox cItmSupplier;
-    private org.components.controls.CComboBox cItmUnit1;
-    private org.components.controls.CComboBox cItmUnit2;
-    private org.components.controls.CTextField cItmcode;
+    private org.components.controls.CButton cImgBrowse;
     private org.components.controls.CLabel cLabel1;
     private org.components.controls.CButton cSaveBtn;
     private org.components.controls.CTextField cTextField10;
@@ -431,11 +722,6 @@ public class ItemMasterUI2 extends TabPanelUI  {
     private org.components.controls.CTextField cTextField12;
     private org.components.controls.CTextField cTextField13;
     private org.components.controls.CTextField cTextField14;
-    private org.components.controls.CTextField cTextField18;
-    private org.components.controls.CTextField cTextField5;
-    private org.components.controls.CTextField cTextField6;
-    private org.components.controls.CTextField cTextField7;
-    private org.components.controls.CTextField cTextField8;
     private org.components.controls.CTextField cTextField9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -449,25 +735,38 @@ public class ItemMasterUI2 extends TabPanelUI  {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lImage;
+    private org.components.controls.CTextField tCartonItem;
     private org.components.controls.CCheckBox tChkInactive;
     private org.components.controls.CCheckBox tChkManufactoring;
     private org.components.controls.CCheckBox tChkNonStockItm;
     private org.components.controls.CCheckBox tChkTrackSerial;
+    private org.components.controls.CTextField tDifferentPerUnit;
+    private org.components.controls.CComboBox tItemCategory;
+    private org.components.controls.CTextField tItemCostPrice;
+    private org.components.controls.CTextField tItemDescription;
+    private org.components.controls.CTextField tItemLandingCost;
+    private org.components.controls.CTextField tItemSalesPriceUnit1;
+    private org.components.controls.CTextField tItemSalesPriceUnit2;
+    private org.components.controls.CTextField tItemcode;
     private org.components.controls.CComboBox tPriceRange;
     private org.components.controls.CTextField tRngeValue;
+    private org.components.controls.CComboBox tSupplierItem;
+    private org.components.controls.CComboBox tUnitItem1;
+    private org.components.controls.CComboBox tUnitItem2;
     private org.components.controls.CTextField tWholesalePrice;
-    private org.components.controls.CTextField tdesc;
+    private javax.swing.JTable tblTblPriceRange;
     // End of variables declaration//GEN-END:variables
 
     @Override

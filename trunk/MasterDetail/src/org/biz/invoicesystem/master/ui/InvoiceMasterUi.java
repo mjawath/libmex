@@ -162,7 +162,7 @@ public class InvoiceMasterUi extends TabPanelUI  {
 
         cComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Invoice", "Quotation", "Credit Note", "Consignment Out" }));
         add(cComboBox2);
-        cComboBox2.setBounds(680, 10, 150, 23);
+        cComboBox2.setBounds(690, 10, 140, 23);
 
         cTextField2.setText("Inv No manually");
         add(cTextField2);
@@ -238,10 +238,11 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cPanel3.add(cLabel6);
         cLabel6.setBounds(800, 70, 60, 25);
 
+        cLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cLabel11.setText("Last Invoice");
-        cLabel11.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cPanel3.add(cLabel11);
-        cLabel11.setBounds(60, 0, 70, 20);
+        cLabel11.setBounds(0, 0, 180, 20);
 
         cLabel12.setText("Invoice Date");
         cLabel12.setFont(new java.awt.Font("Tahoma", 0, 10));

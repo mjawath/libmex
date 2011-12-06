@@ -37,11 +37,11 @@ public class ItemListUi extends TabPanelUI   {
         cItmcode = new org.components.controls.CTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItemList = new org.components.controls.CxTable();
-        cNewBtn = new org.components.controls.CButton();
-        cButton3 = new org.components.controls.CButton();
-        cDeleteItem = new org.components.controls.CButton();
-        cButton6 = new org.components.controls.CButton();
-        cNewBtn1 = new org.components.controls.CButton();
+        cUpdateItemBtn = new org.components.controls.CButton();
+        cRefreshItem = new org.components.controls.CButton();
+        cDeleteItemBtn = new org.components.controls.CButton();
+        cClose = new org.components.controls.CButton();
+        cNewItemBtn = new org.components.controls.CButton();
 
         setLayout(null);
 
@@ -81,83 +81,83 @@ public class ItemListUi extends TabPanelUI   {
         add(jScrollPane1);
         jScrollPane1.setBounds(10, 47, 760, 278);
 
-        cNewBtn.setText("Update");
-        cNewBtn.addActionListener(new java.awt.event.ActionListener() {
+        cUpdateItemBtn.setText("Update");
+        cUpdateItemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cNewBtnActionPerformed(evt);
+                cUpdateItemBtnActionPerformed(evt);
             }
         });
-        add(cNewBtn);
-        cNewBtn.setBounds(230, 340, 121, 49);
+        add(cUpdateItemBtn);
+        cUpdateItemBtn.setBounds(230, 340, 121, 49);
 
-        cButton3.setText("Refresh");
-        cButton3.addActionListener(new java.awt.event.ActionListener() {
+        cRefreshItem.setText("Refresh");
+        cRefreshItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton3ActionPerformed(evt);
+                cRefreshItemActionPerformed(evt);
             }
         });
-        add(cButton3);
-        cButton3.setBounds(490, 340, 121, 49);
+        add(cRefreshItem);
+        cRefreshItem.setBounds(490, 340, 121, 49);
 
-        cDeleteItem.setText("Delete");
-        cDeleteItem.addActionListener(new java.awt.event.ActionListener() {
+        cDeleteItemBtn.setText("Delete");
+        cDeleteItemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cDeleteItemActionPerformed(evt);
+                cDeleteItemBtnActionPerformed(evt);
             }
         });
-        add(cDeleteItem);
-        cDeleteItem.setBounds(360, 340, 121, 49);
+        add(cDeleteItemBtn);
+        cDeleteItemBtn.setBounds(360, 340, 121, 49);
 
-        cButton6.setText("Close");
-        cButton6.addActionListener(new java.awt.event.ActionListener() {
+        cClose.setText("Close");
+        cClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton6ActionPerformed(evt);
+                cCloseActionPerformed(evt);
             }
         });
-        add(cButton6);
-        cButton6.setBounds(620, 340, 110, 50);
+        add(cClose);
+        cClose.setBounds(620, 340, 110, 50);
 
-        cNewBtn1.setText("New ");
-        cNewBtn1.addActionListener(new java.awt.event.ActionListener() {
+        cNewItemBtn.setText("New ");
+        cNewItemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cNewBtn1ActionPerformed(evt);
+                cNewItemBtnActionPerformed(evt);
             }
         });
-        add(cNewBtn1);
-        cNewBtn1.setBounds(100, 340, 121, 49);
+        add(cNewItemBtn);
+        cNewItemBtn.setBounds(100, 340, 121, 49);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewBtnActionPerformed
+    private void cUpdateItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cUpdateItemBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cNewBtnActionPerformed
+    }//GEN-LAST:event_cUpdateItemBtnActionPerformed
 
-    private void cButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton3ActionPerformed
+    private void cRefreshItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cRefreshItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton3ActionPerformed
+    }//GEN-LAST:event_cRefreshItemActionPerformed
 
-    private void cDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cDeleteItemActionPerformed
+    private void cDeleteItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cDeleteItemBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cDeleteItemActionPerformed
+    }//GEN-LAST:event_cDeleteItemBtnActionPerformed
 
-    private void cButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton6ActionPerformed
+    private void cCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCloseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton6ActionPerformed
+    }//GEN-LAST:event_cCloseActionPerformed
 
     private void cItmcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cItmcodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cItmcodeActionPerformed
 
-    private void cNewBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewBtn1ActionPerformed
+    private void cNewItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewItemBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cNewBtn1ActionPerformed
+    }//GEN-LAST:event_cNewItemBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CButton cButton3;
-    private org.components.controls.CButton cButton6;
-    private org.components.controls.CButton cDeleteItem;
+    private org.components.controls.CButton cClose;
+    private org.components.controls.CButton cDeleteItemBtn;
     private org.components.controls.CTextField cItmcode;
-    private org.components.controls.CButton cNewBtn;
-    private org.components.controls.CButton cNewBtn1;
+    private org.components.controls.CButton cNewItemBtn;
+    private org.components.controls.CButton cRefreshItem;
+    private org.components.controls.CButton cUpdateItemBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.components.controls.CxTable tblItemList;

@@ -34,15 +34,15 @@ public class CustomerListUi extends TabPanelUI   {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        CustomerSearch = new org.components.controls.CTextField();
+        tCustomerSearch = new org.components.controls.CTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        cxTable1 = new org.components.controls.CxTable();
-        cButton1 = new org.components.controls.CButton();
-        cButton3 = new org.components.controls.CButton();
-        cButton4 = new org.components.controls.CButton();
-        cButton5 = new org.components.controls.CButton();
-        cButton6 = new org.components.controls.CButton();
-        cButton7 = new org.components.controls.CButton();
+        tblCustomerList = new org.components.controls.CxTable();
+        cNewCustomer = new org.components.controls.CButton();
+        cCustomerHistory = new org.components.controls.CButton();
+        cDeleteCustomer = new org.components.controls.CButton();
+        cBulkMail = new org.components.controls.CButton();
+        cClose = new org.components.controls.CButton();
+        cBulkSms = new org.components.controls.CButton();
         cCheckBox1 = new org.components.controls.CCheckBox();
 
         setLayout(null);
@@ -51,15 +51,15 @@ public class CustomerListUi extends TabPanelUI   {
         add(jLabel1);
         jLabel1.setBounds(10, 10, 112, 20);
 
-        CustomerSearch.addActionListener(new java.awt.event.ActionListener() {
+        tCustomerSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CustomerSearchActionPerformed(evt);
+                tCustomerSearchActionPerformed(evt);
             }
         });
-        add(CustomerSearch);
-        CustomerSearch.setBounds(140, 10, 470, 25);
+        add(tCustomerSearch);
+        tCustomerSearch.setBounds(140, 10, 470, 25);
 
-        cxTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCustomerList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -75,113 +75,113 @@ public class CustomerListUi extends TabPanelUI   {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(cxTable1);
-        cxTable1.getColumnModel().getColumn(1).setMinWidth(150);
-        cxTable1.getColumnModel().getColumn(1).setPreferredWidth(150);
-        cxTable1.getColumnModel().getColumn(1).setMaxWidth(150);
+        jScrollPane1.setViewportView(tblCustomerList);
+        tblCustomerList.getColumnModel().getColumn(1).setMinWidth(150);
+        tblCustomerList.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblCustomerList.getColumnModel().getColumn(1).setMaxWidth(150);
 
         add(jScrollPane1);
         jScrollPane1.setBounds(10, 47, 760, 278);
 
-        cButton1.setText("New ");
-        cButton1.addActionListener(new java.awt.event.ActionListener() {
+        cNewCustomer.setText("New ");
+        cNewCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton1ActionPerformed(evt);
+                cNewCustomerActionPerformed(evt);
             }
         });
-        add(cButton1);
-        cButton1.setBounds(10, 350, 121, 49);
+        add(cNewCustomer);
+        cNewCustomer.setBounds(10, 350, 121, 49);
 
-        cButton3.setText("History");
-        cButton3.addActionListener(new java.awt.event.ActionListener() {
+        cCustomerHistory.setText("History");
+        cCustomerHistory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton3ActionPerformed(evt);
+                cCustomerHistoryActionPerformed(evt);
             }
         });
-        add(cButton3);
-        cButton3.setBounds(270, 350, 121, 49);
+        add(cCustomerHistory);
+        cCustomerHistory.setBounds(270, 350, 121, 49);
 
-        cButton4.setText("Delete");
-        cButton4.addActionListener(new java.awt.event.ActionListener() {
+        cDeleteCustomer.setText("Delete");
+        cDeleteCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton4ActionPerformed(evt);
+                cDeleteCustomerActionPerformed(evt);
             }
         });
-        add(cButton4);
-        cButton4.setBounds(140, 350, 121, 49);
+        add(cDeleteCustomer);
+        cDeleteCustomer.setBounds(140, 350, 121, 49);
 
-        cButton5.setText("Bulk Email");
-        cButton5.addActionListener(new java.awt.event.ActionListener() {
+        cBulkMail.setText("Bulk Email");
+        cBulkMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton5ActionPerformed(evt);
+                cBulkMailActionPerformed(evt);
             }
         });
-        add(cButton5);
-        cButton5.setBounds(530, 350, 121, 49);
+        add(cBulkMail);
+        cBulkMail.setBounds(530, 350, 121, 49);
 
-        cButton6.setText("Close");
-        cButton6.addActionListener(new java.awt.event.ActionListener() {
+        cClose.setText("Close");
+        cClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton6ActionPerformed(evt);
+                cCloseActionPerformed(evt);
             }
         });
-        add(cButton6);
-        cButton6.setBounds(660, 350, 110, 49);
+        add(cClose);
+        cClose.setBounds(660, 350, 110, 49);
 
-        cButton7.setText("Bulk Sms");
-        cButton7.addActionListener(new java.awt.event.ActionListener() {
+        cBulkSms.setText("Bulk Sms");
+        cBulkSms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton7ActionPerformed(evt);
+                cBulkSmsActionPerformed(evt);
             }
         });
-        add(cButton7);
-        cButton7.setBounds(400, 350, 121, 49);
+        add(cBulkSms);
+        cBulkSms.setBounds(400, 350, 121, 49);
 
         cCheckBox1.setText("Remove Selection");
         add(cCheckBox1);
         cCheckBox1.setBounds(650, 330, 120, 23);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
+    private void cNewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewCustomerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton1ActionPerformed
+    }//GEN-LAST:event_cNewCustomerActionPerformed
 
-    private void cButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton3ActionPerformed
+    private void cCustomerHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCustomerHistoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton3ActionPerformed
+    }//GEN-LAST:event_cCustomerHistoryActionPerformed
 
-    private void cButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton4ActionPerformed
+    private void cDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cDeleteCustomerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton4ActionPerformed
+    }//GEN-LAST:event_cDeleteCustomerActionPerformed
 
-    private void cButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton5ActionPerformed
+    private void cBulkMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBulkMailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton5ActionPerformed
+    }//GEN-LAST:event_cBulkMailActionPerformed
 
-    private void cButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton6ActionPerformed
+    private void cCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCloseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton6ActionPerformed
+    }//GEN-LAST:event_cCloseActionPerformed
 
-    private void CustomerSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerSearchActionPerformed
+    private void tCustomerSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCustomerSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CustomerSearchActionPerformed
+    }//GEN-LAST:event_tCustomerSearchActionPerformed
 
-    private void cButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton7ActionPerformed
+    private void cBulkSmsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBulkSmsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cButton7ActionPerformed
+    }//GEN-LAST:event_cBulkSmsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CTextField CustomerSearch;
-    private org.components.controls.CButton cButton1;
-    private org.components.controls.CButton cButton3;
-    private org.components.controls.CButton cButton4;
-    private org.components.controls.CButton cButton5;
-    private org.components.controls.CButton cButton6;
-    private org.components.controls.CButton cButton7;
+    private org.components.controls.CButton cBulkMail;
+    private org.components.controls.CButton cBulkSms;
     private org.components.controls.CCheckBox cCheckBox1;
-    private org.components.controls.CxTable cxTable1;
+    private org.components.controls.CButton cClose;
+    private org.components.controls.CButton cCustomerHistory;
+    private org.components.controls.CButton cDeleteCustomer;
+    private org.components.controls.CButton cNewCustomer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private org.components.controls.CTextField tCustomerSearch;
+    private org.components.controls.CxTable tblCustomerList;
     // End of variables declaration//GEN-END:variables
 
     @Override
