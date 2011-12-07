@@ -10,11 +10,9 @@
  */
 package invoicingsystem;
 
-import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -23,9 +21,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.AbstractAction;
-import javax.swing.AbstractCellEditor;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -44,17 +41,17 @@ import org.components.windows.TabPanelUI;
  */
 public class InvoiceTestUI extends TabPanelUI {
 
+    DetailPanel panel;
+
     /** Creates new form InvoiceTestUI */
     public InvoiceTestUI() {
         initComponents();
+
+        panel = new DetailPanel();
         cxTable1.putClientProperty("JTable.autoStartsEdit", Boolean.TRUE);
-            
-           jd= new jd();
-           jd.getRootPane().setOpaque(false);
-           AWTUtilities.setWindowOpacity(jd, 0.8f);
-           jd.setUndecorated(true);
-                
-                jd.setSize(700,100);
+
+
+
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(10, 310));
         layeredPane.setBackground(Color.red);
@@ -68,22 +65,22 @@ public class InvoiceTestUI extends TabPanelUI {
             }
         });
         add(layeredPane);
-        
+
         cxTable1.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.println("jtable pressed " + e);
-                int sc=cxTable1.getSelectedColumn();
-                int sr =cxTable1.getSelectedRow();
-                if(sr>-1){
+                int sc = cxTable1.getSelectedColumn();
+                int sr = cxTable1.getSelectedRow();
+                if (sr > -1) {
                     System.out.println("sdffsfsafsafsadf");
-                TableCellEditor tc= cxTable1.getCellEditor(sr, sc);
-               Component c= tc.getTableCellEditorComponent(cxTable1, tc.getCellEditorValue(), true, sr, sc);
-               if(c instanceof JTextField ){
-               JTextField cc=(JTextField) c;
-               cc.setCaretPosition(0);
-               } 
+                    TableCellEditor tc = cxTable1.getCellEditor(sr, sc);
+                    Component c = tc.getTableCellEditorComponent(cxTable1, tc.getCellEditorValue(), true, sr, sc);
+                    if (c instanceof JTextField) {
+                        JTextField cc = (JTextField) c;
+                        cc.setCaretPosition(0);
+                    }
                 }
             }
 
@@ -120,19 +117,15 @@ public class InvoiceTestUI extends TabPanelUI {
             }
         });
         cxTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
             public void valueChanged(ListSelectionEvent e) {
-   
-       
-                
             }
         });
         cxTable1.addFocusListener(new FocusAdapter() {
 
             @Override
             public void focusLost(FocusEvent e) {
-  
             }
-        
         });
     }
 
@@ -181,7 +174,7 @@ public class InvoiceTestUI extends TabPanelUI {
         add(cTextField1);
         cTextField1.setBounds(40, 40, 130, 25);
     }// </editor-fold>//GEN-END:initComponents
- JDialog jd = null;
+    JDialog jd = null;
     private void cTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField1ActionPerformed
 
         cxTable1.requestFocus();
@@ -204,87 +197,18 @@ public class InvoiceTestUI extends TabPanelUI {
     }
 }
 
-class MyTableCellEditor extends AbstractCellEditor implements TableCellEditor {
-    // This is the component that will handle the editing of the cell value
-
-    JComponent component = new JTextField() {
-
-        @Override
-        protected void processKeyEvent(KeyEvent e) {
-
-
-            super.processKeyEvent(e);
-        }
-
-        @Override
-        protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
-
-            Boolean bv = super.processKeyBinding(ks, e, condition, pressed);
-//          throw  new RuntimeException();     // System.out.println("binding evetn "+e);
-//          System.out.println("eeeeeeeeee"+e); 
-            if (!component.isFocusOwner()) {
-                component.requestFocus();
-
-            }
-
-            return bv;
-        }
-    };
-
+class MyTableCellEditor extends DefaultCellEditor {
+    
+    JTextField jtf=new JTextField();
+    
     public MyTableCellEditor() {
-        super();
-        component.setBackground(Color.orange);
-        component.addKeyListener(new KeyAdapter() {
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                System.out.println("ccccccccr pressed ----------------\n" + e);
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    System.out.println("action concumed ");
-                    stopCellEditing();
-                    return;
-                }
-            }
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-                System.out.println("ccccccctyped " + e);
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                System.out.println("ccccccccckey rtel;ased " + e);
-            }
-        });
-        component.addFocusListener(new FocusAdapter() {
-
-            @Override
-            public void focusGained(FocusEvent e) {
-            }
-        });
+        super(new JTextField());
+        
+        
+  
     }
-
-    // This method is called when a cell value is edited by the user.
-    public Component getTableCellEditorComponent(JTable table, Object value,
-            boolean isSelected, int rowIndex, int vColIndex) {
-        // 'value' is value contained in the cell located at (rowIndex, vColIndex)
-
-        if (isSelected) {
-            // cell (and perhaps other cells) are selected
-        }
-
-        // Configure the component with the specified value
-        ((JTextField) component).setText((String) value);
-
-        // Return the configured component
-        return component;
-    }
-
-    // This method is called when editing is completed.
-    // It must return the new value to be stored in the cell.
-    public Object getCellEditorValue() {
-        return ((JTextField) component).getText();
-    }
+   
+    
 }
 
 class CustomRenderer extends DefaultTableCellRenderer {
@@ -300,10 +224,11 @@ class CustomRenderer extends DefaultTableCellRenderer {
         return c;
     }
 }
-class jd extends JDialog{
+
+class jd extends JDialog {
 
     public jd() {
-setFocusableWindowState(false);
+        setFocusableWindowState(false);
     }
-
 }
+
