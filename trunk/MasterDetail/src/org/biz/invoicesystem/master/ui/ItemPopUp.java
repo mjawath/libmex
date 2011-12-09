@@ -115,8 +115,8 @@ public class ItemPopUp extends Popdialog {
         TableUtil.cleardata(getTable());
         for (Object ob : items) {
             Item item=(Item)ob;
-                    Object[] row = {item.getId(),item.getCode(),item.getName(),item.getDescription()};
-            TableUtil.addrow(getTable(), row);
+//                    Object[] row = {item.getId(),item.getCode(),item.getName(),item.getDescription()};
+//            TableUtil.addrow(getTable(), row);
         }
 
     }
