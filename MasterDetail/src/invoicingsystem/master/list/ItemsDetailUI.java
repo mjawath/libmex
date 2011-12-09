@@ -47,7 +47,7 @@ public class ItemsDetailUI extends TabPanelUI {
     }
 
     public void addToTable(Item item) {
-        TableUtil.addrow(cxTable1, new Object[]{item.getId(), item.getCode(), item.getName(), item.getDescription()});
+//        TableUtil.addrow(cxTable1, new Object[]{item.getId(), item.getCode(), item.getName(), item.getDescription()});
     }
 
     @SuppressWarnings("unchecked")

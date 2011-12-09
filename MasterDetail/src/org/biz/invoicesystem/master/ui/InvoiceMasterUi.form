@@ -234,8 +234,11 @@
     </Component>
     <Component class="org.components.controls.CTextField" name="cTextField2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Inv No manually"/>
+        <Property name="text" type="java.lang.String" value="inv no"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField2ActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="830" y="10" width="110" height="-1"/>
@@ -266,7 +269,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField3">
+        <Component class="org.components.controls.CTextField" name="tCustomerSearchField">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="60" y="0" width="150" height="20"/>
@@ -285,7 +288,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="org.components.controls.CTextArea" name="cTextArea2">
+            <Component class="org.components.controls.CTextArea" name="tCusDetail">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="10"/>
@@ -293,7 +296,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="org.components.controls.CCheckBox" name="cCheckBox2">
+        <Component class="org.components.controls.CCheckBox" name="tInvType">
           <Properties>
             <Property name="text" type="java.lang.String" value="Type"/>
           </Properties>
@@ -443,7 +446,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField9">
+        <Component class="org.components.controls.CTextField" name="tLastInvDate">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="10" style="0"/>
@@ -455,7 +458,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField10">
+        <Component class="org.components.controls.CTextField" name="tInvTotal">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="10" style="0"/>
@@ -545,7 +548,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField12">
+        <Component class="org.components.controls.CTextField" name="tBouncedChq">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="10" style="0"/>
@@ -557,7 +560,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField13">
+        <Component class="org.components.controls.CTextField" name="tCreditLimit">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="10" style="0"/>
@@ -569,7 +572,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField14">
+        <Component class="org.components.controls.CTextField" name="tTotalDues">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="10" style="0"/>
@@ -581,7 +584,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField15">
+        <Component class="org.components.controls.CTextField" name="tPdChq">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="10" style="0"/>

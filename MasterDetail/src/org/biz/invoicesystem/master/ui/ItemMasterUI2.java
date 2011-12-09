@@ -302,8 +302,35 @@ public class ItemMasterUI2 extends TabPanelUI  {
                 }
   
       
+  });//cost price listener finished.
+  
+  //landing cost listener field strtd...
+  
+  tItemLandingCost.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+       tItemMinimumPrice.requestFocus();  
+             
+                }
+                 
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+           
+                    tItemCostPrice.requestFocus();
+                
+                }  
+                }
+  
+      
   });
-  //cost price listener finished.
+  
+  //landing cost listener field finished...
           } catch (Exception e) {
         e.printStackTrace();
         }
@@ -331,7 +358,7 @@ public class ItemMasterUI2 extends TabPanelUI  {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblTblPriceRange = new javax.swing.JTable();
+        tblPriceRanges = new javax.swing.JTable();
         tRngeValue = new org.components.controls.CTextField();
         tPriceRange = new org.components.controls.CComboBox();
         cLabel1 = new org.components.controls.CLabel();
@@ -354,14 +381,14 @@ public class ItemMasterUI2 extends TabPanelUI  {
         tItemSalesPriceUnit2 = new org.components.controls.CTextField();
         tItemLandingCost = new org.components.controls.CTextField();
         tItemCostPrice = new org.components.controls.CTextField();
-        cTextField9 = new org.components.controls.CTextField();
-        cTextField10 = new org.components.controls.CTextField();
-        cTextField11 = new org.components.controls.CTextField();
-        cTextField12 = new org.components.controls.CTextField();
-        cTextField13 = new org.components.controls.CTextField();
-        cTextField14 = new org.components.controls.CTextField();
+        tItemMinimumPrice = new org.components.controls.CTextField();
+        tItemdiscount = new org.components.controls.CTextField();
+        tItemdiscValue = new org.components.controls.CTextField();
+        tItemCommission = new org.components.controls.CTextField();
+        tItemMinimumStock = new org.components.controls.CTextField();
+        tItemReOrder = new org.components.controls.CTextField();
         tItemCategory = new org.components.controls.CComboBox();
-        cComboBox4 = new org.components.controls.CComboBox();
+        tItemLocation = new org.components.controls.CComboBox();
         tDifferentPerUnit = new org.components.controls.CTextField();
         tUnitItem1 = new org.components.controls.CComboBox();
         cClose = new org.components.controls.CButton();
@@ -370,11 +397,11 @@ public class ItemMasterUI2 extends TabPanelUI  {
         cClear = new org.components.controls.CButton();
         cDeleteBtn = new org.components.controls.CButton();
         lImage = new javax.swing.JLabel();
-        tChkInactive = new org.components.controls.CCheckBox();
-        tChkTrackSerial = new org.components.controls.CCheckBox();
-        TChkTrackExpiry = new org.components.controls.CCheckBox();
-        tChkNonStockItm = new org.components.controls.CCheckBox();
-        tChkManufactoring = new org.components.controls.CCheckBox();
+        tItemTrakInactive = new org.components.controls.CCheckBox();
+        tItemTrakSerial = new org.components.controls.CCheckBox();
+        tItemTrakExpiry = new org.components.controls.CCheckBox();
+        tItemTrakNonStockItem = new org.components.controls.CCheckBox();
+        tItemTrakManfctringItem = new org.components.controls.CCheckBox();
         jLabel21 = new javax.swing.JLabel();
         tSupplierItem = new org.components.controls.CComboBox();
         jLabel18 = new javax.swing.JLabel();
@@ -410,7 +437,7 @@ public class ItemMasterUI2 extends TabPanelUI  {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(10, 15, 82, 20);
 
-        tblTblPriceRange.setModel(new javax.swing.table.DefaultTableModel(
+        tblPriceRanges.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -418,7 +445,7 @@ public class ItemMasterUI2 extends TabPanelUI  {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane1.setViewportView(tblTblPriceRange);
+        jScrollPane1.setViewportView(tblPriceRanges);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(10, 120, 300, 80);
@@ -490,7 +517,6 @@ public class ItemMasterUI2 extends TabPanelUI  {
         add(tItemSalesPriceUnit1);
         tItemSalesPriceUnit1.setBounds(90, 205, 80, 20);
 
-        tItemSalesPriceUnit2.setBackground(new java.awt.Color(255, 255, 255));
         tItemSalesPriceUnit2.setEditable(false);
         tItemSalesPriceUnit2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -503,26 +529,26 @@ public class ItemMasterUI2 extends TabPanelUI  {
         tItemLandingCost.setBounds(210, 260, 90, 25);
         add(tItemCostPrice);
         tItemCostPrice.setBounds(90, 260, 90, 25);
-        add(cTextField9);
-        cTextField9.setBounds(90, 290, 90, 25);
-        add(cTextField10);
-        cTextField10.setBounds(90, 320, 90, 25);
-        add(cTextField11);
-        cTextField11.setBounds(210, 320, 90, 25);
-        add(cTextField12);
-        cTextField12.setBounds(90, 350, 90, 20);
-        add(cTextField13);
-        cTextField13.setBounds(90, 410, 210, 25);
-        add(cTextField14);
-        cTextField14.setBounds(90, 440, 210, 25);
+        add(tItemMinimumPrice);
+        tItemMinimumPrice.setBounds(90, 290, 90, 25);
+        add(tItemdiscount);
+        tItemdiscount.setBounds(90, 320, 90, 25);
+        add(tItemdiscValue);
+        tItemdiscValue.setBounds(210, 320, 90, 25);
+        add(tItemCommission);
+        tItemCommission.setBounds(90, 350, 90, 20);
+        add(tItemMinimumStock);
+        tItemMinimumStock.setBounds(90, 410, 210, 25);
+        add(tItemReOrder);
+        tItemReOrder.setBounds(90, 440, 210, 25);
 
         tItemCategory.setEditable(true);
         add(tItemCategory);
         tItemCategory.setBounds(90, 70, 210, 23);
 
-        cComboBox4.setEditable(true);
-        add(cComboBox4);
-        cComboBox4.setBounds(90, 380, 210, 23);
+        tItemLocation.setEditable(true);
+        add(tItemLocation);
+        tItemLocation.setBounds(90, 380, 210, 23);
         add(tDifferentPerUnit);
         tDifferentPerUnit.setBounds(170, 180, 40, 25);
 
@@ -570,50 +596,50 @@ public class ItemMasterUI2 extends TabPanelUI  {
         add(lImage);
         lImage.setBounds(490, 10, 160, 140);
 
-        tChkInactive.setText("Inactive");
-        tChkInactive.addActionListener(new java.awt.event.ActionListener() {
+        tItemTrakInactive.setText("Inactive");
+        tItemTrakInactive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tChkInactiveActionPerformed(evt);
+                tItemTrakInactiveActionPerformed(evt);
             }
         });
-        add(tChkInactive);
-        tChkInactive.setBounds(330, 130, 140, 23);
+        add(tItemTrakInactive);
+        tItemTrakInactive.setBounds(330, 130, 140, 23);
 
-        tChkTrackSerial.setText("Track Serial Number");
-        tChkTrackSerial.addActionListener(new java.awt.event.ActionListener() {
+        tItemTrakSerial.setText("Track Serial Number");
+        tItemTrakSerial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tChkTrackSerialActionPerformed(evt);
+                tItemTrakSerialActionPerformed(evt);
             }
         });
-        add(tChkTrackSerial);
-        tChkTrackSerial.setBounds(330, 10, 150, 23);
+        add(tItemTrakSerial);
+        tItemTrakSerial.setBounds(330, 10, 150, 23);
 
-        TChkTrackExpiry.setText("Track Expiry ");
-        TChkTrackExpiry.addActionListener(new java.awt.event.ActionListener() {
+        tItemTrakExpiry.setText("Track Expiry ");
+        tItemTrakExpiry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TChkTrackExpiryActionPerformed(evt);
+                tItemTrakExpiryActionPerformed(evt);
             }
         });
-        add(TChkTrackExpiry);
-        TChkTrackExpiry.setBounds(330, 40, 150, 23);
+        add(tItemTrakExpiry);
+        tItemTrakExpiry.setBounds(330, 40, 150, 23);
 
-        tChkNonStockItm.setText("Non Stock Item");
-        tChkNonStockItm.addActionListener(new java.awt.event.ActionListener() {
+        tItemTrakNonStockItem.setText("Non Stock Item");
+        tItemTrakNonStockItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tChkNonStockItmActionPerformed(evt);
+                tItemTrakNonStockItemActionPerformed(evt);
             }
         });
-        add(tChkNonStockItm);
-        tChkNonStockItm.setBounds(330, 70, 150, 23);
+        add(tItemTrakNonStockItem);
+        tItemTrakNonStockItem.setBounds(330, 70, 150, 23);
 
-        tChkManufactoring.setText("Manufacturing Item");
-        tChkManufactoring.addActionListener(new java.awt.event.ActionListener() {
+        tItemTrakManfctringItem.setText("Manufacturing Item");
+        tItemTrakManfctringItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tChkManufactoringActionPerformed(evt);
+                tItemTrakManfctringItemActionPerformed(evt);
             }
         });
-        add(tChkManufactoring);
-        tChkManufactoring.setBounds(330, 100, 140, 23);
+        add(tItemTrakManfctringItem);
+        tItemTrakManfctringItem.setBounds(330, 100, 140, 23);
 
         jLabel21.setText("Supplier");
         add(jLabel21);
@@ -644,7 +670,29 @@ public class ItemMasterUI2 extends TabPanelUI  {
         try {
            
          i.setCode(uiEty.tcToStr(tItemcode));
-         i.setDescription(uiEty.tcToStr(tItemDescription));               
+         i.setDescription(uiEty.tcToStr(tItemDescription)); 
+    // tItemCategory   combo
+    //tSupplierItem    combo 
+    //tCartonItem     
+   //tUnitItem1      combo
+  //tDifferentPerUnit
+  //tUnitItem2       combo
+   //tItemSalesPriceUnit1      
+     //tItemCostPrice
+    //tItemLandingCost     
+   //tItemMinimumPrice
+   //tItemdiscount        
+    //tItemdiscValue       
+    //tItemCommission
+    //tItemLocation   combo   
+     //tItemMinimumStock   
+    //tItemReOrder
+     //tItemTrakSerial chk
+     //tItemTrakExpiry chk
+    //tItemTrakNonStockItem chk
+   //tItemTrakManfctringItem chk      
+   //tItemTrakInactive chk      
+    //tWholesalePrice      
         } catch (Exception e) {
     e.printStackTrace();
     throw e;
@@ -663,42 +711,46 @@ public class ItemMasterUI2 extends TabPanelUI  {
 //            addToTable(items);
 //            return;
 //        }
-        
+        try {
         Item item = new Item();
-       // uiToEntity(item);
- 
-        itemService.getDao().save(item);
+        uiToEntity(item);
+       itemService.getDao().save(item);
         items = itemService.getDao().getAll();
         
         System.out.println("list count "+items.size());
 //        addToTable(items);?
 //        ipu.populateTable(items);
-        
+  
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+     
+          
     }//GEN-LAST:event_cSaveBtnActionPerformed
 
     private void cImgBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cImgBrowseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cImgBrowseActionPerformed
 
-    private void tChkInactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkInactiveActionPerformed
+    private void tItemTrakInactiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemTrakInactiveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tChkInactiveActionPerformed
+    }//GEN-LAST:event_tItemTrakInactiveActionPerformed
 
-    private void tChkTrackSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkTrackSerialActionPerformed
+    private void tItemTrakSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemTrakSerialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tChkTrackSerialActionPerformed
+    }//GEN-LAST:event_tItemTrakSerialActionPerformed
 
-    private void TChkTrackExpiryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TChkTrackExpiryActionPerformed
+    private void tItemTrakExpiryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemTrakExpiryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TChkTrackExpiryActionPerformed
+    }//GEN-LAST:event_tItemTrakExpiryActionPerformed
 
-    private void tChkNonStockItmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkNonStockItmActionPerformed
+    private void tItemTrakNonStockItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemTrakNonStockItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tChkNonStockItmActionPerformed
+    }//GEN-LAST:event_tItemTrakNonStockItemActionPerformed
 
-    private void tChkManufactoringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tChkManufactoringActionPerformed
+    private void tItemTrakManfctringItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemTrakManfctringItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tChkManufactoringActionPerformed
+    }//GEN-LAST:event_tItemTrakManfctringItemActionPerformed
 
     private void tItemSalesPriceUnit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemSalesPriceUnit2ActionPerformed
         // TODO add your handling code here:
@@ -709,20 +761,12 @@ public class ItemMasterUI2 extends TabPanelUI  {
     }//GEN-LAST:event_tUnitItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CCheckBox TChkTrackExpiry;
     private org.components.controls.CButton cClear;
     private org.components.controls.CButton cClose;
-    private org.components.controls.CComboBox cComboBox4;
     private org.components.controls.CButton cDeleteBtn;
     private org.components.controls.CButton cImgBrowse;
     private org.components.controls.CLabel cLabel1;
     private org.components.controls.CButton cSaveBtn;
-    private org.components.controls.CTextField cTextField10;
-    private org.components.controls.CTextField cTextField11;
-    private org.components.controls.CTextField cTextField12;
-    private org.components.controls.CTextField cTextField13;
-    private org.components.controls.CTextField cTextField14;
-    private org.components.controls.CTextField cTextField9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -748,25 +792,33 @@ public class ItemMasterUI2 extends TabPanelUI  {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lImage;
     private org.components.controls.CTextField tCartonItem;
-    private org.components.controls.CCheckBox tChkInactive;
-    private org.components.controls.CCheckBox tChkManufactoring;
-    private org.components.controls.CCheckBox tChkNonStockItm;
-    private org.components.controls.CCheckBox tChkTrackSerial;
     private org.components.controls.CTextField tDifferentPerUnit;
     private org.components.controls.CComboBox tItemCategory;
+    private org.components.controls.CTextField tItemCommission;
     private org.components.controls.CTextField tItemCostPrice;
     private org.components.controls.CTextField tItemDescription;
     private org.components.controls.CTextField tItemLandingCost;
+    private org.components.controls.CComboBox tItemLocation;
+    private org.components.controls.CTextField tItemMinimumPrice;
+    private org.components.controls.CTextField tItemMinimumStock;
+    private org.components.controls.CTextField tItemReOrder;
     private org.components.controls.CTextField tItemSalesPriceUnit1;
     private org.components.controls.CTextField tItemSalesPriceUnit2;
+    private org.components.controls.CCheckBox tItemTrakExpiry;
+    private org.components.controls.CCheckBox tItemTrakInactive;
+    private org.components.controls.CCheckBox tItemTrakManfctringItem;
+    private org.components.controls.CCheckBox tItemTrakNonStockItem;
+    private org.components.controls.CCheckBox tItemTrakSerial;
     private org.components.controls.CTextField tItemcode;
+    private org.components.controls.CTextField tItemdiscValue;
+    private org.components.controls.CTextField tItemdiscount;
     private org.components.controls.CComboBox tPriceRange;
     private org.components.controls.CTextField tRngeValue;
     private org.components.controls.CComboBox tSupplierItem;
     private org.components.controls.CComboBox tUnitItem1;
     private org.components.controls.CComboBox tUnitItem2;
     private org.components.controls.CTextField tWholesalePrice;
-    private javax.swing.JTable tblTblPriceRange;
+    private javax.swing.JTable tblPriceRanges;
     // End of variables declaration//GEN-END:variables
 
     @Override

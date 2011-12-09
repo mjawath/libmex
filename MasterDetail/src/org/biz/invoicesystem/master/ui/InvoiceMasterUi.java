@@ -53,10 +53,10 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cTextField2 = new org.components.controls.CTextField();
         cPanel2 = new org.components.containers.CPanel();
         cLabel3 = new org.components.controls.CLabel();
-        cTextField3 = new org.components.controls.CTextField();
+        tCustomerSearchField = new org.components.controls.CTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        cTextArea2 = new org.components.controls.CTextArea();
-        cCheckBox2 = new org.components.controls.CCheckBox();
+        tCusDetail = new org.components.controls.CTextArea();
+        tInvType = new org.components.controls.CCheckBox();
         cDatePicker1 = new org.components.controls.CDatePicker();
         cPanel4 = new org.components.containers.CPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -67,18 +67,18 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cLabel11 = new org.components.controls.CLabel();
         cLabel12 = new org.components.controls.CLabel();
         cLabel13 = new org.components.controls.CLabel();
-        cTextField9 = new org.components.controls.CTextField();
-        cTextField10 = new org.components.controls.CTextField();
+        tLastInvDate = new org.components.controls.CTextField();
+        tInvTotal = new org.components.controls.CTextField();
         cPanel5 = new org.components.containers.CPanel();
         cLabel16 = new org.components.controls.CLabel();
         cLabel17 = new org.components.controls.CLabel();
         cLabel18 = new org.components.controls.CLabel();
         cLabel19 = new org.components.controls.CLabel();
         cLabel20 = new org.components.controls.CLabel();
-        cTextField12 = new org.components.controls.CTextField();
-        cTextField13 = new org.components.controls.CTextField();
-        cTextField14 = new org.components.controls.CTextField();
-        cTextField15 = new org.components.controls.CTextField();
+        tBouncedChq = new org.components.controls.CTextField();
+        tCreditLimit = new org.components.controls.CTextField();
+        tTotalDues = new org.components.controls.CTextField();
+        tPdChq = new org.components.controls.CTextField();
 
         setLayout(null);
 
@@ -164,7 +164,12 @@ public class InvoiceMasterUi extends TabPanelUI  {
         add(cComboBox2);
         cComboBox2.setBounds(690, 10, 140, 23);
 
-        cTextField2.setText("Inv No manually");
+        cTextField2.setText("inv no");
+        cTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cTextField2ActionPerformed(evt);
+            }
+        });
         add(cTextField2);
         cTextField2.setBounds(830, 10, 110, 25);
 
@@ -174,19 +179,19 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cLabel3.setFont(new java.awt.Font("Tahoma", 1, 10));
         cPanel2.add(cLabel3);
         cLabel3.setBounds(10, 0, 60, 20);
-        cPanel2.add(cTextField3);
-        cTextField3.setBounds(60, 0, 150, 20);
+        cPanel2.add(tCustomerSearchField);
+        tCustomerSearchField.setBounds(60, 0, 150, 20);
 
-        cTextArea2.setColumns(20);
-        cTextArea2.setRows(10);
-        jScrollPane3.setViewportView(cTextArea2);
+        tCusDetail.setColumns(20);
+        tCusDetail.setRows(10);
+        jScrollPane3.setViewportView(tCusDetail);
 
         cPanel2.add(jScrollPane3);
         jScrollPane3.setBounds(10, 20, 230, 70);
 
-        cCheckBox2.setText("Type");
-        cPanel2.add(cCheckBox2);
-        cCheckBox2.setBounds(10, 90, 140, 23);
+        tInvType.setText("Type");
+        cPanel2.add(tInvType);
+        tInvType.setBounds(10, 90, 140, 23);
 
         add(cPanel2);
         cPanel2.setBounds(0, 11, 240, 110);
@@ -240,7 +245,7 @@ public class InvoiceMasterUi extends TabPanelUI  {
 
         cLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cLabel11.setText("Last Invoice");
-        cLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cLabel11.setFont(new java.awt.Font("Tahoma", 1, 12));
         cPanel3.add(cLabel11);
         cLabel11.setBounds(0, 0, 180, 20);
 
@@ -254,13 +259,13 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cPanel3.add(cLabel13);
         cLabel13.setBounds(10, 60, 70, 20);
 
-        cTextField9.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel3.add(cTextField9);
-        cTextField9.setBounds(10, 40, 150, 20);
+        tLastInvDate.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel3.add(tLastInvDate);
+        tLastInvDate.setBounds(10, 40, 150, 20);
 
-        cTextField10.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel3.add(cTextField10);
-        cTextField10.setBounds(10, 80, 150, 20);
+        tInvTotal.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel3.add(tInvTotal);
+        tInvTotal.setBounds(10, 80, 150, 20);
 
         add(cPanel3);
         cPanel3.setBounds(490, 10, 180, 110);
@@ -292,28 +297,31 @@ public class InvoiceMasterUi extends TabPanelUI  {
         cPanel5.add(cLabel20);
         cLabel20.setBounds(10, 80, 70, 20);
 
-        cTextField12.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField12);
-        cTextField12.setBounds(90, 80, 150, 20);
+        tBouncedChq.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel5.add(tBouncedChq);
+        tBouncedChq.setBounds(90, 80, 150, 20);
 
-        cTextField13.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField13);
-        cTextField13.setBounds(90, 10, 150, 20);
+        tCreditLimit.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel5.add(tCreditLimit);
+        tCreditLimit.setBounds(90, 10, 150, 20);
 
-        cTextField14.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField14);
-        cTextField14.setBounds(90, 40, 150, 20);
+        tTotalDues.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel5.add(tTotalDues);
+        tTotalDues.setBounds(90, 40, 150, 20);
 
-        cTextField15.setFont(new java.awt.Font("Tahoma", 0, 10));
-        cPanel5.add(cTextField15);
-        cTextField15.setBounds(90, 60, 150, 20);
+        tPdChq.setFont(new java.awt.Font("Tahoma", 0, 10));
+        cPanel5.add(tPdChq);
+        tPdChq.setBounds(90, 60, 150, 20);
 
         add(cPanel5);
         cPanel5.setBounds(240, 10, 250, 110);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cTextField2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CCheckBox cCheckBox2;
     private org.components.controls.CComboBox cComboBox1;
     private org.components.controls.CComboBox cComboBox2;
     private org.components.controls.CDatePicker cDatePicker1;
@@ -340,24 +348,25 @@ public class InvoiceMasterUi extends TabPanelUI  {
     private org.components.containers.CPanel cPanel3;
     private org.components.containers.CPanel cPanel4;
     private org.components.containers.CPanel cPanel5;
-    private org.components.controls.CTextArea cTextArea2;
     private org.components.controls.CTextField cTextField1;
-    private org.components.controls.CTextField cTextField10;
     private org.components.controls.CTextField cTextField11;
-    private org.components.controls.CTextField cTextField12;
-    private org.components.controls.CTextField cTextField13;
-    private org.components.controls.CTextField cTextField14;
-    private org.components.controls.CTextField cTextField15;
     private org.components.controls.CTextField cTextField2;
-    private org.components.controls.CTextField cTextField3;
     private org.components.controls.CTextField cTextField4;
     private org.components.controls.CTextField cTextField5;
     private org.components.controls.CTextField cTextField6;
-    private org.components.controls.CTextField cTextField9;
     private org.components.controls.CxTable cxTable2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private org.components.controls.CTextField tBouncedChq;
+    private org.components.controls.CTextField tCreditLimit;
+    private org.components.controls.CTextArea tCusDetail;
+    private org.components.controls.CTextField tCustomerSearchField;
+    private org.components.controls.CTextField tInvTotal;
+    private org.components.controls.CCheckBox tInvType;
+    private org.components.controls.CTextField tLastInvDate;
+    private org.components.controls.CTextField tPdChq;
+    private org.components.controls.CTextField tTotalDues;
     private org.components.controls.CTable tblInvoice;
     // End of variables declaration//GEN-END:variables
 
