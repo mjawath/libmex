@@ -1,4 +1,3 @@
- 
 package org.biz.invoicesystem.entity.master;
 
 import java.io.Serializable;
@@ -6,41 +5,36 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
-/**
- *
- * @author mjawath
- */
+
 @Entity
 public class Item implements Serializable {
-    private static final long serialVersionUID = 1L;
+ //   private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
-    private String code;
+    private String id; //default table id...for 
+    private String code;//unique item code...
  //   private String name;
 //    @OneToOne
 //    private Product product;
-    @OneToOne
-    private ItemVariation variation;
-    private String description;
+    private String description; //item description ....
    // private String inventoryType;
 
-    private String category;
+    private String category; 
     
-    private String unitOne;
+    private String unitOne; //like bags...dozens...boxes..
     
-    private int different; 
+    private int different; //unit diferents like 50packets=1 bag...
             
-    private String unitTwo;
+    private String unitTwo; //like pcs ..packets...
     //item has many mariation
     //variation has name value --colur = red/colur = yellow , size = 15 ,size = 20 
     
@@ -50,12 +44,14 @@ public class Item implements Serializable {
     private String supplierId;
     private Double cost;
     private Double salesPrice;
+    private Double unit1SalesPrice;
     private Double unit2SalesPrice;
     
     private String type;
  //   private String sections;
     private Double minSalesPrice;
-    private Double dicount;
+    private Double discount;
+    private Double discountValue;
  //   private Double difference;
     private Double minStock;
     private String location;
@@ -70,6 +66,7 @@ public class Item implements Serializable {
  //   private Double avgCost;
     private Double wholesalePrice;
     private Double commission;
+    private Double commissionValue;
     private Double reOrder;
     private Double carton;
     private Boolean nonStockItems;
@@ -79,12 +76,19 @@ public class Item implements Serializable {
     private Boolean trackSerial;
     private Boolean trackExpiry;
 
-//      @OneToMany(cascade={javax.persistence.CascadeType.ALL, javax.persistence.CascadeType.REMOVE}, mappedBy="item")
+    String metaInfo; //extra description about item ..we need this some time when we upload this 
+                     // item to online....so must be good desc..
+    
+//      @OneToMany(cascade={javax.persistence.CascadeType.ALL}, mappedBy="item")
 //    private List<ItemTex> itemtexCollection;
-//  
-//      @OneToMany(cascade={javax.persistence.CascadeType.ALL, javax.persistence.CascadeType.REMOVE}, mappedBy="item")
-//   private List<ExtraSalesPrice> extrasalespriceCollection;
 
+   @JoinColumn(name="Item_id")
+/*     */   @OneToMany(cascade={javax.persistence.CascadeType.ALL, javax.persistence.CascadeType.REMOVE},orphanRemoval=true)
+/*     */     private List<ExtraSalesPrice> extrasalespriceCollection;
+
+   @JoinColumn(name="Item_id")
+/*     */   @OneToMany(cascade={javax.persistence.CascadeType.ALL, javax.persistence.CascadeType.REMOVE},orphanRemoval=true)
+/*     */    private List<ItemVariation> variations;
     
     public String getId() {
         return id;
@@ -100,7 +104,7 @@ public class Item implements Serializable {
     private Boolean isDeleted;
 //    private String loggedinStaff;
 //    private List itemtexCollection;
-    private List extrasalespriceCollection;
+  //  private List extrasalespriceCollection;
 
 
     
@@ -190,21 +194,7 @@ public class Item implements Serializable {
         this.crDate = crDate;
     }
 
-    public Double getDicount() {
-        return dicount;
-    }
-
-    public void setDicount(Double dicount) {
-        this.dicount = dicount;
-    }
-
-    public List getExtrasalespriceCollection() {
-        return extrasalespriceCollection;
-    }
-
-    public void setExtrasalespriceCollection(List extrasalespriceCollection) {
-        this.extrasalespriceCollection = extrasalespriceCollection;
-    }
+    
 
     public Boolean getIsDeleted() {
         return isDeleted;
@@ -353,6 +343,117 @@ public class Item implements Serializable {
     public void setDifferent(int different) {
         this.different = different;
     }
+
+    public Double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Double commission) {
+        this.commission = commission;
+    }
+
+    public Boolean getInactive() {
+        return inactive;
+    }
+
+    public void setInactive(Boolean inactive) {
+        this.inactive = inactive;
+    }
+
+    public String getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(String supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    public Boolean getTrackExpiry() {
+        return trackExpiry;
+    }
+
+    public void setTrackExpiry(Boolean trackExpiry) {
+        this.trackExpiry = trackExpiry;
+    }
+
+    public Boolean getTrackSerial() {
+        return trackSerial;
+    }
+
+    public void setTrackSerial(Boolean trackSerial) {
+        this.trackSerial = trackSerial;
+    }
+
+    public Double getUnit2SalesPrice() {
+        return unit2SalesPrice;
+    }
+
+    public void setUnit2SalesPrice(Double unit2SalesPrice) {
+        this.unit2SalesPrice = unit2SalesPrice;
+    }
+
+    public List<ExtraSalesPrice> getExtrasalespriceCollection() {
+        return extrasalespriceCollection;
+    }
+
+    public void setExtrasalespriceCollection(List<ExtraSalesPrice> extrasalespriceCollection) {
+        this.extrasalespriceCollection = extrasalespriceCollection;
+    }
+
+    public String getMetaInfo() {
+        return metaInfo;
+    }
+
+    public void setMetaInfo(String metaInfo) {
+        this.metaInfo = metaInfo;
+    }
+
+    public Double getUnit1SalesPrice() {
+        return unit1SalesPrice;
+    }
+
+    public void setUnit1SalesPrice(Double unit1SalesPrice) {
+        this.unit1SalesPrice = unit1SalesPrice;
+    }
+
+    public List<ItemVariation> getVariations() {
+        return variations;
+    }
+
+    public void setVariations(List<ItemVariation> variations) {
+        this.variations = variations;
+    }
+
+    /**
+     * @return the discount
+     */
+    public Double getDiscount() {
+        return discount;
+    }
+
+    /**
+     * @param discount the discount to set
+     */
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public Double getCommissionValue() {
+        return commissionValue;
+    }
+
+    public void setCommissionValue(Double commissionValue) {
+        this.commissionValue = commissionValue;
+    }
+
+    public Double getDiscountValue() {
+        return discountValue;
+    }
+
+    public void setDiscountValue(Double discountValue) {
+        this.discountValue = discountValue;
+    }
  
+    
     
 }
