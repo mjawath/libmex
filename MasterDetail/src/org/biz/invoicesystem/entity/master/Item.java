@@ -89,7 +89,12 @@ public class Item implements Serializable {
    @JoinColumn(name="Item_id")
 /*     */   @OneToMany(cascade={javax.persistence.CascadeType.ALL, javax.persistence.CascadeType.REMOVE},orphanRemoval=true)
 /*     */    private List<ItemVariation> variations;
-    
+ 
+    @JoinColumn(name="Item_id")
+/*     */   @OneToMany(cascade={javax.persistence.CascadeType.ALL, javax.persistence.CascadeType.REMOVE},orphanRemoval=true)
+/*     */    private List<ItemBarcode> barcodes;
+ 
+   
     public String getId() {
         return id;
     }
@@ -452,6 +457,14 @@ public class Item implements Serializable {
 
     public void setDiscountValue(Double discountValue) {
         this.discountValue = discountValue;
+    }
+
+    public List<ItemBarcode> getBarcodes() {
+        return barcodes;
+    }
+
+    public void setBarcodes(List<ItemBarcode> barcodes) {
+        this.barcodes = barcodes;
     }
  
     

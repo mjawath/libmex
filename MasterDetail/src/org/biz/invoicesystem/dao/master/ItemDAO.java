@@ -17,6 +17,31 @@ public class ItemDAO extends GenericDAO<Item>{
     setCls(Item.class);
     }
 
+     public Item findItemByCode(String itemcode){
+     Item i=null;
+        try { 
+ExecuteQuery("");
+   EntityManager em=createEmNew();
+  
+    //        em.getTransaction().begin();
+ List<Item> lst=em.createQuery("select i from item Where i.code=?1").setParameter(1,itemcode).getResultList();
+            for (Item item : lst) {
+           i=item;     
+            }
+ 
+ em.getTransaction().commit();            
+em.close();
+        } catch (Exception e) {
+             
+        e.printStackTrace();
+        }finally{
+   
+        }
+           
+   return i;      
+    }
+    
+    
     public void deleteItemByid(String itemid){
      
         try {

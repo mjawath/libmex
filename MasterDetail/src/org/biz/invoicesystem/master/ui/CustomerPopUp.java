@@ -113,7 +113,7 @@ public class CustomerPopUp extends Popdialog {
         TableUtil.cleardata(getTable());
         for (Object ob: items) {
             Customer item =(Customer)ob;
-            Object[] row = {item.getId(),item.getCode(),item.getName()};
+            Object[] row = {item.getId(),item.getCode(),item.getCustomerName()};
             TableUtil.addrow(getTable(), row);
             System.out.println(item.getId());
         }

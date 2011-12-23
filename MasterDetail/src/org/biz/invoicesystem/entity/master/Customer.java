@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 
 package org.biz.invoicesystem.entity.master;
 
@@ -25,33 +22,34 @@ public class Customer implements Serializable {
   
     @Id 
     private String id;
-    private String name;
-    private String code;
+     private String code;
       private String customerID;
-    private String warehouse;
     private String customerName;
     private String companyName;
     private String designation;
     private String type;
+    private String title;
     private Double creditLimit;
+    private Double discount;
     private String salesRep;
     private String address;
+     private String address2;
     private String city;
-    private String area;
     private String district;
     private String nicno;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date   crtDate;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date   uptDate;
-    Boolean isSentToMaster;
+    private Date   dob;
+
+    //   Boolean isSentToMaster;
     private Boolean isDeleted;
-    private String loggedinStaff;
+  //  private String loggedinStaff;
     private String religion;
     private String groupOfCustomer;
     private String signatureImage;
-    private String landPhone;
-    private String handPhone;
+    private String phone;
+    private String mobile;
     private String email;
     private String picLocation;
     private String loyaltyCardNo;
@@ -72,13 +70,7 @@ public class Customer implements Serializable {
         this.address = address;
     }
 
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
+   
 
     public String getCity() {
         return city;
@@ -168,12 +160,39 @@ public class Customer implements Serializable {
         this.groupOfCustomer = groupOfCustomer;
     }
 
-    public String getHandPhone() {
-        return handPhone;
+   
+
+  
+    
+    public static Customer find(String code, List<Customer> lst) {
+
+
+        Comparator<Customer> com = new Comparator<Customer>() {
+
+            public int compare(Customer o1, Customer o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        };
+
+        Collections.sort(lst, com);
+
+        Customer s = new Customer();
+        s.setId(code);
+        int num = Collections.binarySearch(lst, s, com);
+
+        if (num > -1) {
+            return lst.get(num);
+        } else {
+            return null;
+        }
     }
 
-    public void setHandPhone(String handPhone) {
-        this.handPhone = handPhone;
+    public String getAddress2() {
+        return address2;
+    }
+
+    public void setAddress2(String address2) {
+        this.address2 = address2;
     }
 
     public Boolean getIsDeleted() {
@@ -183,30 +202,7 @@ public class Customer implements Serializable {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-
-    public Boolean getIsSentToMaster() {
-        return isSentToMaster;
-    }
-
-    public void setIsSentToMaster(Boolean isSentToMaster) {
-        this.isSentToMaster = isSentToMaster;
-    }
-
-    public String getLandPhone() {
-        return landPhone;
-    }
-
-    public void setLandPhone(String landPhone) {
-        this.landPhone = landPhone;
-    }
-
-    public String getLoggedinStaff() {
-        return loggedinStaff;
-    }
-
-    public void setLoggedinStaff(String loggedinStaff) {
-        this.loggedinStaff = loggedinStaff;
-    }
+ 
 
     public String getLoyaltyCardNo() {
         return loyaltyCardNo;
@@ -214,14 +210,6 @@ public class Customer implements Serializable {
 
     public void setLoyaltyCardNo(String loyaltyCardNo) {
         this.loyaltyCardNo = loyaltyCardNo;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getNicno() {
@@ -272,42 +260,63 @@ public class Customer implements Serializable {
         this.type = type;
     }
 
-    public Date getUptDate() {
-        return uptDate;
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
     }
 
-    public void setUptDate(Date uptDate) {
-        this.uptDate = uptDate;
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getWarehouse() {
-        return warehouse;
+    /**
+     * @return the dob
+     */
+    public Date getDob() {
+        return dob;
     }
 
-    public void setWarehouse(String warehouse) {
-        this.warehouse = warehouse;
+    /**
+     * @param dob the dob to set
+     */
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    /**
+     * @return the discount
+     */
+    public Double getDiscount() {
+        return discount;
+    }
+
+    /**
+     * @param discount the discount to set
+     */
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     
-    public static Customer find(String code, List<Customer> lst) {
-
-
-        Comparator<Customer> com = new Comparator<Customer>() {
-
-            public int compare(Customer o1, Customer o2) {
-                return o1.getId().compareTo(o2.getId());
-            }
-        };
-
-        Collections.sort(lst, com);
-
-        Customer s = new Customer();
-        s.setId(code);
-        int num = Collections.binarySearch(lst, s, com);
-
-        if (num > -1) {
-            return lst.get(num);
-        } else {
-            return null;
-        }
-    }
+    
 }
