@@ -22,7 +22,7 @@ import org.components.windows.TabPanelUI;
  *
  * @author Administrator
  */
-public class ItemMaster extends TabPanelUI {
+public class ItemMasterTab extends TabPanelUI {
 
      
     List<Item> items;
@@ -30,7 +30,7 @@ public class ItemMaster extends TabPanelUI {
     EntityService es;
     ItemPopUp ipu;
     Item selectedItem;
-      public ItemMaster() {
+      public ItemMasterTab() {
         initComponents();
    init();
       }
@@ -158,7 +158,7 @@ public class ItemMaster extends TabPanelUI {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(itemMasterUI21, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("1", jPanel5);

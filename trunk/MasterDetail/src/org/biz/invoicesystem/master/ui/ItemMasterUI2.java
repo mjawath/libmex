@@ -1,21 +1,37 @@
  package org.biz.invoicesystem.master.ui;
 
+import java.awt.AWTKeyStroke;
+import java.awt.BorderLayout;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.WindowConstants;
+import org.biz.app.ui.util.MessageBoxes;
 import org.biz.app.ui.util.TableUtil;
 import org.biz.app.ui.util.uiEty;
 import org.biz.dao.util.EntityService;
-import org.biz.invoicesystem.entity.master.Customer;
 import org.biz.invoicesystem.entity.master.ExtraSalesPrice;
 import org.biz.invoicesystem.entity.master.Item;
+import org.biz.invoicesystem.entity.master.ItemBarcode;
 import org.biz.invoicesystem.entity.master.ItemVariation;
-import org.biz.invoicesystem.master.ui.ItemPopUp;
+import org.biz.invoicesystem.entity.master.Supplier;
 import org.biz.invoicesystem.service.master.ItemService;
 import org.components.windows.TabPanelUI;
 
@@ -27,7 +43,7 @@ public class ItemMasterUI2 extends TabPanelUI  {
     ItemService itemService;
     EntityService es;
     ItemPopUp ipu;
-    Item selectedItem;
+    private Item selectedItem;
     
     public ItemMasterUI2() {
         initComponents();
@@ -524,14 +540,147 @@ keyListeners();
     }    );   
   ///////////////////////////////////////////////////////////////////////////
    //tItemTrakNonStockItem request fct need to write....
-  ////////////////////////////////////////////////////////////////////////////
+  
+      tItemTrakNonStockItem.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    try {
+                        
+                    if(e.getKeyCode()==KeyEvent.VK_UP){
+                 tItemTrakExpiry.requestFocus();  
+                  }
+                    } catch (Exception exx) {
+                    exx.printStackTrace();
+                    }
+                    
+                }
+
+        
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    try {
+                        
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+          tItemTrakNonStockItem.setSelected( tItemTrakNonStockItem.isSelected()?true:false);                                  
+                    }
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+      tItemTrakInactive.requestFocus();  
+             
+                }
+                    } catch (Exception exx) {
+                    exx.printStackTrace();
+                    }
+                  
+                }
+    
+    }    );   
+    
+    ////////////////////////////////////////////////////////////////////////////
   
  ////////////////////////////////////////////////////////////////////////////
- 
+
+      tItemTrakInactive.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    try {
+                        
+                    if(e.getKeyCode()==KeyEvent.VK_UP){
+                 tItemTrakNonStockItem.requestFocus();  
+                  }
+                    } catch (Exception exx) {
+                    exx.printStackTrace();
+                    }
+                    
+                }
+
+        
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    try {
+                        
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+          tItemTrakInactive.setSelected( tItemTrakInactive.isSelected()?true:false);                                  
+                    }
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+      tItemTrakManfctringItem.requestFocus();  
+             
+                }
+                    } catch (Exception exx) {
+                    exx.printStackTrace();
+                    }
+                  
+                }
+    
+    }    );   
+     
  ///////////////////////////////////////////////////////////////////////////
  
  ////////////////////////////////////////////////////////////////////////////
  
+      tItemTrakManfctringItem.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    try {
+                        
+                    if(e.getKeyCode()==KeyEvent.VK_UP){
+                 tItemTrakInactive.requestFocus();  
+                  }
+                    } catch (Exception exx) {
+                    exx.printStackTrace();
+                    }
+                    
+                }
+
+        
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    try {
+                        
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+          tItemTrakManfctringItem.setSelected( tItemTrakManfctringItem.isSelected()?true:false);                                  
+                    }
+                if(e.getKeyChar()==KeyEvent.VK_ENTER){
+              
+      cSaveBtn.requestFocus();  
+             
+                }
+                    } catch (Exception exx) {
+                    exx.printStackTrace();
+                    }
+                  
+                }
+    
+    }    );   
+     
+ ////////////////////////////////////////////////////////////////////////////
+tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    try {
+              if(e.getKeyChar()==KeyEvent.VK_ENTER){ 
+                  
+                 tVariationPrice1.requestFocus();
+                 
+              }
+                    } catch (Exception exx) {
+                   
+                    }
+                }
+
+});
+ /////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////
+
+ /////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////
+
+ /////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////
 
  /////////////////////////////////////////////////////////////////////////////
@@ -550,7 +699,23 @@ keyListeners();
    
    }
    
-   
+   public void clearMaster(){
+       try {
+           
+           tVariationName.setSelectedItem("");
+                tVariationPrice1.setText("");
+                tVariationPrice2.setText("");
+                
+          tPriceRange.setSelectedItem("");           
+         tRngeValue.setText("");
+            TableUtil.cleardata(tblVariation);
+            TableUtil.cleardata(tblPriceRanges);
+          
+           entity2Ui(new Item());
+       } catch (Exception e) {
+       }
+       
+   }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -615,10 +780,19 @@ keyListeners();
         tPriceRange = new org.components.controls.CComboBox();
         cLabel1 = new org.components.controls.CLabel();
         tWholesalePrice = new org.components.controls.CTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblBarcode = new javax.swing.JTable();
+        tType = new org.components.controls.CTextField();
+        cLabel4 = new org.components.controls.CLabel();
+        cLabel5 = new org.components.controls.CLabel();
+        cLabel6 = new org.components.controls.CLabel();
+        tItemBarcode = new org.components.controls.CTextField();
         cPanel3 = new org.components.containers.CPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tMetaInfo = new org.components.controls.CTextArea();
         cLabel3 = new org.components.controls.CLabel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         cPanel2 = new org.components.containers.CPanel();
         tItemTrakSerial = new org.components.controls.CCheckBox();
@@ -775,6 +949,11 @@ keyListeners();
         tUnitItem1.setBounds(90, 180, 80, 23);
 
         cClose.setText("Goto List ");
+        cClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cCloseActionPerformed(evt);
+            }
+        });
         add(cClose);
         cClose.setBounds(650, 420, 90, 50);
 
@@ -831,6 +1010,11 @@ keyListeners();
 
         cPanel1.setLayout(null);
 
+        tVariationPrice2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tVariationPrice2ActionPerformed(evt);
+            }
+        });
         tVariationPrice2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tVariationPrice2KeyTyped(evt);
@@ -874,6 +1058,12 @@ keyListeners();
 
         cPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(10, 60, 440, 120);
+
+        tVariationPrice1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tVariationPrice1KeyTyped(evt);
+            }
+        });
         cPanel1.add(tVariationPrice1);
         tVariationPrice1.setBounds(150, 30, 140, 25);
 
@@ -938,6 +1128,66 @@ keyListeners();
 
         jTabbedPane1.addTab("Price Range", jPanel1);
 
+        jPanel4.setLayout(null);
+
+        tblBarcode.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Type", "Barcode"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(tblBarcode);
+
+        jPanel4.add(jScrollPane5);
+        jScrollPane5.setBounds(50, 70, 340, 110);
+
+        tType.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tTypeKeyTyped(evt);
+            }
+        });
+        jPanel4.add(tType);
+        tType.setBounds(50, 30, 160, 25);
+
+        cLabel4.setText("Barcode Number");
+        jPanel4.add(cLabel4);
+        cLabel4.setBounds(230, 0, 160, 25);
+
+        cLabel5.setText("Type");
+        jPanel4.add(cLabel5);
+        cLabel5.setBounds(50, 0, 160, 25);
+
+        cLabel6.setText("Enter");
+        jPanel4.add(cLabel6);
+        cLabel6.setBounds(404, 30, 40, 25);
+
+        tItemBarcode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tItemBarcodeKeyTyped(evt);
+            }
+        });
+        jPanel4.add(tItemBarcode);
+        tItemBarcode.setBounds(230, 30, 160, 25);
+
+        jTabbedPane1.addTab("Barcode", jPanel4);
+
         cPanel3.setLayout(null);
 
         tMetaInfo.setColumns(20);
@@ -950,11 +1200,13 @@ keyListeners();
         cLabel3.setText("Meta Information ");
         cPanel3.add(cLabel3);
         cLabel3.setBounds(10, 50, 300, 25);
+        cPanel3.add(jPanel3);
+        jPanel3.setBounds(100, -30, 100, 100);
 
         jTabbedPane1.addTab("Meta Details ", cPanel3);
 
         add(jTabbedPane1);
-        jTabbedPane1.setBounds(320, 10, 470, 220);
+        jTabbedPane1.setBounds(310, 10, 470, 220);
         add(jPanel2);
         jPanel2.setBounds(320, 200, 10, 10);
 
@@ -1039,27 +1291,45 @@ keyListeners();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void addToVariationTbl(){
-      try {
+   try{
    // TableUtil.cleardata(tblVariation);
-    
    String variationDesc=uiEty.cmbtostr(tVariationName);
    double variaiotnPrice1=uiEty.tcToDble0(tVariationPrice1);
    double variaiotnPrice2=uiEty.tcToDble0(tVariationPrice2);
+   TableUtil.addrow(tblVariation,new Object[]{variationDesc,variaiotnPrice1,variaiotnPrice2});                   
+  
+   } catch (Exception e) {
    
- TableUtil.addrow(tblVariation,new Object[]{variationDesc,variaiotnPrice1,variaiotnPrice2});                   
-        } catch (Exception e) {
-     e.printStackTrace();   
-        }
+   e.printStackTrace();   
+   
+   }
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //this method ADD VALUES TO THE TABLE OF EXTRA SALES PRICE...TABLE.
     public void addToExtraPriceTbl(){
+   try {
+   // TableUtil.cleardata(tblVariation);
+   String tPriceDes=uiEty.cmbtostr(tPriceRange);
+   double ExtraPrice1=uiEty.tcToDble0(tRngeValue);
+   TableUtil.addrow(tblPriceRanges,new Object[]{tPriceDes,ExtraPrice1});
+    
+   } catch (Exception e) {
+     e.printStackTrace();   
+        }
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //this method ADD barcode TO THE TABLE OF barcodeTbl...TABLE.
+    public void addToBarcode(){
       try {
    // TableUtil.cleardata(tblVariation);
     
-   String tPriceDes=uiEty.cmbtostr(tPriceRange);
-   double ExtraPrice1=uiEty.tcToDble0(tRngeValue);
-    TableUtil.addrow(tblPriceRanges,new Object[]{tPriceDes,ExtraPrice1});
+   String type=uiEty.tcToStr(tType);
+   String barcode=uiEty.tcToStr(tItemBarcode);
+    
+   TableUtil.addrow(tblBarcode,new Object[]{type,barcode});
           
         } catch (Exception e) {
      e.printStackTrace();   
@@ -1067,6 +1337,7 @@ keyListeners();
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Item uiToEntity(Item i)throws Exception{
@@ -1119,23 +1390,7 @@ keyListeners();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     /////////////////////////////////////////////////////////////////////////////////////////////////
-   public void clearMaster(){
-   
-       try {
-           
-           tVariationName.setSelectedItem("");
-                tVariationPrice1.setText("");
-                tVariationPrice2.setText("");
-                
-          tPriceRange.setSelectedItem("");           
-         tRngeValue.setText("");
-            TableUtil.cleardata(tblVariation);
-            TableUtil.cleardata(tblPriceRanges);
-          
-           entity2Ui(new Item());
-       } catch (Exception e) {
-       }
-   }
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1204,6 +1459,28 @@ keyListeners();
         }
         
         return lstOfExSalePrice;
+    }
+    
+    ////////////////////////////
+    public List<ItemBarcode> ui2Barcodes(JTable tbl,String itemid){
+    List<ItemBarcode> lstFBarcodes=new ArrayList<ItemBarcode>();
+        try {
+       Vector<Vector> vecOfVec=TableUtil.getDataVector(tbl);
+            for (Iterator<Vector> it = vecOfVec.iterator(); it.hasNext();) {
+                Vector row = it.next();
+           ItemBarcode bCode=new ItemBarcode();
+           bCode.setId(EntityService.getEntityService().getKey(""));
+           bCode.setType(row.get(0)==null?"":row.get(0).toString());
+           bCode.setBarcode(row.get(1)==null?"":row.get(1).toString());
+              lstFBarcodes.add(bCode);                
+         
+            }
+            
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+        
+        return lstFBarcodes;
     }
     
     ////////////////////////////
@@ -1282,33 +1559,69 @@ keyListeners();
    }
     
     /////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////
+   /////////////////////////////////////////////////////////////////////////////////////////////////
+   public void barcode2Ui(List<ItemBarcode> lstOfBarcode){
+   
+       
+        try {
+            for (Iterator<ItemBarcode> it = lstOfBarcode.iterator(); it.hasNext();) {
+                ItemBarcode i = it.next();
+
+                TableUtil.addrow(tblVariation, new Object[]{i.getType(),i.getBarcode()});
+      
+            }
+        } catch (Exception e) {
+        e.printStackTrace();
+        } 
+       
+   }
     
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+   ///////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////
     
     
     private void cSaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSaveBtnActionPerformed
         
-//        if (selectedItem != null) {
-//            Item item = itemService.getDao().deatach(selectedItem, selectedItem.getId());
-//            uiToEty(item);
-//            //            item.setProduct(selectedProd);
-//            itemService.getDao().update(item);
-//            items = itemService.getDao().getAll();
-//            addToTable(items);
-//            return;
-//        }
+ 
         try {
-        
+     //validate vendor..
+     //code
+     //description
+     //salesprice
+            
+            if(uiEty.tcToStr(tItemcode)==null || uiEty.tcToStr(tItemcode).equals("")){
+           MessageBoxes.wrnmsg(null,"Please Type Item Code","Empty Item Code");                 
+                return;
+            }
+       createDefSupplier("");     
+            
+            
         Item item=uiToEntity(new Item());
-        itemService.getDao().save(item);
-        items = itemService.getDao().getAll();
         
-        System.out.println("list count "+items.size());
-//        addToTable(items);?
-//        ipu.populateTable(items);
+        Item exist=itemService.getDao().findItemByCode(item.getCode());
+  if(exist==null){
+        itemService.getDao().save(item);
+        
+   }else{
+  //item exist so ask user to update ...
+      String[] ObjButtons = { "Yes", "No" };
+  int PromptResult = JOptionPane.showOptionDialog(null, "Item Already Exist Do You Want to Update it?", "Item Form", -1, 2, null, ObjButtons, ObjButtons[1]);
+ 
+      if (PromptResult == 0) {
+     item.setId(exist.getId());
+       itemService.getDao().update(item); 
+      }
   
+  }  
+          // addToTable(items);
+//        ipu.populateTable(items);
+  clearMaster();
         } catch (Exception e) {
         e.printStackTrace();
+     MessageBoxes.errormsg(null,e.getMessage(),"Error");
         }
      
           
@@ -1429,7 +1742,9 @@ keyListeners();
         try {
             if(evt.getKeyChar()==KeyEvent.VK_ENTER){
         //need to clear table before adding rows....
-         addToExtraPriceTbl();       
+         addToExtraPriceTbl();   
+         tPriceRange.setSelectedItem("");
+         tRngeValue.setText("");
       tPriceRange.getEditor().getEditorComponent().requestFocus();  
             
             }
@@ -1438,34 +1753,98 @@ keyListeners();
     }//GEN-LAST:event_tRngeValueKeyTyped
 
     private void tVariationPrice2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tVariationPrice2KeyTyped
-          try {
+    try {
+         
          if(evt.getKeyChar()==KeyEvent.VK_ENTER){
          //need to clear table before adding rows....
-         addToVariationTbl();       
+         addToVariationTbl();
+         
+         tVariationName.setSelectedItem("");
+         tVariationPrice1.setText("");
+         tVariationPrice2.setText("");
+         
          tVariationName.getEditor().getEditorComponent().requestFocus();  
+         
          }
-        } catch (Exception e) {
+         
+         } catch (Exception e) {
      e.printStackTrace();   }
     }//GEN-LAST:event_tVariationPrice2KeyTyped
 
     private void cClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cClearActionPerformed
-        try {
-            TableUtil.cleardata(tblVariation);
-            TableUtil.cleardata(tblPriceRanges);
-            
-        entity2Ui(new Item());                
-            
-        } catch (Exception e) {
-        e.printStackTrace();}
+clearMaster();        
     }//GEN-LAST:event_cClearActionPerformed
 
     private void cDeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cDeleteBtnActionPerformed
         try {
             
+            if(uiEty.tcToStr(tItemcode)==null || uiEty.tcToStr(tItemcode).equals("")){
+           MessageBoxes.wrnmsg(null,"Please Type Item Code","Empty Item Code");                 
+                return;
+            }
+             
+        Item item=uiToEntity(new Item());
+            
+       Item exist=itemService.getDao().findItemByCode(item.getCode());
+  if(exist!=null){
+  itemService.getDao().delete(exist);
+  }else{
+  MessageBoxes.errormsg(null,"No Item Found.",getTabName());                    
+   return;
+   
+   }  
+  clearMaster();
         } catch (Exception e) {
+            
+    MessageBoxes.errormsg(null,e.getMessage(),getTabName());                    
         }
                 
     }//GEN-LAST:event_cDeleteBtnActionPerformed
+
+    private void cCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCloseActionPerformed
+      //cal item list form....
+        //hide this form
+    }//GEN-LAST:event_cCloseActionPerformed
+
+    private void tTypeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tTypeKeyTyped
+        try {
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+        
+        tItemBarcode.requestFocus();
+        }    
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+    }//GEN-LAST:event_tTypeKeyTyped
+
+    private void tItemBarcodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tItemBarcodeKeyTyped
+        try {
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+   
+            addToBarcode();
+      tType.setText("");   
+      tItemBarcode.setText("");
+      tType.requestFocus();
+   
+        }    
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+    }//GEN-LAST:event_tItemBarcodeKeyTyped
+
+    private void tVariationPrice1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tVariationPrice1KeyTyped
+       
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+        
+        tVariationPrice2.requestFocus();
+       
+        }
+        
+    }//GEN-LAST:event_tVariationPrice1KeyTyped
+
+    private void tVariationPrice2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tVariationPrice2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tVariationPrice2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CButton cClear;
@@ -1474,6 +1853,9 @@ keyListeners();
     private org.components.controls.CLabel cLabel1;
     private org.components.controls.CLabel cLabel2;
     private org.components.controls.CLabel cLabel3;
+    private org.components.controls.CLabel cLabel4;
+    private org.components.controls.CLabel cLabel5;
+    private org.components.controls.CLabel cLabel6;
     private org.components.containers.CPanel cPanel1;
     private org.components.containers.CPanel cPanel2;
     private org.components.containers.CPanel cPanel3;
@@ -1506,13 +1888,17 @@ keyListeners();
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.components.controls.CTextField tCartonItem;
     private org.components.controls.CTextField tDifferentPerUnit;
+    private org.components.controls.CTextField tItemBarcode;
     private org.components.controls.CComboBox tItemCategory;
     private org.components.controls.CTextField tItemCommission;
     private org.components.controls.CTextField tItemCommissionValue;
@@ -1537,12 +1923,14 @@ keyListeners();
     private org.components.controls.CComboBox tPriceRange;
     private org.components.controls.CTextField tRngeValue;
     private org.components.controls.CComboBox tSupplierItem;
+    private org.components.controls.CTextField tType;
     private org.components.controls.CComboBox tUnitItem1;
     private org.components.controls.CComboBox tUnitItem2;
     private org.components.controls.CComboBox tVariationName;
     private org.components.controls.CTextField tVariationPrice1;
     private org.components.controls.CTextField tVariationPrice2;
     private org.components.controls.CTextField tWholesalePrice;
+    private javax.swing.JTable tblBarcode;
     private javax.swing.JTable tblPriceRanges;
     private javax.swing.JTable tblVariation;
     // End of variables declaration//GEN-END:variables
@@ -1555,5 +1943,68 @@ keyListeners();
     @Override
     public JPanel getJPanel() {
         return this; 
+    }
+    //////////////////////////////////////////////
+    public Supplier createDefSupplier(String typedName)throws Exception{
+    Supplier s=null;
+        try {
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+                    }
+        
+        return s;
+    }
+    //////////////////////////////////////////////////////
+    
+    
+    
+    public static void main(String[] args) {
+    final JTabbedPane tp = new JTabbedPane();
+
+    // Remove Tab as the focus traversal key - Could always add another key stroke here instead.
+    tp.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.<AWTKeyStroke>emptySet());
+
+    KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0);
+
+    Action nextTab = new AbstractAction("NextTab") {
+        public void actionPerformed(ActionEvent evt) {
+            int i = tp.getSelectedIndex();
+            tp.setSelectedIndex(i == tp.getTabCount() - 1 ? 0 : i + 1);
+        }
+    };
+
+    // Register action.
+    tp.getActionMap().put("NextTab", nextTab);
+    tp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ks, "NextTab");
+
+    tp.addTab("Foo", new JPanel());
+    tp.addTab("Bar", new JPanel());
+    tp.addTab("Baz", new JPanel());
+    tp.addTab("Qux", new JPanel());
+
+    JFrame frm = new JFrame();
+
+    frm.setLayout(new BorderLayout());
+    frm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    frm.add(new JButton(nextTab), BorderLayout.NORTH);
+    frm.add(tp, BorderLayout.CENTER);
+    frm.setBounds(50,50,400,300);
+    frm.setVisible(true);
+}
+
+    /**
+     * @return the selectedItem
+     */
+    public Item getSelectedItem() {
+        return selectedItem;
+    }
+
+    /**
+     * @param selectedItem the selectedItem to set
+     */
+    public void setSelectedItem(Item selectedItem) {
+        this.selectedItem = selectedItem;
     }
 }
