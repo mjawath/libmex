@@ -4,15 +4,9 @@ package org.biz.dao.service;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.eclipse.persistence.config.HintValues;
-import org.eclipse.persistence.config.QueryHints;
-import org.biz.dao.util.EntityService;
 import org.dao.util.JPAUtil;
 
 /**
@@ -70,326 +64,110 @@ public class GenericDAO<T> {
 
     public T getWhere(String property, Object key) {
 
-        String qry = "select c from  " + classname + " c  where c." + property + " ='" + key + "'";
-        return ExecuteQuerySR(qry);
+        return GenericDAOUtil.getWhere(property, key, cls);
 
     }
 
     public T getByPropertySR(String property, Number key) {
 
-        String qry = "select c from  " + classname + " c  where c." + property + " =" + key + "";
-        return ExecuteQuerySR(qry);
+        return GenericDAOUtil.getByPropertySR(property, key, cls);
 
     }
 
     public T getByPropertySR(String property, String key) {
-
-        String qry = "select c from  " + classname + " c  where c." + property + " ='" + key + "' ";
-        return ExecuteQuerySR(qry);
+        return GenericDAOUtil.getByPropertySR(property, key, cls);
 
     }
 
     public List<T> getByProperty(String property, Number key) {
-
-        String qry = "select c from  " + classname + " c  where c." + property + " =" + key + "";
-        return ExecuteQuery(qry);
+        return GenericDAOUtil.getByProperty(property, key, cls);
 
     }
 
     public List<T> getByProperty(String property, String key) {
+        return GenericDAOUtil.getByProperty(property, key, cls);
 
-        String qry = "select c from  " + classname + " c  where c." + property + " = '" + key + "'";
-        return ExecuteQuery(qry);
-
-    }
-
-    public EntityService getES() {
-        return EntityService.getEntityService();
-    }
-
-    public void findRefresh(Object c, Object key) {
-        getEm().find(c.getClass(), key);
-        getEm().refresh(c);
-    }
-
-    public T deatach(Object c, Object key) {
-        T cc = (T) getEm().find(c.getClass(), key);
-        getEm().refresh(cc);
-        getEm().detach(cc);
-        return cc;
     }
 
 //    public T find(Object key ){
 //        em.find(T, key);
 //        return null;
 //    }
+    //use to retreve every objects database contains
+    //dont be dum to use it when u hav 10000 of records
     public List<T> getAll() {
 //        getEm().clear();
-        String order = "";
-        if (!orderby.isEmpty()) {
-            order = "order by item." + orderby + " ASC";
-        }
-        Query query = createEmNew().createQuery("select item from " + classname + " item   " + order);
-        query.setHint(QueryHints.REFRESH, HintValues.TRUE);
-        return query.getResultList();
+        return GenericDAOUtil.getAll(orderby, cls);
     }
-
-  
-    public void persistob(EntityManager em, Object ob) {
-        em.persist(ob);
-    }
-
-    public void persist(EntityManager em, Object... ob) {
-
-        for (Object obj : ob) {
-            persistob(em, obj);
-        }
-    }
+    // save array of objects may be used to persist different kind of objects
+    // eg car , dog ,customer in same time 
 
     public void save(Object... ob) {
-        EntityManager em = null;
-        try {
-            em = createEmNew();
-            em.getTransaction().begin();
-            persist(em, ob);
-            em.getTransaction().commit();
-
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            if (em != null) {
-                try {
-                    em.clear();
-                    em.close();
-                } catch (Exception e) {
-                }
-
-            }
-        }
-
+        GenericDAOUtil.save(ob);
     }
 
+//save a single object 
     public void save(T ob) {
-        EntityManager em = null;
-        try {
-            em = createEmNew();
-            em.getTransaction().begin();
-            persist(em, ob);
-            em.getTransaction().commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            if (em != null) {
-                try {
-                    em.clear();
-                    em.close();
-                } catch (Exception e) {
-                }
-
-            }
-        }
+        GenericDAOUtil.save(ob);
     }
 
+    //save list of items
     public void saveList(List<T> ob) {
-        EntityManager em = null;
-        try {
-            em = createEmNew();
-            em.getTransaction().begin();
-            for (T it : ob) {
-                persistob(em, it);
-            }
-
-            em.getTransaction().commit();
-
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            if (em != null) {
-                try {
-                    em.clear();
-                    em.close();
-                } catch (Exception e) {
-                }
-
-            }
-        }
-
+        GenericDAOUtil.save(ob);
     }
 
-    public void remove(EntityManager em, T ob) {
-        em.remove(em.merge(ob));
-    }
-
+    //use this to delete a certain object 
+    //@param is a rerieved object from database with a valid id
     public void delete(T ob) {
-        EntityManager em = null;
-        try {
-            em = createEmNew();
-            em.getTransaction().begin();
-            remove(em, ob);
-            em.getTransaction().commit();
-
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            if (em != null) {
-                try {
-                    em.clear();
-                    em.close();
-                } catch (Exception e) {
-                }
-
-            }
-        }
-
+        GenericDAOUtil.delete(ob);
     }
+//may be used to update a database entity
 
     public void update(T ob) {
-        EntityManager em = null;
-        try {
-            em = createEmNew();
-            em.getTransaction().begin();
-            merge(em, ob);
-            em.getTransaction().commit();
-
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            if (em != null) {
-                try {
-                    em.clear();
-                    em.close();
-                } catch (Exception e) {
-                }
-
-            }
-        }
+        GenericDAOUtil.update(ob);
     }
+//may be used to merge objects
 
     public void merge(EntityManager em, T ob) {
         em.merge(ob);
     }
 
-    public void begin() {
-        getEm().getTransaction().begin();
-    }
-
-    public void commit() {
-        getEm().getTransaction().commit();
-    }
-
-    public EntityManager createEmNew() {
-        em = JPAUtil.getEntityManager();
-        return em;
-    }
-
-    public Query getQuery(String qryString, boolean ref) {
-        Query query = getEm().createQuery(qryString);
-        if (ref) {
-            refreshOn(query);
-        }
-        return query;
-    }
-
-    public Query getQueryWithClass(String qryString, Class c) {
-        return getEm().createQuery(qryString, c);
-    }
-
-    public Query getQuery(String qryString) {
-        return createEmNew().createQuery(qryString);
-    }
-//    public Query getQuery(String qryString,List<Parameter> ps){
-//        Query q= em.createQuery(qryString);
-//        for (Parameter parameter : ps) {
-//            q.set
-//        }
-//        return .;
-//    }
-
-    public List<T> ExecuteQuery(String qryString) {
-        Query query = getEm().createQuery(qryString, getCls());
-        query.setHint(QueryHints.REFRESH, HintValues.TRUE);
-        List ts = query.getResultList();
-        return ts;
-    }
-
+    //use  this to execute the query 
+    //@param query object
     public List<T> ExecuteQuery(Query qryString) {
-        qryString.setHint(QueryHints.REFRESH, HintValues.TRUE);
-        List<T> ts = qryString.getResultList();
+        List<T> ts = GenericDAOUtil.ExecuteQuery(qryString);
         return ts;
+    }
+
+    //use  this to execute the query  string
+    //@param query object is a string of jpql
+    public List<T> ExecuteQuery(String qryString) {
+        return GenericDAOUtil.ExecuteQuery(qryString, cls);
     }
 
     public T ExecuteQuerySR(String qryString) {
 
-        Query query = getEm().createQuery(qryString, getCls());
-        query.setHint(QueryHints.REFRESH, HintValues.TRUE);
-        T ts = null;
-
-        try {
-            ts = (T) query.getSingleResult();
-
-        } catch (Exception e) {
-            if (e instanceof NoResultException) {
-                return null;
-            }
-
-        }
-        return ts;
+        return GenericDAOUtil.ExecuteQuerySR(qryString, cls);
     }
 
     public Object ExecuteQueryOb(String qryString) {
-        Object ts = null;
-        try {
-            Query query = getEm().createQuery(qryString, getCls());
-            query.setHint(QueryHints.REFRESH, HintValues.TRUE);
-            ts = query.getSingleResult();
-        } catch (Exception e) {
-            if (e instanceof NoResultException) {
-                return null;
-            }
 
-        }
-
-        return ts;
+        return GenericDAOUtil.ExecuteQuerySR(qryString, cls);
     }
-//
-//    public List<T> ExecuteQuery(Query query, Class<T> cc) {
-//        List<T> ts = query.getResultList();
-//        return ts;
-//    }
-
-    public T ExecuteQuerySR(Query query) {
-        T ts = null;
-        try {
-            query.setHint(QueryHints.REFRESH, HintValues.TRUE);
-            ts = (T) query.getSingleResult();
-
-        } catch (Exception e) {
-            if (e instanceof NoResultException) {
-                return null;
-            }
-            throw new RuntimeException(e);
-        }
-        return ts;
+      
+    
+    public static<T>  T deatach(Object c, Object key) {
+      
+        T cc = (T)GenericDAOUtil.deatach(c, key);
+        return cc;
     }
-
-    public void refreshOn(Query query) {
-        query.setHint(QueryHints.REFRESH, HintValues.TRUE);
-    }
-
-    public Date currentTime() {
-        Date date = (Timestamp) getEm().createNativeQuery("select CURRENT_TIMESTAMP  ").getSingleResult();
-        return date;
-    }
+    /*
+    ///////////////
+    //
+    T ->
+     * retruns the unique  type querys with the 
+    <T ->
+    /////////
+     * 
+     */
 }
