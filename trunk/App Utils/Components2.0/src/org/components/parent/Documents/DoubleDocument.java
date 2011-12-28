@@ -71,4 +71,6 @@ public class DoubleDocument extends PlainDocument {
     public DoubleDocument(Double min) {
         this.min = min;
     }
+    
+    
 }
