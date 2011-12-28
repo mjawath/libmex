@@ -10,12 +10,9 @@ package org.components.windows;
  *
  * Created on Nov 22, 2010, 1:58:08 PM
  */
-import java.awt.Component;
-import java.awt.Container;
-import java.util.Arrays;
-import java.util.Vector;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
-import org.components.util.orgFocusTraversalPolicy;
 
 /**
  *
@@ -30,23 +27,12 @@ public abstract class TabPanelUI extends javax.swing.JPanel implements TabChildU
     }
 
     public void init() {
-//        Set forwardKeys = getFocusTraversalKeys(
-//                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS);
-//        Set newForwardKeys = new HashSet(forwardKeys);
-//        newForwardKeys.add(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0));
-//        newForwardKeys.add(KeyStroke.getKeyStroke(KeyEvent.VK_PAGE_DOWN, 0));
-//        setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
-//                newForwardKeys);
-//        Set backKeys = getFocusTraversalKeys(
-//                KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS);
-//        Set backwordKeys = new HashSet(backKeys);
-//        backwordKeys.add(KeyStroke.getKeyStroke(KeyEvent.VK_PAGE_UP, 0));
-//        setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS,
-//                backwordKeys);
+
         events();
     }
 
     public void events() {
+
     }
 
     @SuppressWarnings("unchecked")
@@ -68,13 +54,7 @@ public abstract class TabPanelUI extends javax.swing.JPanel implements TabChildU
         
     }
 
-    public void setFocusTraverce(Container m, Component... components) {
-
-        Vector<Component> cs = new Vector<Component>();
-        cs.addAll(Arrays.asList(components));
-        orgFocusTraversalPolicy ftp = new orgFocusTraversalPolicy(cs);
-        m.setFocusTraversalPolicy(ftp);
-    }
+   
 
     public void setobj(Object obj) {
     }

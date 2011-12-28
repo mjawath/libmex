@@ -11,6 +11,11 @@
 
 package org.components.controls;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import org.components.parent.controls.PTable;
 
 /**
@@ -22,6 +27,15 @@ public class CTable extends PTable {
     /** Creates new form BeanForm */
     public CTable() {
         initComponents();
+        ActionListener al = new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+            }
+        };
+        // i am disabling the default behaviour of table editing
+        // so we can imlplement our own way of navigation 
+        this.registerKeyboardAction(al, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        this.registerKeyboardAction(al, KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     /** This method is called from within the constructor to
