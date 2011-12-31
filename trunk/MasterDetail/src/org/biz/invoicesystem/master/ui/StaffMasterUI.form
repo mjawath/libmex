@@ -40,11 +40,11 @@
     </Component>
     <Component class="org.components.controls.CLabel" name="cLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Staff Id"/>
+        <Property name="text" type="java.lang.String" value="Staff Code"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="10" width="70" height="-1"/>
+          <AbsoluteConstraints x="10" y="10" width="90" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -60,7 +60,7 @@
     </Component>
     <Component class="org.components.controls.CLabel" name="cLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Custmer Name "/>
+        <Property name="text" type="java.lang.String" value="Staff  Name "/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -68,9 +68,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField2">
+    <Component class="org.components.controls.CTextField" name="tName">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tNameActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -78,7 +78,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CDatePicker" name="cDatePicker1">
+    <Component class="org.components.controls.CDatePicker" name="tWorkStarted">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="610" y="50" width="130" height="-1"/>
@@ -95,52 +95,61 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CButton" name="cButton1">
+    <Component class="org.components.controls.CButton" name="cClose">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Close"/>
+        <Property name="text" type="java.lang.String" value="Go to List"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cCloseActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="600" y="340" width="60" height="30"/>
+          <AbsoluteConstraints x="660" y="340" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CButton" name="cButton3">
+    <Component class="org.components.controls.CButton" name="cSave">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cSaveActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="340" width="60" height="30"/>
+          <AbsoluteConstraints x="440" y="340" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CButton" name="cButton4">
+    <Component class="org.components.controls.CButton" name="cClear">
       <Properties>
         <Property name="text" type="java.lang.String" value="Clear"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cClearActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="480" y="340" width="60" height="30"/>
+          <AbsoluteConstraints x="510" y="340" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CButton" name="cButton5">
+    <Component class="org.components.controls.CButton" name="cDelete">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cDeleteActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="540" y="340" width="60" height="30"/>
+          <AbsoluteConstraints x="580" y="340" width="70" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField3">
+    <Component class="org.components.controls.CTextField" name="tAddress1">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tAddress1ActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -148,9 +157,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField4">
+    <Component class="org.components.controls.CTextField" name="tAddress2">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tAddress2ActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -158,9 +167,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField5">
+    <Component class="org.components.controls.CTextField" name="tCity">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tCityActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -168,9 +177,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField6">
+    <Component class="org.components.controls.CTextField" name="tPhone">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField6ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tPhoneActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -188,9 +197,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField7">
+    <Component class="org.components.controls.CTextField" name="tMobile">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField7ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tMobileActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -208,9 +217,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField8">
+    <Component class="org.components.controls.CTextField" name="tEmail">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField8ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tEmailActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -228,9 +237,9 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CTextField" name="cTextField10">
+    <Component class="org.components.controls.CTextField" name="tCode">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField10ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tCodeActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -238,7 +247,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CComboBox" name="cComboBox4">
+    <Component class="org.components.controls.CComboBox" name="tReligion">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
       </Properties>
@@ -248,7 +257,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CDatePicker" name="cDatePicker2">
+    <Component class="org.components.controls.CDatePicker" name="tDob">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="460" y="50" width="120" height="-1"/>
@@ -275,7 +284,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CComboBox" name="cComboBox5">
+    <Component class="org.components.controls.CComboBox" name="tSecRole">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
       </Properties>
@@ -295,10 +304,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CComboBox" name="cComboBox6">
-      <Properties>
-        <Property name="editable" type="boolean" value="true"/>
-      </Properties>
+    <Component class="org.components.controls.CComboBox" name="tGender">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="110" y="90" width="110" height="-1"/>
@@ -315,7 +321,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.components.controls.CComboBox" name="cComboBox7">
+    <Component class="org.components.controls.CComboBox" name="tInitial">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
       </Properties>
@@ -356,9 +362,9 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.components.controls.CTextField" name="cTextField9">
+        <Component class="org.components.controls.CTextField" name="tUsername">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTextField9ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tUsernameActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -386,7 +392,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+        <Component class="javax.swing.JPasswordField" name="tRetypePassword">
           <Properties>
             <Property name="text" type="java.lang.String" value="jPasswordField1"/>
           </Properties>
@@ -396,7 +402,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordField2">
+        <Component class="javax.swing.JPasswordField" name="tPassword">
           <Properties>
             <Property name="text" type="java.lang.String" value="jPasswordField1"/>
           </Properties>

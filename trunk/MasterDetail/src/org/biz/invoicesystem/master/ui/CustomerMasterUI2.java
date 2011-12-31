@@ -1,6 +1,9 @@
 
 package org.biz.invoicesystem.master.ui;
 
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.biz.app.ui.util.MessageBoxes;
@@ -34,6 +37,46 @@ import org.components.windows.TabPanelUI;
         }
         
     }
+    
+    public void loadComboItems(){
+        try {
+     List lstOfArray= cService.getDao().loadComboItems();  
+     
+     //list of array retuns String array  
+      //object is String array....
+     
+     
+        String[] cusType= (String[]) lstOfArray.get(0);        
+        Set<String> types=new TreeSet<String>();
+       for(String type:cusType){
+       types.add(type);
+       
+       }  
+        
+        String[] cusReligion= (String[]) lstOfArray.get(1);        
+       Set<String> religions=new TreeSet<String>();
+     
+        for(String religion:cusReligion){
+      religions.add(religion);
+       
+       }  
+        
+        String[] cusTitle= (String[]) lstOfArray.get(2);        
+      Set<String> titles=new TreeSet<String>();
+    
+        for(String title:cusTitle){
+       titles.add(title);
+       
+       }        
+     uiEty.loadcombo(tCusType, types); 
+     uiEty.loadcombo(tCusReligion, religions); 
+     uiEty.loadcombo(tCusTitle, titles); 
+     
+        } catch (Exception e) {
+    e.printStackTrace();
+        }
+    }
+    
     /** Creates new form cust */
     public CustomerMasterUI2() {
         initComponents();
@@ -125,7 +168,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         cLabel5 = new org.components.controls.CLabel();
         cClose = new org.components.controls.CButton();
         cSave = new org.components.controls.CButton();
-        cClear = new org.components.controls.CButton();
+        cBrowseImg = new org.components.controls.CButton();
         dDelete = new org.components.controls.CButton();
         tCusAdd1 = new org.components.controls.CTextField();
         tCusAdd2 = new org.components.controls.CTextField();
@@ -149,6 +192,8 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         cLabel16 = new org.components.controls.CLabel();
         cLabel17 = new org.components.controls.CLabel();
         tCusNIC = new org.components.controls.CTextField();
+        cLabel18 = new org.components.controls.CLabel();
+        cClear1 = new org.components.controls.CButton();
 
         setLayout(null);
 
@@ -204,7 +249,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         add(tCusTitle);
         tCusTitle.setBounds(260, 40, 63, 23);
         add(tCusDOB);
-        tCusDOB.setBounds(610, 40, 116, 22);
+        tCusDOB.setBounds(610, 40, 112, 22);
 
         cLabel5.setText("DOB");
         add(cLabel5);
@@ -212,7 +257,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
 
         cClose.setText("Close");
         add(cClose);
-        cClose.setBounds(470, 360, 59, 23);
+        cClose.setBounds(470, 430, 59, 23);
 
         cSave.setText("Save");
         cSave.addActionListener(new java.awt.event.ActionListener() {
@@ -221,16 +266,16 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
             }
         });
         add(cSave);
-        cSave.setBounds(280, 360, 57, 23);
+        cSave.setBounds(280, 430, 57, 23);
 
-        cClear.setText("Clear");
-        cClear.addActionListener(new java.awt.event.ActionListener() {
+        cBrowseImg.setText("Browse");
+        cBrowseImg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cClearActionPerformed(evt);
+                cBrowseImgActionPerformed(evt);
             }
         });
-        add(cClear);
-        cClear.setBounds(340, 360, 57, 23);
+        add(cBrowseImg);
+        cBrowseImg.setBounds(10, 430, 140, 23);
 
         dDelete.setText("Delete");
         dDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +284,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
             }
         });
         add(dDelete);
-        dDelete.setBounds(400, 360, 63, 23);
+        dDelete.setBounds(400, 430, 63, 23);
 
         tCusAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,7 +366,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         add(cLabel13);
         cLabel13.setBounds(10, 140, 119, 25);
 
-        tCusReligion.setEditable(true);
+        tCusReligion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "Buddhist", "Hindu", "Muslim", "Christian" }));
         add(tCusReligion);
         tCusReligion.setBounds(140, 110, 180, 23);
 
@@ -372,6 +417,20 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         });
         add(tCusNIC);
         tCusNIC.setBounds(480, 80, 284, 25);
+
+        cLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cLabel18.setText("Image");
+        add(cLabel18);
+        cLabel18.setBounds(20, 320, 130, 110);
+
+        cClear1.setText("Clear");
+        cClear1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cClear1ActionPerformed(evt);
+            }
+        });
+        add(cClear1);
+        cClear1.setBounds(340, 430, 57, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tCusNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCusNameActionPerformed
@@ -464,22 +523,23 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         // TODO add your handling code here:
     }//GEN-LAST:event_tCusNICActionPerformed
 
-    private void cClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cClearActionPerformed
+    private void cBrowseImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBrowseImgActionPerformed
         try {
-   clear();
- 
-   tCusId.requestFocus();
+   //call file chooser and load image of jpg png gif....
        
         } catch (Exception e) {
         e.printStackTrace();
         MessageBoxes.errormsg(null, e.getMessage(), "Error");
         }
               
-    }//GEN-LAST:event_cClearActionPerformed
+    }//GEN-LAST:event_cBrowseImgActionPerformed
 
     private void dDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dDeleteActionPerformed
        try {
-           
+       if(uiEty.tcToStr(tCusId)==null || uiEty.tcToStr(tCusId).equals("")){
+           MessageBoxes.wrnmsg(null,"Please Type Customer Code","Empty Customer Code");                 
+                return;
+            }            
       //delete the selected customer...     
       Customer c=uiToEntity(new Customer());//from ui....
      Customer exist=cService.getDao().findCustomerByCode(c.getCode());
@@ -502,6 +562,10 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         }
     }//GEN-LAST:event_dDeleteActionPerformed
 
+    private void cClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cClear1ActionPerformed
+       clear();
+    }//GEN-LAST:event_cClear1ActionPerformed
+
     
       /**
      * @param cService the cService to set
@@ -521,7 +585,8 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         return this;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CButton cClear;
+    private org.components.controls.CButton cBrowseImg;
+    private org.components.controls.CButton cClear1;
     private org.components.controls.CButton cClose;
     private org.components.controls.CLabel cLabel1;
     private org.components.controls.CLabel cLabel10;
@@ -532,6 +597,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
     private org.components.controls.CLabel cLabel15;
     private org.components.controls.CLabel cLabel16;
     private org.components.controls.CLabel cLabel17;
+    private org.components.controls.CLabel cLabel18;
     private org.components.controls.CLabel cLabel2;
     private org.components.controls.CLabel cLabel3;
     private org.components.controls.CLabel cLabel4;

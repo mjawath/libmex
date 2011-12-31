@@ -6,13 +6,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import org.biz.dao.service.GenericDAO;
 import org.biz.invoicesystem.entity.master.Customer;
+import org.biz.invoicesystem.entity.master.Staff;
 
  
-public class CustomerDAO extends GenericDAO<Customer>{
+public class StaffDAO extends GenericDAO<Staff>{
 
     
-    public CustomerDAO() {
-    setCls(Customer.class);
+    public StaffDAO() {
+    setCls(Staff.class);
     }
 
     public List loadComboItems(){
@@ -20,7 +21,7 @@ public class CustomerDAO extends GenericDAO<Customer>{
     List lst=new ArrayList<Object>();
     //   EntityManager em=createEmNew();
         try {
-    lst=ExecuteQuery("select  c.type , c.religion , c.title From Customer c ");      
+    lst=ExecuteQuery("select  c.type , c.religion , c.title From Staff c ");      
      
             System.out.println("lst size "+lst.size());                 
         } catch (Exception e) {
@@ -29,13 +30,13 @@ public class CustomerDAO extends GenericDAO<Customer>{
     return lst;
     }
     
- public Customer findCustomerByCode(String customercode){
-     Customer i=null;
+ public Staff findStaffByCode(String customercode){
+     Staff i=null;
         try { 
 //ExecuteQuery("");
     
-   List<Customer> lst=ExecuteQuery("select i from Customer i Where i.code= '"+customercode+"'");
-            for (Customer c : lst) {
+   List<Staff> lst=ExecuteQuery("select i from Staff i Where i.code= '"+customercode+"'");
+            for (Staff c : lst) {
            i=c;     
             }
  
@@ -52,7 +53,7 @@ public class CustomerDAO extends GenericDAO<Customer>{
  
     public static void main(String[] args) {
         try {
-     CustomerDAO g=new CustomerDAO();
+     StaffDAO g=new StaffDAO();
      
      g.loadComboItems();
         } catch (Exception e) {

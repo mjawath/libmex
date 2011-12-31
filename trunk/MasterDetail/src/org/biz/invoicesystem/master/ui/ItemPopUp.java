@@ -1,13 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/*
- * ItemPopUp.java
- *
- * Created on 16-Apr-2011, 22:41:19
- */
 package org.biz.invoicesystem.master.ui;
 
 import java.util.List;
