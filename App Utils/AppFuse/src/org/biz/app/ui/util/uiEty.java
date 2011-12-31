@@ -8,7 +8,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.text.JTextComponent;
@@ -22,7 +25,26 @@ public class uiEty {
     public static  void setcombomodel(String[] str, JComboBox box) {
         box.setModel(new DefaultComboBoxModel(str));
     }
-
+public static void loadcombo(JComboBox com, Set lst)
+   {
+    DefaultComboBoxModel dcbm = (DefaultComboBoxModel)com.getModel();
+    if (dcbm.getSize() != 0) {
+      dcbm.removeAllElements();
+    }
+      Iterator it = lst.iterator();
+       ((DefaultComboBoxModel)com.getModel()).addElement("");
+  
+      while (it.hasNext())
+    {
+       Object object = it.next();
+  
+     if ((object != null) && (!object.toString().isEmpty()))
+      {
+       ((DefaultComboBoxModel)com.getModel()).addElement(object);
+       }
+    }
+  }
+    
     public static String doubleToUI(Number d) {
         if (d == null) {
             return "";
@@ -290,7 +312,15 @@ public class uiEty {
     public static void objToUi(JComboBox jtc, Object val) {
         if (val != null) {
             jtc.setSelectedItem(val.toString());
+        }else{
+        
         }
+    }
+
+        public static void objToUi(JCheckBox jtc,Boolean val) {
+       
+            jtc.setSelected(val==null?false:val);
+      
     }
 
     public static String now() {
@@ -300,7 +330,15 @@ public class uiEty {
         return sdf.format(date);
 
     }
+public static String nowTimesStamp() {
+        Date date = new Date();
+        
+  //      return Long.toString(date.getTime()).substring(5, 13);
+      return Long.toString(date.getTime());
 
+    }
+
+    
     public static Date nowDate() {
         Date date = new Date();
         return date;
@@ -316,6 +354,6 @@ public class uiEty {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Date());
+        System.out.println(nowTimesStamp());
     }
 }
