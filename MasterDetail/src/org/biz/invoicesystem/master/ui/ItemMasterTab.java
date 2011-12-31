@@ -34,6 +34,25 @@ public class ItemMasterTab extends TabPanelUI {
         initComponents();
    init();
       }
+  //////////////////////////////////////////////////
+      public void fillItemTbl(){
+      TableUtil.cleardata(tblItemList);
+      
+          try {
+          items=itemService.getDao().selectAll();   
+              for (Item i : items) {
+    TableUtil.addrow(tblItemList, new Object[]{i.getCode(),i.getDescription(),i.getCost(),i.getSalesPrice(),i.getWholesalePrice()});                                
+              }
+          
+          
+          } catch (Exception e) {
+          e.printStackTrace();
+          }
+           
+      }
+      
+ /////////////////////////////////////////////////////     
+      
       
       
     @SuppressWarnings("unchecked")

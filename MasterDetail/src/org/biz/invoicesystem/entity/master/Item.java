@@ -19,8 +19,7 @@ import javax.persistence.Temporal;
 public class Item implements Serializable {
  //   private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id; //default table id...for 
+     private String id; //default table id...for 
     private String code;//unique item code...
  //   private String name;
 //    @OneToOne

@@ -60,7 +60,6 @@ public class ItemListUi extends TabPanelUI   {
         cItmcode = new org.components.controls.CTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItemList = new org.components.controls.CxTable();
-        cUpdateItemBtn = new org.components.controls.CButton();
         cRefreshItem = new org.components.controls.CButton();
         cDeleteItemBtn = new org.components.controls.CButton();
         cClose = new org.components.controls.CButton();
@@ -120,15 +119,6 @@ public class ItemListUi extends TabPanelUI   {
         add(jScrollPane1);
         jScrollPane1.setBounds(10, 70, 760, 278);
 
-        cUpdateItemBtn.setText("Update");
-        cUpdateItemBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cUpdateItemBtnActionPerformed(evt);
-            }
-        });
-        add(cUpdateItemBtn);
-        cUpdateItemBtn.setBounds(200, 360, 121, 49);
-
         cRefreshItem.setText("Refresh");
         cRefreshItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +126,7 @@ public class ItemListUi extends TabPanelUI   {
             }
         });
         add(cRefreshItem);
-        cRefreshItem.setBounds(460, 360, 121, 49);
+        cRefreshItem.setBounds(350, 360, 121, 49);
 
         cDeleteItemBtn.setText("Delete");
         cDeleteItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +135,7 @@ public class ItemListUi extends TabPanelUI   {
             }
         });
         add(cDeleteItemBtn);
-        cDeleteItemBtn.setBounds(330, 360, 121, 49);
+        cDeleteItemBtn.setBounds(210, 360, 121, 49);
 
         cClose.setText("Close");
         cClose.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +144,7 @@ public class ItemListUi extends TabPanelUI   {
             }
         });
         add(cClose);
-        cClose.setBounds(590, 360, 110, 50);
+        cClose.setBounds(490, 360, 110, 50);
 
         cNewItemBtn.setText("New ");
         cNewItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -183,15 +173,6 @@ public class ItemListUi extends TabPanelUI   {
         add(cTextFieldPopUp1);
         cTextFieldPopUp1.setBounds(320, 40, 90, 20);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cUpdateItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cUpdateItemBtnActionPerformed
-        // call item master form with selected item details to update....
-         try {
-          
-        } catch (Exception e) {
-        e.printStackTrace();
-        }
-    }//GEN-LAST:event_cUpdateItemBtnActionPerformed
 
     private void cRefreshItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cRefreshItemActionPerformed
         //refresh the item list and reinsert item tabl list...
@@ -249,7 +230,6 @@ public class ItemListUi extends TabPanelUI   {
     private org.components.controls.CButton cNewItemBtn;
     private org.components.controls.CButton cRefreshItem;
     private org.components.controls.CTextFieldPopUp cTextFieldPopUp1;
-    private org.components.controls.CButton cUpdateItemBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.components.controls.CxTable tblItemList;
