@@ -137,45 +137,57 @@ public void clear(){
         tSuppId = new org.components.controls.CTextField();
         cLabel14 = new org.components.controls.CLabel();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
 
         cLabel6.setText("Address");
-        add(cLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 63, -1));
+        add(cLabel6);
+        cLabel6.setBounds(360, 80, 63, 25);
 
         tSuppType.setEditable(true);
-        add(tSuppType, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 160, -1));
+        add(tSuppType);
+        tSuppType.setBounds(140, 160, 160, 23);
 
         cLabel7.setText("City");
-        add(cLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 31, -1));
+        add(cLabel7);
+        cLabel7.setBounds(360, 150, 31, 25);
 
         cLabel2.setText("Supplier Code");
-        add(cLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 239, -1));
+        add(cLabel2);
+        cLabel2.setBounds(10, 10, 239, 25);
 
         cLabel8.setText("Phone");
-        add(cLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 48, -1));
+        add(cLabel8);
+        cLabel8.setBounds(360, 190, 48, 25);
 
         cLabel4.setText("Name ");
-        add(cLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 119, -1));
+        add(cLabel4);
+        cLabel4.setBounds(330, 10, 119, 25);
 
         tSuppName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppNameActionPerformed(evt);
             }
         });
-        add(tSuppName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 275, -1));
+        add(tSuppName);
+        tSuppName.setBounds(330, 40, 275, 25);
 
         cLabel3.setText("Title");
-        add(cLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, -1));
+        add(cLabel3);
+        cLabel3.setBounds(260, 10, 40, 25);
 
         tSuppTitle.setEditable(true);
-        add(tSuppTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 63, -1));
-        add(cSuppDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, -1, -1));
+        add(tSuppTitle);
+        tSuppTitle.setBounds(260, 40, 63, 23);
+        add(cSuppDob);
+        cSuppDob.setBounds(610, 40, 106, 22);
 
         cLabel5.setText("DOB");
-        add(cLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 110, -1));
+        add(cLabel5);
+        cLabel5.setBounds(610, 10, 110, 25);
 
         cClose.setText("Close");
-        add(cClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, -1, 40));
+        add(cClose);
+        cClose.setBounds(230, 210, 59, 40);
 
         cSave.setText("Save");
         cSave.addActionListener(new java.awt.event.ActionListener() {
@@ -183,10 +195,12 @@ public void clear(){
                 cSaveActionPerformed(evt);
             }
         });
-        add(cSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, 40));
+        add(cSave);
+        cSave.setBounds(40, 210, 57, 40);
 
         cClear.setText("Clear");
-        add(cClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, 40));
+        add(cClear);
+        cClear.setBounds(100, 210, 57, 40);
 
         cDelete.setText("Delete");
         cDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -194,81 +208,96 @@ public void clear(){
                 cDeleteActionPerformed(evt);
             }
         });
-        add(cDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, 40));
+        add(cDelete);
+        cDelete.setBounds(160, 210, 63, 40);
 
         tSuppAddress1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppAddress1ActionPerformed(evt);
             }
         });
-        add(tSuppAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 284, -1));
+        add(tSuppAddress1);
+        tSuppAddress1.setBounds(430, 80, 284, 25);
 
         tSuppAddress2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppAddress2ActionPerformed(evt);
             }
         });
-        add(tSuppAddress2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 284, -1));
+        add(tSuppAddress2);
+        tSuppAddress2.setBounds(430, 110, 284, 25);
 
         tSuppCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppCityActionPerformed(evt);
             }
         });
-        add(tSuppCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 284, -1));
+        add(tSuppCity);
+        tSuppCity.setBounds(430, 150, 284, 25);
 
         tSuppPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppPhoneActionPerformed(evt);
             }
         });
-        add(tSuppPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 284, -1));
+        add(tSuppPhone);
+        tSuppPhone.setBounds(430, 190, 284, 25);
 
         cLabel9.setText("Mobile");
-        add(cLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 48, -1));
+        add(cLabel9);
+        cLabel9.setBounds(360, 230, 48, 25);
 
         tSuppMobile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppMobileActionPerformed(evt);
             }
         });
-        add(tSuppMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 284, -1));
+        add(tSuppMobile);
+        tSuppMobile.setBounds(430, 230, 284, 25);
 
         cLabel10.setText("Email");
-        add(cLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 48, -1));
+        add(cLabel10);
+        cLabel10.setBounds(360, 260, 48, 25);
 
         tSuppEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppEmailActionPerformed(evt);
             }
         });
-        add(tSuppEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 284, -1));
+        add(tSuppEmail);
+        tSuppEmail.setBounds(430, 260, 284, 25);
 
         cLabel12.setText("Company Name");
-        add(cLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 119, -1));
+        add(cLabel12);
+        cLabel12.setBounds(20, 90, 119, 25);
 
         tSuppCompanyName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppCompanyNameActionPerformed(evt);
             }
         });
-        add(tSuppCompanyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 90, 190, -1));
+        add(tSuppCompanyName);
+        tSuppCompanyName.setBounds(139, 90, 190, 25);
 
         cLabel13.setText("Type");
-        add(cLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 119, -1));
+        add(cLabel13);
+        cLabel13.setBounds(20, 160, 119, 25);
 
         tSuppReligion.setEditable(true);
-        add(tSuppReligion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 160, -1));
+        add(tSuppReligion);
+        tSuppReligion.setBounds(140, 130, 160, 23);
 
         tSuppId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tSuppIdActionPerformed(evt);
             }
         });
-        add(tSuppId, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 240, -1));
+        add(tSuppId);
+        tSuppId.setBounds(10, 40, 240, 25);
 
         cLabel14.setText("Religion");
-        add(cLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 119, -1));
+        add(cLabel14);
+        cLabel14.setBounds(20, 130, 119, 25);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tSuppNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tSuppNameActionPerformed
