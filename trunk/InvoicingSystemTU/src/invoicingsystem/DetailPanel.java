@@ -34,7 +34,7 @@ this.jt=jt;
 
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(" sdfsdfsdf  fsadfsdfsdf sf sdfsd"+e);
+//                System.out.println(" sdfsdfsdf  fsadfsdfsdf sf sdfsd"+e);
                 if (e.getKeyCode()==KeyEvent.VK_DOWN) {
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().redispatchEvent(DetailPanel.this.jt,e);
                 }
@@ -51,18 +51,16 @@ this.jt=jt;
  
 }
 
-    @Override
-    protected void processKeyEvent(KeyEvent e) {
-        System.out.println("panel event  " +e.getKeyCode());
-        super.processKeyEvent(e);
-    }
+
 
 
 
 /** Creates new form DetailPanel */
     public DetailPanel() {
-       super(null, JDialog.ModalityType.MODELESS);
-            setFocusableWindowState(false);
+//       super(null, JDialog.ModalityType.MODELESS);
+       setModal(false);
+        this.setModalityType(ModalityType.MODELESS);
+          setFocusableWindowState(false);
           setUndecorated(true);  
           initComponents();        
           getRootPane().setOpaque(false);
@@ -72,7 +70,7 @@ this.jt=jt;
     }
 
 public void showWithoutFocus(){
-setFocusableWindowState(false);
+    setFocusableWindowState(false);
     this.setVisible(true);
     setFocusableWindowState(true);
 }
