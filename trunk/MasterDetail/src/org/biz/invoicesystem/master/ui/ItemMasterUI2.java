@@ -2,11 +2,19 @@
 
 import java.awt.AWTKeyStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -14,15 +22,22 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileFilter;
 import org.biz.app.ui.util.MessageBoxes;
 import org.biz.app.ui.util.TableUtil;
 import org.biz.app.ui.util.uiEty;
@@ -44,12 +59,18 @@ public class ItemMasterUI2 extends TabPanelUI  {
     EntityService es;
     ItemPopUp ipu;
     private Item selectedItem;
-    
+      private ItemMasterTab mastertab;
+    private ItemListUi listUi;
+    private String copiedItemId;  //not item code...keep in mind
+   JFileChooser chooser;
+   
+   
     public ItemMasterUI2() {
         initComponents();
 keyListeners();
+init();
     }
-    
+   
     public void keyListeners(){
     
         try {
@@ -693,10 +714,43 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
    @Override
     public void init() {
        
-        es = EntityService.getEntityService();
+       try {
+       es = EntityService.getEntityService();
         itemService = new ItemService();
         items = itemService.getDao().getAll();
    
+    ///init filechooser and set filter
+      ///////////////////////  
+        chooser = new JFileChooser(new File("."));
+        chooser.setMultiSelectionEnabled(true);
+        chooser.setFileFilter(new FileFilter() {
+
+                @Override
+                public boolean accept(File f) {
+              
+                     if (f.isDirectory())
+      return true;
+    String s = f.getName();
+    int i = s.lastIndexOf('.');
+
+    if (i > 0 && i < s.length() - 1)
+      if (s.substring(i + 1).toLowerCase().equals("jpg" ) || s.substring(i + 1).toLowerCase().equals("png" )|| s.substring(i + 1).toLowerCase().equals("gif" )|| s.substring(i + 1).toLowerCase().equals("png" ))
+        return true;
+
+    return false;
+                }
+
+                @Override
+                public String getDescription() {
+                  return "Images Only";
+                }
+            });
+      chooser.setCurrentDirectory(null);   
+        
+      ////////////////////////////////////////
+       } catch (Exception e) {
+      e.printStackTrace(); }
+               
    }
    
    public void clearMaster(){
@@ -802,10 +856,11 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
         tItemTrakManfctringItem = new org.components.controls.CCheckBox();
         cPanel4 = new org.components.containers.CPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        cPanel5 = new org.components.containers.CPanel();
-        cScrollPane1 = new org.components.controls.CScrollPane();
         jLabel23 = new javax.swing.JLabel();
         tItemCommissionValue = new org.components.controls.CTextField();
+        cButton1 = new org.components.controls.CButton();
+        cLabel7 = new org.components.controls.CLabel();
+        cButton2 = new org.components.controls.CButton();
 
         setLayout(null);
 
@@ -1201,7 +1256,7 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
         cPanel3.add(cLabel3);
         cLabel3.setBounds(10, 50, 300, 25);
         cPanel3.add(jPanel3);
-        jPanel3.setBounds(100, -30, 100, 100);
+        jPanel3.setBounds(100, -30, 10, 10);
 
         jTabbedPane1.addTab("Meta Details ", cPanel3);
 
@@ -1224,7 +1279,7 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
             }
         });
         cPanel2.add(tItemTrakSerial);
-        tItemTrakSerial.setBounds(0, 10, 110, 50);
+        tItemTrakSerial.setBounds(10, 10, 110, 50);
 
         tItemTrakExpiry.setText("Track Expiry ");
         tItemTrakExpiry.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1261,20 +1316,11 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
         tItemTrakManfctringItem.setBounds(330, 0, 110, 60);
 
         add(cPanel2);
-        cPanel2.setBounds(330, 240, 440, 60);
+        cPanel2.setBounds(330, 230, 440, 60);
         add(cPanel4);
         cPanel4.setBounds(370, 330, 10, 10);
-
-        cPanel5.setLayout(null);
-
-        cScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        cPanel5.add(cScrollPane1);
-        cScrollPane1.setBounds(0, 0, 470, 100);
-
-        jScrollPane3.setViewportView(cPanel5);
-
         add(jScrollPane3);
-        jScrollPane3.setBounds(320, 310, 470, 100);
+        jScrollPane3.setBounds(320, 290, 470, 70);
 
         jLabel23.setText("Val");
         add(jLabel23);
@@ -1287,6 +1333,27 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
         });
         add(tItemCommissionValue);
         tItemCommissionValue.setBounds(210, 350, 90, 25);
+
+        cButton1.setText("Browse");
+        cButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton1ActionPerformed(evt);
+            }
+        });
+        add(cButton1);
+        cButton1.setBounds(320, 370, 80, 23);
+
+        cLabel7.setText("You Can Select More than one Product Image");
+        add(cLabel7);
+        cLabel7.setBounds(510, 370, 280, 25);
+
+        cButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton2ActionPerformed(evt);
+            }
+        });
+        add(cButton2);
+        cButton2.setBounds(410, 370, 65, 23);
     }// </editor-fold>//GEN-END:initComponents
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1382,7 +1449,12 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
     
      
    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
- 
+ public void callListTab(){
+   try {
+     getMastertab().getItemTabPane().setSelectedIndex(getMastertab().getItemTabPane().indexOfTab(ItemMasterTab.ListUiTabName));                   
+        } catch (Exception e) {
+  e.printStackTrace();      }
+ }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1488,6 +1560,8 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
     public void entity2Ui(Item i){
     
         try {
+            
+            setCopiedItemId(i.getId());
          uiEty.objToUi(tItemcode, i.getCode());
     uiEty.objToUi(tItemDescription,i.getDescription());// tItemDescription
   uiEty.objToUi(tItemCategory,i.getCategory());//   i.setCategory(uiEty.cmbtostr(tItemCategory)); //    combo 
@@ -1530,6 +1604,10 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
     public void itemVariation2Ui(List<ItemVariation> lstOfVariation){
     
         try {
+            
+            if(lstOfVariation==null){
+            return;
+            }
             for (Iterator<ItemVariation> it = lstOfVariation.iterator(); it.hasNext();) {
                 ItemVariation i = it.next();
 
@@ -1546,6 +1624,10 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
    
        
         try {
+            
+             if(lstOfExtraPrice==null){
+            return;
+            }
             for (Iterator<ExtraSalesPrice> it = lstOfExtraPrice.iterator(); it.hasNext();) {
                 ExtraSalesPrice i = it.next();
 
@@ -1565,6 +1647,10 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
    
        
         try {
+               if(lstOfBarcode==null){
+            return;
+            }  
+            
             for (Iterator<ItemBarcode> it = lstOfBarcode.iterator(); it.hasNext();) {
                 ItemBarcode i = it.next();
 
@@ -1598,8 +1684,22 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
             }
        createDefSupplier("");     
             
-            
+      //if customer copy item and edit item here..
+    //copieditemId will nt be empty it carries copied item id.
+      
+       
         Item item=uiToEntity(new Item());
+     
+        if(getCopiedItemId()!=null){
+       if(pasteItem(item, getCopiedItemId())){
+       clearMaster();
+      MessageBoxes.okCancel(null,"ok edited saved.", "Copied item");
+       return;
+       
+       }
+      
+        } 
+        
         
         Item exist=itemService.getDao().findItemByCode(item.getCode());
   if(exist==null){
@@ -1627,6 +1727,22 @@ tVariationName.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() 
           
     }//GEN-LAST:event_cSaveBtnActionPerformed
 
+    public boolean pasteItem(Item i,String itemid)throws Exception{
+       boolean b=false; 
+        try {
+       i.setId(itemid);            
+      itemService.getDao().update(i);
+      b=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+           b=false;
+       throw e;
+        }
+        return b;
+    }
+    
+    
     private void tItemTrakExpiryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tItemTrakExpiryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tItemTrakExpiryActionPerformed
@@ -1787,7 +1903,16 @@ clearMaster();
             
        Item exist=itemService.getDao().findItemByCode(item.getCode());
   if(exist!=null){
+      
+   String[] ObjButtons = { "Yes", "No" };
+  int PromptResult = JOptionPane.showOptionDialog(null, "Are you want to delete ?", "Item Form", -1, 2, null, ObjButtons, ObjButtons[1]);
+     
+      
+     if(PromptResult==0){ 
   itemService.getDao().delete(exist);
+ 
+     }
+  
   }else{
   MessageBoxes.errormsg(null,"No Item Found.",getTabName());                    
    return;
@@ -1804,6 +1929,8 @@ clearMaster();
     private void cCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCloseActionPerformed
       //cal item list form....
         //hide this form
+     callListTab(); 
+      
     }//GEN-LAST:event_cCloseActionPerformed
 
     private void tTypeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tTypeKeyTyped
@@ -1846,7 +1973,73 @@ clearMaster();
         // TODO add your handling code here:
     }//GEN-LAST:event_tVariationPrice2ActionPerformed
 
+    private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
+        try {
+  chooser.showOpenDialog(null);
+  File[] files = chooser.getSelectedFiles();
+      JPanel panel = new JPanel(new FlowLayout());
+      
+          GridBagConstraints gbc= new GridBagConstraints();
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+   JPopupMenu p=new JPopupMenu("imagepanel");
+        
+             for (File file : files) {
+      System.out.println("addedd image");
+    ImagePanel ii=new ImagePanel(new ImageIcon(file.getCanonicalPath()).getImage(),1);
+ImagePanel ii2=new ImagePanel(new ImageIcon("C:/Documents and Settings/Administrator/Desktop/mazari.jpg").getImage(),1);
+
+ panel.setPreferredSize(new Dimension(300, 200));
+ //ii2.setVisible(true);
+ 
+//      System.out.println("canonical o]path "+file.getCanonicalPath());
+//      System.out.println("absolute o]path "+file.getAbsolutePath());
+      panel.add(new JLabel(new ImageIcon(file.getAbsolutePath())));                             
+     // panel.add(ii2);                             
+  // panel.setPreferredSize(new Dimension(200, 200));  
+  ////    panel.add(new JLabel(new ImageIcon("C:/Documents and Settings/Administrator/Desktop/mazari.jpg")));
+   //ImagePanel ii=new ImagePanel(new ImageIcon("C:/Documents and Settings/Administrator/Desktop/mazari.jpg").getImage(),1);
+//   ii.setPreferredSize(new Dimension(200,150));
+//   ii.setVisible(true);
+          
+ //jScrollPane3.add(new JLabel(new ImageIcon("C:/Documents and Settings/Administrator/Desktop/mazari.jpg")));                   
+ jScrollPane3.add(panel);                   
+             
+             }
+             
+             jScrollPane3.validate();
+   // new JScrollPane(panel);         
+    panel.setVisible(true);  
+   p.add(panel);
+   p.show(this,10, 100);
+   p.setVisible(true);
+  //  ii.setVisible(true);
+          
+             
+            } catch (Exception e) {
+       
+                e.printStackTrace(); 
+         
+            }
+        
+    }//GEN-LAST:event_cButton1ActionPerformed
+
+    private void cButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton2ActionPerformed
+        jScrollPane3.add(cLabel7);
+    }//GEN-LAST:event_cButton2ActionPerformed
+ private JLabel imagesloadresize(String ss, JLabel jl)
+   {
+   ImageIcon i = new ImageIcon(ss);
+      Image i1 = i.getImage().getScaledInstance(200,100, 4);
+    Icon i12 = new ImageIcon(i1);
+      jl.setIcon(i12);
+      return jl;
+   }
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.components.controls.CButton cButton1;
+    private org.components.controls.CButton cButton2;
     private org.components.controls.CButton cClear;
     private org.components.controls.CButton cClose;
     private org.components.controls.CButton cDeleteBtn;
@@ -1856,13 +2049,12 @@ clearMaster();
     private org.components.controls.CLabel cLabel4;
     private org.components.controls.CLabel cLabel5;
     private org.components.controls.CLabel cLabel6;
+    private org.components.controls.CLabel cLabel7;
     private org.components.containers.CPanel cPanel1;
     private org.components.containers.CPanel cPanel2;
     private org.components.containers.CPanel cPanel3;
     private org.components.containers.CPanel cPanel4;
-    private org.components.containers.CPanel cPanel5;
     private org.components.controls.CButton cSaveBtn;
-    private org.components.controls.CScrollPane cScrollPane1;
     private org.components.util.ComponentFactory componentFactory1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2007,4 +2199,164 @@ clearMaster();
     public void setSelectedItem(Item selectedItem) {
         this.selectedItem = selectedItem;
     }
+
+    /**
+     * @return the mastertab
+     */
+    public ItemMasterTab getMastertab() {
+        return mastertab;
+    }
+
+    /**
+     * @param mastertab the mastertab to set
+     */
+    public void setMastertab(ItemMasterTab mastertab) {
+        this.mastertab = mastertab;
+    }
+
+    /**
+     * @return the listUi
+     */
+    public ItemListUi getListUi() {
+        return listUi;
+    }
+
+    /**
+     * @param listUi the listUi to set
+     */
+    public void setListUi(ItemListUi listUi) {
+        this.listUi = listUi;
+    }
+
+    /**
+     * @return the copiedItemId
+     */
+    public String getCopiedItemId() {
+        return copiedItemId;
+    }
+
+    /**
+     * @param copiedItemId the copiedItemId to set
+     */
+    public void setCopiedItemId(String copiedItemId) {
+        this.copiedItemId = copiedItemId;
+    }
+    
+   public class ImagePanel extends JPanel 
+    { 
+        private double m_zoom = 1.0; 
+        private double m_zoomPercentage; 
+        private Image m_image; 
+                 
+        /** 
+         * Constructor 
+         *  
+         * @param image 
+         * @param zoomPercentage 
+         */                 
+        public ImagePanel(Image image, double zoomPercentage) 
+        { 
+            m_image = image; 
+            m_zoomPercentage = zoomPercentage / 100; 
+        } 
+         
+        /** 
+         * This method is overriden to draw the image 
+         * and scale the graphics accordingly 
+         */ 
+        public void paintComponent(Graphics grp)  
+        {  
+            Graphics2D g2D = (Graphics2D)grp; 
+             
+            //set the background color to white 
+            g2D.setColor(Color.WHITE); 
+            //fill the rect 
+            g2D.fillRect(0, 0, getWidth(), getHeight()); 
+             
+            //scale the graphics to get the zoom effect 
+            g2D.scale(m_zoom, m_zoom); 
+             
+            //draw the image 
+            g2D.drawImage(m_image, 0, 0, this);  
+        } 
+          
+        /** 
+         * This method is overriden to return the preferred size 
+         * which will be the width and height of the image plus 
+         * the zoomed width width and height.  
+         * while zooming out the zoomed width and height is negative 
+         */ 
+//        public Dimension getPreferredSize() 
+//        { 
+//            return new Dimension((int)(m_image.getWidth(this) +  
+//                                      (m_image.getWidth(this) * (m_zoom - 1))), 
+//                                 (int)(m_image.getHeight(this) +  
+//                                      (m_image.getHeight(this) * (m_zoom -1 )))); 
+//        } 
+       
+        
+         public Dimension getPreferredSize() 
+        { 
+            return new Dimension(200,100); 
+        } 
+        /** 
+         * Sets the new zoomed percentage 
+         * @param zoomPercentage 
+         */ 
+        public void setZoomPercentage(int zoomPercentage) 
+        { 
+            m_zoomPercentage = ((double)zoomPercentage) / 100;     
+        } 
+         
+        /** 
+         * This method set the image to the original size 
+         * by setting the zoom factor to 1. i.e. 100% 
+         */ 
+        public void originalSize() 
+        { 
+            m_zoom = 1;  
+        } 
+         
+        /** 
+         * This method increments the zoom factor with 
+         * the zoom percentage, to create the zoom in effect  
+         */ 
+        public void zoomIn() 
+        { 
+            m_zoom += m_zoomPercentage; 
+        }             
+         
+        /** 
+         * This method decrements the zoom factor with the  
+         * zoom percentage, to create the zoom out effect  
+         */ 
+        public void zoomOut() 
+        { 
+            m_zoom -= m_zoomPercentage; 
+             
+            if(m_zoom < m_zoomPercentage) 
+            { 
+                if(m_zoomPercentage > 1.0) 
+                { 
+                    m_zoom = 1.0; 
+                } 
+                else 
+                { 
+                    zoomIn(); 
+                } 
+            } 
+        } 
+         
+        /** 
+         * This method returns the currently 
+         * zoomed percentage 
+         *  
+         * @return 
+         */ 
+        public double getZoomedTo() 
+        { 
+            return m_zoom * 100;  
+        } 
+    }   
+    
 }

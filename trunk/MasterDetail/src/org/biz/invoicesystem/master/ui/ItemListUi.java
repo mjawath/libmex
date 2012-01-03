@@ -1,10 +1,15 @@
 
 package org.biz.invoicesystem.master.ui;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
+import org.biz.app.ui.util.MessageBoxes;
 import org.biz.app.ui.util.TableUtil;
+import org.biz.dao.util.EntityService;
 import org.biz.invoicesystem.entity.master.Item;
 import org.biz.invoicesystem.service.master.ItemService;
 import org.components.windows.TabPanelUI;
@@ -13,9 +18,18 @@ import org.components.windows.TabPanelUI;
 public class ItemListUi extends TabPanelUI   {
 
     private ItemService itemService;
+    private ItemMasterTab mastertab;
+    private ItemMasterUI2 formUi;
+    
     
     public ItemListUi() {
         initComponents();
+   init();
+    }
+
+    @Override
+    public void init() {
+     itemService=new ItemService();
     }
 
     public void loadItemList2Tbl(){
@@ -24,7 +38,7 @@ public class ItemListUi extends TabPanelUI   {
 
             @Override
             protected List<Item> doInBackground() throws Exception {
-             List<Item> items=getItemService().getDao().getAll();
+             List<Item> items=getItemService().getDao().selectAll();
                 return items;
             }
 
@@ -32,7 +46,9 @@ public class ItemListUi extends TabPanelUI   {
             protected void done() {
                 try {
                     TableUtil.cleardata(tblItemList);
-                    
+                   if(get()==null){
+                   return;
+                   } 
             List<Item> items=get();   
                     for (Item i : items) {
                     TableUtil.addrowSR(tblItemList,new Object[]{i.getCode(),i.getDescription(),i.getCost(),i.getUnit1SalesPrice(),i.getWholesalePrice()});                            
@@ -51,7 +67,38 @@ public class ItemListUi extends TabPanelUI   {
                 
     
     } 
-     
+    
+    public void callFormUi(){
+        try {
+  
+   getMastertab().getItemTabPane().setSelectedIndex(getMastertab().getItemTabPane().indexOfTab(ItemMasterTab.FormUiTabName));
+              
+            
+        } catch (Exception e) {
+        e.printStackTrace();}
+    }
+  ////////////////////////////////////////////////
+  //when user double click on item row in table...bring him to form view the particular item... 
+  public void callItemByCode(String itemCode){
+  
+      try {
+   Item item=itemService.getDao().findItemByCode(itemCode);
+  formUi.clearMaster();
+   formUi.entity2Ui(item);
+   callFormUi();
+      } catch (Exception e) {
+      e.printStackTrace();
+      }
+  
+  }
+      
+ ///////////////////////////////////////////////    
+    
+    
+    ///////////////////////////////////////////
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,6 +116,7 @@ public class ItemListUi extends TabPanelUI   {
         cButton3 = new org.components.controls.CButton();
         cButton4 = new org.components.controls.CButton();
         cTextFieldPopUp1 = new org.components.controls.CTextFieldPopUp();
+        cCopyItem = new org.components.controls.CButton();
 
         setLayout(null);
 
@@ -107,8 +155,15 @@ public class ItemListUi extends TabPanelUI   {
                 return canEdit [columnIndex];
             }
         });
+        tblItemList.setColumnSelectionAllowed(true);
         tblItemList.setFont(new java.awt.Font("Tahoma", 0, 14));
+        tblItemList.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblItemListKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblItemList);
+        tblItemList.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblItemList.getColumnModel().getColumn(0).setMinWidth(85);
         tblItemList.getColumnModel().getColumn(0).setPreferredWidth(85);
         tblItemList.getColumnModel().getColumn(0).setMaxWidth(85);
@@ -144,7 +199,7 @@ public class ItemListUi extends TabPanelUI   {
             }
         });
         add(cClose);
-        cClose.setBounds(490, 360, 110, 50);
+        cClose.setBounds(610, 360, 110, 50);
 
         cNewItemBtn.setText("New ");
         cNewItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -172,12 +227,21 @@ public class ItemListUi extends TabPanelUI   {
         cButton4.setBounds(420, 40, 41, 23);
         add(cTextFieldPopUp1);
         cTextFieldPopUp1.setBounds(320, 40, 90, 20);
+
+        cCopyItem.setText("Copy");
+        cCopyItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cCopyItemActionPerformed(evt);
+            }
+        });
+        add(cCopyItem);
+        cCopyItem.setBounds(490, 360, 110, 50);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cRefreshItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cRefreshItemActionPerformed
         //refresh the item list and reinsert item tabl list...
          try {
-          
+        loadItemList2Tbl();  
         } catch (Exception e) {
         e.printStackTrace();
         }
@@ -186,18 +250,43 @@ public class ItemListUi extends TabPanelUI   {
     private void cDeleteItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cDeleteItemBtnActionPerformed
         //call item master form with selected item to delete the item...
          try {
-          
+      String itemid=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
+          if(itemid==null || itemid.equals("")){
+           MessageBoxes.wrnmsg(null,"Please Select an Item.","Empty Item");                 
+                return;
+            }  
+      Item exist=itemService.getDao().findItemByCode(itemid);
+       if(exist==null || exist.getCode().equals("")){
+           MessageBoxes.wrnmsg(null,"No Item Found.","Empty Item");                 
+                return;
+            }         
+    String[] ObjButtons = { "Yes", "No" };
+  int PromptResult = JOptionPane.showOptionDialog(null, "Are you want to delete ?", "Item Form", -1, 2, null, ObjButtons, ObjButtons[1]);
+     
+      
+     if(PromptResult==0){ 
+  itemService.getDao().delete(exist);
+ 
+     }
         } catch (Exception e) {
         e.printStackTrace();
+        MessageBoxes.errormsg(null, e.getMessage(), "Error");
         }
     }//GEN-LAST:event_cDeleteItemBtnActionPerformed
 
     private void cCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCloseActionPerformed
         // close this form...
-        try {
-          
+            try {
+//      String itemid=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
+//          if(itemid==null || itemid.equals("")){
+//           MessageBoxes.wrnmsg(null,"Please Select an Item.","Empty Item");                 
+//                return;
+//            }  
+            
+   
         } catch (Exception e) {
         e.printStackTrace();
+        MessageBoxes.errormsg(null, e.getMessage(), "Error");
         }
     }//GEN-LAST:event_cCloseActionPerformed
 
@@ -213,11 +302,53 @@ public class ItemListUi extends TabPanelUI   {
     private void cNewItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewItemBtnActionPerformed
       //calling item master form...
          try {
-          
+    callFormUi();      
         } catch (Exception e) {
         e.printStackTrace();
         }
     }//GEN-LAST:event_cNewItemBtnActionPerformed
+
+    private void tblItemListKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblItemListKeyTyped
+      if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+      
+   String itemid=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
+   callItemByCode(itemid);
+   
+      }
+    }//GEN-LAST:event_tblItemListKeyTyped
+
+    private void cCopyItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCopyItemActionPerformed
+            try {
+      String itemid=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
+          if(itemid==null || itemid.equals("")){
+           MessageBoxes.wrnmsg(null,"Please Select an Item.","Empty Item");                 
+           return;
+            }  
+      Item exist=itemService.getDao().findItemByCode(itemid);
+       if(exist==null || exist.getCode().equals("")){
+           MessageBoxes.wrnmsg(null,"No Item Found.","Empty Item");                 
+                return;
+            }       
+  String[] ObjButtons = { "Yes", "No" };
+  int PromptResult = JOptionPane.showOptionDialog(null, "Are you want to Copy this Item ?", "Item Form", -1, 2, null, ObjButtons, ObjButtons[1]);
+     
+      
+     if(PromptResult==0){    
+      exist.setId(EntityService.getEntityService().getKey(""));                
+        String oldCode=exist.getCode();
+     exist.setCode("Copy "+oldCode);                 
+     
+    
+     itemService.getDao().save(exist);    
+     getFormUi().entity2Ui(exist);
+   callFormUi();  
+     }
+      
+        } catch (Exception e) {
+        e.printStackTrace();
+        MessageBoxes.errormsg(null, e.getMessage(), "Error");
+        }
+    }//GEN-LAST:event_cCopyItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CButton cButton1;
@@ -225,6 +356,7 @@ public class ItemListUi extends TabPanelUI   {
     private org.components.controls.CButton cButton3;
     private org.components.controls.CButton cButton4;
     private org.components.controls.CButton cClose;
+    private org.components.controls.CButton cCopyItem;
     private org.components.controls.CButton cDeleteItemBtn;
     private org.components.controls.CTextField cItmcode;
     private org.components.controls.CButton cNewItemBtn;
@@ -258,5 +390,33 @@ public class ItemListUi extends TabPanelUI   {
      */
     public void setItemService(ItemService itemService) {
         this.itemService = itemService;
+    }
+
+    /**
+     * @return the mastertab
+     */
+    public ItemMasterTab getMastertab() {
+        return mastertab;
+    }
+
+    /**
+     * @param mastertab the mastertab to set
+     */
+    public void setMastertab(ItemMasterTab mastertab) {
+        this.mastertab = mastertab;
+    }
+
+    /**
+     * @return the formUi
+     */
+    public ItemMasterUI2 getFormUi() {
+        return formUi;
+    }
+
+    /**
+     * @param formUi the formUi to set
+     */
+    public void setFormUi(ItemMasterUI2 formUi) {
+        this.formUi = formUi;
     }
 }
