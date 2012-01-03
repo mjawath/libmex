@@ -80,7 +80,7 @@ import org.components.windows.TabPanelUI;
     /** Creates new form cust */
     public CustomerMasterUI2() {
         initComponents();
-  init();
+//  init();
     }
     
     public Customer uiToEntity(Customer c)throws Exception{
