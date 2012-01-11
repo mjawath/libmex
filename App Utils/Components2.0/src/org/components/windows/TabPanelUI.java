@@ -10,8 +10,6 @@ package org.components.windows;
  *
  * Created on Nov 22, 2010, 1:58:08 PM
  */
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 /**

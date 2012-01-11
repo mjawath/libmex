@@ -14,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -22,29 +23,27 @@ import javax.swing.text.JTextComponent;
  */
 public class uiEty {
 
-    public static  void setcombomodel(String[] str, JComboBox box) {
+    public static void setcombomodel(String[] str, JComboBox box) {
         box.setModel(new DefaultComboBoxModel(str));
     }
-public static void loadcombo(JComboBox com, Set lst)
-   {
-    DefaultComboBoxModel dcbm = (DefaultComboBoxModel)com.getModel();
-    if (dcbm.getSize() != 0) {
-      dcbm.removeAllElements();
+
+    public static void loadcombo(JComboBox com, Set lst) {
+        DefaultComboBoxModel dcbm = (DefaultComboBoxModel) com.getModel();
+        if (dcbm.getSize() != 0) {
+            dcbm.removeAllElements();
+        }
+        Iterator it = lst.iterator();
+        ((DefaultComboBoxModel) com.getModel()).addElement("");
+
+        while (it.hasNext()) {
+            Object object = it.next();
+
+            if ((object != null) && (!object.toString().isEmpty())) {
+                ((DefaultComboBoxModel) com.getModel()).addElement(object);
+            }
+        }
     }
-      Iterator it = lst.iterator();
-       ((DefaultComboBoxModel)com.getModel()).addElement("");
-  
-      while (it.hasNext())
-    {
-       Object object = it.next();
-  
-     if ((object != null) && (!object.toString().isEmpty()))
-      {
-       ((DefaultComboBoxModel)com.getModel()).addElement(object);
-       }
-    }
-  }
-    
+
     public static String doubleToUI(Number d) {
         if (d == null) {
             return "";
@@ -238,6 +237,50 @@ public static void loadcombo(JComboBox com, Set lst)
         }
     }
 
+    public static String colToStrE(JTable txtcom, int col) {
+        String x = TableUtil.getSelectedValueE(txtcom, col);
+        if (x.isEmpty()) {
+            return null;
+        } else {
+            return x;
+        }
+    }
+
+    public static String colToStr(JTable txtcom, int col) {
+        Object x = TableUtil.getSelectedValue(txtcom, col);
+        if (x == null) {
+            return null;
+        } else {
+            return x.toString();
+        }
+    }
+
+    public static Double colToDbl(JTable txtcom, int col) {
+        Object x = TableUtil.getSelectedValue(txtcom, col);
+        if (x != null) {
+            String bb = x.toString();
+            try {
+                return Double.parseDouble(bb);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public static Double colToDbl0(JTable txtcom, int col) {
+        Object x = TableUtil.getSelectedValue(txtcom, col);
+        if (x != null) {
+            String bb = x.toString();
+            try {
+                return Double.parseDouble(bb);
+            } catch (Exception e) {
+                return 0d;
+            }
+        }
+        return 0d;
+    }
+
     public static String cmbtostr(JComboBox jcb) {
         Object obj = null;
         if (jcb.isEditable()) {
@@ -312,15 +355,14 @@ public static void loadcombo(JComboBox com, Set lst)
     public static void objToUi(JComboBox jtc, Object val) {
         if (val != null) {
             jtc.setSelectedItem(val.toString());
-        }else{
-        
+        } else {
         }
     }
 
-        public static void objToUi(JCheckBox jtc,Boolean val) {
-       
-            jtc.setSelected(val==null?false:val);
-      
+    public static void objToUi(JCheckBox jtc, Boolean val) {
+
+        jtc.setSelected(val == null ? false : val);
+
     }
 
     public static String now() {
@@ -330,15 +372,15 @@ public static void loadcombo(JComboBox com, Set lst)
         return sdf.format(date);
 
     }
-public static String nowTimesStamp() {
+
+    public static String nowTimesStamp() {
         Date date = new Date();
-        
-  //      return Long.toString(date.getTime()).substring(5, 13);
-      return Long.toString(date.getTime());
+
+        //      return Long.toString(date.getTime()).substring(5, 13);
+        return Long.toString(date.getTime());
 
     }
 
-    
     public static Date nowDate() {
         Date date = new Date();
         return date;

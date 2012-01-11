@@ -200,7 +200,10 @@ public class GenericDAOUtil<T> {
             em.getTransaction().commit();
 
         } catch (Exception e) {
-            if (em != null) {
+            e.printStackTrace();
+            if (em != null) {//why no transaction is active ??? 
+//                Exception in thread "main" java.lang.IllegalStateException: 
+//                Exception Description: No transaction is currently active
                 em.getTransaction().rollback();
             }
         } finally {
@@ -294,11 +297,11 @@ public class GenericDAOUtil<T> {
         return query;
     }
 
-    public Query getQueryWithClass(String qryString, Class c) {
-        return getEm().createQuery(qryString, c);
+    public static Query getQueryWithClass(String qryString, Class c) {
+        return createEmNew().createQuery(qryString, c);
     }
 
-    public Query getQuery(String qryString) {
+    public static Query getQuery(String qryString) {
         return createEmNew().createQuery(qryString);
     }
     //set parameters  as object array in the accoridng to the order of  to qry string 
@@ -410,4 +413,21 @@ public class GenericDAOUtil<T> {
     /////////
      * 
      */
+    
+       public static List pagedData(String qryKey,String qry,int pageNo){
+    Query qu=GenericDAOUtil.getQuery(qry);
+    int noofrows=10;
+    int fr=(pageNo==0?0:pageNo) * noofrows;
+    qu.setFirstResult(fr);//firstresult
+    qu.setMaxResults(noofrows); //max result = noofrows+ 
+    
+        
+        return ExecuteQuery(qu);
+    }
+//    public List pagedDataScr(String qryKey,String qry,int pageNo){
+//    Query qu=GenericDAOUtil.getQuery(qry);
+//    ScrollableCursor scrollableCursor = (ScrollableCursor)qu.getSingleResult();
+//        
+//        return ExecuteQuery(qry);
+//    }
 }
