@@ -256,6 +256,7 @@ public class TableUtil {
           }
           return null;
     }
+    //get selected column return specified column value of selected row  if  null  retruns null
     public static Object getSelectedValue(JTable jt,int column) {
         if (jt.getSelectedRow()>-1) {
              return jt.getValueAt(jt.getSelectedRow(), column);       
@@ -263,6 +264,20 @@ public class TableUtil {
         return null;
 
     }
+    //get selected column return empty string if null
+    public static String getSelectedValueE(JTable jt,int column) {
+        if (jt.getSelectedRow()>-1) {
+             Object ob =getSelectedValue(jt, column);       
+             if(ob==null){
+             return "";
+             }
+            return ob.toString();       
+        }
+        return "";
+
+    }
+    
+    
     public static void selectNextRow(JTable jt,KeyEvent e) {
         int x =jt.getSelectedRow();
         int r =jt.getRowCount();

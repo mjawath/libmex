@@ -41,6 +41,7 @@ public class PxTable extends JXTable {
 
             }
         ));
+        setTerminateEditOnFocusLost(false);
     }// </editor-fold>//GEN-END:initComponents
 
 
