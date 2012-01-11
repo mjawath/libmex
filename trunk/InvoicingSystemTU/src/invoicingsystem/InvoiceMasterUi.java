@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /*
  * InvoiceMasterUi.java
@@ -10,22 +6,23 @@
  */
 package invoicingsystem;
 
+import com.components.custom.PagedPopUpPanel;
+import com.components.custom.TableEditor;
 import java.awt.event.ActionEvent;
-import java.text.DecimalFormat;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.AbstractAction;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import org.biz.app.ui.util.uiEty;
 import org.biz.invoicesystem.entity.master.Customer;
 import org.biz.invoicesystem.entity.master.Item;
 import org.biz.invoicesystem.entity.transactions.SalesInvoice;
 import org.biz.invoicesystem.entity.transactions.SalesInvoiceLineItem;
-import org.biz.invoicesystem.master.ui.ItemPopUp;
 import org.biz.invoicesystem.service.master.CustomerService;
 import org.biz.invoicesystem.service.master.ItemService;
 import org.components.windows.TabPanelUI;
@@ -41,7 +38,6 @@ public class InvoiceMasterUi extends TabPanelUI {
 
     SalesInvoice invoice;
     List<SalesInvoiceLineItem> lineItems;
-    ItemPopUp dialog;
 
     /** Creates new form InvoiceMasterUi */
     public InvoiceMasterUi() {
@@ -49,40 +45,37 @@ public class InvoiceMasterUi extends TabPanelUI {
 
         init();
     }
+    TableEditor ed;
 
     @Override
     public void init() {
 //        System.out.println("yyyyyy");
 
+
         invoice = new SalesInvoice();
         lineItems = new ArrayList<SalesInvoiceLineItem>();
         invoice.setLineItems(lineItems);
-        
         itemService = new ItemService();
         listItem = itemService.getDao().getAll();
-        
-        TableEditor ed = new TableEditor();
-        popUpComponent = new DetailPopUpPanel(tblInvoice, ed) {
+        ed = new TableEditor();
+        TableEditor tb = new TableEditor();
+        popUpComponent = new PagedPopUpPanel(tblInvoice, ed) {
 
             @Override
             public Object[] data(Object item) {
-            
-           Item it = (Item) item;
+                Item it = (Item) item;
                 return new Object[]{it.getId(), it.getCode(), it.getDescription()};
             }
-            
         };
-        DecimalFormat df = new DecimalFormat ("#,##0.######"); //you shouldn't need more "#" to the left
-        JFormattedTextField fmtTxtField = new JFormattedTextField(df);
-
-
-        tblInvoice.getColumnModel().getColumn(0).setCellEditor(ed);
+        tblInvoice.getColumnModel().getColumn(0).setCellEditor(tb);
         tblInvoice.getColumnModel().getColumn(1).setCellEditor(ed);
         tblInvoice.getColumnModel().getColumn(3).setCellEditor(new DoubleCellEditor());
-         ComboBoxCellEditor com=new ComboBoxCellEditor();
-        JComboBox jc= new JComboBox();
+        ComboBoxCellEditor com = new ComboBoxCellEditor();
+
+
+        JComboBox jc = new JComboBox();
         jc.setEditable(true);
-        jc.setModel(new DefaultComboBoxModel(new Object[]{"150","250","3650"}));
+        jc.setModel(new DefaultComboBoxModel(new Object[]{"150", "250", "3650"}));
         jc.addActionListener(new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("fkkkkkkkkkkk");
@@ -90,42 +83,71 @@ public class InvoiceMasterUi extends TabPanelUI {
         });
         tblInvoice.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(jc));
         tblInvoice.getColumnModel().getColumn(5).setCellEditor(new DoubleCellEditor());
-        tblInvoice.getColumnModel().getColumn(6).setCellEditor(new DoubleCellEditor());
+        de = new DoubleCellEditor() {
+            @Override
+            public boolean isValide() {
+                if (de.getComponent().getText().equals("2.0")) {
+                    
+                    
+                    
+                    System.out.println("  8--88--8  ");
+                    return true;
+                }
+                return false;
+            }
+        };
+        tblInvoice.getColumnModel().getColumn(6).setCellEditor(de);
+        de.getComponent().addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("action performed.........");
+            }
+        });
 //        cxTable2.getColumnModel().getColumn(2).setCellEditor(new editor(popUpComponent, tblInvoice));
 //        dialog = new ItemPopUp(cTextField1, lineItems)
-        tblInvoice.setSurrendersFocusOnKeystroke(true);
         /*     KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
         KeyStroke ob = KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0);
         //         tblInvoice.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),ob);
         ActionListener ac = tblInvoice.getActionForKeyStroke(ob);
         tblInvoice.registerKeyboardAction(ac,enter,JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);*/
-        
+
         custService = new CustomerService();
         listCust = custService.getDao().getAll();
 //                //ADD this list to popup
-              
-        
-        cuspop = new DetailPopUpPanel(tcus) {
+
+
+        cuspop = new PagedPopUpPanel(tcus) {
+
             @Override
             public Object[] data(Object item) {
                 Customer customer = (Customer) item;
                 return new Object[]{customer.getId(), customer.getCode(), customer.getCustomerName()};
             }
-        };  
+
+            @Override
+            public void search(String qry) {
+                //filter 
+               
+            }
+            
+            
+        };
+
         cuspop.setObjectToTable(listCust);
         custService = new CustomerService();
-        
         popUpComponent.setObjectToTable(listItem);
+     
         
-        
-
 
     }
-    DetailPopUpPanel cuspop;
+    DoubleCellEditor de;
+    PagedPopUpPanel cuspop;
     CustomerService custService;
     ItemService itemService;
     List<Customer> listCust;
     List<Item> listItem;
+    SalesInvoiceLineItem invoiceLineItem;
+    Item currentItem;
 
     public void lineItem() {
 //        SalesInvoiceLineItem lineItem = rowToEty(SalesInvoiceLineItem lineItem);
@@ -136,17 +158,39 @@ public class InvoiceMasterUi extends TabPanelUI {
 //        lineItem.setPrice(Long.MIN_VALUE);
     }
 
-    public void rowToEty(Object[] row) {
+    public SalesInvoiceLineItem rowToEty() {
+        SalesInvoiceLineItem lineItem = new SalesInvoiceLineItem();
+        Item item = new Item();
+        lineItem.setItem(currentItem);
+        lineItem.setDescription(uiEty.colToStrE(cxTable2, 2));
+        lineItem.setPrice(uiEty.colToDbl(cxTable2, 4));
+        lineItem.setLineAmount(uiEty.colToDbl(cxTable2, 5));
+        return lineItem;
+    }
 
-        return;
+    public boolean validateRow() {
+        int r = tblInvoice.getSelectedRow();
+        if (r == -1) {
+            return true;
+        }
+        try {
+            System.out.println("0000000000000000000000000000");
+            SalesInvoiceLineItem lineItem = rowToEty();
+            if (lineItem.getPrice() == null) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblInvoice = new org.components.controls.CTable();
         cPanel1 = new org.components.containers.CPanel();
         cLabel5 = new org.components.controls.CLabel();
         cLabel7 = new org.components.controls.CLabel();
@@ -191,34 +235,10 @@ public class InvoiceMasterUi extends TabPanelUI {
         cTextField13 = new org.components.controls.CTextField();
         cTextField14 = new org.components.controls.CTextField();
         cTextField15 = new org.components.controls.CTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblInvoice = new org.components.controls.CxTable();
 
         setLayout(null);
-
-        tblInvoice.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "id", "Item Code", "Description", "Qty", "Unit", "Price", "Amount"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tblInvoice.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblInvoice);
-        tblInvoice.getColumnModel().getColumn(0).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(5).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(6).setResizable(false);
-
-        add(jScrollPane1);
-        jScrollPane1.setBounds(10, 130, 930, 210);
 
         cPanel1.setLayout(null);
 
@@ -431,6 +451,38 @@ public class InvoiceMasterUi extends TabPanelUI {
 
         add(cPanel5);
         cPanel5.setBounds(240, 10, 250, 110);
+
+        tblInvoice.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "id", "Item Code", "Item Description", "Qty", "Unit", "Price", "LineAmount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblInvoice.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblInvoice);
+        tblInvoice.getColumnModel().getColumn(0).setResizable(false);
+        tblInvoice.getColumnModel().getColumn(1).setResizable(false);
+        tblInvoice.getColumnModel().getColumn(2).setResizable(false);
+        tblInvoice.getColumnModel().getColumn(3).setResizable(false);
+        tblInvoice.getColumnModel().getColumn(4).setResizable(false);
+        tblInvoice.getColumnModel().getColumn(5).setResizable(false);
+        tblInvoice.getColumnModel().getColumn(6).setResizable(false);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(10, 140, 930, 200);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CCheckBox cCheckBox2;
@@ -477,18 +529,14 @@ public class InvoiceMasterUi extends TabPanelUI {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private org.components.controls.CTable tblInvoice;
+    private org.components.controls.CxTable tblInvoice;
     private org.components.controls.CTextField tcus;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void updateEntityUI() {
-       
     }
 
-    
-    
-    
     @Override
     public String getTabName() {
         return "Invoice Master";
@@ -498,6 +546,5 @@ public class InvoiceMasterUi extends TabPanelUI {
     public JPanel getJPanel() {
         return this;
     }
-    DetailPopUpPanel popUpComponent;
+    PagedPopUpPanel popUpComponent;
 }
-
