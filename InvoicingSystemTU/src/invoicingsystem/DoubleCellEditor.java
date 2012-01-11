@@ -29,12 +29,22 @@ public class DoubleCellEditor extends AbstractCellEditor
 //        if (component.getText().equals("abcd") || component.getText().equals("")) {
      
 //            TableColumn tc= masterTbl.getColumnModel().getColumn(selcol); 
-                 boolean b = super.stopCellEditing();
+        
+        boolean b = false;
+        if (isValide()) {
+            System.out.println("===============");
+//            int selcol = masterTbl.getSelectedColumn();
+//            int selrow = masterTbl.getSelectedRow();
+//            TableColumn tc = masterTbl.getColumnModel().getColumn(selcol);
+            b = super.stopCellEditing();
 
-            return b;
+//            masterTbl.changeSelection(selrow, selcol + 1, true, true);
+
+        }
+        return b;
 //        }
 //
-//        return false;
+        
     }
 
     public DoubleCellEditor() {
@@ -52,6 +62,10 @@ public class DoubleCellEditor extends AbstractCellEditor
                 stopCellEditing();
             }
        });
+    }
+    
+    public boolean isValide(){
+        return true;   
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value,
@@ -74,7 +88,7 @@ public class DoubleCellEditor extends AbstractCellEditor
         Double dd =   new Double((s));
        return dd;
      }
-     return s;
+     return null;
     }
 
     public JTextField getComponent() {
