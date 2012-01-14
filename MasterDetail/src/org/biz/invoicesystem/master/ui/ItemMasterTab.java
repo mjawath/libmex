@@ -60,7 +60,7 @@ public static String FormUiTabName="Form";
     public void updateEntityUI() {
         
         getItemTabPane().setSelectedIndex(getItemTabPane().indexOfTab("List"));
-      itemListUi1.loadItemList2Tbl();
+      itemListUi1.loadItemList2Tbl(0,itemListUi1.getDynamicQuery());
     }
       
       
@@ -71,36 +71,17 @@ public static String FormUiTabName="Form";
 
         tItemDescription = new org.components.controls.CTextField();
         itemTabPane = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
         itemMasterUI21 = new org.biz.invoicesystem.master.ui.ItemMasterUI2();
         itemListUi1 = new org.biz.invoicesystem.master.ui.ItemListUi();
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(itemMasterUI21, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(itemMasterUI21, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        itemTabPane.addTab("Form", jPanel5);
-        itemTabPane.addTab("List", itemListUi1);
+        itemTabPane.addTab("tab2", itemMasterUI21);
+        itemTabPane.addTab("tab1", itemListUi1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(itemTabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(itemTabPane, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +93,6 @@ public static String FormUiTabName="Form";
     private org.biz.invoicesystem.master.ui.ItemListUi itemListUi1;
     private org.biz.invoicesystem.master.ui.ItemMasterUI2 itemMasterUI21;
     private javax.swing.JTabbedPane itemTabPane;
-    private javax.swing.JPanel jPanel5;
     private org.components.controls.CTextField tItemDescription;
     // End of variables declaration//GEN-END:variables
 

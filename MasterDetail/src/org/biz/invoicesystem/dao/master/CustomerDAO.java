@@ -20,7 +20,7 @@ public class CustomerDAO extends GenericDAO<Customer>{
     List lst=new ArrayList<Object>();
     //   EntityManager em=createEmNew();
         try {
-    lst=ExecuteQuery("select  c.type , c.religion , c.title From Customer c ");      
+    lst=ExecuteQuery("select  c.type ,c.title From Customer c ");      
      
             System.out.println("lst size "+lst.size());                 
         } catch (Exception e) {

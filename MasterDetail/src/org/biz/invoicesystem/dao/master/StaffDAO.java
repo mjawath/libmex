@@ -16,12 +16,12 @@ public class StaffDAO extends GenericDAO<Staff>{
     setCls(Staff.class);
     }
 
-    public List loadComboItems(){
+    public List<Object[]> loadComboItems(){
     
-    List lst=new ArrayList<Object>();
+    List<Object[]> lst=new ArrayList<Object[]>();
     //   EntityManager em=createEmNew();
         try {
-    lst=ExecuteQuery("select  c.type , c.religion , c.title From Staff c ");      
+    lst=ExecuteNativeQuery("select  c.securityRole , c.initial From Staff c ");      
      
             System.out.println("lst size "+lst.size());                 
         } catch (Exception e) {
@@ -50,12 +50,34 @@ public class StaffDAO extends GenericDAO<Staff>{
    return i;      
     }
  
+ public Staff findStaffByUsername(String username,String shopname){
+     Staff i=null;
+        try { 
+//ExecuteQuery("");
+    
+   List<Staff> lst=ExecuteQuery("select i from Staff i Where i.username= '"+username+"'");
+            for (Staff c : lst) {
+           i=c;     
+            }
+ 
+        } catch (Exception e) {
+             
+        e.printStackTrace();
+        }finally{
+   
+        }
+           
+   return i;      
+    }
+ 
  
     public static void main(String[] args) {
         try {
      StaffDAO g=new StaffDAO();
      
-     g.loadComboItems();
+    List lst= g.loadComboItems();
+      
+        
         } catch (Exception e) {
         e.printStackTrace();
         }

@@ -8,6 +8,8 @@ import javax.persistence.Query;
 import org.biz.dao.service.GenericDAO;
 import org.biz.dao.util.EntityService;
 import org.biz.invoicesystem.entity.master.Item;
+import org.biz.invoicesystem.master.ui.FormMaster;
+import org.dao.util.JPAUtil;
 import org.eclipse.persistence.queries.ScrollableCursor;
 
 /**
@@ -24,14 +26,14 @@ public class ItemDAO extends GenericDAO<Item>{
      public Item findItemByCode(String itemcode){
      Item i=null;
 //        try { 
-//ExecuteQuery("");
+List<Item> lst=ExecuteQuery("select i from Item i Where i.code='"+itemcode+"'");
 //   //EntityManager em=createEmNew();
 //  
 //    //        em.getTransaction().begin();
 // List<Item> lst=em.createQuery("select i from item Where i.code=?1").setParameter(1,itemcode).getResultList();
-//            for (Item item : lst) {
-//           i=item;     
-//            }
+            for (Item item : lst) {
+           i=item;     
+            }
 // 
 // em.getTransaction().commit();            
 //em.close();
@@ -73,31 +75,99 @@ em.close();
     public List<Item> selectAll(){
         List<Item> lst=null;
         try {
-  EntityManager em=null;
-  
-            em.getTransaction().begin();
- lst=em.createQuery("select * From Item ",Item.class).getResultList();
- 
-em.getTransaction().commit();            
-em.close();           
+   
+ lst=ExecuteQuery("select i From Item i");
+       
         } catch (Exception e) {
         e.printStackTrace();
         }
         return lst;
         
     }
-    public static void main(String[] args) {
-        ItemDAO i=new ItemDAO();
-       // i.deleteItemByid("1000");
+    
+    //////////////////////////////////////////
+     public List<Object[]> loadComboItems(){
+    
+    List<Object[]> lst=new ArrayList<Object[]>();
+    //   EntityManager em=createEmNew();
+        try {
+    lst=ExecuteNativeQuery("select  c.category , c.unitOne , c.unitTwo c.location From Item c ");      
+     
+            System.out.println("lst size "+lst.size());                 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    return lst;
+    }
+    
+    
+    //////////////////////////////////////////
+    public int getListSize(){
+    int x=0;
+        try {
+            
+       Query query = JPAUtil.getEntityManager().createQuery("SELECT COUNT(i) from Item i");
+          
+     
+        return ((Long) query.getSingleResult()).intValue();
+    
+            
+        } catch (Exception e) {
+        e.printStackTrace();}
+       return 0;
+    }
+    
+    ////////////////////////////////////////////////////
+    
         
-//        for(int x=0;x<5000;x++){
+    public List<Item> getPaginatedData(int pageNo,String generatedQuery){
+        List<Item> lst=new ArrayList<Item>();
+        int strt=0;
+        try {
+            
+            System.out.println("calling page no is "+pageNo);
+            EntityManager em=JPAUtil.getEntityManager();
+//            
+    //     Query query = em.createQuery("SELECT e FROM Item e order by e.id asc");
+      Query query = em.createQuery(generatedQuery);
+ 
+       strt= pageNo==0?0:pageNo*FormMaster.GRID_LIST_SIZE;
+         
+            System.out.println("starting no is "+strt);              
+         query.setFirstResult(strt+1);
+         query.setMaxResults(FormMaster.GRID_LIST_SIZE);
+         
+lst= query.getResultList();
+            System.out.println("came here....");
+        } catch (Exception e) {
+        
+        }
+        
+        return lst;
+    }
+     
+    
+    
+    //////////////////////////////////////////////////////
+    
+    
+    public static void main(String[] args) {
+     
+       ItemDAO i=new ItemDAO();
+    //   List l= i.likequeryy();                 //    
+ List ls= i.getPaginatedData(1,"SELECT e FROM Item e Where e.description LIKE '%de%'  order by e.id asc");
+   //   System.out.println("l size s "+ls.getListSize());
+      System.out.println("l size s "+ls.size());
+//   //     i.deleteItemByid("1000");
+//////        
+//        for(int x=0;x<150;x++){
 //            System.out.println("persist working.....");
 //      Item ii=new Item();
 //      
 //      ii.setId(""+x);
 //      ii.setCarton(00d);          
 //      ii.setCategory("catt");
-//      ii.setCode("erererrrr");
+//      ii.setCode(""+x);
 //      ii.setCommission(1000d);
 //      ii.setCost(3200d);
 //      ii.setDescription("des");
@@ -112,14 +182,15 @@ em.close();
 //              
 //              
 //              }
-      List<Item> lst=i.getIndexItems(0,500);
-      List<Item> lst1=i.getIndexItems(501, 1000);
-      
-        System.out.println("lst 500 item is "+lst.get(499).getId());
-        System.out.println("lst 500 item is "+lst1.get(501).getId());
-        System.out.println("lst size is "+lst.size());         
-        System.out.println("lst size is "+lst1.size());         
-    
+        System.out.println("saved....");
+//      List<Item> lst=i.getIndexItems(0,500);
+//      List<Item> lst1=i.getIndexItems(501, 1000);
+//      
+//        System.out.println("lst 500 item is "+lst.get(499).getId());
+//        System.out.println("lst 500 item is "+lst1.get(501).getId());
+//        System.out.println("lst size is "+lst.size());         
+//        System.out.println("lst size is "+lst1.size());         
+//    
     }
     
 //           Query query = em.createQuery("SELECT e FROM Item e ");
@@ -128,25 +199,6 @@ em.close();
 ////lst= scrollableCursor.next(100); 
 //lst= query.getResultList();
 //            System.out.println("came here....");
-    
-    public List<Item> getIndexItems(int strt,int end){
-        List<Item> lst=new ArrayList<Item>();
-        try {
-            EntityManager em=null;
-//            
-         Query query = em.createQuery("SELECT e FROM Item e order by e.id asc");
- //lst= scrollableCursor.next(100); 
-         query.setFirstResult(strt);
-         query.setMaxResults(end);
-         
-lst= query.getResultList();
-            System.out.println("came here....");
-        } catch (Exception e) {
-        
-        }
-        
-        return lst;
-    }
-     
+
     
 }

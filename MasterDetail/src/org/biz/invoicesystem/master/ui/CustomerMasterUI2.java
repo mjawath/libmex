@@ -1,6 +1,8 @@
 
 package org.biz.invoicesystem.master.ui;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -31,47 +33,78 @@ import org.components.windows.TabPanelUI;
    //customers=new ArrayList<Customer>();
   // customer=new Customer();
    
-   
+   loadComboItems();
         } catch (Exception e) {
         e.printStackTrace();
         }
         
     }
     
+    
+    /////////////////////////////////////
+   ///////////////////////////////////////////////
+  public void keyListeners(){
+      try {
+  tCusCode.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    try {
+                        if(e.getKeyChar()==KeyEvent.VK_ENTER){
+             tCusTitle.getEditor().getEditorComponent().requestFocus();
+                        }
+                    } catch (Exception ee) {
+                    ee.printStackTrace();}
+                }
+  
+  });  
+  
+  
+   tCusTitle.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    try {
+                 if(e.getKeyChar()==KeyEvent.VK_ENTER){}
+                    } catch (Exception ee) {
+                    ee.printStackTrace();}
+                }
+  
+  });  
+    
+   
+
+   
+   
+   
+      } catch (Exception e) {
+     e.printStackTrace();
+      }
+  }
+  
+  ///////////////////////////////////////////////  
+    ///////////////////////////////////////////
+    
     public void loadComboItems(){
         try {
-     List lstOfArray= cService.getDao().loadComboItems();  
+            //c.type , c.religion , c.title
+     List<Object[]> lstOfArray= cService.getDao().loadComboItems();  
      
      //list of array retuns String array  
       //object is String array....
      
-     
-        String[] cusType= (String[]) lstOfArray.get(0);        
-        Set<String> types=new TreeSet<String>();
-       for(String type:cusType){
-       types.add(type);
-       
-       }  
-        
-        String[] cusReligion= (String[]) lstOfArray.get(1);        
-       Set<String> religions=new TreeSet<String>();
-     
-        for(String religion:cusReligion){
-      religions.add(religion);
-       
-       }  
-        
-        String[] cusTitle= (String[]) lstOfArray.get(2);        
+      Set<String> types=new TreeSet<String>();
       Set<String> titles=new TreeSet<String>();
-    
-        for(String title:cusTitle){
-       titles.add(title);
-       
-       }        
-     uiEty.loadcombo(tCusType, types); 
-     uiEty.loadcombo(tCusReligion, religions); 
-     uiEty.loadcombo(tCusTitle, titles); 
-     
+             for (Object[] ss : lstOfArray) {
+               String type=(String) ss[0];
+               types.add(type);
+               
+               String title=(String) ss[0];
+               titles.add(title);
+            }
+       uiEty.loadcombo(tCusType, types); 
+      uiEty.loadcombo(tCusTitle, titles); 
+//     
         } catch (Exception e) {
     e.printStackTrace();
         }
@@ -80,14 +113,14 @@ import org.components.windows.TabPanelUI;
     /** Creates new form cust */
     public CustomerMasterUI2() {
         initComponents();
-//  init();
+   init();
     }
     
     public Customer uiToEntity(Customer c)throws Exception{
         try {
     c.setId(EntityService.getEntityService().getKey(""));              
        
-    c.setCode(uiEty.tcToStr(tCusId));
+    c.setCode(uiEty.tcToStr(tCusCode));
     c.setTitle(uiEty.cmbtostr(tCusTitle));             
     c.setCustomerName(uiEty.tcToStr(tCusName));            
     c.setDob(tCusDOB.getDate());
@@ -115,7 +148,7 @@ import org.components.windows.TabPanelUI;
     
         public void entity2Ui(Customer c)throws Exception{
             try {
-uiEty.objToUi(tCusId, c.getCustomerID());//    c.setCode(uiEty.tcToStr(tCusId));
+uiEty.objToUi(tCusCode, c.getCustomerID());//    c.setCode(uiEty.tcToStr(tCusId));
 uiEty.objToUi(tCusTitle,c.getTitle());//    c.setTitle(uiEty.cmbtostr(tCusTitle));             
 uiEty.objToUi(tCusName, c.getCustomerName());//    c.setCustomerName(uiEty.tcToStr(tCusName));            
 tCusDOB.setDate(c.getDob());
@@ -140,7 +173,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
             }
         }
         
-        public void clear(){
+        public void clearForm(){
             try {
            entity2Ui(new Customer());                
            
@@ -168,7 +201,6 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         cLabel5 = new org.components.controls.CLabel();
         cClose = new org.components.controls.CButton();
         cSave = new org.components.controls.CButton();
-        cBrowseImg = new org.components.controls.CButton();
         dDelete = new org.components.controls.CButton();
         tCusAdd1 = new org.components.controls.CTextField();
         tCusAdd2 = new org.components.controls.CTextField();
@@ -188,11 +220,10 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         tCusLoyalty = new org.components.controls.CTextField();
         cLabel15 = new org.components.controls.CLabel();
         tCusCreditLimit = new org.components.controls.CTextField();
-        tCusId = new org.components.controls.CTextField();
+        tCusCode = new org.components.controls.CTextField();
         cLabel16 = new org.components.controls.CLabel();
         cLabel17 = new org.components.controls.CLabel();
         tCusNIC = new org.components.controls.CTextField();
-        cLabel18 = new org.components.controls.CLabel();
         cClear1 = new org.components.controls.CButton();
 
         setLayout(null);
@@ -249,15 +280,15 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         add(tCusTitle);
         tCusTitle.setBounds(260, 40, 63, 23);
         add(tCusDOB);
-        tCusDOB.setBounds(610, 40, 112, 22);
+        tCusDOB.setBounds(610, 40, 116, 22);
 
         cLabel5.setText("DOB");
         add(cLabel5);
         cLabel5.setBounds(610, 10, 110, 25);
 
-        cClose.setText("Close");
+        cClose.setText("Goto List");
         add(cClose);
-        cClose.setBounds(470, 430, 59, 23);
+        cClose.setBounds(470, 350, 90, 23);
 
         cSave.setText("Save");
         cSave.addActionListener(new java.awt.event.ActionListener() {
@@ -266,16 +297,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
             }
         });
         add(cSave);
-        cSave.setBounds(280, 430, 57, 23);
-
-        cBrowseImg.setText("Browse");
-        cBrowseImg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cBrowseImgActionPerformed(evt);
-            }
-        });
-        add(cBrowseImg);
-        cBrowseImg.setBounds(10, 430, 140, 23);
+        cSave.setBounds(280, 350, 57, 23);
 
         dDelete.setText("Delete");
         dDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +306,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
             }
         });
         add(dDelete);
-        dDelete.setBounds(400, 430, 63, 23);
+        dDelete.setBounds(400, 350, 63, 23);
 
         tCusAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,13 +416,13 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         add(tCusCreditLimit);
         tCusCreditLimit.setBounds(140, 210, 180, 25);
 
-        tCusId.addActionListener(new java.awt.event.ActionListener() {
+        tCusCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tCusIdActionPerformed(evt);
+                tCusCodeActionPerformed(evt);
             }
         });
-        add(tCusId);
-        tCusId.setBounds(10, 40, 239, 25);
+        add(tCusCode);
+        tCusCode.setBounds(10, 40, 239, 25);
 
         cLabel16.setText("Religion");
         add(cLabel16);
@@ -418,11 +440,6 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         add(tCusNIC);
         tCusNIC.setBounds(480, 80, 284, 25);
 
-        cLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cLabel18.setText("Image");
-        add(cLabel18);
-        cLabel18.setBounds(20, 320, 130, 110);
-
         cClear1.setText("Clear");
         cClear1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -430,7 +447,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
             }
         });
         add(cClear1);
-        cClear1.setBounds(340, 430, 57, 23);
+        cClear1.setBounds(340, 350, 57, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tCusNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCusNameActionPerformed
@@ -443,7 +460,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
 
     private void cSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSaveActionPerformed
          try {
-            if(uiEty.tcToStr(tCusId)==null || uiEty.tcToStr(tCusId).equals("")){
+            if(uiEty.tcToStr(tCusCode)==null || uiEty.tcToStr(tCusCode).equals("")){
            MessageBoxes.wrnmsg(null,"Please Type Customer Code","Empty Customer Code");                 
                 return;
             }       
@@ -464,12 +481,14 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
           c.setId(exist.getId());
      cService.getDao().update(c);
       
-       }
+       }else{
+      return;
+      }
     }         
       //updating customers       
-   clear();
+   clearForm();
  
-   tCusId.requestFocus();
+   tCusCode.requestFocus();
        
         } catch (Exception e) {
         e.printStackTrace();
@@ -515,28 +534,17 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         // TODO add your handling code here:
     }//GEN-LAST:event_tCusCreditLimitActionPerformed
 
-    private void tCusIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCusIdActionPerformed
+    private void tCusCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCusCodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tCusIdActionPerformed
+    }//GEN-LAST:event_tCusCodeActionPerformed
 
     private void tCusNICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCusNICActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tCusNICActionPerformed
 
-    private void cBrowseImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBrowseImgActionPerformed
-        try {
-   //call file chooser and load image of jpg png gif....
-       
-        } catch (Exception e) {
-        e.printStackTrace();
-        MessageBoxes.errormsg(null, e.getMessage(), "Error");
-        }
-              
-    }//GEN-LAST:event_cBrowseImgActionPerformed
-
     private void dDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dDeleteActionPerformed
        try {
-       if(uiEty.tcToStr(tCusId)==null || uiEty.tcToStr(tCusId).equals("")){
+       if(uiEty.tcToStr(tCusCode)==null || uiEty.tcToStr(tCusCode).equals("")){
            MessageBoxes.wrnmsg(null,"Please Type Customer Code","Empty Customer Code");                 
                 return;
             }            
@@ -552,9 +560,9 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
     MessageBoxes.warn(null,"No Customer Found.", getTabName());
     return;
     }      
-   clear();
+   clearForm();
  
-   tCusId.requestFocus();
+   tCusCode.requestFocus();
        
         } catch (Exception e) {
         e.printStackTrace();
@@ -563,7 +571,7 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
     }//GEN-LAST:event_dDeleteActionPerformed
 
     private void cClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cClear1ActionPerformed
-       clear();
+       clearForm();
     }//GEN-LAST:event_cClear1ActionPerformed
 
     
@@ -585,7 +593,6 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
         return this;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CButton cBrowseImg;
     private org.components.controls.CButton cClear1;
     private org.components.controls.CButton cClose;
     private org.components.controls.CLabel cLabel1;
@@ -597,7 +604,6 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
     private org.components.controls.CLabel cLabel15;
     private org.components.controls.CLabel cLabel16;
     private org.components.controls.CLabel cLabel17;
-    private org.components.controls.CLabel cLabel18;
     private org.components.controls.CLabel cLabel2;
     private org.components.controls.CLabel cLabel3;
     private org.components.controls.CLabel cLabel4;
@@ -611,12 +617,12 @@ uiEty.objToUi(tCusEmail, c.getEmail());//    c.setEmail(uiEty.tcToStr(tCusEmail)
     private org.components.controls.CTextField tCusAdd1;
     private org.components.controls.CTextField tCusAdd2;
     private org.components.controls.CTextField tCusCity;
+    private org.components.controls.CTextField tCusCode;
     private org.components.controls.CTextField tCusCompany;
     private org.components.controls.CTextField tCusCreditLimit;
     private org.components.controls.CDatePicker tCusDOB;
     private org.components.controls.CTextField tCusDiscount;
     private org.components.controls.CTextField tCusEmail;
-    private org.components.controls.CTextField tCusId;
     private org.components.controls.CTextField tCusLoyalty;
     private org.components.controls.CTextField tCusMobile;
     private org.components.controls.CTextField tCusNIC;
