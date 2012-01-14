@@ -4,23 +4,22 @@
  */
 
 /*
- * CPanel.java
+ * cTabPane.java
  *
- * Created on Oct 7, 2010, 1:21:25 PM
+ * Created on Jan 11, 2012, 5:41:17 PM
  */
+package org.components.controls;
 
-package org.components.containers;
-
-import org.components.parent.containers.PPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
- * @author nano
+ * @author Administrator
  */
-public class CPanel extends PPanel {
+public class cTabPane extends JTabbedPane {
 
-    /** Creates new form BeanForm */
-    public CPanel() {
+    /** Creates new form cTabPane */
+    public cTabPane() {
         initComponents();
     }
 
@@ -32,12 +31,7 @@ public class CPanel extends PPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        setBackground(new java.awt.Color(255, 255, 255));
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }
