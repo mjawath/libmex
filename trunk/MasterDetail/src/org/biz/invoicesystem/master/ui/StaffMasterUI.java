@@ -1,6 +1,9 @@
  
 package org.biz.invoicesystem.master.ui;
 
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.biz.app.ui.util.MessageBoxes;
@@ -14,7 +17,7 @@ import org.components.windows.TabPanelUI;
 public class StaffMasterUI extends TabPanelUI  {
 
     
-     private StaffService sService;
+  private StaffService sService;
   Staff selectedStaff;
  // List<Customer> customers;
   
@@ -31,7 +34,48 @@ public class StaffMasterUI extends TabPanelUI  {
         }
         
     }
-    /** Creates new form cust */
+     
+     ///////////////////////////////////////////////
+     
+     public void loadCombo(){
+     
+         try {
+    List<Object[]> lst= sService.getDao().loadComboItems();
+      Set<String> secRoles=new TreeSet<String>();
+      Set<String> initialz=new TreeSet<String>();
+             
+    for (Object[] obj : lst) {
+         
+       String secRole=(String) obj[0];
+       String initial=(String) obj[1];
+        
+       secRoles.add(secRole);
+       
+       initialz.add(initial);
+             
+    }
+    uiEty.loadcombo(tInitial, initialz); 
+    uiEty.loadcombo(tSecRole, secRoles); 
+                  
+             
+             
+             
+         } catch (Exception e) {
+         e.printStackTrace();}
+     
+     }
+     
+    ///////////////////////////////////////////////
+    ///////////////////////////////////////////////
+  public void keyListeners(){
+      try {
+          
+      } catch (Exception e) {
+     e.printStackTrace();
+      }
+  }
+  
+  ///////////////////////////////////////////////
     public StaffMasterUI() {
         initComponents();
     }
@@ -139,7 +183,6 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
         cLabel12 = new org.components.controls.CLabel();
         tCode = new org.components.controls.CTextField();
         tReligion = new org.components.controls.CComboBox();
-        tDob = new org.components.controls.CDatePicker();
         cLabel16 = new org.components.controls.CLabel();
         cLabel17 = new org.components.controls.CLabel();
         tSecRole = new org.components.controls.CComboBox();
@@ -154,6 +197,7 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
         cLabel18 = new org.components.controls.CLabel();
         tRetypePassword = new javax.swing.JPasswordField();
         tPassword = new javax.swing.JPasswordField();
+        tDob = new org.components.parent.controls.PDatePicker();
 
         setLayout(null);
 
@@ -296,10 +340,9 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
         tCode.setBounds(10, 50, 70, 25);
 
         tReligion.setEditable(true);
+        tReligion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "Buddhist", "Hindu", "Muslims", "Christians" }));
         add(tReligion);
         tReligion.setBounds(110, 170, 240, 23);
-        add(tDob);
-        tDob.setBounds(460, 50, 120, 22);
 
         cLabel16.setText("DOB");
         add(cLabel16);
@@ -316,6 +359,8 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
         cLabel13.setText("Gender");
         add(cLabel13);
         cLabel13.setBounds(10, 90, 70, 25);
+
+        tGender.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ".....", "Male", "Female" }));
         add(tGender);
         tGender.setBounds(110, 90, 110, 23);
 
@@ -327,8 +372,7 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
         add(tInitial);
         tInitial.setBounds(110, 130, 110, 23);
 
-        cPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        cPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        cPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cPanel1.setLayout(null);
 
         cLabel11.setText("Retype Password");
@@ -361,6 +405,8 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
 
         add(cPanel1);
         cPanel1.setBounds(10, 250, 340, 120);
+        add(tDob);
+        tDob.setBounds(460, 50, 140, 22);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNameActionPerformed
@@ -373,27 +419,61 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
            MessageBoxes.wrnmsg(null,"Please Type Staff Code","Empty Staff Code");                 
                 return;
             }  
-    //check username
+     if(uiEty.cmbtostr(tSecRole)==null || uiEty.cmbtostr(tSecRole).equals("")){
+           MessageBoxes.wrnmsg(null,"Please Type Security Role","Empty");                 
+                return;
+            }  
+     
+       if(uiEty.tcToStr(tUsername)==null || uiEty.tcToStr(tUsername).equals("")){
+           MessageBoxes.wrnmsg(null,"Please Type Username ","Empty");                 
+                return;
+            }
+       
+        if(uiEty.tcToStr(tPassword)==null ||uiEty.tcToStr(tRetypePassword)==null ||
+          !uiEty.tcToStr(tPassword).equals(uiEty.tcToStr(tRetypePassword)) 
+            ){
+        
+      MessageBoxes.errormsg(null, "Passwords Does not Match Or ", "Wrong ");            
+   
+    }
+     
+    //check username  and pwd...
+    Staff usernameChk=sService.getDao().findStaffByUsername(uiEty.tcToStr(tUsername),"");
     
+    Staff exist=sService.getDao().findStaffByCode(uiEty.tcToStr(tCode));
+   
+    if(usernameChk!=null){
+  if(exist==null){
+    MessageBoxes.errormsg(null, "Username Exist", "Exist");            
+  return;
+  }else{
+  
+  if(!exist.getUsername().equals(usernameChk.getUsername())){
+   MessageBoxes.errormsg(null, "Username Exist", "Exist");            
+  return;
+  }
+  
+  }
+    } 
      
-     
+    
      Staff s=uiToEntity(new Staff());
      
-     Staff exist=sService.getDao().findStaffByCode(uiEty.tcToStr(tCode));
      
      if(exist==null){
-     
-      sService.getDao().save(s);            
+       sService.getDao().save(s);            
      }else{
          String[] ObjButtons = { "Yes", "No" };
   int PromptResult = JOptionPane.showOptionDialog(null, "Staff Exist Do You Want to Update it?", getTabName(), -1, 2, null, ObjButtons, ObjButtons[1]);
-     if(PromptResult==0)
+     if(PromptResult==0){
          s.setId(exist.getId());
         sService.getDao().update(s);         
-        
+     }else{
+     return;
      }
+     }
+     clear();
      
-            clear();
         } catch (Exception e) {
         
         MessageBoxes.errormsg(null,e.getMessage(), "Error");
@@ -446,7 +526,7 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
       if(uiEty.tcToStr(tCode)==null || uiEty.tcToStr(tCode).equals("")){
            MessageBoxes.wrnmsg(null,"Please Type Staff Code","Empty Staff Code");                 
                 return;
-            }  
+        }  
       
       Staff s=uiToEntity(new Staff());
       
@@ -455,13 +535,12 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
      if(exist!=null){
      sService.getDao().delete(exist);
      }else{
-    MessageBoxes.warn(null,"No Staff Found.", getTabName());
-    return;
-    }   
+     MessageBoxes.warn(null,"No Staff Found.", getTabName());
+     return;
+     }   
               
-            clear();
-        } catch (Exception e) {
-        
+    clear();
+    } catch (Exception e) {        
         MessageBoxes.errormsg(null,e.getMessage(), "Error");
         }
     }//GEN-LAST:event_cDeleteActionPerformed
@@ -519,7 +598,7 @@ uiEty.objToUi(tEmail,s.getEmail());//   s.setEmail(uiEty.tcToStr(tEmail));
     private org.components.controls.CTextField tAddress2;
     private org.components.controls.CTextField tCity;
     private org.components.controls.CTextField tCode;
-    private org.components.controls.CDatePicker tDob;
+    private org.components.parent.controls.PDatePicker tDob;
     private org.components.controls.CTextField tEmail;
     private org.components.controls.CComboBox tGender;
     private org.components.controls.CComboBox tInitial;

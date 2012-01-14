@@ -9,6 +9,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
 import org.biz.app.ui.util.MessageBoxes;
 import org.biz.app.ui.util.TableUtil;
+import org.biz.app.ui.util.uiEty;
 import org.biz.dao.util.EntityService;
 import org.biz.invoicesystem.entity.master.Item;
 import org.biz.invoicesystem.service.master.ItemService;
@@ -21,24 +22,63 @@ public class ItemListUi extends TabPanelUI   {
     private ItemMasterTab mastertab;
     private ItemMasterUI2 formUi;
     
-    
+     int currentPageNo=0;
     public ItemListUi() {
         initComponents();
-   init();
+    init();
     }
 
     @Override
     public void init() {
      itemService=new ItemService();
+     
+     callVeryFirstPage();
+     
     }
 
-    public void loadItemList2Tbl(){
+    public void callVeryFirstPage(){
+    
+        try {
+           currentPageNo=0; 
+       loadItemList2Tbl(currentPageNo,getDynamicQuery());  
+        cPageCount.setText(""+currentPageNo+" OF "+pageCount());
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+    }
+    
+    public int pageCount(){
+    int x=0;
+        try {
+      x=itemService.getDao().getListSize()%FormMaster.GRID_LIST_SIZE;      
+        } catch (Exception e) {
+        e.printStackTrace();}
+        return x;
+    }
+    
+    public String getDynamicQuery(){
+    String qq="";
+    
+    if(uiEty.tcToStr(cItmDescription)==null ||uiEty.tcToStr(cItmDescription).trim().equals("")){
+    
+        qq="SELECT e FROM Item e  order by e.id asc";
+    }else{
+qq="SELECT e FROM Item e Where e.description LIKE '%"+uiEty.tcToStr(cItmDescription)+"%'  order by e.id asc";
+    }
+    
+    
+    return qq;
+    }
+    
+    public void loadItemList2Tbl(final int currentPageNo,final String dynamicQuery){
      
         SwingWorker<List<Item>,Object> sw=new SwingWorker<List<Item>,Object>() {
 
             @Override
             protected List<Item> doInBackground() throws Exception {
-             List<Item> items=getItemService().getDao().selectAll();
+        //     List<Item> items=getItemService().getDao().selectAll();
+                
+             List<Item> items=getItemService().getDao().getPaginatedData(currentPageNo,dynamicQuery);
                 return items;
             }
 
@@ -72,8 +112,7 @@ public class ItemListUi extends TabPanelUI   {
         try {
   
    getMastertab().getItemTabPane().setSelectedIndex(getMastertab().getItemTabPane().indexOfTab(ItemMasterTab.FormUiTabName));
-              
-            
+           
         } catch (Exception e) {
         e.printStackTrace();}
     }
@@ -103,8 +142,9 @@ public class ItemListUi extends TabPanelUI   {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cPanel1 = new org.components.containers.CPanel();
         jLabel1 = new javax.swing.JLabel();
-        cItmcode = new org.components.controls.CTextField();
+        cItmDescription = new org.components.controls.CTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItemList = new org.components.controls.CxTable();
         cRefreshItem = new org.components.controls.CButton();
@@ -115,22 +155,29 @@ public class ItemListUi extends TabPanelUI   {
         cButton2 = new org.components.controls.CButton();
         cButton3 = new org.components.controls.CButton();
         cButton4 = new org.components.controls.CButton();
-        cTextFieldPopUp1 = new org.components.controls.CTextFieldPopUp();
+        cPageCount = new org.components.controls.CTextFieldPopUp();
         cCopyItem = new org.components.controls.CButton();
 
         setLayout(null);
 
-        jLabel1.setText("Item Description Search");
-        add(jLabel1);
-        jLabel1.setBounds(30, 10, 130, 20);
+        cPanel1.setLayout(null);
 
-        cItmcode.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Item Description Search");
+        cPanel1.add(jLabel1);
+        jLabel1.setBounds(40, 30, 130, 20);
+
+        cItmDescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cItmcodeActionPerformed(evt);
+                cItmDescriptionActionPerformed(evt);
             }
         });
-        add(cItmcode);
-        cItmcode.setBounds(160, 10, 470, 25);
+        cItmDescription.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cItmDescriptionKeyTyped(evt);
+            }
+        });
+        cPanel1.add(cItmDescription);
+        cItmDescription.setBounds(170, 30, 470, 25);
 
         tblItemList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,6 +204,11 @@ public class ItemListUi extends TabPanelUI   {
         });
         tblItemList.setColumnSelectionAllowed(true);
         tblItemList.setFont(new java.awt.Font("Tahoma", 0, 14));
+        tblItemList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblItemListMouseClicked(evt);
+            }
+        });
         tblItemList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tblItemListKeyTyped(evt);
@@ -171,8 +223,8 @@ public class ItemListUi extends TabPanelUI   {
         tblItemList.getColumnModel().getColumn(1).setPreferredWidth(200);
         tblItemList.getColumnModel().getColumn(1).setMaxWidth(200);
 
-        add(jScrollPane1);
-        jScrollPane1.setBounds(10, 70, 760, 278);
+        cPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 90, 760, 278);
 
         cRefreshItem.setText("Refresh");
         cRefreshItem.addActionListener(new java.awt.event.ActionListener() {
@@ -180,8 +232,8 @@ public class ItemListUi extends TabPanelUI   {
                 cRefreshItemActionPerformed(evt);
             }
         });
-        add(cRefreshItem);
-        cRefreshItem.setBounds(350, 360, 121, 49);
+        cPanel1.add(cRefreshItem);
+        cRefreshItem.setBounds(360, 380, 121, 49);
 
         cDeleteItemBtn.setText("Delete");
         cDeleteItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -189,8 +241,8 @@ public class ItemListUi extends TabPanelUI   {
                 cDeleteItemBtnActionPerformed(evt);
             }
         });
-        add(cDeleteItemBtn);
-        cDeleteItemBtn.setBounds(210, 360, 121, 49);
+        cPanel1.add(cDeleteItemBtn);
+        cDeleteItemBtn.setBounds(220, 380, 121, 49);
 
         cClose.setText("Close");
         cClose.addActionListener(new java.awt.event.ActionListener() {
@@ -198,8 +250,8 @@ public class ItemListUi extends TabPanelUI   {
                 cCloseActionPerformed(evt);
             }
         });
-        add(cClose);
-        cClose.setBounds(610, 360, 110, 50);
+        cPanel1.add(cClose);
+        cClose.setBounds(620, 380, 110, 50);
 
         cNewItemBtn.setText("New ");
         cNewItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -207,26 +259,46 @@ public class ItemListUi extends TabPanelUI   {
                 cNewItemBtnActionPerformed(evt);
             }
         });
-        add(cNewItemBtn);
-        cNewItemBtn.setBounds(70, 360, 121, 49);
+        cPanel1.add(cNewItemBtn);
+        cNewItemBtn.setBounds(80, 380, 121, 49);
 
         cButton1.setText("<");
-        add(cButton1);
-        cButton1.setBounds(270, 40, 41, 23);
+        cButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton1ActionPerformed(evt);
+            }
+        });
+        cPanel1.add(cButton1);
+        cButton1.setBounds(280, 60, 41, 23);
 
         cButton2.setText("<<");
-        add(cButton2);
-        cButton2.setBounds(210, 40, 49, 23);
+        cButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton2ActionPerformed(evt);
+            }
+        });
+        cPanel1.add(cButton2);
+        cButton2.setBounds(220, 60, 49, 23);
 
         cButton3.setText(">>");
-        add(cButton3);
-        cButton3.setBounds(470, 40, 49, 23);
+        cButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton3ActionPerformed(evt);
+            }
+        });
+        cPanel1.add(cButton3);
+        cButton3.setBounds(480, 60, 49, 23);
 
         cButton4.setText(">");
-        add(cButton4);
-        cButton4.setBounds(420, 40, 41, 23);
-        add(cTextFieldPopUp1);
-        cTextFieldPopUp1.setBounds(320, 40, 90, 20);
+        cButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton4ActionPerformed(evt);
+            }
+        });
+        cPanel1.add(cButton4);
+        cButton4.setBounds(430, 60, 41, 23);
+        cPanel1.add(cPageCount);
+        cPageCount.setBounds(330, 60, 90, 20);
 
         cCopyItem.setText("Copy");
         cCopyItem.addActionListener(new java.awt.event.ActionListener() {
@@ -234,14 +306,17 @@ public class ItemListUi extends TabPanelUI   {
                 cCopyItemActionPerformed(evt);
             }
         });
-        add(cCopyItem);
-        cCopyItem.setBounds(490, 360, 110, 50);
+        cPanel1.add(cCopyItem);
+        cCopyItem.setBounds(500, 380, 110, 50);
+
+        add(cPanel1);
+        cPanel1.setBounds(0, 0, 790, 480);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cRefreshItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cRefreshItemActionPerformed
         //refresh the item list and reinsert item tabl list...
          try {
-        loadItemList2Tbl();  
+        loadItemList2Tbl(0,getDynamicQuery());  
         } catch (Exception e) {
         e.printStackTrace();
         }
@@ -290,14 +365,14 @@ public class ItemListUi extends TabPanelUI   {
         }
     }//GEN-LAST:event_cCloseActionPerformed
 
-    private void cItmcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cItmcodeActionPerformed
+    private void cItmDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cItmDescriptionActionPerformed
         // TODO add your handling code here:
          try {
           
         } catch (Exception e) {
         e.printStackTrace();
         }
-    }//GEN-LAST:event_cItmcodeActionPerformed
+    }//GEN-LAST:event_cItmDescriptionActionPerformed
 
     private void cNewItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNewItemBtnActionPerformed
       //calling item master form...
@@ -311,14 +386,17 @@ public class ItemListUi extends TabPanelUI   {
     private void tblItemListKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblItemListKeyTyped
       if(evt.getKeyChar()==KeyEvent.VK_ENTER){
       
-   String itemid=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
-   callItemByCode(itemid);
+   String itemCode=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
+   callItemByCode(itemCode);
    
       }
     }//GEN-LAST:event_tblItemListKeyTyped
 
     private void cCopyItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCopyItemActionPerformed
             try {
+                if(tblItemList.getRowCount()==0){
+                return;
+                }
       String itemid=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
           if(itemid==null || itemid.equals("")){
            MessageBoxes.wrnmsg(null,"Please Select an Item.","Empty Item");                 
@@ -350,6 +428,68 @@ public class ItemListUi extends TabPanelUI   {
         }
     }//GEN-LAST:event_cCopyItemActionPerformed
 
+    private void cButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton4ActionPerformed
+     
+       TableUtil.cleardata(tblItemList); 
+   currentPageNo+=1;  
+   
+   
+   if(currentPageNo>pageCount()){
+  currentPageNo=pageCount();
+        
+   }
+        loadItemList2Tbl(currentPageNo,getDynamicQuery());
+          cPageCount.setText(""+currentPageNo+" OF "+pageCount());
+    }//GEN-LAST:event_cButton4ActionPerformed
+
+    private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
+      TableUtil.cleardata(tblItemList); 
+   currentPageNo-=1; 
+   
+   if(currentPageNo<0){
+  currentPageNo=0;
+        
+   }
+   
+        loadItemList2Tbl(currentPageNo,getDynamicQuery());
+          cPageCount.setText(""+currentPageNo+" OF "+pageCount());
+    }//GEN-LAST:event_cButton1ActionPerformed
+
+    private void cButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton3ActionPerformed
+      
+     TableUtil.cleardata(tblItemList); 
+   currentPageNo=pageCount();      
+        loadItemList2Tbl(currentPageNo,getDynamicQuery());
+          cPageCount.setText(""+currentPageNo+" OF "+pageCount());
+    }//GEN-LAST:event_cButton3ActionPerformed
+
+    private void cButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton2ActionPerformed
+    
+     TableUtil.cleardata(tblItemList); 
+   currentPageNo=0;      
+        loadItemList2Tbl(currentPageNo,getDynamicQuery());
+          cPageCount.setText(""+currentPageNo+" OF "+pageCount());
+    }//GEN-LAST:event_cButton2ActionPerformed
+
+    private void cItmDescriptionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cItmDescriptionKeyTyped
+        
+               loadItemList2Tbl(currentPageNo,getDynamicQuery());
+
+    }//GEN-LAST:event_cItmDescriptionKeyTyped
+
+    private void tblItemListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblItemListMouseClicked
+        try {
+         if(evt.getClickCount()==2){  
+             
+   String itemCode=(String) tblItemList.getValueAt(tblItemList.getSelectedRow(),0);
+   callItemByCode(itemCode);
+        
+         }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_tblItemListMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CButton cButton1;
     private org.components.controls.CButton cButton2;
@@ -358,10 +498,11 @@ public class ItemListUi extends TabPanelUI   {
     private org.components.controls.CButton cClose;
     private org.components.controls.CButton cCopyItem;
     private org.components.controls.CButton cDeleteItemBtn;
-    private org.components.controls.CTextField cItmcode;
+    private org.components.controls.CTextField cItmDescription;
     private org.components.controls.CButton cNewItemBtn;
+    private org.components.controls.CTextFieldPopUp cPageCount;
+    private org.components.containers.CPanel cPanel1;
     private org.components.controls.CButton cRefreshItem;
-    private org.components.controls.CTextFieldPopUp cTextFieldPopUp1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.components.controls.CxTable tblItemList;

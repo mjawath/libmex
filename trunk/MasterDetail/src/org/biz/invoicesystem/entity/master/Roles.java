@@ -23,6 +23,8 @@ public class Roles implements Serializable {
      @Id
      private String id;
  
+     private String shopName;
+     
     private String rolename;
   
    @Temporal(TemporalType.DATE)
@@ -65,6 +67,20 @@ public class Roles implements Serializable {
     @Override
     public String toString() {
         return "org.biz.invoicesystem.entity.master.Roles[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the shopName
+     */
+    public String getShopName() {
+        return shopName;
+    }
+
+    /**
+     * @param shopName the shopName to set
+     */
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
     
 }

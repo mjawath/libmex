@@ -6,12 +6,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 
@@ -31,7 +28,7 @@ public class Item implements Serializable {
     
     private String unitOne; //like bags...dozens...boxes..
     
-    private int different; //unit diferents like 50packets=1 bag...
+    private Integer different; //unit diferents like 50packets=1 bag...
             
     private String unitTwo; //like pcs ..packets...
     //item has many mariation
@@ -334,20 +331,7 @@ public class Item implements Serializable {
         this.wholesalePrice = wholesalePrice;
     }
 
-    /**
-     * @return the different
-     */
-    public int getDifferent() {
-        return different;
-    }
-
-    /**
-     * @param different the different to set
-     */
-    public void setDifferent(int different) {
-        this.different = different;
-    }
-
+  
     public Double getCommission() {
         return commission;
     }
@@ -464,6 +448,20 @@ public class Item implements Serializable {
 
     public void setBarcodes(List<ItemBarcode> barcodes) {
         this.barcodes = barcodes;
+    }
+
+    /**
+     * @return the different
+     */
+    public Integer getDifferent() {
+        return different;
+    }
+
+    /**
+     * @param different the different to set
+     */
+    public void setDifferent(Integer different) {
+        this.different = different;
     }
  
     

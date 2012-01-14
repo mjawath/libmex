@@ -2,6 +2,9 @@
 package org.biz.invoicesystem.master.ui;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.biz.app.ui.util.MessageBoxes;
@@ -11,10 +14,7 @@ import org.biz.invoicesystem.entity.master.Supplier;
 import org.biz.invoicesystem.service.master.SupplierService;
 import org.components.windows.TabPanelUI;
 
-/**
- *
- * @author Administrator
- */
+ 
 public class SupplerMasterUI extends TabPanelUI {
 
     SupplierService supplierService;
@@ -22,6 +22,8 @@ public class SupplerMasterUI extends TabPanelUI {
     
     public SupplerMasterUI() {
         initComponents();
+        init();
+        
     }
 public void init(){
     try {
@@ -29,8 +31,38 @@ public void init(){
         
     
     } catch (Exception e) {
+        e.printStackTrace();
     }
 }
+
+///////////////////////////////////////////////////////
+public void loadComboBoxData(){
+
+    try {
+        List<Object[]> lstOfArray= supplierService.getDao().loadComboItems();  
+     
+     //list of array retuns String array  
+      //object is String array....
+     
+      Set<String> types=new TreeSet<String>();
+      Set<String> titles=new TreeSet<String>();
+      
+       for (Object[] ss : lstOfArray) {
+               String type=(String) ss[0];
+               types.add(type);
+               
+               String title=(String) ss[1];
+               titles.add(title);
+            }
+       uiEty.loadcombo(tSuppType, types); 
+      uiEty.loadcombo(tSuppTitle, titles); 
+//     
+      
+    } catch (Exception e) {
+    e.printStackTrace();}
+
+}
+///////////////////////////////////////////////////
 
 public Supplier uiToEntity(Supplier s)throws Exception{
     try { 
@@ -179,15 +211,20 @@ public void clear(){
         add(tSuppTitle);
         tSuppTitle.setBounds(260, 40, 63, 23);
         add(cSuppDob);
-        cSuppDob.setBounds(610, 40, 106, 22);
+        cSuppDob.setBounds(610, 40, 116, 22);
 
         cLabel5.setText("DOB");
         add(cLabel5);
         cLabel5.setBounds(610, 10, 110, 25);
 
-        cClose.setText("Close");
+        cClose.setText("Go to List");
+        cClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cCloseActionPerformed(evt);
+            }
+        });
         add(cClose);
-        cClose.setBounds(230, 210, 59, 40);
+        cClose.setBounds(230, 210, 80, 40);
 
         cSave.setText("Save");
         cSave.addActionListener(new java.awt.event.ActionListener() {
@@ -199,6 +236,11 @@ public void clear(){
         cSave.setBounds(40, 210, 57, 40);
 
         cClear.setText("Clear");
+        cClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cClearActionPerformed(evt);
+            }
+        });
         add(cClear);
         cClear.setBounds(100, 210, 57, 40);
 
@@ -301,7 +343,7 @@ public void clear(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void tSuppNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tSuppNameActionPerformed
-        // TODO add your handling code here:
+        
 }//GEN-LAST:event_tSuppNameActionPerformed
 
     private void cSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSaveActionPerformed
@@ -327,7 +369,9 @@ public void clear(){
           s.setId(exist.getId());
      supplierService.getDao().update(s);
       
-       }
+       }else{
+          return;
+      }
     }         
       //updating customers       
    clear();
@@ -374,7 +418,11 @@ public void clear(){
 
     private void cDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cDeleteActionPerformed
        try {
-           
+       
+       if(uiEty.tcToStr(tSuppId)==null || uiEty.tcToStr(tSuppId).equals("")){
+           MessageBoxes.wrnmsg(null,"Please Type Customer Code","Empty Customer Code");                 
+                return;
+           }       
       //delete the selected customer...     
       Supplier s=uiToEntity(new Supplier());//from ui....
      Supplier exist=supplierService.getDao().findSupplierByCode(s.getCode());
@@ -397,6 +445,18 @@ public void clear(){
         MessageBoxes.errormsg(null, e.getMessage(), "Error");
         }
     }//GEN-LAST:event_cDeleteActionPerformed
+
+    private void cClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cClearActionPerformed
+        try {
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_cClearActionPerformed
+
+    private void cCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCloseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cCloseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CButton cClear;

@@ -5,6 +5,7 @@
 
 package org.biz.invoicesystem.dao.master;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.biz.dao.service.GenericDAO;
 import org.biz.invoicesystem.entity.master.Supplier;
@@ -23,7 +24,7 @@ public class SupplierDAO extends GenericDAO<Supplier>{
      Supplier i=null;
         try { 
 //ExecuteQuery("");
-    
+           
    List<Supplier> lst=ExecuteQuery("select i from Supplier i Where i.code= '"+suppliercode+"'");
             for (Supplier c : lst) {
            i=c;     
@@ -37,6 +38,20 @@ public class SupplierDAO extends GenericDAO<Supplier>{
         }
            
    return i;      
+    }
+ 
+ public List loadComboItems(){
+    
+    List lst=new ArrayList<Object>();
+    //   EntityManager em=createEmNew();
+        try {
+    lst=ExecuteQuery("select  s.type ,s.title From Supplier s ");      
+     
+            System.out.println("lst size "+lst.size());                 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    return lst;
     }
 
 }
