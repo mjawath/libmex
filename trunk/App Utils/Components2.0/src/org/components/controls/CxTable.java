@@ -11,11 +11,15 @@
 
 package org.components.controls;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
+import javax.swing.JTable;
 import javax.swing.KeyStroke;
+import javax.swing.table.DefaultTableCellRenderer;
 import org.components.parent.controls.PxTable;
 
 /**
@@ -38,9 +42,15 @@ public class CxTable extends PxTable {
         // so we can imlplement our own way of navigation 
         this.registerKeyboardAction(al, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 //        this.registerKeyboardAction(al, KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    
+      this.setDefaultRenderer(String.class, new CustomRenderer());
+      this.setDefaultRenderer(Double.class, new CustomRenderer());
+      this.setDefaultRenderer(Object.class, new CustomRenderer());
     }
 
+     public boolean validateRow() {
+     return true;
+     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -68,25 +78,37 @@ public class CxTable extends PxTable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    protected void processKeyEvent(KeyEvent e) {
-        super.processKeyEvent(e);
-        
-    }
     
-    
-    public boolean  validateChangeSelection(){
-        
-        return true;
-    }
- 
-    
-
     @Override
     public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
- 
-//        if(validateChangeSelection()){
+//        if(getCurSelectedRow()==rowIndex || validateRow()){
         super.changeSelection(rowIndex, columnIndex, toggle, extend);
+//        setCurSelectedRow(rowIndex);
 //        }
     }
+    int curSelectedRow=-1;
+
+    public int getCurSelectedRow() {
+        return curSelectedRow;
+    }
+
+    public void setCurSelectedRow(int curSelectedRow) {
+        this.curSelectedRow = curSelectedRow;
+    }
+    
+    class CustomRenderer extends DefaultTableCellRenderer {
+
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        if (isSelected && hasFocus) {
+            c.setBackground(Color.red);
+        }
+
+
+        // Formatting
+        return c;
+    }
+}
+    
+    
 }

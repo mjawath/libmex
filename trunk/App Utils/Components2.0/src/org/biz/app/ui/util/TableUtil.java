@@ -16,6 +16,11 @@ import javax.swing.table.DefaultTableModel;
 public class TableUtil {
 
     public final static String newRowID= "cxMxCy%%76";
+    
+    public static String getNewRowId(){
+    return System.currentTimeMillis()+""+Math.random();
+    }
+    
     public static void createTableModel(JTable jTable, String[] columns, final Class[] columntypes) {
 
         DefaultTableModel dtm = new DefaultTableModel(

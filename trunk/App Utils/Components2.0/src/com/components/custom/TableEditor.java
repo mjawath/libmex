@@ -9,7 +9,6 @@ import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -25,8 +24,7 @@ public class TableEditor extends AbstractCellEditor
     // This method is called when a cell value is edited by the user.
     public TableEditor(PagedPopUpPanel popUpComponent, JTable tbl) {
         this.popUpComponent = popUpComponent;
-        this.masterTbl = tbl;
-        init();
+        init(tbl);
 
     }
 
@@ -49,12 +47,11 @@ public class TableEditor extends AbstractCellEditor
         if (isValide()) {
             System.out.println("===============");
             int selcol = masterTbl.getSelectedColumn();
-            int selrow = masterTbl.getSelectedRow();
-            TableColumn tc = masterTbl.getColumnModel().getColumn(selcol);
+            int selrow = masterTbl.getSelectedRow();            
             b = super.stopCellEditing();
-
-            masterTbl.changeSelection(selrow, selcol + 1, true, true);
-
+            selcol+=1;
+            masterTbl.changeSelection(selrow, selcol, true, true);
+//      masterTbl.getColumnModel().getColumn(selcol). 
         }
         return b;
     }
@@ -63,8 +60,10 @@ public class TableEditor extends AbstractCellEditor
         return true;
     }
 
-    public TableEditor() {
-        init();
+    
+    public TableEditor(JTable jt) {
+        init(jt);
+        
 
     }
 
@@ -73,16 +72,21 @@ public class TableEditor extends AbstractCellEditor
         return true;
     }
 
-    private void init() {
+    private void init(JTable jt) {
 
 
         component = new JTextField();
+        masterTbl=jt;
+        
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
-
+if(!isSelected){
+return null;
+}
+     
 
         // Configure the component with the specified value
         ((JTextField) component).setText((String) value);
