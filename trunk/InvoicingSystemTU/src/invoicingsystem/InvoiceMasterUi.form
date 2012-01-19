@@ -219,7 +219,7 @@
     <Container class="org.components.containers.CPanel" name="cPanel2">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="11" width="240" height="110"/>
+          <AbsoluteConstraints x="0" y="11" width="240" height="120"/>
         </Constraint>
       </Constraints>
 
@@ -356,7 +356,7 @@
     <Container class="org.components.containers.CPanel" name="cPanel3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="490" y="10" width="180" height="110"/>
+          <AbsoluteConstraints x="500" y="10" width="170" height="110"/>
         </Constraint>
       </Constraints>
 
@@ -639,5 +639,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="org.components.controls.CButton" name="cButton1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cButton1ActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="400" y="420" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
   </SubComponents>
 </Form>
