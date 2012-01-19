@@ -20,7 +20,6 @@
     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
     </Property>
-    <Property name="terminateEditOnFocusLost" type="boolean" value="false"/>
   </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
