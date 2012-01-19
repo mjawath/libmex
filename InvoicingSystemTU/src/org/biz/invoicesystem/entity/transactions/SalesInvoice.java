@@ -23,8 +23,7 @@ import org.biz.invoicesystem.entity.master.Customer;
 @Entity
 public class SalesInvoice implements Serializable   {
     @Id
-    private String id;
-
+    private String id;//timestamp + random string + domain level generated string 
     private static final long serialVersionUID = 1L;
     @ManyToOne
     Customer customer;
@@ -37,7 +36,7 @@ public class SalesInvoice implements Serializable   {
     Date docdate;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date saveddate;
-
+    
     public Customer getCustomer() {
         return customer;
     }

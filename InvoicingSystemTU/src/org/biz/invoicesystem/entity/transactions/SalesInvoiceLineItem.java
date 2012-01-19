@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import org.biz.invoicesystem.entity.master.Item;
-import org.biz.invoicesystem.entity.master.UOM;
 
 /**
  *
@@ -22,9 +21,8 @@ public class SalesInvoiceLineItem implements Serializable  {
     private String description;
     @OneToOne
     private Item item;
-    private Long qty;
-    @OneToOne
-    private UOM uom;
+    private Double qty;
+    private String unit;
     private Double price;
     private Double lineAmount;
 
@@ -48,13 +46,7 @@ public class SalesInvoiceLineItem implements Serializable  {
         this.price = price;
     }
 
-    public void setUom(UOM uom) {
-        this.uom = uom;
-    }
-
-    public void setQty(Long qty) {
-        this.qty = qty;
-    }
+    
 
     public void setLineAmount(Double lineAmount) {
         this.lineAmount = lineAmount;
@@ -64,13 +56,7 @@ public class SalesInvoiceLineItem implements Serializable  {
         this.description = description;
     }
 
-    public UOM getUom() {
-        return uom;
-    }
-
-    public Long getQty() {
-        return qty;
-    }
+  
 
     public Double getPrice() {
         return price;
@@ -82,6 +68,22 @@ public class SalesInvoiceLineItem implements Serializable  {
 
     public String getDescription() {
         return description;
+    }
+
+    public Double getQty() {
+        return qty;
+    }
+
+    public void setQty(Double qty) {
+        this.qty = qty;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     

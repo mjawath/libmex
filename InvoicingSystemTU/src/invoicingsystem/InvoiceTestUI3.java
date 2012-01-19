@@ -10,6 +10,7 @@
  */
 package invoicingsystem;
 
+import com.components.custom.PagedPopUpPanel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
@@ -23,7 +24,7 @@ import org.components.windows.TabPanelUI;
  * @author user
  */
 public class InvoiceTestUI3 extends TabPanelUI {
-     DetailPopUpPanel detailPopUpPanel;
+     PagedPopUpPanel detailPopUpPanel;
     /** Creates new form InvoiceTestUI */
     public InvoiceTestUI3() {
         initComponents();
