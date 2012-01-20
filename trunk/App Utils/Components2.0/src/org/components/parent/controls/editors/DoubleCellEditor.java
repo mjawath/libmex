@@ -35,20 +35,16 @@ public class DoubleCellEditor extends AbstractCellEditor
 
         boolean b = false;
         if (isValide()) {
-            int selcol = getTbl().getSelectedColumn();
-            int selrow = getTbl().getSelectedRow();
             b = super.stopCellEditing();
 //            getTbl().changeSelection(selrow, selcol + 1, true, true);
-                System.out.println("col" + selcol);
         }
         return b;
     }
 
     @Override
     public boolean isCellEditable(EventObject e) {
-        System.out.println(e);
         return super.isCellEditable(e);
-        
+
     }
 
     public DoubleCellEditor(JTable jt) {
@@ -80,12 +76,13 @@ public class DoubleCellEditor extends AbstractCellEditor
 
             @Override
             public void editingStopped(ChangeEvent e) {
-            boolean b = false;
+                boolean b = false;
 //        if (isCellValid()) {
-            int selcol = tbl.getSelectedColumn();
-            int selrow = tbl.getSelectedRow();
+                int selcol = tbl.getSelectedColumn();
+                int selrow = tbl.getSelectedRow();
+                System.out.println("editing stped sel col   "+selcol);
 //            b = super.stopCellEditing();
-            tbl.changeSelection(selrow, selcol + 1, true, true);
+                tbl.changeSelection(selrow, selcol + 1, true, true);
 
 //        }/
 //        return b;
@@ -93,7 +90,6 @@ public class DoubleCellEditor extends AbstractCellEditor
 
             @Override
             public void editingCanceled(ChangeEvent e) {
-           
             }
         });
     }
@@ -104,9 +100,7 @@ public class DoubleCellEditor extends AbstractCellEditor
 
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
-         if(!isSelected){
-return null;
-}
+      
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
         System.out.println("vlaue " + value);
         // Configure the component with the specified value
