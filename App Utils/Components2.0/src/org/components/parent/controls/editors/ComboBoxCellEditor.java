@@ -6,6 +6,8 @@ package org.components.parent.controls.editors;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultComboBoxModel;
@@ -64,16 +66,16 @@ public class ComboBoxCellEditor extends AbstractCellEditor
     }
 
     public ComboBoxCellEditor(JTable tbl) {
- init();
+            init();
 //        super(new JComboBox());
 //        component = (JComboBox) getComponent();
 //        component.setEditable(true);
         component.setModel(new DefaultComboBoxModel(new Object[]{"150", "250", "3650"}));
       //  component.getEditor().addActionListener(new AbstractAction() {
-    component.addActionListener(new AbstractAction() {
+        component.addActionListener(new AbstractAction() {
 
             public void actionPerformed(ActionEvent e) {
-                stopCellEditing();
+//                stopCellEditing();
 
             }
         });
@@ -97,8 +99,16 @@ public class ComboBoxCellEditor extends AbstractCellEditor
 //                stopCellEditing();
 //            }
 //        });
-        
-       
+        component.setEditable(true);
+        component.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                    stopCellEditing();
+                }
+            }
+        });
         addCellEditorListener(new CellEditorListener() {
 
             @Override
@@ -109,7 +119,7 @@ public class ComboBoxCellEditor extends AbstractCellEditor
                 int selrow = tbl.getSelectedRow();
 //            b = super.stopCellEditing();
                 tbl.changeSelection(selrow, selcol+1, true, true);
-tbl.revalidate();
+//tbl.revalidate();
 //         }/
 //        return b;
             }
