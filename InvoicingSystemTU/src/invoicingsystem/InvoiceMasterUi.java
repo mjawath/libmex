@@ -6,24 +6,27 @@
  */
 package invoicingsystem;
 
-import javax.swing.event.ChangeEvent;
-import org.components.parent.controls.editors.ComboBoxCellEditor;
 import com.components.custom.PagedPopUpPanel;
 import com.components.custom.TableEditor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.AbstractAction;
 import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.plaf.basic.BasicTreeUI.CellEditorHandler;
+import javax.swing.table.TableCellEditor;
 import org.biz.app.ui.util.TableUtil;
 import org.biz.app.ui.util.uiEty;
 import org.biz.invoicesystem.entity.master.Customer;
@@ -32,6 +35,7 @@ import org.biz.invoicesystem.entity.transactions.SalesInvoice;
 import org.biz.invoicesystem.entity.transactions.SalesInvoiceLineItem;
 import org.biz.invoicesystem.service.master.CustomerService;
 import org.biz.invoicesystem.service.master.ItemService;
+import org.components.parent.controls.editors.ComboBoxCellEditor;
 import org.components.parent.controls.editors.DoubleCellEditor;
 import org.components.windows.TabPanelUI;
 
@@ -71,10 +75,9 @@ public class InvoiceMasterUi extends TabPanelUI {
     @Override
     public void init() {
 //        System.out.println("yyyyyy");
-JTable jt= new JTable(){
-
-            @Override
-            public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
+            JTable jt= new JTable(){
+                @Override
+                public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
                 if(validateRow()){
                 super.changeSelection(rowIndex, columnIndex, toggle, extend);
                 }
@@ -106,33 +109,42 @@ JTable jt= new JTable(){
                 return new Object[]{it.getId(), it.getCode(), it.getDescription()};
             }
         };
-        tblInvoice.getColumnModel().getColumn(0).setCellEditor(tb);
-//        tblInvoice.getColumnModel().getColumn().setCellEditor(tb);
-         
-        
-        tblInvoice.getColumnModel().getColumn(1).setCellEditor(ed);
-        tblInvoice.getColumnModel().getColumn(3).setCellEditor(new DoubleCellEditor(tblInvoice));
-        tblInvoice.getColumnModel().getColumn(4).setCellEditor(new ComboBoxCellEditor(tblInvoice));
-        tblInvoice.getColumnModel().getColumn(5).setCellEditor(new DoubleCellEditor(tblInvoice));
-        de = new DoubleCellEditor(tblInvoice) {
-
-            @Override
-            public boolean isValide() {
-                SalesInvoiceLineItem sl = rowToEty();
-                if (sl != null) {
-                    return true;
-                }
-                return false;
-            }
-        };
-        tblInvoice.getColumnModel().getColumn(6).setCellEditor(de);
-        de.getComponent().addActionListener(new ActionListener() {
+        JTextField tf= new JTextField();
+         de= new DefaultCellEditor(tf);
+         tf.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                de.stopCellEditing();
+           de.stopCellEditing();
+                int selcol = tblInvoice.getSelectedColumn();
+                int selrow = tblInvoice.getSelectedRow();
+                System.out.println("editing stped sel col   "+selcol);
+//            b = super.stopCellEditing();
+                tblInvoice.changeSelection(selrow, selcol + 1, false, false);
+//                tblInvoice.revalidate();
+
             }
         });
+         
+         de.addCellEditorListener(new CellEditorListener() {
 
+            public void editingStopped(ChangeEvent e) {
+            
+
+                
+            }
+
+            public void editingCanceled(ChangeEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+        tblInvoice.getColumnModel().getColumn(2).setCellEditor(de);      
+        tblInvoice.getColumnModel().getColumn(3).setCellEditor(de);      
+        tblInvoice.getColumnModel().getColumn(4).setCellEditor(de);      
+//        tblInvoice.getColumnModel().getColumn(4).setCellEditor(new DoubleCellEditor(tblInvoice));      
+        tblInvoice.getColumnModel().getColumn(5).setCellEditor(new DoubleCellEditor(tblInvoice));      
+        tblInvoice.getColumnModel().getColumn(6).setCellEditor(new DoubleCellEditor(tblInvoice));      
+
+        
         custService = new CustomerService();
         listCust = custService.getDao().getAll();
 //                //ADD this list to popup
@@ -176,7 +188,8 @@ JTable jt= new JTable(){
         });
         setnewrow();
     }
-    DoubleCellEditor de;
+    TableCellEditor de;
+//    DoubleCellEditor de;
     PagedPopUpPanel cuspop;
     CustomerService custService;
     ItemService itemService;
