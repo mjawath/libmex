@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 /**
  *
@@ -338,5 +339,10 @@ public class TableUtil {
             }
         }
 
+    }
+
+    public static void setColumnEditor(JTable tb,int col,TableCellEditor ed) {
+        tb.getColumnModel().getColumn(col).setCellEditor(ed);
+        
     }
 }
