@@ -4,50 +4,58 @@
  */
 package org.components.parent.controls.editors;
 
+import com.components.custom.PagedPopUpPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellEditor;
-import org.biz.app.ui.util.ComponentFactory;
 import org.biz.app.ui.util.TableUtil;
 
 /**
  *
  * @author nnjj
  */
-public class DoubleCellEditor extends AbstractCellEditor
+public class TablePopUpCellEditor extends AbstractCellEditor
         implements TableCellEditor {
 
+    private JTable tbl;
+    PagedPopUpPanel popUpComponent;
     JTextField component;
-    JTable tbl;
+
     // This method is called when a cell value is edited by the user.
+    public TablePopUpCellEditor(PagedPopUpPanel popUpComponent, JTable tbl) {
+        this.popUpComponent = popUpComponent;
+        init(tbl);
+
+    }
 
     @Override
     public boolean stopCellEditing() {
         boolean b = false;
         if (isCellValid()) {
-
+            
             b = super.stopCellEditing();
+            
         }
         return b;
     }
 
-    public DoubleCellEditor(JTable jt) {
+    public boolean isCellValid() {
+        return true;
+    }
+
+    public TablePopUpCellEditor(JTable jt) {
         init(jt);
 
+
     }
 
-    public JTable getTbl() {
-        return tbl;
-    }
+    public boolean validateCell() {
 
-    public void setTbl(JTable tbl) {
-        this.tbl = tbl;
+        return true;
     }
 
     private void init(JTable jt) {
@@ -55,7 +63,7 @@ public class DoubleCellEditor extends AbstractCellEditor
 
         tbl = jt;
         component = new JTextField();
-        ComponentFactory.createDoubleTextField(component);
+
         component.addActionListener(new AbstractAction() {
 
             public void actionPerformed(ActionEvent e) {
@@ -67,9 +75,9 @@ public class DoubleCellEditor extends AbstractCellEditor
                 int rowcount = tbl.getRowCount();
 
                 boolean ab = action();//Action will return true if it need new row or 
-                if (((rowcount-1 )==selrow) && ab) {              //false normal selection           
-                    TableUtil.addrow(tbl, new Object[]{});                    
-                    tbl.changeSelection(selrow+1, 1, false, false);
+                if (((rowcount - 1) == selrow) && ab) {              //false normal selection           
+                    TableUtil.addrow(tbl, new Object[]{});
+                    tbl.changeSelection(selrow + 1, 1, false, false);
                 } else {
                     selcol = (colcount - 1) == selcol ? selcol : ++selcol;
                     tbl.changeSelection(selrow, selcol, false, false);
@@ -84,19 +92,18 @@ public class DoubleCellEditor extends AbstractCellEditor
 
     }
 
-    public boolean isCellValid() {
-        return true;
-    }
-
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
-
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
-        System.out.println("vlaue " + value);
+        if (!isSelected) {
+            return null;
+        }
         // Configure the component with the specified value
-        ((JTextField) component).setText("" + value);
-        ((JTextField) component).selectAll();
+        if (value != null) {
+            ((JTextField) component).setText("" + value);
+            ((JTextField) component).selectAll();
 
+        }
         // Return the configured component
         return component;
     }
@@ -104,15 +111,24 @@ public class DoubleCellEditor extends AbstractCellEditor
     // This method is called when editing is completed.
     // It must return the new value to be stored in the cell.
     public Object getCellEditorValue() {
-        String s = ((JTextField) component).getText();
-        if (!"".equals(s)) {
-            Double dd = new Double((s));
-            return dd;
-        }
-        return null;
+        return ((JTextField) component).getText();
     }
 
     public JTextField getComponent() {
         return component;
+    }
+
+    /**
+     * @return the masterTbl
+     */
+    public JTable getMasterTbl() {
+        return tbl;
+    }
+
+    /**
+     * @param masterTbl the masterTbl to set
+     */
+    public void setMasterTbl(JTable masterTbl) {
+        this.tbl = masterTbl;
     }
 }

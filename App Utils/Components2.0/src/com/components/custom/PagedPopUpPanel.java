@@ -23,6 +23,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.biz.app.ui.util.TableUtil;
 import org.components.controls.CPopupMenu;
+import org.components.parent.controls.editors.TablePopUpCellEditor;
 
 /**
  *
@@ -32,16 +33,16 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
 
     JTable tbl;
     JTextField textField;
-    TableEditor editor;
-    int selectedColumn=0;
+    TablePopUpCellEditor editor;
+    int selectedColumn = 0;
     String pageKey;
 
     /** Creates new form Detail */
-    public PagedPopUpPanel(JTable tb, TableEditor field) {
+    public PagedPopUpPanel(JTable tb, TablePopUpCellEditor field) {
         initComponents();
         tbl = tb;
-        editor =field;
-        textField = field.getComponent();    
+        editor = field;
+        textField = field.getComponent();
         editor.setMasterTbl(tbl);
         init();
     }
@@ -49,12 +50,12 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
     public PagedPopUpPanel(JTextField field) {
         initComponents();
         textField = field;
- 
+
 //        this.requestFocusInWindow();
 //        cTextField1.requestFocus();
-    
-      
-     
+
+
+
         init();
 
     }
@@ -67,30 +68,30 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
 
     public void showPopUp() {
         try {
-          if (!jpm.isVisible()) {
-            jpm.setLocation(252, 300);
-            jpm.setFocusable(false);
-            jpm.show(textField, 30, 30);
-            jpm.setFocusable(true);
+            if (!jpm.isVisible()) {
+                jpm.setLocation(252, 300);
+                jpm.setFocusable(false);
+                jpm.show(textField, 30, 30);
+                jpm.setFocusable(true);
 //              this.setFocusable(true);            
 //              tbl.setFocusable(true);
-            this.setVisible(true);
-            jpm.setVisible(true);
-        }  
+                this.setVisible(true);
+                jpm.setVisible(true);
+            }
         } catch (Exception e) {
-            
-            System.out.println(" --------------   "+e.getMessage());                   
+
+            System.out.println(" --------------   " + e.getMessage());
         }
-        
+
 
     }
 
-    public void init() { 
-   
-       jpm = new CPopupMenu();
+    public void init() {
+
+        jpm = new CPopupMenu();
         jpm.add(this);
-        this.setSize(600, 300);         
-          jpm.setSize(200, 200);
+        this.setSize(600, 300);
+        jpm.setSize(200, 200);
 //        this.requestFocusInWindow();
 //        cTextField1.requestFocus();
         jpm.setFocusable(false);
@@ -98,23 +99,22 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
 
             @Override
             public void focusLost(FocusEvent e) {
-                
-            closePopup();
+
+                closePopup();
             }
-        
         });
         textField.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyPressed(KeyEvent e) {
 
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {       
-                           getSeletedValue();
-                           if(editor!=null){
-                           editor.stopCellEditing();      
-                           }
-                           //move table selection
-                           
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    getSeletedValue();
+                    if (editor != null) {
+                        editor.getComponent().postActionEvent();
+                    }
+                    //move table selection
+
                     e.consume();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -127,17 +127,17 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         textField.getDocument().addDocumentListener(new DocumentListener() {
 
             public void insertUpdate(DocumentEvent e) {
-               search(textField.getText());             
-               showPopUp();
+                search(textField.getText());
+                showPopUp();
             }
 
             public void removeUpdate(DocumentEvent e) {
                 search(textField.getText());
-               showPopUp();
+                showPopUp();
             }
 
             public void changedUpdate(DocumentEvent e) {
@@ -145,13 +145,13 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
                 showPopUp();
             }
         });
-        
-        
+
+
     }
 //serach sort filter cache and within the cache we we do 
     //we find our entity
-    public void search(String qry) {
 
+    public void search(String qry) {
     }
 
     public void getSeletedValue() {
@@ -223,29 +223,32 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void selectItem() {
-      
-        Object ob = TableUtil.getSelectedModelsValueAt(cxTable1, selectedColumn);        
-        if(textField instanceof JTextField){
-        textField.setText(ob.toString());
+
+        Object ob = TableUtil.getSelectedModelsValueAt(cxTable1, selectedColumn);
+        if (textField instanceof JTextField) {
+            textField.setText(ob.toString());
         }
-        closePopup(); 
+        closePopup();
         action();
     }
-       
+
     public void closePopup() {
         if (jpm.isVisible()) {
             jpm.setVisible(false);
         }
     }
-    public  void action(){
-        
+
+    public void action() {
+
         System.out.println("action implemented ......");
-    };        
+    }
+
+    ;        
         
     public void setObjectToTable(List lst) {
         addToTable(lst);
     }
-     
+
     public void addToTable(List items) {
         TableUtil.cleardata(cxTable1);
         if (items == null || items.isEmpty()) {
@@ -258,10 +261,10 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
     }
 
     public void addToTable(Object item) {
-        TableUtil.addrow(cxTable1, data(item) );
+        TableUtil.addrow(cxTable1, data(item));
     }
 
-    public Object[] data(Object item){
-    return null;
+    public Object[] data(Object item) {
+        return null;
     }
 }

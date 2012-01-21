@@ -8,7 +8,6 @@
  *
  * Created on May 6, 2010, 10:48:54 AM
  */
-
 package org.components.controls;
 
 import java.awt.Color;
@@ -31,8 +30,8 @@ public class CxTable extends PxTable {
     /** Creates new form BeanForm */
     public CxTable() {
         initComponents();
-             this.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
-             this.setSurrendersFocusOnKeystroke(true);
+        this.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        this.setSurrendersFocusOnKeystroke(true);
         ActionListener al = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
@@ -42,15 +41,20 @@ public class CxTable extends PxTable {
         // so we can imlplement our own way of navigation 
         this.registerKeyboardAction(al, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 //        this.registerKeyboardAction(al, KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-      this.setDefaultRenderer(String.class, new CustomRenderer());
-      this.setDefaultRenderer(Double.class, new CustomRenderer());
-      this.setDefaultRenderer(Object.class, new CustomRenderer());
+        this.setDefaultRenderer(String.class, new CustomRenderer());
+        this.setDefaultRenderer(Double.class, new CustomRenderer());
+        this.setDefaultRenderer(Object.class, new CustomRenderer());
     }
 
-     public boolean validateRow() {
-     return true;
-     }
+    private boolean isCurrentRowValid=true;
     
+    public boolean isCurrentRowValid() {
+        return isCurrentRowValid;
+    }
+    
+    public void setCurrentRowValid(boolean rowv) {
+         isCurrentRowValid=rowv;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -74,19 +78,22 @@ public class CxTable extends PxTable {
         setTerminateEditOnFocusLost(false);
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
-    
     @Override
     public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
-//        if(getCurSelectedRow()==rowIndex || validateRow()){
+       if(getCurSelectedRow()==-1 || getCurSelectedRow()==rowIndex ){ 
         super.changeSelection(rowIndex, columnIndex, toggle, extend);
-//        setCurSelectedRow(rowIndex);
-//        }
+        setCurSelectedRow(rowIndex);
+//        setCurrentRowValid(false);       
+       }
+        if(getCurSelectedRow()!=rowIndex && isCurrentRowValid()){
+        super.changeSelection(rowIndex, columnIndex, toggle, extend);
+        setCurSelectedRow(rowIndex);
+//        setCurrentRowValid(false);       
+       }
     }
-    int curSelectedRow=-1;
+    int curSelectedRow = -1;
 
     public int getCurSelectedRow() {
         return curSelectedRow;
@@ -95,20 +102,18 @@ public class CxTable extends PxTable {
     public void setCurSelectedRow(int curSelectedRow) {
         this.curSelectedRow = curSelectedRow;
     }
-    
+
     class CustomRenderer extends DefaultTableCellRenderer {
 
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if (isSelected && hasFocus) {
-            c.setBackground(Color.red);
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (isSelected && hasFocus) {
+                c.setBackground(Color.red);
+            }
+
+
+            // Formatting
+            return c;
         }
-
-
-        // Formatting
-        return c;
     }
-}
-    
-    
 }
