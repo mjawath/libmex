@@ -61,7 +61,7 @@ public class GenericDAOUtil<T> {
 
     public static <T>  T getWhere(String property, Object key,Class cls) {
 
-        String qry = "select c from  " + cls.getName() + " c  where c." + property + " ='" + key + "'";
+        String qry = "select c from  " + cls.getSimpleName() + " c  where c." + property + " ='" + key + "'";
         return ExecuteQuerySR(qry,cls);
 
     }

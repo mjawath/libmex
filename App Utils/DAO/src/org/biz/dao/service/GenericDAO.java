@@ -1,9 +1,7 @@
 package org.biz.dao.service;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.dao.util.JPAUtil;
@@ -19,11 +17,12 @@ public class GenericDAO<T> {
        
 
     }
-    Map<String ,List> cache;
+
     private EntityManager em;
     String classname;
     Class<T> cls;
     String orderby = "";
+    Cache cache;
 
     public GenericDAO(EntityManager em) {
         this.em = em;
@@ -31,9 +30,20 @@ public class GenericDAO<T> {
 
     public GenericDAO() {
         em = JPAUtil.getEntityManager();
-        cache = new HashMap<String, List>();
+        cache = new Cache();
+        
     }
 
+    public Cache getCache() {
+        return cache;
+    }
+
+    public void setCache(Cache cache) {
+        this.cache = cache;
+    }
+
+    
+    
     public void setCls(Class<T> cls) {
         this.cls = cls;
         this.classname = cls.getSimpleName();
@@ -171,16 +181,17 @@ public class GenericDAO<T> {
     }
     
     
-    public List pagedData(String qryKey,String qry,int pageNo){
-    Query qu=GenericDAOUtil.getQuery(qry);
-    
-    int noofrows=1000;
-    int fr=(pageNo-1) * noofrows;
-    qu.setFirstResult(fr);//firstresult
-    qu.setMaxResults(noofrows); //max result = noofrows+     
-        
+    public List pagedData(String qryKey,String qry,int pageNo){    
+        String sq=createSelect();
+        sq+=qry;        
+        Query qu=GenericDAOUtil.getQuery(sq);
+        int noofrows=1000;
+        int fr=(pageNo-1) * noofrows;
+        qu.setFirstResult(fr);//firstresult
+        qu.setMaxResults(noofrows); //max result = noofrows+ 0
         return ExecuteQuery(qu);
     }
+    
     public List pagedDataScr(String qryKey,String qry,int pageNo){
     Query qu=GenericDAOUtil.getQuery(qry);
     ScrollableCursor scrollableCursor = (ScrollableCursor)qu.getSingleResult();
@@ -190,8 +201,17 @@ public class GenericDAO<T> {
     
     
     
-    
-    
+   public String createSelect(){
+   return "select c from  "+classname+" c ";
+   } 
+   
+
+   
+   public String createWhere(String whr){   
+       
+       return " from  ";
+   }
+   
     
     /*
     ///////////////

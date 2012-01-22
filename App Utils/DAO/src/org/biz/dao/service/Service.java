@@ -13,6 +13,8 @@ import org.biz.dao.util.EntityService;
  */
 public class Service {
     EntityService es;
+    Cache cache;
+    GenericDAO dao;
 
     public Service() {
     es =  EntityService.getEntityService();
@@ -21,6 +23,18 @@ public class Service {
     
 
     public GenericDAO getDao() {
-        return new GenericDAO();
+        
+        if(dao==null){
+        dao = new GenericDAO();
+        }
+        return dao;
     }
+
+    public Cache getCache() {
+        return dao.getCache();
+    }
+
+    
+    
+    
 }
