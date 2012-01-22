@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.dao.util;
 
 import java.sql.Connection;
@@ -9,11 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-/**
- *
- * @author Mohamed Jawath
- */
+ 
 public  class JPAUtil {
 
    static  int  etyvertion=0;

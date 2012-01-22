@@ -1,9 +1,5 @@
 package org.biz.dao.util;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 
 
 import java.text.SimpleDateFormat;
@@ -47,12 +43,12 @@ public class EntityService {
 
     public String getUniqueKey(Service service,Class cls){
       boolean loop=true;
-        String key = getKey();
+        String key = getKey("");
         Object ob = new Object();
         while(loop) {
             ob = service.getDao().find( key);
             if (ob!=null) {
-                key = getKey();
+                key = getKey("");
             }else{
             loop=false;
             }
@@ -69,7 +65,8 @@ public class EntityService {
     public String getKeyStr() {
     return randomString(15);
     }
-    public String getKey() {
+    public String getKey(String shopName) {
+        
         String rn=""+AB.charAt(rnd.nextInt(AB.length()));
         String rn2=""+AB.charAt(rnd.nextInt(AB.length()));
         String key = System.currentTimeMillis()+"-"+rn+rn2;

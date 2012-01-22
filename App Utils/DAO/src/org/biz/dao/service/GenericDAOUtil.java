@@ -325,14 +325,19 @@ public class GenericDAOUtil<T> {
     
     public static <T> List<T> ExecuteQuery(String qryString,Class cls) {
         Query query = JPAUtil.getEntityManager().createQuery(qryString, cls);
+      
         query.setHint(QueryHints.REFRESH, HintValues.TRUE);
         List ts = query.getResultList();
         return ts;
     }
 
-//    public static T gete(){
-//    return null;
-//    }
+   public static   List<Object[]> ExecuteNativeQuery(String qryString) {
+       Query query = JPAUtil.getEntityManager().createNativeQuery(qryString);
+      
+     //   query.setHint(QueryHints.REFRESH, HintValues.TRUE);
+        List<Object[]> ts = query.getResultList();
+        return ts;
+    }
     
     public static <T>  List<T> ExecuteQuery(Query qryString) {
         qryString.setHint(QueryHints.REFRESH, HintValues.TRUE);
