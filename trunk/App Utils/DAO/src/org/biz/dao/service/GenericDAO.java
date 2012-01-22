@@ -1,6 +1,13 @@
 package org.biz.dao.service;
 
+<<<<<<< .mine
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+=======
 
+>>>>>>> .r80
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
