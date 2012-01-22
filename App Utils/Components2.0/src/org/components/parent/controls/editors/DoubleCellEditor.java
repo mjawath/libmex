@@ -8,10 +8,9 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellEditor;
 import org.biz.app.ui.util.ComponentFactory;
 import org.biz.app.ui.util.TableUtil;
@@ -30,16 +29,14 @@ public class DoubleCellEditor extends AbstractCellEditor
     @Override
     public boolean stopCellEditing() {
         boolean b = false;
-        if (isCellValid()) {
-
-            b = super.stopCellEditing();
+        if (isCellValid()) {           
+                 b = super.stopCellEditing();
         }
         return b;
     }
 
     public DoubleCellEditor(JTable jt) {
         init(jt);
-
     }
 
     public JTable getTbl() {
@@ -60,7 +57,6 @@ public class DoubleCellEditor extends AbstractCellEditor
 
             public void actionPerformed(ActionEvent e) {
                 stopCellEditing();
-
                 int selcol = tbl.getSelectedColumn();
                 int selrow = tbl.getSelectedRow();
                 int colcount = tbl.getColumnCount();
@@ -71,8 +67,14 @@ public class DoubleCellEditor extends AbstractCellEditor
                     TableUtil.addrow(tbl, new Object[]{});                    
                     tbl.changeSelection(selrow+1, 1, false, false);
                 } else {
-                    selcol = (colcount - 1) == selcol ? selcol : ++selcol;
-                    tbl.changeSelection(selrow, selcol, false, false);
+                    
+                if (((rowcount-1 )> selrow) && ab){
+                    System.out.println("ee");
+                tbl.changeSelection(selrow+1, 1, false, false);
+                return;
+                }
+                selcol = (colcount - 1) == selcol ? selcol : ++selcol;
+                tbl.changeSelection(selrow, selcol, false, false);
                 }
             }
         });
@@ -91,6 +93,15 @@ public class DoubleCellEditor extends AbstractCellEditor
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
 
+        if (!isSelected) {
+            JLabel jl = new JLabel();
+//            if (value == null) {
+//                jl.setText("");
+//            } else {
+//                jl.setText(value.toString());
+//            }
+            return jl;
+        }
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
         System.out.println("vlaue " + value);
         // Configure the component with the specified value

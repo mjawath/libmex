@@ -30,6 +30,9 @@ public class StringCellEditor extends AbstractCellEditor
 
     @Override
     public Object getCellEditorValue() {
+        
+         String s = ((JTextField) component).getText();
+
         return component.getText();
     }
 
@@ -71,15 +74,15 @@ public class StringCellEditor extends AbstractCellEditor
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         if (!isSelected) {
             JLabel jl = new JLabel();
-            if (value == null) {
-                jl.setText("");
-            } else {
-                jl.setText(value.toString());
-            }
+//            if (value == null) {
+//                jl.setText("");
+//            } else {
+//                jl.setText(value.toString());
+//            }
             return jl;
         }
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
-
+init(tbl);
         // Configure the component with the specified value
         if (value != null) {
             ((JTextField) component).setText("" + value);
@@ -97,8 +100,8 @@ public class StringCellEditor extends AbstractCellEditor
             int selcol = tbl.getSelectedColumn();
             int selrow = tbl.getSelectedRow();
             b = super.stopCellEditing();
-            selcol++;
-            tbl.changeSelection(selrow, selcol, false, false);
+//            selcol++;
+//            tbl.changeSelection(selrow, selcol, false, false);
 
         }
         return b;

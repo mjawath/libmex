@@ -12,6 +12,7 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
@@ -132,11 +133,15 @@ public class ComboBoxCellEditor extends AbstractCellEditor
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-
-//
-////        if (!isSelected) {
-////            return null;
-////        }
+if (!isSelected) {
+            JLabel jl = new JLabel();
+            if (value == null) {
+                jl.setText("");
+            } else {
+                jl.setText(value.toString());
+            }
+            return jl;
+        }
         return component;
     }
 
