@@ -1,9 +1,6 @@
 package org.biz.dao.service;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,7 +115,7 @@ public class GenericDAO<T> {
 
     //save list of items
     public void saveList(List<T> ob) {
-        GenericDAOUtil.save(ob);
+        GenericDAOUtil.saveList(ob);
     }
 
     //use this to delete a certain object 
@@ -147,7 +144,13 @@ public class GenericDAO<T> {
     //use  this to execute the query  string
     //@param query object is a string of jpql
     public List<T> ExecuteQuery(String qryString) {
+        
         return GenericDAOUtil.ExecuteQuery(qryString, cls);
+    }
+   
+    public List<Object[]> ExecuteNativeQuery(String qryString) {
+        
+        return GenericDAOUtil.ExecuteNativeQuery(qryString);
     }
 
     public T ExecuteQuerySR(String qryString) {
