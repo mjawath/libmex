@@ -15,9 +15,11 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.EventObject;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
+import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import org.components.parent.controls.PxTable;
 
@@ -116,4 +118,20 @@ public class CxTable extends PxTable {
             return c;
         }
     }
+
+    @Override
+    public boolean editCellAt(int row, int column, EventObject e) {
+    
+        if(isCellSelected(row, column)){
+        return super.editCellAt(row, column, e);
+    }
+    return false; 
+    }
+
+    @OverrideChangeEvent
+    public void editingStopped( e) {
+        super.editingStopped(e);
+    }
+    
+    
 }
