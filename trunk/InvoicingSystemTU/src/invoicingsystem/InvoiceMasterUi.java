@@ -11,6 +11,8 @@ import org.components.parent.controls.editors.TablePopUpCellEditor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
@@ -96,17 +98,17 @@ public class InvoiceMasterUi extends TabPanelUI {
         TableUtil.setColumnEditor(tblInvoice, 5, new DoubleCellEditor(tblInvoice));
         DoubleCellEditor dce = new DoubleCellEditor(tblInvoice) {
 
-            @Override
+            
             public boolean action() {
                 SalesInvoiceLineItem lineItem = rowToEty();
                 if (lineItem != null && lineItem.getPrice() != null && lineItem.getPrice() >= 150) {
                     System.out.println("row is valid so move to next if  e");
                     //if ot last row row is valid so move
                     // to next if  exist or or creat new row                                                             
-                    tblInvoice.setCurrentRowValid(true);
+//                    tblInvoice.setCurrentRowValid(true);
                     return true;
                 } else {
-                    tblInvoice.setCurrentRowValid(false);
+//                    tblInvoice.setCurrentRowValid(false);
                     return false;
                 }
 
@@ -142,7 +144,6 @@ public class InvoiceMasterUi extends TabPanelUI {
 
             }
         };
-
         cuspop.setObjectToTable(listCust);
         custService = new CustomerService();
         popUpComponent.setObjectToTable(listItem);
@@ -171,14 +172,7 @@ public class InvoiceMasterUi extends TabPanelUI {
     SalesInvoiceLineItem invoiceLineItem;
     Item currentItem;
 
-    public void lineItem() {
-//        SalesInvoiceLineItem lineItem = rowToEty(SalesInvoiceLineItem lineItem);
-//        Item item = new Item();
-//        lineItem.setItem(item);
-//        lineItem.setDescription("");
-//        lineItem.setLineAmount(55.0);
-//        lineItem.setPrice(Long.MIN_VALUE);
-    }
+    
 
     public SalesInvoiceLineItem rowToEty() {
         SalesInvoiceLineItem lineItem = new SalesInvoiceLineItem();
@@ -189,10 +183,10 @@ public class InvoiceMasterUi extends TabPanelUI {
         lineItem.setPrice(uiEty.colToDbl(tblInvoice, 5));
         lineItem.setLineAmount(uiEty.colToDbl(tblInvoice, 6));
         return lineItem;
-    }
-
+    }    
+    
     public boolean validateRow() {
-        System.out.println("dd");
+        System.out.println("validating row ... ... jaw........");
         int r = tblInvoice.getSelectedRow();
         if (r == -1) {
             return true;
@@ -201,16 +195,18 @@ public class InvoiceMasterUi extends TabPanelUI {
 
             SalesInvoiceLineItem lineItem = rowToEty();
             if (lineItem.getPrice() == null) {
-                return false;
+                return true;
             }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return false;
+    return false;
     }
 
+    
+    
+    
     public void setnewrow() {
         TableUtil.addrow(tblInvoice, new Object[]{TableUtil.getNewRowId(), ""});
     }
@@ -258,6 +254,7 @@ public class InvoiceMasterUi extends TabPanelUI {
         jScrollPane3 = new javax.swing.JScrollPane();
         cTextArea2 = new org.components.controls.CTextArea();
         cCheckBox2 = new org.components.controls.CCheckBox();
+        cButton1 = new org.components.controls.CButton();
         cDatePicker1 = new org.components.controls.CDatePicker();
         cPanel4 = new org.components.containers.CPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -281,8 +278,11 @@ public class InvoiceMasterUi extends TabPanelUI {
         cTextField14 = new org.components.controls.CTextField();
         cTextField15 = new org.components.controls.CTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblInvoice = new org.components.controls.CxTable();
-        cButton1 = new org.components.controls.CButton();
+        tblInvoice = new org.components.controls.CxTable(){
+            public boolean isCurrentRowValid() {
+                return validateRow();
+            }
+        };
 
         setLayout(null);
 
@@ -375,6 +375,14 @@ public class InvoiceMasterUi extends TabPanelUI {
         cCheckBox2.setText("Type");
         cPanel2.add(cCheckBox2);
         cCheckBox2.setBounds(10, 90, 140, 23);
+
+        cButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton1ActionPerformed(evt);
+            }
+        });
+        cPanel2.add(cButton1);
+        cButton1.setBounds(170, 90, 65, 23);
 
         add(cPanel2);
         cPanel2.setBounds(0, 11, 240, 120);
@@ -529,14 +537,6 @@ public class InvoiceMasterUi extends TabPanelUI {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(10, 140, 930, 200);
-
-        cButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton1ActionPerformed(evt);
-            }
-        });
-        add(cButton1);
-        cButton1.setBounds(400, 420, 65, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
