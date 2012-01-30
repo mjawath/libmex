@@ -62,20 +62,20 @@ public class DoubleCellEditor extends AbstractCellEditor
                 int colcount = tbl.getColumnCount();
                 int rowcount = tbl.getRowCount();
 
-                boolean ab = action();//Action will return true if it need new row or 
-                if (((rowcount-1 )==selrow) && ab) {              //false normal selection           
-                    TableUtil.addrow(tbl, new Object[]{});                    
-                    tbl.changeSelection(selrow+1, 1, false, false);
-                } else {
-                    
-                if (((rowcount-1 )> selrow) && ab){
-                    System.out.println("ee");
-                tbl.changeSelection(selrow+1, 1, false, false);
-                return;
-                }
-                selcol = (colcount - 1) == selcol ? selcol : ++selcol;
-                tbl.changeSelection(selrow, selcol, false, false);
-                }
+//                boolean ab = action();//Action will return true if it need new row or 
+//                if (((rowcount-1 )==selrow) && ab) {              //false normal selection           
+//                    TableUtil.addrow(tbl, new Object[]{});                    
+//                    tbl.changeSelection(selrow+1, 1, false, false);
+//                } else {
+//                    
+//                if (((rowcount-1 )> selrow) && ab){
+//                    System.out.println("ee");
+//                tbl.changeSelection(selrow+1, 1, false, false);
+//                return;
+//                }
+//                selcol = (colcount - 1) == selcol ? selcol : ++selcol;
+//                tbl.changeSelection(selrow, selcol, false, false);
+//                }
             }
         });
 
@@ -92,7 +92,7 @@ public class DoubleCellEditor extends AbstractCellEditor
 
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
-
+     System.out.println("calling getTableCellEditorComponent method......");
         if (!isSelected) {
             JLabel jl = new JLabel();
 //            if (value == null) {

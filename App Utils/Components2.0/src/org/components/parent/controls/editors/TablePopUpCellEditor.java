@@ -7,6 +7,7 @@ package org.components.parent.controls.editors;
 import com.components.custom.PagedPopUpPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.EventObject;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JLabel;
@@ -14,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellEditor;
 import org.biz.app.ui.util.TableUtil;
+import org.components.controls.CTextField;
 
 /**
  *
@@ -79,14 +81,14 @@ public class TablePopUpCellEditor extends AbstractCellEditor
                 int colcount = tbl.getColumnCount();
                 int rowcount = tbl.getRowCount();
 
-                boolean ab = action();//Action will return true if it need new row or 
-                if (((rowcount - 1) == selrow) && ab) {              //false normal selection           
-                    TableUtil.addrow(tbl, new Object[]{});
-                    tbl.changeSelection(selrow + 1, 1, false, false);
-                } else {
-                    selcol = (colcount - 1) == selcol ? selcol : ++selcol;
-                    tbl.changeSelection(selrow, selcol, false, false);
-                }
+//                boolean ab = action();//Action will return true if it need new row or 
+//                if (((rowcount - 1) == selrow) && ab) {              //false normal selection           
+//                    TableUtil.addrow(tbl, new Object[]{});
+//                    tbl.changeSelection(selrow + 1, 1, false, false);
+//                } else {
+//                    selcol = (colcount - 1) == selcol ? selcol : ++selcol;
+//                    tbl.changeSelection(selrow, selcol, false, false);
+//                }
             }
         });
 
@@ -99,7 +101,11 @@ public class TablePopUpCellEditor extends AbstractCellEditor
 
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
+        
+   //   init(tbl);
+      
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
+             System.out.println("calling getTableCellEditorComponent method......");
         if (!isSelected) {
             JLabel jl = new JLabel();
 //            if (value == null) {
@@ -120,6 +126,14 @@ public class TablePopUpCellEditor extends AbstractCellEditor
         return component;
     }
 
+    
+     @Override
+    public boolean shouldSelectCell(EventObject anEvent) {
+        System.out.println("calling.........shuld select cellll");
+        component.setText("");
+        return true;
+    }
+    
     // This method is called when editing is completed.
     // It must return the new value to be stored in the cell.
     public Object getCellEditorValue() {
