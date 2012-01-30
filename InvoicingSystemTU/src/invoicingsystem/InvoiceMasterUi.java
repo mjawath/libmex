@@ -4,6 +4,7 @@
  *
  * Created on Dec 2, 2011, 10:27:21 AM
  */
+
 package invoicingsystem;
 
 import com.components.custom.PagedPopUpPanel;
@@ -11,8 +12,6 @@ import org.components.parent.controls.editors.TablePopUpCellEditor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
@@ -70,17 +69,20 @@ public class InvoiceMasterUi extends TabPanelUI {
         invoice.setLineItems(lineItems);
         itemService = new ItemService();
         listItem = itemService.getDao().getAll();
+        
+        
         TablePopUpCellEditor tb = new TablePopUpCellEditor(tblInvoice){
             @Override
             public boolean action() {                
-                System.out.println("item selected");
-                
+                System.out.println("item selected");                
                 return false;
             }        
         };
+        
         popUpComponent = new PagedPopUpPanel(tblInvoice, tb) {
             @Override
             public void action() {
+            
             }
             @Override
             public Object[] data(Object item) {
@@ -97,21 +99,18 @@ public class InvoiceMasterUi extends TabPanelUI {
         TableUtil.setColumnEditor(tblInvoice, 4, new DoubleCellEditor(tblInvoice));
         TableUtil.setColumnEditor(tblInvoice, 5, new DoubleCellEditor(tblInvoice));
         DoubleCellEditor dce = new DoubleCellEditor(tblInvoice) {
-
-            
             public boolean action() {
                 SalesInvoiceLineItem lineItem = rowToEty();
                 if (lineItem != null && lineItem.getPrice() != null && lineItem.getPrice() >= 150) {
                     System.out.println("row is valid so move to next if  e");
                     //if ot last row row is valid so move
                     // to next if  exist or or creat new row                                                             
-//                    tblInvoice.setCurrentRowValid(true);
+                    //tblInvoice.setCurrentRowValid(true);
                     return true;
                 } else {
 //                    tblInvoice.setCurrentRowValid(false);
                     return false;
                 }
-
             }
         };
         TableUtil.setColumnEditor(tblInvoice, 6, dce);
@@ -124,23 +123,27 @@ public class InvoiceMasterUi extends TabPanelUI {
 
 
         cuspop = new PagedPopUpPanel(tcus) {
-
             @Override
-            public Object[] data(Object item) {
+            public Object[] data(Object item) {            
                 Customer customer = (Customer) item;
-                return new Object[]{customer.getId(), customer.getCode(), customer.getCustomerName()};
-            }
-
+                return new Object[]{customer.getId(), customer.getCode(), customer.getCustomerName()};            
+            }            
             @Override
             public void search(String qry) {
                 //filter 
 //             listCust = custService.getDao().findCustomerByCode(qry);
-                String cus = " where c.customerName like '" + qry + "%' ";
+                try {
+                
+                    String cus = " where c.customerName like '" + qry + "%' ";
                 if (qry.isEmpty()) {
                     listCust = custService.getDao().getAll();
                 } else {
                     listCust = custService.getDao().pagedData("cuspop", cus, 1);
+                }   
+                } catch (Exception e) {
+                e.printStackTrace();
                 }
+                 
 
             }
         };
@@ -154,6 +157,7 @@ public class InvoiceMasterUi extends TabPanelUI {
                 if (!e.getValueIsAdjusting()) {
                     try {
                         SalesInvoiceLineItem inli = rowToEty();
+                        
                     } catch (Exception ee) {
                     }
 
@@ -162,6 +166,7 @@ public class InvoiceMasterUi extends TabPanelUI {
         });
         setnewrow();
     }
+    
     TableCellEditor de;
 //    DoubleCellEditor de;
     PagedPopUpPanel cuspop;
@@ -175,6 +180,7 @@ public class InvoiceMasterUi extends TabPanelUI {
     
 
     public SalesInvoiceLineItem rowToEty() {
+        
         SalesInvoiceLineItem lineItem = new SalesInvoiceLineItem();
         Item item = new Item();
         lineItem.setItem(currentItem);
@@ -182,11 +188,14 @@ public class InvoiceMasterUi extends TabPanelUI {
         lineItem.setUnit(uiEty.colToStr(tblInvoice, 4));
         lineItem.setPrice(uiEty.colToDbl(tblInvoice, 5));
         lineItem.setLineAmount(uiEty.colToDbl(tblInvoice, 6));
+    
         return lineItem;
+    
     }    
     
     public boolean validateRow() {
-        System.out.println("validating row ... ... jaw........");
+        System.out.println("validating row ... "
+                + "... jaw........");
         int r = tblInvoice.getSelectedRow();
         if (r == -1) {
             return true;
@@ -282,6 +291,15 @@ public class InvoiceMasterUi extends TabPanelUI {
             public boolean isCurrentRowValid() {
                 return validateRow();
             }
+            public boolean action(){
+                if(tblInvoice.getSelectedColumn()==5){
+
+                    System.out.println("table action called");
+                    return true;
+                }
+                return false;
+            }
+
         };
 
         setLayout(null);
@@ -374,15 +392,16 @@ public class InvoiceMasterUi extends TabPanelUI {
 
         cCheckBox2.setText("Type");
         cPanel2.add(cCheckBox2);
-        cCheckBox2.setBounds(10, 90, 140, 23);
+        cCheckBox2.setBounds(10, 90, 60, 23);
 
+        cButton1.setText("Save");
         cButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cButton1ActionPerformed(evt);
             }
         });
         cPanel2.add(cButton1);
-        cButton1.setBounds(170, 90, 65, 23);
+        cButton1.setBounds(170, 90, 57, 23);
 
         add(cPanel2);
         cPanel2.setBounds(0, 11, 240, 120);
@@ -525,6 +544,7 @@ public class InvoiceMasterUi extends TabPanelUI {
                 return types [columnIndex];
             }
         });
+        tblInvoice.setSortable(false);
         tblInvoice.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblInvoice);
         tblInvoice.getColumnModel().getColumn(0).setResizable(false);
