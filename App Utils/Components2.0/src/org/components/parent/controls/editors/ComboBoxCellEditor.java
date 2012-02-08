@@ -9,21 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
-import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
-import javax.swing.table.TableCellEditor;
 
 /**
  *
  * @author nnjj
  */
-public class ComboBoxCellEditor extends AbstractCellEditor
-        implements TableCellEditor {
+public class ComboBoxCellEditor extends CellEditor {
 
     private JComboBox component;
     private JTable tbl;
@@ -148,5 +146,10 @@ if (!isSelected) {
     @Override
     public Object getCellEditorValue() {
         return component.getEditor().getItem();
+    }
+
+    @Override
+    public JComponent getComponent() {
+        return component;
     }
 }

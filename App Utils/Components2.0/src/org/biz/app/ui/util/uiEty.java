@@ -10,11 +10,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -236,13 +239,33 @@ public class uiEty {
             return x;
         }
     }
-
+//selected rows columns value
     public static String colToStrE(JTable txtcom, int col) {
         String x = TableUtil.getSelectedValueE(txtcom, col);
         if (x.isEmpty()) {
             return null;
         } else {
             return x;
+        }
+    }
+    
+    // specified rows cols value
+    public static String colToStrE(JTable txtcom,int row ,int col) {
+        Object x = TableUtil.getValueat(txtcom, row,col);
+        if (x==null) {
+            return "";
+        } else {
+            return x.toString();
+        }
+    }
+    
+    // specified rows cols value
+    public static String colToStr(JTable txtcom,int row ,int col) {
+        Object x = TableUtil.getValueat(txtcom, row,col);
+        if (x==null) {
+            return null;
+        } else {
+            return x.toString();
         }
     }
 
@@ -255,6 +278,19 @@ public class uiEty {
         }
     }
 
+    public static Double colToDbl(JTable txtcom,int row, int col) {
+        Object x = TableUtil.getValueat(txtcom, row, col);
+        if (x != null) {
+            String bb = x.toString();
+            try {
+                return Double.parseDouble(bb);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+    
     public static Double colToDbl(JTable txtcom, int col) {
         Object x = TableUtil.getSelectedValue(txtcom, col);
         if (x != null) {
@@ -268,6 +304,18 @@ public class uiEty {
         return null;
     }
 
+    public static Double colToDbl0(JTable txtcom,int row, int col) {
+        Object x = TableUtil.getModelsValueAt(txtcom, row ,col);
+        if (x != null) {
+            String bb = x.toString();
+            try {
+                return Double.parseDouble(bb);
+            } catch (Exception e) {
+                return 0d;
+            }
+        }
+        return 0d;
+    }
     public static Double colToDbl0(JTable txtcom, int col) {
         Object x = TableUtil.getSelectedValue(txtcom, col);
         if (x != null) {
@@ -395,6 +443,14 @@ public class uiEty {
 
     }
 
+   static int x=-99; 
+    public static void setKeyAction(JComponent component,Action escpli,int keycode){
+
+        String xx="act"+ ++x;
+        component.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke( keycode,0), xx);
+
+        component.getActionMap().put(xx, escpli);
+    }
     public static void main(String[] args) {
         System.out.println(nowTimesStamp());
     }
