@@ -66,9 +66,11 @@ public class TableEditable extends PxTable {
     @Override
     public void editingStopped(ChangeEvent e) {
         super.editingStopped(e);        
-                
-             
-                    action.selectionAction();
+//        if(TableUtil.newRowID.equals( TableUtil.getSelectedValue(this, 0))){
+//           this.setValueAt( TableUtil.getNewRowId(), this.getSelectedRow(), 0);
+//        }
+        action.selectionAction();
+        
                 
                 
 //                boolean ab = //Action will return true if it need new row or 
@@ -90,6 +92,7 @@ public class TableEditable extends PxTable {
     }
     public void setTableSelection(TableSelectionAction action ){
         this.action=action;
+        action.setTbl(this);
     }
     
     public TableSelectionAction getTableSelection( ){
@@ -127,26 +130,17 @@ public class TableEditable extends PxTable {
     @Override
     public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
        
-        if(getCurSelectedRow()==-1 || getCurSelectedRow()==rowIndex ){ 
-        super.changeSelection(rowIndex, columnIndex, toggle, extend);
-        setCurSelectedRow(rowIndex);
-//        setCurrentRowValid(false);       
-       }
-        if(getCurSelectedRow()!=rowIndex && isCurrentRowValid()){
-        super.changeSelection(rowIndex, columnIndex, toggle, extend);
-        setCurSelectedRow(rowIndex);
-//        setCurrentRowValid(false);       
-       }
-    }
-    int curSelectedRow = -1;
-
-    public int getCurSelectedRow() {
-        return curSelectedRow;
+        int sr=getSelectedRow();
+        
+        if(sr ==-1 || sr==rowIndex || ( sr!=rowIndex && action.rowValid())){
+            super.changeSelection(rowIndex, columnIndex, toggle, extend);
+            action.commitChanges(sr);
+        }
     }
 
-    public void setCurSelectedRow(int curSelectedRow) {
-        this.curSelectedRow = curSelectedRow;
-    }
+    
+    
+
 
     class CustomRenderer extends DefaultTableCellRenderer {
 
@@ -171,6 +165,6 @@ public class TableEditable extends PxTable {
     return false; 
     }
 
-    
+   
     
 }

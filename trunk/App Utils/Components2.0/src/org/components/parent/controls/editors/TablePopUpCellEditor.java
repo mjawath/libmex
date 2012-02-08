@@ -9,20 +9,16 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.EventObject;
 import javax.swing.AbstractAction;
-import javax.swing.AbstractCellEditor;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.TableCellEditor;
-import org.biz.app.ui.util.TableUtil;
-import org.components.controls.CTextField;
 
 /**
  *
  * @author nnjj
  */
-public class TablePopUpCellEditor extends AbstractCellEditor
-        implements TableCellEditor {
+public class TablePopUpCellEditor extends CellEditor
+         {
 
     private JTable tbl;
     PagedPopUpPanel popUpComponent;
@@ -75,7 +71,7 @@ public class TablePopUpCellEditor extends AbstractCellEditor
 
             public void actionPerformed(ActionEvent e) {
                 stopCellEditing();
-
+                component.setText("");
                 int selcol = tbl.getSelectedColumn();
                 int selrow = tbl.getSelectedRow();
                 int colcount = tbl.getColumnCount();
@@ -105,7 +101,6 @@ public class TablePopUpCellEditor extends AbstractCellEditor
    //   init(tbl);
       
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
-             System.out.println("calling getTableCellEditorComponent method......");
         if (!isSelected) {
             JLabel jl = new JLabel();
 //            if (value == null) {

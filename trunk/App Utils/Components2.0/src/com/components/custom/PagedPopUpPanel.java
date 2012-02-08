@@ -35,7 +35,49 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
     JTextField textField;
     TablePopUpCellEditor editor;
     int selectedColumn = 0;
+    Object selectedObject ;
+    String selectedID ;
     String pageKey;
+    List list;
+
+    
+    
+    public int getSelectedColumn() {
+        return selectedColumn;
+    }
+    public String getSelectedID() {
+        return selectedID;
+    }
+    public Object getSelectedObject() {
+        return selectedObject;
+    }
+
+    public void setSelectedColumn(int selectedColumn) {
+        this.selectedColumn = selectedColumn;
+    }
+    public void setSelectedID(String selectedID) {
+        this.selectedID = selectedID;
+    }
+    public void setSelectedObject(Object selectedObject) {
+        this.selectedObject = selectedObject;
+    }
+    
+
+    public JTable getTbl() {
+        return tbl;
+    }
+
+    public void setTbl(JTable tbl) {
+        this.tbl = tbl;
+    }
+
+    public JTextField getTextField() {
+        return textField;
+    }
+
+    public void setTextField(JTextField textField) {
+        this.textField = textField;
+    }
 
     /** Creates new form Detail */
     public PagedPopUpPanel(JTable tb, TablePopUpCellEditor field) {
@@ -45,6 +87,16 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
         textField = field.getComponent();
         editor.setMasterTbl(tbl);
         init();
+    }
+
+   
+    
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
     }
 
     public PagedPopUpPanel(JTextField field) {
@@ -69,11 +121,11 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
     public void showPopUp() {
         try {
             if (!jpm.isVisible()) {
+                jpm.setFocusable(false);
                 this.setSize(600, 300);
                 jpm.setSize(200, 200);                
                 this.setVisible(true);
-                jpm.setVisible(true);
-                jpm.setFocusable(false);
+                jpm.setVisible(true);                
                 jpm.show(textField, 30, 30);
                 jpm.setFocusable(true);
             }
@@ -130,18 +182,21 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
         textField.getDocument().addDocumentListener(new DocumentListener() {
 
             public void insertUpdate(DocumentEvent e) {
-                System.out.println(e);
+                
                 search(textField.getText());
+                setObjectToTable(list);
                 showPopUp();
             }
 
             public void removeUpdate(DocumentEvent e) {
                 search(textField.getText());
+                setObjectToTable(list);
                 showPopUp();
             }
 
             public void changedUpdate(DocumentEvent e) {
                 search(textField.getText());
+                setObjectToTable(list);
                 showPopUp();
             }
         });
@@ -194,25 +249,24 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(cLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(cButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(cButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(cButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(cTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(cButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(cButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(cButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(cButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(cTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(cButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(cButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +294,8 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
                         .addGap(3, 3, 3)
                         .addComponent(cButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -258,12 +313,18 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
 
     public void selectItem() {
 
-        Object ob = TableUtil.getSelectedModelsValueAt(cxTable1, selectedColumn);
-        if (textField instanceof JTextField) {
+        Object ob = TableUtil.getSelectedModelsValueAt(cxTable1, 0);
+      
+        if(ob!=null){
+            //find object from list and select
+           if (textField instanceof JTextField) {
             textField.setText(ob.toString());
+            selectedID=ob.toString();
+        }
+            action(); 
         }
         closePopup();
-        action();
+      
     }
 
     public void closePopup() {
@@ -277,9 +338,10 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
         System.out.println("action implemented ......");
     }
 
-    ;        
+        
         
     public void setObjectToTable(List lst) {
+        list=lst;
         addToTable(lst);
     }
 

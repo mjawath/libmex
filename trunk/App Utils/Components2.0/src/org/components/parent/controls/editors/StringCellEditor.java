@@ -6,22 +6,16 @@ package org.components.parent.controls.editors;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.util.EventObject;
 import javax.swing.AbstractAction;
-import javax.swing.AbstractCellEditor;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.TableCellEditor;
-import org.biz.app.ui.util.TableUtil;
-import org.components.controls.CTextField;
 
 /**
  *
  * @author nnjj
  */
-public class StringCellEditor extends AbstractCellEditor
-        implements TableCellEditor {
+public class StringCellEditor extends CellEditor {
 
     JTextField component;
     JTable tbl;
@@ -75,7 +69,6 @@ public class StringCellEditor extends AbstractCellEditor
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 //        CTextField component=new CTextField();
-        System.out.println("calling getTableCellEditorComponent method......");
         if (!isSelected) {
             JLabel jl = new JLabel();
             
@@ -112,6 +105,7 @@ public class StringCellEditor extends AbstractCellEditor
             b = super.stopCellEditing();
 //            selcol++;
 //            tbl.changeSelection(selrow, selcol, false, false);
+            component.setText("");
 
         }
         return b;
