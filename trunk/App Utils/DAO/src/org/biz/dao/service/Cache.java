@@ -57,7 +57,10 @@ Map<String,Cache> map;
     public void setSpecialKey(String specialKey) {
         this.specialKey = specialKey;
     }
-
-
+    
+    public List getbySpecialKey(String key,String spclkey ,int pageno){
+//         list=getMap().get(key).0;
+         return list; 
+    }
     
 }

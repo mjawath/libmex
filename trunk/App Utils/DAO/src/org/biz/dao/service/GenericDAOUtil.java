@@ -25,8 +25,20 @@ public class GenericDAOUtil<T> {
     String classname;
     T cls;
     String orderby = "";
+    private  static   Cache cache;
+    
+    static {
+        if(cache==null){
+        cache=new Cache();   
+        
+        }
+    }
 
+    public static Cache getCache() {
+        return cache;
+    }
   
+    
 
 //    public void setCls(Class<T> cls) {
 //        this.cls = cls;
