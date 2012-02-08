@@ -184,7 +184,12 @@ public class GenericDAO<T> {
     
     public List pagedData(String qryKey,String qry,int pageNo){    
         String sq=createSelect();
-        sq+=qry;        
+        sq+=qry;
+        List lst=GenericDAOUtil.getCache().getbySpecialKey(qryKey, sq,pageNo);
+        if(lst!=null && !lst.isEmpty()){
+            System.out.println("dddddddddf");
+            return lst;
+        }
         Query qu=GenericDAOUtil.getQuery(sq);
         int noofrows=1000;
         int fr=(pageNo-1) * noofrows;
