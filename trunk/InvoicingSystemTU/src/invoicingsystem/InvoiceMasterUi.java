@@ -4,27 +4,37 @@
  *
  * Created on Dec 2, 2011, 10:27:21 AM
  */
-
 package invoicingsystem;
 
 import com.components.custom.PagedPopUpPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import org.components.parent.controls.editors.TablePopUpCellEditor;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
 import org.biz.app.ui.util.TableUtil;
 import org.biz.app.ui.util.uiEty;
+import org.biz.dao.util.EntityService;
 import org.biz.invoicesystem.entity.master.Customer;
 import org.biz.invoicesystem.entity.master.Item;
 import org.biz.invoicesystem.entity.transactions.SalesInvoice;
 import org.biz.invoicesystem.entity.transactions.SalesInvoiceLineItem;
 import org.biz.invoicesystem.service.master.CustomerService;
 import org.biz.invoicesystem.service.master.ItemService;
+import org.biz.invoicesystem.service.transactions.SalesInvoiceService;
 import org.components.parent.controls.editors.DoubleCellEditor;
 import org.components.parent.controls.editors.StringCellEditor;
+import org.components.parent.controls.editors.TableSelectionAction;
 import org.components.windows.TabPanelUI;
 
 /*
@@ -38,6 +48,7 @@ public class InvoiceMasterUi extends TabPanelUI {
 
     SalesInvoice invoice;
     List<SalesInvoiceLineItem> lineItems;
+    SalesInvoiceService servicedao;
 
     /** Creates new form InvoiceMasterUi */
     public InvoiceMasterUi() {
@@ -47,60 +58,178 @@ public class InvoiceMasterUi extends TabPanelUI {
     }
     TablePopUpCellEditor ed;
 
-    private boolean isvalid() {
-        if (tblInvoice.getSelectedRow() > -1) {
-            Object ob = TableUtil.getSelectedValue(tblInvoice, 1);
-            if (ob != null) {
-                if (ob.equals("2.0")) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
+    public static void main(String[] args) {
+//        List lst = new ArrayList();
+//        for (int i = 0; i < 1500; i++) {
+//            Item cus = new Item();
+//            cus.setId("" + i + "" + System.currentTimeMillis());
+//            cus.setCode("" + i + "" + System.currentTimeMillis() + "" + i);
+//            cus.setDescription("" + i + "" + System.currentTimeMillis() + "" + i);
+//            lst.add(cus);
+//        }
+//        new GenericDAO<Item>().saveList(lst);
+//        List lst = new ArrayList();
+//        for (int i = 0; i < 1500; i++) {
+//            Customer cus = new Customer();
+//            cus.setId("" + i + "" + System.currentTimeMillis());
+//            cus.setCode("" + i + "" + System.currentTimeMillis() + "" + i);
+//            cus.setCustomerName("" + i + "" + System.currentTimeMillis() + "" + i);
+//            lst.add(cus);
+//        }
+//        new GenericDAO<Customer>().saveList(lst);
     }
 
     @Override
     public void init() {
-//        System.out.println("yyyyyy"); 
+uiEty.setKeyAction(tblInvoice,new AbstractAction() {
 
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("delete action .......");
+                int sr = tblInvoice.getSelectedRow();
+                String id = (String) TableUtil.getSelectedValue(tblInvoice, 0);
+                if (id.equals(TableUtil.newRowID)) {
+                    return;
+                }
+                TableUtil.removerow(tblInvoice, sr);
+                for (Iterator<SalesInvoiceLineItem> it = lineItems.iterator(); it.hasNext();) {
+                    SalesInvoiceLineItem salesInvoiceLineItem = it.next();
+                    if (salesInvoiceLineItem.getId().equals(id)) {
+                        it.remove();
+                    }
+                }
+            }
+        },KeyEvent.VK_DELETE);
+        
+//        KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
+////KeyStroke ob = KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0);
+////         tblInvoice.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),ob);
+//        AbstractAction ac = new AbstractAction() {
+//
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("delete action .......");
+//                int sr = tblInvoice.getSelectedRow();
+//                String id = (String) TableUtil.getSelectedValue(tblInvoice, 0);
+//                if (id.equals(TableUtil.newRowID)) {
+//                    return;
+//                }
+//                TableUtil.removerow(tblInvoice, sr);
+//                for (Iterator<SalesInvoiceLineItem> it = lineItems.iterator(); it.hasNext();) {
+//                    SalesInvoiceLineItem salesInvoiceLineItem = it.next();
+//                    if (salesInvoiceLineItem.getId().equals(id)) {
+//                        it.remove();
+//                    }
+//                }
+//            }
+//        };
+//        tblInvoice.getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0),
+//                "doSomething");
+//        tblInvoice.getActionMap().put("doSomething",
+//                ac);
         invoice = new SalesInvoice();
         lineItems = new ArrayList<SalesInvoiceLineItem>();
         invoice.setLineItems(lineItems);
         itemService = new ItemService();
         listItem = itemService.getDao().getAll();
-        
-        
-        TablePopUpCellEditor tb = new TablePopUpCellEditor(tblInvoice){
-            @Override
-            public boolean action() {                
-                System.out.println("item selected");                
+
+        servicedao = new SalesInvoiceService();
+        itemService = new ItemService();
+
+
+        TablePopUpCellEditor tb = new TablePopUpCellEditor(tblInvoice) {
+
+            public boolean action() {
                 return false;
-            }        
+            }
         };
-        
+        TableSelectionAction taacti = new TableSelectionAction() {
+
+            @Override
+            public boolean rowValid() {
+                return validateAndRow();
+            }
+
+            @Override
+            public void newRowAdded() {
+                System.out.println("new row added");
+                SalesInvoiceLineItem si = new SalesInvoiceLineItem();
+                si.setId(TableUtil.newRowID);
+                lineItems.add(si);
+            }
+        };
+        tblInvoice.setTableSelection(taacti);
+        tblInvoice.getTableSelection().addAction(5, new TableSelectionAction() {
+
+            @Override
+            public int actionPerformed() {
+//                tblInvoice.setValueAt(TableUtil.getNewRowId(), tblInvoice.getSelectedRow(), 0);
+                validateAndRow();
+                return TableSelectionAction.newrow;
+            }
+        });
         popUpComponent = new PagedPopUpPanel(tblInvoice, tb) {
+
+            @Override
+            public void search(String qry) {
+                try {
+
+                    popUpComponent.setList(itemService.getDao().byCode(qry));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
             @Override
             public void action() {
-            
+
+                String ob = popUpComponent.getSelectedID();
+                Item item = null;
+                //find Item
+                for (Item it : listItem) {
+                    if (ob.equals(it.getId())) {
+                        popUpComponent.setSelectedObject(it);
+                        item = it;
+                        break;
+                    }
+                }
+                int sr = tblInvoice.getSelectedRow();
+                SalesInvoiceLineItem lineItem = rowToEty();
+                //if current row valid 
+                lineItem.setItem(item);
+                //replace row
+                addsales(lineItem);
+
             }
+
             @Override
             public Object[] data(Object item) {
                 Item it = (Item) item;
                 return new Object[]{it.getId(), it.getCode(), it.getDescription()};
             }
         };
+        popUpComponent.setSelectedColumn(1);
 
+        tblInvoice.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    System.out.println("delete");
+                }
+            }
+        });
 
 //        tblInvoice.getColumnModel().getColumn(2).setCellEditor(tb);      
         TableUtil.setColumnEditor(tblInvoice, 1, tb);
         TableUtil.setColumnEditor(tblInvoice, 2, new StringCellEditor(tblInvoice));
         TableUtil.setColumnEditor(tblInvoice, 3, new DoubleCellEditor(tblInvoice));
         TableUtil.setColumnEditor(tblInvoice, 4, new DoubleCellEditor(tblInvoice));
-        TableUtil.setColumnEditor(tblInvoice, 5, new DoubleCellEditor(tblInvoice));
-        DoubleCellEditor dce = new DoubleCellEditor(tblInvoice) {
-            public boolean action() {
+        TableUtil.setColumnEditor(tblInvoice, 5, new DoubleCellEditor(tblInvoice) {
+
+            public boolean isCellValid() {
+                int sr = tblInvoice.getSelectedRow();
+
                 SalesInvoiceLineItem lineItem = rowToEty();
+
                 if (lineItem != null && lineItem.getPrice() != null && lineItem.getPrice() >= 150) {
                     System.out.println("row is valid so move to next if  e");
                     //if ot last row row is valid so move
@@ -112,7 +241,11 @@ public class InvoiceMasterUi extends TabPanelUI {
                     return false;
                 }
             }
+        });
+
+        DoubleCellEditor dce = new DoubleCellEditor(tblInvoice) {
         };
+
         TableUtil.setColumnEditor(tblInvoice, 6, dce);
 
 
@@ -123,50 +256,62 @@ public class InvoiceMasterUi extends TabPanelUI {
 
 
         cuspop = new PagedPopUpPanel(tcus) {
+
             @Override
-            public Object[] data(Object item) {            
+            public Object[] data(Object item) {
                 Customer customer = (Customer) item;
-                return new Object[]{customer.getId(), customer.getCode(), customer.getCustomerName()};            
-            }            
+                return new Object[]{customer.getId(), customer.getCode(), customer.getCustomerName()};
+            }
+
+            @Override
+            public void action() {
+
+                String ob = cuspop.getSelectedID();
+                Customer item = null;
+                //find Item
+                for (Customer it : listCust) {
+                    if (ob.equals(it.getId())) {
+                        cuspop.setSelectedObject(it);
+                        item = it;
+                        invoice.setCustomer(item);
+                        uiEty.objToUi(cTextArea2, item.getAddress());
+                        break;
+                    }
+                }
+
+            }
+
             @Override
             public void search(String qry) {
-                //filter 
-//             listCust = custService.getDao().findCustomerByCode(qry);
                 try {
-                
-                    String cus = " where c.customerName like '" + qry + "%' ";
-                if (qry.isEmpty()) {
-                    listCust = custService.getDao().getAll();
-                } else {
-                    listCust = custService.getDao().pagedData("cuspop", cus, 1);
-                }   
+                    listCust = custService.getDao().byCode(qry);
+                    cuspop.setObjectToTable(listCust);
                 } catch (Exception e) {
-                e.printStackTrace();
+                    e.printStackTrace();
                 }
-                 
-
             }
         };
         cuspop.setObjectToTable(listCust);
-        custService = new CustomerService();
+        cuspop.setSelectedColumn(1);
         popUpComponent.setObjectToTable(listItem);
-
         tblInvoice.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     try {
-                        SalesInvoiceLineItem inli = rowToEty();
-                        
+                        int sr = tblInvoice.getSelectedRow();
+                        SalesInvoiceLineItem seil = rowToEty();
+                        System.out.println("sales + " + seil.getId());
+                        //if new row create new line item add to 
+                        //or selecet the correct model frfom list and select current 
                     } catch (Exception ee) {
+                    
                     }
-
                 }
             }
         });
         setnewrow();
     }
-    
     TableCellEditor de;
 //    DoubleCellEditor de;
     PagedPopUpPanel cuspop;
@@ -177,47 +322,94 @@ public class InvoiceMasterUi extends TabPanelUI {
     SalesInvoiceLineItem invoiceLineItem;
     Item currentItem;
 
-    
+    private boolean validateAndRow() {
+//        SalesInvoiceLineItem lineItem = rowToEty();
 
-    public SalesInvoiceLineItem rowToEty() {
-        
-        SalesInvoiceLineItem lineItem = new SalesInvoiceLineItem();
-        Item item = new Item();
-        lineItem.setItem(currentItem);
-        lineItem.setDescription(uiEty.colToStrE(tblInvoice, 2));
-        lineItem.setUnit(uiEty.colToStr(tblInvoice, 4));
-        lineItem.setPrice(uiEty.colToDbl(tblInvoice, 5));
-        lineItem.setLineAmount(uiEty.colToDbl(tblInvoice, 6));
-    
-        return lineItem;
-    
-    }    
-    
-    public boolean validateRow() {
-        System.out.println("validating row ... "
-                + "... jaw........");
-        int r = tblInvoice.getSelectedRow();
-        if (r == -1) {
-            return true;
-        }
-        try {
+        int sr = tblInvoice.getSelectedRow();
 
-            SalesInvoiceLineItem lineItem = rowToEty();
-            if (lineItem.getPrice() == null) {
-                return true;
-            }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        SalesInvoiceLineItem seil = rowToEty();
+        //validate the lineitem
+        addsales(seil);
+        if (seil != null && TableUtil.newRowID.equals(seil.getId())) {
+            String va = TableUtil.getNewRowId();
+            tblInvoice.setValueAt(va, sr, 0);
+            seil.setId(va);
         }
-    return false;
+        for (SalesInvoiceLineItem Item : lineItems) {
+            Item it = Item.getItem();
+            System.out.println("ite " + Item.getId() + " item " + (it == null ? " - print null" : Item.getItem().getId()));
+        }
+        System.out.println("\\---------------.///////");
+
+        return true;
     }
 
-    
-    
-    
+    private SalesInvoiceLineItem addsales(SalesInvoiceLineItem lineItem) {
+        SalesInvoiceLineItem sl = null;
+        int sx = -1;
+        int x = -1;
+        for (SalesInvoiceLineItem sil : lineItems) {
+            x++;
+            if (lineItem.getId().equals(sil.getId())) {
+                sx = x;
+                sl = sil;
+                break;
+            }
+        }
+        if (sx > -1) {
+            lineItems.remove(sx);
+            lineItems.add(sx, lineItem);
+        }
+        return sl;
+    }
+
+    public SalesInvoiceLineItem rowToEty() {
+
+        String bt = uiEty.colToStrE(tblInvoice, 0);
+        SalesInvoiceLineItem lineItem = new SalesInvoiceLineItem();
+        lineItem.setId(uiEty.colToStrE(tblInvoice, 0));
+//        lineItem.setItem(currentItem);
+        lineItem.setDescription(uiEty.colToStrE(tblInvoice, 2));
+        lineItem.setUnit(uiEty.colToStr(tblInvoice, 4));
+        lineItem.setQty(uiEty.colToDbl(tblInvoice, 3));
+        lineItem.setPrice(uiEty.colToDbl(tblInvoice, 5));
+        lineItem.setLineAmount(uiEty.colToDbl(tblInvoice, 6));
+        for (SalesInvoiceLineItem sli : lineItems) {
+            if (bt.equals(sli.getId())) {
+                lineItem.setItem(sli.getItem());
+                break;
+            }
+        }
+
+//      
+
+//           int sx = -1;
+//        int x = -1;
+//        for (SalesInvoiceLineItem sil : lineItems) {
+//            x++;
+//            if (lineItem.getId().equals(sil.getId())) {
+//                sx = x;
+//                break;
+//            }
+//
+//        }
+//        if (sx > -1) {
+//            lineItems.remove(sx);
+//            lineItems.add(sx, lineItem);
+//        } else {
+////                    if(! TableUtil.newRowID.equals(lineItem.getId())){
+//            lineItems.add(lineItem);
+//        }
+        return lineItem;
+
+    }
+
     public void setnewrow() {
-        TableUtil.addrow(tblInvoice, new Object[]{TableUtil.getNewRowId(), ""});
+        TableUtil.addrow(tblInvoice, new Object[]{TableUtil.newRowID});
+        System.out.println("new row added");
+        SalesInvoiceLineItem si = new SalesInvoiceLineItem();
+        si.setId(TableUtil.newRowID);
+        lineItems.add(si);
     }
 
     public void addToTable(List<SalesInvoiceLineItem> items) {
@@ -225,16 +417,12 @@ public class InvoiceMasterUi extends TabPanelUI {
         if (items == null || items.isEmpty()) {
             return;
         }
-        for (SalesInvoiceLineItem salesInvoiceLineItem : items) {
-            addToTable(salesInvoiceLineItem);
+        for (SalesInvoiceLineItem item : items) {
+            TableUtil.addrow(tblInvoice, new Object[]{item.getId(), item.getItem().getCode(), item.getQty()
+                    });
         }
 
-        TableUtil.addrow(tblInvoice, new Object[]{TableUtil.newRowID, ""});
-    }
-
-    public void addToTable(SalesInvoiceLineItem item) {
-        TableUtil.addrow(tblInvoice, new Object[]{item.getId(), item.getItem().getCode(), item.getQty()
-                });
+        TableUtil.addrow(tblInvoice, new Object[]{TableUtil.newRowID});
     }
 
     @SuppressWarnings("unchecked")
@@ -253,7 +441,6 @@ public class InvoiceMasterUi extends TabPanelUI {
         cTextField6 = new org.components.controls.CTextField();
         cTextField11 = new org.components.controls.CTextField();
         cLabel15 = new org.components.controls.CLabel();
-        cComboBox1 = new org.components.controls.CComboBox();
         cLabel2 = new org.components.controls.CLabel();
         cComboBox2 = new org.components.controls.CComboBox();
         cTextField2 = new org.components.controls.CTextField();
@@ -263,11 +450,8 @@ public class InvoiceMasterUi extends TabPanelUI {
         jScrollPane3 = new javax.swing.JScrollPane();
         cTextArea2 = new org.components.controls.CTextArea();
         cCheckBox2 = new org.components.controls.CCheckBox();
-        cButton1 = new org.components.controls.CButton();
         cDatePicker1 = new org.components.controls.CDatePicker();
         cPanel4 = new org.components.containers.CPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        cxTable2 = new org.components.controls.CxTable();
         cLabel4 = new org.components.controls.CLabel();
         cPanel3 = new org.components.containers.CPanel();
         cLabel6 = new org.components.controls.CLabel();
@@ -286,21 +470,12 @@ public class InvoiceMasterUi extends TabPanelUI {
         cTextField13 = new org.components.controls.CTextField();
         cTextField14 = new org.components.controls.CTextField();
         cTextField15 = new org.components.controls.CTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblInvoice = new org.components.controls.CxTable(){
-            public boolean isCurrentRowValid() {
-                return validateRow();
-            }
-            public boolean action(){
-                if(tblInvoice.getSelectedColumn()==5){
-
-                    System.out.println("table action called");
-                    return true;
-                }
-                return false;
-            }
-
-        };
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblInvoice = new org.components.controls.TableEditable();
+        cButton1 = new org.components.controls.CButton();
+        cdelete = new org.components.controls.CButton();
+        cclear = new org.components.controls.CButton();
+        cTextField3 = new org.components.controls.CTextField();
 
         setLayout(null);
 
@@ -358,13 +533,11 @@ public class InvoiceMasterUi extends TabPanelUI {
 
         add(cPanel1);
         cPanel1.setBounds(680, 360, 260, 160);
-        add(cComboBox1);
-        cComboBox1.setBounds(830, 70, 110, 23);
 
         cLabel2.setText("Salesman");
         cLabel2.setFont(new java.awt.Font("Tahoma", 0, 12));
         add(cLabel2);
-        cLabel2.setBounds(780, 70, 60, 25);
+        cLabel2.setBounds(720, 70, 60, 25);
 
         cComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Invoice", "Quotation", "Credit Note", "Consignment Out" }));
         add(cComboBox2);
@@ -392,16 +565,7 @@ public class InvoiceMasterUi extends TabPanelUI {
 
         cCheckBox2.setText("Type");
         cPanel2.add(cCheckBox2);
-        cCheckBox2.setBounds(10, 90, 60, 23);
-
-        cButton1.setText("Save");
-        cButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cButton1ActionPerformed(evt);
-            }
-        });
-        cPanel2.add(cButton1);
-        cButton1.setBounds(170, 90, 57, 23);
+        cCheckBox2.setBounds(10, 93, 60, 20);
 
         add(cPanel2);
         cPanel2.setBounds(0, 11, 240, 120);
@@ -409,35 +573,6 @@ public class InvoiceMasterUi extends TabPanelUI {
         cDatePicker1.setBounds(830, 40, 110, 22);
 
         cPanel4.setLayout(null);
-
-        cxTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Description", "Price Range"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(cxTable2);
-
-        cPanel4.add(jScrollPane4);
-        jScrollPane4.setBounds(10, 10, 210, 100);
-
         add(cPanel4);
         cPanel4.setBounds(10, 380, 230, 120);
 
@@ -527,47 +662,83 @@ public class InvoiceMasterUi extends TabPanelUI {
 
         tblInvoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "id", "Item Code", "Item Description", "Qty", "Unit", "Price", "LineAmount"
+                "id", "Item Code", "Desc", "Qty", "Unit", "Price", "Line Amount"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        tblInvoice.setSortable(false);
-        tblInvoice.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblInvoice);
-        tblInvoice.getColumnModel().getColumn(0).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(1).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(2).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(3).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(4).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(5).setResizable(false);
-        tblInvoice.getColumnModel().getColumn(6).setResizable(false);
+        jScrollPane2.setViewportView(tblInvoice);
 
-        add(jScrollPane1);
-        jScrollPane1.setBounds(10, 140, 930, 200);
+        add(jScrollPane2);
+        jScrollPane2.setBounds(10, 170, 900, 170);
+
+        cButton1.setText("Save");
+        cButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cButton1ActionPerformed(evt);
+            }
+        });
+        add(cButton1);
+        cButton1.setBounds(410, 400, 57, 30);
+
+        cdelete.setText("Delete");
+        cdelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cdeleteActionPerformed(evt);
+            }
+        });
+        add(cdelete);
+        cdelete.setBounds(540, 400, 70, 30);
+
+        cclear.setText("Clear");
+        cclear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cclearActionPerformed(evt);
+            }
+        });
+        add(cclear);
+        cclear.setBounds(470, 400, 70, 30);
+
+        cTextField3.setText("cTextField3");
+        add(cTextField3);
+        cTextField3.setBounds(780, 80, 130, 25);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
 
-        System.out.println("selected table  " + tblInvoice.getSelectedColumn());
+        invoice.setId(EntityService.getKeys());
+        servicedao.getDao().save(invoice);
+        invoice = SalesInvoice.createNewInvoice();
+        lineItems = invoice.getLineItems();
+        addToTable(lineItems);
+        System.out.println("saved.....");
+
 
     }//GEN-LAST:event_cButton1ActionPerformed
+
+    private void cdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cdeleteActionPerformed
+    }//GEN-LAST:event_cdeleteActionPerformed
+
+    private void cclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cclearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cclearActionPerformed
+
+    public void clear() {
+        //clear the gui
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.components.controls.CButton cButton1;
     private org.components.controls.CCheckBox cCheckBox2;
-    private org.components.controls.CComboBox cComboBox1;
     private org.components.controls.CComboBox cComboBox2;
     private org.components.controls.CDatePicker cDatePicker1;
     private org.components.controls.CLabel cLabel10;
@@ -602,15 +773,16 @@ public class InvoiceMasterUi extends TabPanelUI {
     private org.components.controls.CTextField cTextField14;
     private org.components.controls.CTextField cTextField15;
     private org.components.controls.CTextField cTextField2;
+    private org.components.controls.CTextField cTextField3;
     private org.components.controls.CTextField cTextField4;
     private org.components.controls.CTextField cTextField5;
     private org.components.controls.CTextField cTextField6;
     private org.components.controls.CTextField cTextField9;
-    private org.components.controls.CxTable cxTable2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private org.components.controls.CButton cclear;
+    private org.components.controls.CButton cdelete;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private org.components.controls.CxTable tblInvoice;
+    private org.components.controls.TableEditable tblInvoice;
     private org.components.controls.CTextField tcus;
     // End of variables declaration//GEN-END:variables
 
@@ -629,10 +801,11 @@ public class InvoiceMasterUi extends TabPanelUI {
     }
     PagedPopUpPanel popUpComponent;
 }
+
 //        cxTable2.getColumnModel().getColumn(2).setCellEditor(new editor(popUpComponent, tblInvoice));
 //        dialog = new ItemPopUp(cTextField1, lineItems)
-        /*     KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
-KeyStroke ob = KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0);
-//         tblInvoice.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),ob);
-ActionListener ac = tblInvoice.getActionForKeyStroke(ob);
-tblInvoice.registerKeyboardAction(ac,enter,JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);*/
+//        /*     KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+//KeyStroke ob = KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0);
+////         tblInvoice.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),ob);
+//ActionListener ac = tblInvoice.getActionForKeyStroke(ob);
+//tblInvoice.registerKeyboardAction(ac,enter,JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);*/

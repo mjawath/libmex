@@ -169,13 +169,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="org.components.controls.CComboBox" name="cComboBox1">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="830" y="70" width="110" height="-1"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="org.components.controls.CLabel" name="cLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salesman"/>
@@ -185,7 +178,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="780" y="70" width="60" height="-1"/>
+          <AbsoluteConstraints x="720" y="70" width="60" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -273,20 +266,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="90" width="60" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="org.components.controls.CButton" name="cButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Save"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cButton1ActionPerformed"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="170" y="90" width="-1" height="-1"/>
+              <AbsoluteConstraints x="10" y="93" width="60" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -309,49 +289,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
-      <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="10" width="210" height="100"/>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="org.components.controls.CxTable" name="cxTable2">
-              <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="2" rowCount="0">
-                    <Column editable="false" title="Description" type="java.lang.String"/>
-                    <Column editable="true" title="Price Range" type="java.lang.Double"/>
-                  </Table>
-                </Property>
-                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                  <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                  </TableColumnModel>
-                </Property>
-                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-      </SubComponents>
     </Container>
     <Component class="org.components.controls.CLabel" name="cLabel4">
       <Properties>
@@ -581,80 +518,125 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="140" width="930" height="200"/>
+          <AbsoluteConstraints x="10" y="170" width="900" height="170"/>
         </Constraint>
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="org.components.controls.CxTable" name="tblInvoice">
+        <Component class="org.components.controls.TableEditable" name="tblInvoice">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="4">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="true" title="id" type="java.lang.String"/>
                 <Column editable="true" title="Item Code" type="java.lang.String"/>
-                <Column editable="true" title="Item Description" type="java.lang.String"/>
+                <Column editable="true" title="Desc" type="java.lang.String"/>
                 <Column editable="true" title="Qty" type="java.lang.Double"/>
-                <Column editable="true" title="Unit" type="java.lang.String"/>
+                <Column editable="true" title="Unit" type="java.lang.Double"/>
                 <Column editable="true" title="Price" type="java.lang.Double"/>
-                <Column editable="true" title="LineAmount" type="java.lang.Double"/>
+                <Column editable="true" title="Line Amount" type="java.lang.Double"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
               </TableColumnModel>
             </Property>
-            <Property name="sortable" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.components.controls.CxTable(){&#xa;    public boolean isCurrentRowValid() {&#xa;        return validateRow();&#xa;    }&#xa;    public boolean action(){&#xa;        if(tblInvoice.getSelectedColumn()==5){&#xa;&#xa;            System.out.println(&quot;table action called&quot;);&#xa;            return true;&#xa;        }&#xa;return false; &#xa;    }&#xa;&#xa;}"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="org.components.controls.CButton" name="cButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cButton1ActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="410" y="400" width="-1" height="30"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="org.components.controls.CButton" name="cdelete">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cdeleteActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="540" y="400" width="70" height="30"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="org.components.controls.CButton" name="cclear">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clear"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cclearActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="470" y="400" width="70" height="30"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="org.components.controls.CTextField" name="cTextField3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="cTextField3"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="780" y="80" width="130" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
   </SubComponents>
 </Form>
