@@ -454,4 +454,11 @@ public class uiEty {
     public static void main(String[] args) {
         System.out.println(nowTimesStamp());
     }
+    
+    public static  Double getmultyply(Double d1,Double d2 ){
+        BigDecimal b1=new BigDecimal(d1==null?0:d1);
+        BigDecimal b2=new BigDecimal(d1==null?0:d2);
+        return b1.multiply(b2).doubleValue();            
+    }
+    
 }

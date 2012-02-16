@@ -6,6 +6,8 @@ package org.components.parent.controls.editors;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
@@ -29,17 +31,9 @@ public class ComboBoxCellEditor extends CellEditor {
 
     @Override
     public boolean stopCellEditing() {
-//        if (component.getText().equals("abcd") || component.getText().equals("")) {
-
-//            TableColumn tc= masterTbl.getColumnModel().getColumn(selcol); 
-
         boolean b = false;
-        if (isValide()) {
-            int selcol = getTbl().getSelectedColumn();
-            int selrow = getTbl().getSelectedRow();
+        if (isCellValid()) {
             b = super.stopCellEditing();
-//            getTbl().changeSelection(selrow, selcol + 1, true, true);
-            System.out.println("col" + selcol);
         }
         return b;
     }
@@ -65,19 +59,13 @@ public class ComboBoxCellEditor extends CellEditor {
     }
 
     public ComboBoxCellEditor(JTable tbl) {
-            init();
+        init();
 //        super(new JComboBox());
 //        component = (JComboBox) getComponent();
 //        component.setEditable(true);
         component.setModel(new DefaultComboBoxModel(new Object[]{"150", "250", "3650"}));
-      //  component.getEditor().addActionListener(new AbstractAction() {
-        component.addActionListener(new AbstractAction() {
-
-            public void actionPerformed(ActionEvent e) {
-//                stopCellEditing();
-
-            }
-        });
+        //  component.getEditor().addActionListener(new AbstractAction() {
+        
         this.tbl = tbl;
 //        init();
 
@@ -103,43 +91,26 @@ public class ComboBoxCellEditor extends CellEditor {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
                     stopCellEditing();
+                    System.out.println(" "+e);
                 }
             }
         });
-        addCellEditorListener(new CellEditorListener() {
-
+        component.addKeyListener(new KeyAdapter() {
             @Override
-            public void editingStopped(ChangeEvent e) {
-                boolean b = false;
-//        if (isCellValid()) {
-                int selcol = tbl.getSelectedColumn();
-                int selrow = tbl.getSelectedRow();
-//            b = super.stopCellEditing();
-                tbl.changeSelection(selrow, selcol+1, true, true);
-//tbl.revalidate();
-//         }/
-//        return b;
-            }
-
-            @Override
-            public void editingCanceled(ChangeEvent e) {
+            public void keyPressed(KeyEvent e) {              
+               if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                   System.out.println(" "+e);
+                   
+              } 
             }
         });
+
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-if (!isSelected) {
-            JLabel jl = new JLabel();
-            if (value == null) {
-                jl.setText("");
-            } else {
-                jl.setText(value.toString());
-            }
-            return jl;
-        }
+
         return component;
     }
 
