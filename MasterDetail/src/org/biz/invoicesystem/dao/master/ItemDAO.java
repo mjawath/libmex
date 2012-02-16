@@ -140,7 +140,7 @@ public class ItemDAO extends GenericDAO<Item> {
     
     public List<Item> byCode(String qry) {
         String cus = " where c.code like '" + qry + "%' ";
-        List<Item> lst = pagedData(Item.class.getSimpleName(), cus, 1);
+        List<Item> lst = pagedData( cus, 1);//if lst size 0 then search barcode
         return lst;
      
     }
