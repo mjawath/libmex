@@ -182,10 +182,10 @@ public class GenericDAO<T> {
     }
     
     
-    public List pagedData(String qryKey,String qry,int pageNo){    
+    public List pagedData(String qry,int pageNo){    
         String sq=createSelect();
         sq+=qry;
-        List lst=GenericDAOUtil.getCache().getbySpecialKey(qryKey, sq,pageNo);
+        List lst=GenericDAOUtil.getCache().getbySpecialKey(classname, sq,pageNo);
         if(lst!=null && !lst.isEmpty()){
             System.out.println("dddddddddf");
             return lst;

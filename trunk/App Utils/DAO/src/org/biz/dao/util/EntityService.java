@@ -62,7 +62,7 @@ public class EntityService {
         String key = System.currentTimeMillis()+"-"+rn;
         return key;
     }
-    public String getKeyStr() {
+    public static String getKeyStr() {
     return randomString(15);
     }
     public String getKey(String shopName) {
@@ -111,10 +111,10 @@ public class EntityService {
         return key;
     }
     
-    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static final String AB = "GHIJBK013LO8L2MNOP7ECD456QRS9ABKFTUVWXYZ";
     static Random rnd = new Random();
 
-    String randomString(int len) {
+  static  String  randomString(int len) {
         
 //        Calendar calendar = Calendar.getInstance();
 //        StringBuilder sb = new StringBuilder(len);
