@@ -70,17 +70,9 @@ public class DoubleCellEditor extends  CellEditor {
 
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
-        if (!isSelected) {
-            JLabel jl = new JLabel();
-//            if (value == null) {
-//                jl.setText("");
-//            } else {
-//                jl.setText(value.toString());
-//            }
-            return jl;
-        }
+  
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
-        System.out.println("vlaue " + value);
+      
         // Configure the component with the specified value
         ((JTextField) component).setText("" + value);
         ((JTextField) component).selectAll();
