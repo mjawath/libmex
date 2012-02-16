@@ -5,6 +5,7 @@
 package org.biz.invoicesystem.entity.transactions;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,10 +20,10 @@ import org.biz.invoicesystem.entity.master.Supplier;
  * @author mjawath
  */
 @Entity
-public class PurchaseInvoice implements Serializable   {
+public class PurchaseInvoice implements Serializable {
+
     @Id
     private String id;
-
     private static final long serialVersionUID = 1L;
     @ManyToOne
     Supplier supplier;
@@ -46,14 +47,17 @@ public class PurchaseInvoice implements Serializable   {
         this.supplier = supplier;
     }
 
-
-
-   
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    static public PurchaseInvoice createNewInvoice() {
+        PurchaseInvoice sl = new PurchaseInvoice();
+        sl.setLineItems(new ArrayList<PurchaseInvoiceLineItem>());
+        return sl;
     }
 }

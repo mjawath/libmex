@@ -5,6 +5,7 @@
 package org.biz.invoicesystem.entity.transactions;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -15,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import org.biz.invoicesystem.entity.master.Customer;
+import org.biz.invoicesystem.entity.master.Staff;
 
 /**
  *
@@ -27,6 +29,9 @@ public class SalesInvoice implements Serializable   {
     private static final long serialVersionUID = 1L;
     @ManyToOne
     Customer customer;
+    @ManyToOne
+    Staff staff;
+    
     @JoinColumn(name = "sales_invoice_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     List<SalesInvoiceLineItem> lineItems;
@@ -47,6 +52,22 @@ public class SalesInvoice implements Serializable   {
 
     public void setLineItems(List<SalesInvoiceLineItem> lineItems) {
         this.lineItems = lineItems;
+    }
+
+    public Date getDocdate() {
+        return docdate;
+    }
+
+    public void setDocdate(Date docdate) {
+        this.docdate = docdate;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 
     public List<SalesInvoiceLineItem> getLineItems() {
@@ -77,4 +98,11 @@ public class SalesInvoice implements Serializable   {
     public void setId(String id) {
         this.id = id;
     }
+    
+    static  public SalesInvoice createNewInvoice(){
+    SalesInvoice sl=new SalesInvoice();
+    sl.setLineItems(new ArrayList<SalesInvoiceLineItem>());
+    return sl;
+    }
+    
 }

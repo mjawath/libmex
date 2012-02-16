@@ -22,8 +22,8 @@ public class PurchaseInvoiceDAO extends GenericDAO<PurchaseInvoice>{
 
     public void selectMontlyPurchase(int month){
         String qr="select * from PurchaseInvoice p ";
-         getQuery(qr);
-         getQuery(qr);
+//         getQuery(qr);
+//         getQuery(qr);
     }
 
     public void selectMontly(){}
