@@ -22,11 +22,26 @@ public class PurchaseInvoiceLineItem implements Serializable  {
     private String description;
     @OneToOne
     private Item item;
-    private Long qty;
-    @OneToOne
-    private UOM uom;
+    private Double qty;
+    private String unit;
     private Double price;
     private Double lineAmount;
+
+    public Double getQty() {
+        return qty;
+    }
+
+    public void setQty(Double qty) {
+        this.qty = qty;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
     public String getId() {
         return id;
     }
@@ -63,21 +78,6 @@ public class PurchaseInvoiceLineItem implements Serializable  {
         this.price = price;
     }
 
-    public Long getQty() {
-        return qty;
-    }
-
-    public void setQty(Long qty) {
-        this.qty = qty;
-    }
-
-    public UOM getUom() {
-        return uom;
-    }
-
-    public void setUom(UOM uom) {
-        this.uom = uom;
-    }
 
     public void setId(String id) {
         this.id = id;

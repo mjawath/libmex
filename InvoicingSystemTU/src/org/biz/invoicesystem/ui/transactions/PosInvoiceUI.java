@@ -4,7 +4,7 @@
  *
  * Created on Dec 2, 2011, 10:27:21 AM
  */
-package invoicingsystem;
+package org.biz.invoicesystem.ui.transactions;
 
 import com.components.custom.PagedPopUpPanel;
 import java.awt.event.ActionEvent;
@@ -45,7 +45,7 @@ import org.components.windows.TabPanelUI;
  * @2011/12/15 jawath-  table editing cell ediotr
  * @2011/12/18 jawath-  table editing cell ediotr document listner
  */
-public class InvoiceMasterUi extends TabPanelUI {
+public class PosInvoiceUI extends TabPanelUI {
 
     SalesInvoice invoice;
     List<SalesInvoiceLineItem> lineItems;
@@ -53,7 +53,7 @@ public class InvoiceMasterUi extends TabPanelUI {
     PagedPopUpPanel popUpComponent;
     ComboBoxCellEditor ce;
     /** Creates new form InvoiceMasterUi */
-    public InvoiceMasterUi() {
+    public PosInvoiceUI() {
         initComponents();
 
         init();
@@ -136,17 +136,16 @@ public class InvoiceMasterUi extends TabPanelUI {
                 si.setId(TableUtil.newRowID);
                 lineItems.add(si);
             }
+        };
+        tblInvoice.setTableSelection(taacti);
+        tblInvoice.getTableSelection().addAction(5, new TableSelectionAction() {
+
             @Override
             public int actionPerformed() {
                 validateAndRow();
                 return TableSelectionAction.newrow;
             }
-        };
-        taacti.setUnSelectableColumns(new Integer[]{3,4});
-        taacti.setActioncol(5);
-        
-        tblInvoice.setTableSelection(taacti);
-      
+        });
         popUpComponent = new PagedPopUpPanel(tblInvoice, tb) {
             @Override
             public void search(String qry) {
@@ -710,7 +709,7 @@ public class InvoiceMasterUi extends TabPanelUI {
         jScrollPane2.setViewportView(tblInvoice);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(10, 170, 930, 180);
+        jScrollPane2.setBounds(10, 170, 900, 180);
 
         cButton1.setText("Save");
         cButton1.addActionListener(new java.awt.event.ActionListener() {

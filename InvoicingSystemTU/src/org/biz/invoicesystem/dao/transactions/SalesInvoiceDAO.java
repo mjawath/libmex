@@ -26,9 +26,9 @@ public class SalesInvoiceDAO extends GenericDAO<SalesInvoice>{
 
     public List<SalesInvoice> getByDay(Date date){
           String qr = "select  c from SalesInvoice c  where c.saveddate = ?1";
-          Query qur=   getQuery(qr);
-          qur.setParameter(1,date,TemporalType.DATE);
-          List<SalesInvoice> sb =  ExecuteQuery(qur);
+//          Query qur=   getQuery(qr);
+//          qur.setParameter(1,date,TemporalType.DATE);
+          List<SalesInvoice> sb =  ExecuteQuery(qr);
           return sb;
     }
 
@@ -38,7 +38,7 @@ public class SalesInvoiceDAO extends GenericDAO<SalesInvoice>{
         String doc=SalesInvoice.class.getSimpleName();
         SalesInvoice invoice = new SalesInvoice();
         invoice.setId(id);
-        em= createEmNew();
+//        em= createEmNew();
         String qry="select c    from InventoryJournal c  where c.refCode='"+id+"' and c.documentType='"+doc+"' ";
         em.getTransaction().begin();
         em.remove(em.merge(invoice));
@@ -60,7 +60,7 @@ public class SalesInvoiceDAO extends GenericDAO<SalesInvoice>{
     public void updateEV(SalesInvoice invoice,InventoryJournal uij){
         EntityManager em=null;
         try {
-        em= createEmNew();        
+//        em= createEmNew();        
         em.getTransaction().begin();        
         
          String qry="select c    from InventoryJournal c  where c.refCode='"+invoice.getId()+"' and c.documentType='"+SalesInvoice.class.getSimpleName()+"' ";
