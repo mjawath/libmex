@@ -61,10 +61,7 @@ public class StringCellEditor extends CellEditor {
 
     }
 
-    public boolean action() {
-        return false;
-
-    }
+ 
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

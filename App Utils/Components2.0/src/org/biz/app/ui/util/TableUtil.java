@@ -82,7 +82,7 @@ public class TableUtil {
     
     public static void addnewrow(JTable jTable) {
 
-        getdtm(jTable).addRow( new Object[]{TableUtil.newRowID});
+        getdtm(jTable).addRow( new Object[]{});
 
     }
 

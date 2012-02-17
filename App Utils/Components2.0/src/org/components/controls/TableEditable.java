@@ -23,7 +23,8 @@ import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import org.components.parent.controls.PxTable;
-import org.components.parent.controls.editors.TableSelectionAction;
+import org.components.parent.controls.editors.TableColumnAction;
+import org.components.parent.controls.editors.TableActions;
 
 /**
  *
@@ -50,7 +51,7 @@ public class TableEditable extends PxTable {
         this.setDefaultRenderer(String.class, new CustomRenderer());
         this.setDefaultRenderer(Double.class, new CustomRenderer());
         this.setDefaultRenderer(Object.class, new CustomRenderer());
-        action=new TableSelectionAction(this, new HashMap<Integer, TableSelectionAction>());
+        action=new TableActions(this, new HashMap<Integer, TableColumnAction>());
     }
 
     private boolean isCurrentRowValid=true;
@@ -90,16 +91,16 @@ public class TableEditable extends PxTable {
                 
                     
     }
-    public void setTableSelection(TableSelectionAction action ){
+    public void setTableAction(TableActions action ){
         this.action=action;
         action.setTbl(this);
     }
     
-    public TableSelectionAction getTableSelection( ){
+    public TableActions getTableSelection( ){
         return action;
     }
     
-    TableSelectionAction action;
+    TableActions action;
     public boolean action(){            
         return false;
     }

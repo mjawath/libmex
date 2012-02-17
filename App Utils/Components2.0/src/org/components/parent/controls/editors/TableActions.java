@@ -14,7 +14,7 @@ import org.components.controls.TableEditable;
  *
  * @author nnjj
  */
-public class TableSelectionAction {
+public class TableActions {
 
     JTable tbl;
     public static final int nextcol = -999;
@@ -22,7 +22,7 @@ public class TableSelectionAction {
     public static final int specrow = -997;
     public static final int currow = -996;
     public static final int nextrow = -995;
-    Map<Integer, TableSelectionAction> tableactions;
+    Map<Integer, TableColumnAction> tableactions;
     Integer[] unSelectableColumns;
     int actioncol = -1;
 
@@ -30,29 +30,29 @@ public class TableSelectionAction {
         this.actioncol = actioncol;
     }
 
-    public TableSelectionAction() {
-        tableactions = new HashMap<Integer, TableSelectionAction>();
+    public TableActions() {
+        tableactions = new HashMap<Integer, TableColumnAction>();
         unSelectableColumns = new Integer[15];
 
     }
 
-    public TableSelectionAction(JTable tbl) {
+    public TableActions(JTable tbl) {
         this.tbl = tbl;
-        tableactions = new HashMap<Integer, TableSelectionAction>();
+        tableactions = new HashMap<Integer, TableColumnAction>();
         unSelectableColumns = new Integer[15];
 
     }
 
-    public TableSelectionAction(JTable tbl, Map<Integer, TableSelectionAction> tableactions) {
+    public TableActions(JTable tbl, Map<Integer, TableColumnAction> tableactions) {
         this.tbl = tbl;
         this.tableactions = tableactions;
     }
 
-    public Map<Integer, TableSelectionAction> getTableactions() {
+    public Map<Integer, TableColumnAction> getTableColumnActions() {
         return tableactions;
     }
 
-    public void addAction(int x, TableSelectionAction action) {
+    public void addColumnAction(int x, TableColumnAction action) {
         action.setTbl(tbl);
         tableactions.put(x, action);
     }
@@ -71,9 +71,10 @@ public class TableSelectionAction {
         int colcount = tbl.getColumnCount();
         int rowcount = tbl.getRowCount();
 
-        if (actioncol==selcol) {
+        TableColumnAction columnAction=tableactions.get(selcol);
+        if(columnAction !=null){
 
-            int r = actionPerformed();
+            int r = columnAction.actionPerformed();
             if (r == newrow) {
                 if (((rowcount - 1) == selrow)) { //false normal selection           
                     TableUtil.addnewrow(tbl);
@@ -143,7 +144,11 @@ public class TableSelectionAction {
                     tbl.changeSelection(selrow, nextcolx, false, false);
                     return;
                 }
+                
                 nextcolx++;
+                if(nextcolx>=(colcount - 1)){
+                return;
+                }
             }
 
 
@@ -168,9 +173,7 @@ public class TableSelectionAction {
     public void newRowAdded() {
     }
 
-    public int actionPerformed() {
-        return -11111;
-    }
+    
 
     public boolean rowValid() {
         return true;
@@ -189,7 +192,7 @@ public class TableSelectionAction {
 
     public boolean isUnSelectableColumn(int x) {
         for (Integer integer : unSelectableColumns) {
-            if (integer == x) {
+            if (integer!=null && integer == x) {
                 return true;
             }
 
