@@ -35,7 +35,8 @@ import org.biz.invoicesystem.service.transactions.SalesInvoiceService;
 import org.components.parent.controls.editors.ComboBoxCellEditor;
 import org.components.parent.controls.editors.DoubleCellEditor;
 import org.components.parent.controls.editors.StringCellEditor;
-import org.components.parent.controls.editors.TableSelectionAction;
+import org.components.parent.controls.editors.TableColumnAction;
+import org.components.parent.controls.editors.TableActions;
 import org.components.windows.TabPanelUI;
 
 /*
@@ -122,7 +123,7 @@ public class PosInvoiceUI extends TabPanelUI {
                 return false;
             }
         };
-        TableSelectionAction taacti = new TableSelectionAction() {
+        TableActions taacti = new TableActions() {
 
             @Override
             public boolean rowValid() {
@@ -137,14 +138,16 @@ public class PosInvoiceUI extends TabPanelUI {
                 lineItems.add(si);
             }
         };
-        tblInvoice.setTableSelection(taacti);
-        tblInvoice.getTableSelection().addAction(5, new TableSelectionAction() {
+        tblInvoice.setTableAction(taacti);
+        tblInvoice.getTableSelection().addColumnAction(5, new TableColumnAction(){
 
-            @Override
-            public int actionPerformed() {
-                validateAndRow();
-                return TableSelectionAction.newrow;
+            
+          public   int actionPerformed() {
+                return -1;
             }
+
+           
+            
         });
         popUpComponent = new PagedPopUpPanel(tblInvoice, tb) {
             @Override
