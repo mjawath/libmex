@@ -18,4 +18,7 @@ public abstract  class CellEditor extends  AbstractCellEditor
     
     }
     public abstract  JComponent getComponent();
+    
+    public  void actionPerformed(){};
+    
 }
