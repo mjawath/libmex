@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import org.biz.invoicesystem.entity.master.Item;
-import org.biz.invoicesystem.entity.master.UOM;
 
 /**
  *

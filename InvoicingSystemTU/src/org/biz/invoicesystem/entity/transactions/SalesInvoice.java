@@ -23,7 +23,8 @@ import org.biz.invoicesystem.entity.master.Staff;
  * @author mjawath
  */
 @Entity
-public class SalesInvoice implements Serializable   {
+public class SalesInvoice implements Serializable {
+
     @Id
     private String id;//timestamp + random string + domain level generated string 
     private static final long serialVersionUID = 1L;
@@ -31,17 +32,16 @@ public class SalesInvoice implements Serializable   {
     Customer customer;
     @ManyToOne
     Staff staff;
-    
     @JoinColumn(name = "sales_invoice_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     List<SalesInvoiceLineItem> lineItems;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    Date editeddate;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date docdate;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date saveddate;
-    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    Date editeddate;
+
     public Customer getCustomer() {
         return customer;
     }
@@ -74,35 +74,33 @@ public class SalesInvoice implements Serializable   {
         return lineItems;
     }
 
-    public void setSaveddate(Date saveddate) {
-        this.saveddate = saveddate;
-    }
-
-    public Date getSaveddate() {
-        return saveddate;
-    }
-
-    public void setEditeddate(Date editeddate) {
-        this.editeddate = editeddate;
+    public String getId() {
+        return id;
     }
 
     public Date getEditeddate() {
         return editeddate;
     }
 
-   
-    public String getId() {
-        return id;
+    public void setEditeddate(Date editeddate) {
+        this.editeddate = editeddate;
+    }
+
+    public Date getSaveddate() {
+        return saveddate;
+    }
+
+    public void setSaveddate(Date saveddate) {
+        this.saveddate = saveddate;
     }
 
     public void setId(String id) {
         this.id = id;
     }
-    
-    static  public SalesInvoice createNewInvoice(){
-    SalesInvoice sl=new SalesInvoice();
-    sl.setLineItems(new ArrayList<SalesInvoiceLineItem>());
-    return sl;
+
+    static public SalesInvoice createNewInvoice() {
+        SalesInvoice sl = new SalesInvoice();
+        sl.setLineItems(new ArrayList<SalesInvoiceLineItem>());
+        return sl;
     }
-    
 }
