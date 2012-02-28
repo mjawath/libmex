@@ -1,4 +1,4 @@
-package invoicingsystem;
+package research.ui.demo;
 
 /* try running this, move mouse to top to expose component, move away to
  hide it, also can press the button multiple times to expose it. */

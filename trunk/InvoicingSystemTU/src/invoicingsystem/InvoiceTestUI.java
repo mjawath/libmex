@@ -26,13 +26,12 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
+import org.components.parent.controls.editors.CustomRenderer;
 import org.components.windows.TabPanelUI;
 
 /**
@@ -211,19 +210,7 @@ class MyTableCellEditor extends DefaultCellEditor {
     
 }
 
-class CustomRenderer extends DefaultTableCellRenderer {
 
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if (isSelected && hasFocus) {
-            c.setBackground(Color.red);
-        }
-
-
-        // Formatting
-        return c;
-    }
-}
 
 class jd extends JDialog {
 
