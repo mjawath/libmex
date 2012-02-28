@@ -10,6 +10,10 @@ package org.components.windows;
  *
  * Created on Nov 22, 2010, 1:58:08 PM
  */
+import java.awt.AWTEvent;
+import java.awt.Toolkit;
+import java.awt.event.AWTEventListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +30,14 @@ public abstract class TabPanelUI extends javax.swing.JPanel implements TabChildU
 
     public void init() {
 
+             Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+
+            public void eventDispatched(AWTEvent event) {
+                if (((KeyEvent) event).getKeyCode() == KeyEvent.VK_ESCAPE && TabPanelUI.this.isShowing()) {
+                    System.out.println("closing");
+                };
+            }
+        }, AWTEvent.KEY_EVENT_MASK);
         events();
     }
 

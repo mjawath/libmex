@@ -41,7 +41,10 @@ public class StringCellEditor extends CellEditor {
         component.addActionListener(new AbstractAction() {
 
             public void actionPerformed(ActionEvent e) {
-                stopCellEditing();
+                if (isCellValid()) {
+                    stopCellEditing();
+                       component.setText("");
+                }
 
 //                int selcol = tbl.getSelectedColumn();
 //                int selrow = tbl.getSelectedRow();

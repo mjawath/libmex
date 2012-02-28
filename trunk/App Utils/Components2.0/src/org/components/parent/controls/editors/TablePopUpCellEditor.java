@@ -35,32 +35,15 @@ public class TablePopUpCellEditor extends CellEditor
         
     }
 
-    @Override
-    public boolean stopCellEditing() {
-        boolean b = false;
-        if (isCellValid()) {
-            
-            b = super.stopCellEditing();
-            
-        }
-        return b;
-    }
+  
 
-    public boolean isCellValid() {
-        return true;
-    }
+   
 
     public TablePopUpCellEditor(JTable jt) {
         init(jt);
 
 
     }
-
-    public boolean validateCell() {
-
-        return true;
-    }
-
     private void init(JTable jt) {
         //specify
 
@@ -70,31 +53,14 @@ public class TablePopUpCellEditor extends CellEditor
         component.addActionListener(new AbstractAction() {
 
             public void actionPerformed(ActionEvent e) {
-                stopCellEditing();
-                component.setText("");
-                int selcol = tbl.getSelectedColumn();
-                int selrow = tbl.getSelectedRow();
-                int colcount = tbl.getColumnCount();
-                int rowcount = tbl.getRowCount();
-
-//                boolean ab = action();//Action will return true if it need new row or 
-//                if (((rowcount - 1) == selrow) && ab) {              //false normal selection           
-//                    TableUtil.addrow(tbl, new Object[]{});
-//                    tbl.changeSelection(selrow + 1, 1, false, false);
-//                } else {
-//                    selcol = (colcount - 1) == selcol ? selcol : ++selcol;
-//                    tbl.changeSelection(selrow, selcol, false, false);
-//                }
+              if (isCellValid()) {
+                    stopCellEditing();
+                       component.setText("");
+                }
             }
         });
 
     }
-
-    public boolean action() {
-        return false;
-
-    }
-
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
         

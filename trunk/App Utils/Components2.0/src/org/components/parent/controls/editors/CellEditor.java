@@ -5,20 +5,30 @@
 package org.components.parent.controls.editors;
 
 import javax.swing.AbstractCellEditor;
-import javax.swing.JComponent;
-import javax.swing.table.TableCellEditor;
 
 /**
  *
  * @author nnjj
  */
 public abstract  class CellEditor extends  AbstractCellEditor
-        implements TableCellEditor {
-    public void getEditingValue(){
+        implements ICellEditor {
     
+    //for the sace of column value validation
+     public boolean isCellValid() {
+        return true;
     }
-    public abstract  JComponent getComponent();
+
+    @Override
+    public void actionPerformed() {
+       
+    }
+
+    @Override
+    public void getEditingValue() {
+        
+    }
+
+   
     
-    public  void actionPerformed(){};
-    
+     
 }
