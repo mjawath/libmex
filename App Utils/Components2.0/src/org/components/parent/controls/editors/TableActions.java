@@ -71,8 +71,8 @@ public class TableActions {
         int colcount = tbl.getColumnCount();
         int rowcount = tbl.getRowCount();
 
-        TableColumnAction columnAction=tableactions.get(selcol);
-        if(columnAction !=null){
+        TableColumnAction columnAction = tableactions.get(selcol);
+        if (columnAction != null) {
 
             int r = columnAction.actionPerformed();
             if (r == newrow) {
@@ -84,7 +84,7 @@ public class TableActions {
                 }
 
                 if (((rowcount - 1) > selrow)) {
-                    if (TableUtil.newRowID.equals(TableUtil.getSelectedValue(tbl, 0))) { //false normal selection           
+                    if (TableUtil.getSelectedValue(tbl, 0) == null) { //false normal selection           
                         TableUtil.addnewrow(tbl);
                         ((TableEditable) tbl).getTableSelection().newRowAdded();
                         tbl.changeSelection(rowcount, 1, false, false);
@@ -104,12 +104,20 @@ public class TableActions {
 //                if (!isUnSelectableColumn(selcol)) {
 //                    tbl.changeSelection(selrow, selcol, false, false);
 //                } else {
-                    //todo if column is last or action  move to next row and first row33                        
+                //todo if column is last or action  move to next row and first row33                        
 
-                    tbl.changeSelection(selrow, selcol , false, false);
+//                    tbl.changeSelection(selrow, selcol , false, false);
 //                }
 
-                return;
+                int nextcolx = selcol + 1;
+                while (true) {
+                    if (!isUnSelectableColumn(nextcolx) && nextcolx < (colcount - 1)) {
+                        tbl.changeSelection(selrow, nextcolx, false, false);
+                        return;
+                    }
+                    nextcolx++;
+                }
+
             }
             if (r >= 0 && r <= (rowcount - 1)) {
                 tbl.changeSelection(selrow, r, false, false);
@@ -144,16 +152,16 @@ public class TableActions {
                     tbl.changeSelection(selrow, nextcolx, false, false);
                     return;
                 }
-                
+
                 nextcolx++;
-                if(nextcolx>=(colcount - 1)){
-                return;
+                if (nextcolx >= (colcount - 1)) {
+                    return;
                 }
             }
 
 
         }
-         
+
         if (selcol < (colcount - 1) && (selrow == rowcount - 1)) {
 
             int nextcolx = selcol + 1;
@@ -173,8 +181,6 @@ public class TableActions {
     public void newRowAdded() {
     }
 
-    
-
     public boolean rowValid() {
         return true;
     }
@@ -192,7 +198,7 @@ public class TableActions {
 
     public boolean isUnSelectableColumn(int x) {
         for (Integer integer : unSelectableColumns) {
-            if (integer!=null && integer == x) {
+            if (integer != null && integer == x) {
                 return true;
             }
 

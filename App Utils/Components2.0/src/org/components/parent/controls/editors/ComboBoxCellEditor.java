@@ -5,19 +5,13 @@
 package org.components.parent.controls.editors;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.AbstractAction;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -29,22 +23,13 @@ public class ComboBoxCellEditor extends CellEditor {
     private JTable tbl;
     // This method is called when a cell value is edited by the user.
 
-    @Override
-    public boolean stopCellEditing() {
-        boolean b = false;
-        if (isCellValid()) {
-            b = super.stopCellEditing();
-        }
-        return b;
-    }
-
-    public ComboBoxCellEditor() {
-
-//        super(new JComboBox());
+    public ComboBoxCellEditor(JTable tbl) {
+        this.tbl = tbl;
         init();
-
-
     }
+    
+
+    
 
     public JTable getTbl() {
         return tbl;
@@ -57,19 +42,18 @@ public class ComboBoxCellEditor extends CellEditor {
     public boolean isValide() {
         return true;
     }
-
-    public ComboBoxCellEditor(JTable tbl) {
-        init();
-//        super(new JComboBox());
-//        component = (JComboBox) getComponent();
-//        component.setEditable(true);
-        component.setModel(new DefaultComboBoxModel(new Object[]{"150", "250", "3650"}));
-        //  component.getEditor().addActionListener(new AbstractAction() {
-        
-        this.tbl = tbl;
+//
+//    public ComboBoxCellEditor(JTable tbl) {
 //        init();
-
-    }
+////        super(new JComboBox());
+////        component = (JComboBox) getComponent();
+////        component.setEditable(true);
+//        //  component.getEditor().addActionListener(new AbstractAction() {
+//        
+//        this.tbl = tbl;
+////        init();
+//
+//    }
 
     public boolean isCellValid() {
         return true;
@@ -91,8 +75,9 @@ public class ComboBoxCellEditor extends CellEditor {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                     if (isCellValid()) {
                     stopCellEditing();
-                    System.out.println(" "+e);
+                }
                 }
             }
         });
@@ -100,17 +85,37 @@ public class ComboBoxCellEditor extends CellEditor {
             @Override
             public void keyPressed(KeyEvent e) {              
                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                   System.out.println(" "+e);
+                    if (isCellValid()) {
+                    stopCellEditing();
+                }
                    
               } 
             }
         });
+//        component.addActionListener(new AbstractAction() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("sdfsdf");
+//                    if (isCellValid()) {
+//                    stopCellEditing();
+//                }
+//           
+//            }
+//        });
 
     }
 
+   
+
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+//        ((JTextComponent)((JComboBox) component).getEditor().getEditorComponent()).setText("" + value);
 
+        System.out.println("/**********  "+value);
+        ((JTextComponent)((JComboBox) component).getEditor().getEditorComponent()).setText("" + value);
+        ((JTextComponent)((JComboBox) component).getEditor().getEditorComponent()).selectAll();
+        
         return component;
     }
 
@@ -122,5 +127,10 @@ public class ComboBoxCellEditor extends CellEditor {
     @Override
     public JComponent getComponent() {
         return component;
+    }
+
+    @Override
+    public void getEditingValue() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

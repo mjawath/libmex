@@ -23,8 +23,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.biz.app.ui.util.TableUtil;
 import org.components.controls.CPopupMenu;
 import org.components.parent.controls.editors.TablePopUpCellEditor;
@@ -33,7 +31,7 @@ import org.components.parent.controls.editors.TablePopUpCellEditor;
  *
  * @author nnjj
  */
-public abstract class PagedPopUpPanel extends javax.swing.JPanel {
+public abstract class DropDownPopUpPanel extends javax.swing.JPanel {
 
     JTable tbl;
     JTextField textField;
@@ -84,7 +82,7 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
     }
 
     /** Creates new form Detail */
-    public PagedPopUpPanel(JTable tb, TablePopUpCellEditor field) {
+    public DropDownPopUpPanel(JTable tb, TablePopUpCellEditor field) {
         initComponents();
         tbl = tb;
         editor = field;
@@ -103,7 +101,7 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
         this.list = list;
     }
 
-    public PagedPopUpPanel(JTextField field) {
+    public DropDownPopUpPanel(JTextField field) {
         initComponents();
         textField = field;
 
@@ -116,7 +114,7 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
 
     }
 
-    public PagedPopUpPanel() {
+    public DropDownPopUpPanel() {
         initComponents();
         tbl = new JTable();
     }
@@ -180,23 +178,12 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
                     e.consume();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if (jpm.isVisible()) {
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().redispatchEvent(cxTable1, e);
                     e.consume();
-                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                   if (jpm.isVisible()) {
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().redispatchEvent(cxTable1, e);
                     e.consume();
-                   }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    System.out.println("popup panels related text field selected");
-                    if (jpm.isVisible()) {
-                    jpm.setVisible(false);
-                    e.consume();
-                   }
                 }
             }
         });
@@ -235,57 +222,20 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
         selectItem();
     }
 
-    public  void setModel(){
-       
-TableUtil.createTableModel(cxTable1, new String[]{"111","22","33,44","55","666","777"},new Class [] {
-        Object.class, String.class, String.class,Double.class,Double.class,Double.class,Double.class,Double.class
-    });
-    }
-    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cLabel1 = new org.components.controls.CLabel();
-        cTextField1 = new org.components.controls.CTextField();
-        cButton1 = new org.components.controls.CButton();
-        cButton2 = new org.components.controls.CButton();
-        cButton3 = new org.components.controls.CButton();
-        cButton4 = new org.components.controls.CButton();
-        cButton5 = new org.components.controls.CButton();
-        cButton6 = new org.components.controls.CButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         cxTable1 = new org.components.controls.CxTable();
-
-        cLabel1.setText("Popo fff");
-
-        cButton1.setText(">");
-
-        cButton2.setText(">>");
-
-        cButton3.setText(">|");
-
-        cButton4.setText("<");
-
-        cButton5.setText("<<");
-
-        cButton6.setText("|<");
 
         cxTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "nullfsdf", "nullsdafsadfd", "nullsadfd", "nullgeg"
+                "Value"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         cxTable1.setFocusable(false);
         jScrollPane1.setViewportView(cxTable1);
 
@@ -294,65 +244,19 @@ TableUtil.createTableModel(cxTable1, new String[]{"111","22","33,44","55","666",
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(cButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(cButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(cTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(cButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(cButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(cLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.components.controls.CButton cButton1;
-    private org.components.controls.CButton cButton2;
-    private org.components.controls.CButton cButton3;
-    private org.components.controls.CButton cButton4;
-    private org.components.controls.CButton cButton5;
-    private org.components.controls.CButton cButton6;
-    private org.components.controls.CLabel cLabel1;
-    private org.components.controls.CTextField cTextField1;
     private org.components.controls.CxTable cxTable1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

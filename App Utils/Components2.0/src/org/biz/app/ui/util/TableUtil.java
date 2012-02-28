@@ -102,12 +102,15 @@ public class TableUtil {
 
     }
 
+
+
+    
     public static void addrow(JTable jTable, Object[] row) {
         getdtm(jTable).addRow(row);
         jTable.scrollRectToVisible(jTable.getCellRect(jTable.getRowCount(), 0, true));
         jTable.scrollRectToVisible(jTable.getCellRect(jTable.getRowCount(), 0, true));
     }
-
+//First row will be visble
     public static void addrowSR(JTable jTable, Object[] row) {
 //    jTable.scrollRectToVisible(jTable.getCellRect(jTable.getRowCount() - 1, 0, true));
         getdtm(jTable).addRow(row);
@@ -266,7 +269,9 @@ public class TableUtil {
     }
 
     public static Object getSelectedModelsValueAt(JTable jt, int modelcolindex) {
-        return jt.getValueAt(jt.getSelectedRow(), jt.convertColumnIndexToView(modelcolindex));
+        int sr=jt.getSelectedRow();
+        if(sr<0){return null;}
+        return jt.getValueAt(sr, jt.convertColumnIndexToView(modelcolindex));
     }
 
     public static Object getSelectedValue(JTable jt) {
@@ -368,6 +373,28 @@ public class TableUtil {
 
     }
 
+    public static void selectNextRow(JTable jt, int e) {
+        int x = jt.getSelectedRow();
+        int r = jt.getRowCount();
+        if (e == KeyEvent.VK_DOWN) {
+            if (x + 1 < r) {
+
+                jt.getSelectionModel().setSelectionInterval(x + 1, x + 1);
+                return;
+            }
+
+        }
+        if (e == KeyEvent.VK_UP) {
+            if (x - 1 >= 0 && x - 1 < r) {
+                jt.getSelectionModel().setSelectionInterval(x - 1, x - 1);
+            }
+        }
+
+
+
+    }
+
+    
     public static void setModelValueat(JTable jt, Object value, int modelrowindex, int modelcolindex) {
         jt.setValueAt(value, jt.convertRowIndexToView(modelrowindex), jt.convertColumnIndexToView(modelcolindex));
     }

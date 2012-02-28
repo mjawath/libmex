@@ -54,16 +54,11 @@ public class TableEditable extends PxTable {
         action=new TableActions(this, new HashMap<Integer, TableColumnAction>());
     }
 
-    private boolean isCurrentRowValid=true;
-    
-    public boolean isCurrentRowValid() {
-        return isCurrentRowValid;
-    }
-    
-    public void setCurrentRowValid(boolean rowv) {
-         isCurrentRowValid=rowv;
-    }
+ 
 
+
+
+    
     @Override
     public void editingStopped(ChangeEvent e) {
         super.editingStopped(e);        
@@ -136,6 +131,8 @@ public class TableEditable extends PxTable {
         if(sr ==-1 || sr==rowIndex || ( sr!=rowIndex && action.rowValid())){
             super.changeSelection(rowIndex, columnIndex, toggle, extend);
             action.commitChanges(sr);
+//            editCellAt(rowIndex, columnIndex);
+            prepareEditor(this.getCellEditor(rowIndex, columnIndex), rowIndex, columnIndex);
         }
     }
 
@@ -161,7 +158,10 @@ public class TableEditable extends PxTable {
     public boolean editCellAt(int row, int column, EventObject e) {
     
         if(isCellSelected(row, column)){
-        return super.editCellAt(row, column, e);
+           boolean b=  super.editCellAt(row, column, e);
+//           Component jc= getEditorComponent();
+//           jc.dispatchEvent(new AWTEvent(e.getSource(),e.) {});
+        return b;
     }
     return false; 
     }

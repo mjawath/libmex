@@ -63,31 +63,6 @@ public class CxTable extends PxTable {
          isCurrentRowValid=rowv;
     }
 
-    @Override
-    public void editingStopped(ChangeEvent e) {
-        super.editingStopped(e);        
-                
-             
-                    action.selectionAction();
-                
-                
-//                boolean ab = //Action will return true if it need new row or 
-//                if (((rowcount-1 )==selrow) && ab) { //false normal selection           
-//                    TableUtil.addrow(this, new Object[]{});                    
-//                    this.changeSelection(selrow+1 , 1, false, false);
-//                } else {
-//                    
-//                if (((rowcount-1 ) > selrow) && ab){
-//                    System.out.println("ee");
-//                this.changeSelection(selrow+1, 1, false, false);
-//                return;
-//                }
-//                selcol = (colcount - 1) == selcol ? selcol : ++selcol;
-//                this.changeSelection(selrow, selcol, false, false);
-//                }
-                
-                    
-    }
     public void setTableSelection(TableActions action ){
         this.action=action;
     }
@@ -125,29 +100,8 @@ public class CxTable extends PxTable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    @Override
-    public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
-       
-        if(getCurSelectedRow()==-1 || getCurSelectedRow()==rowIndex ){ 
-        super.changeSelection(rowIndex, columnIndex, toggle, extend);
-        setCurSelectedRow(rowIndex);
-//        setCurrentRowValid(false);       
-       }
-        if(getCurSelectedRow()!=rowIndex && isCurrentRowValid()){
-        super.changeSelection(rowIndex, columnIndex, toggle, extend);
-        setCurSelectedRow(rowIndex);
-//        setCurrentRowValid(false);       
-       }
-    }
-    int curSelectedRow = -1;
-
-    public int getCurSelectedRow() {
-        return curSelectedRow;
-    }
-
-    public void setCurSelectedRow(int curSelectedRow) {
-        this.curSelectedRow = curSelectedRow;
-    }
+    
+   
 
     class CustomRenderer extends DefaultTableCellRenderer {
 
@@ -163,14 +117,6 @@ public class CxTable extends PxTable {
         }
     }
 
-    @Override
-    public boolean editCellAt(int row, int column, EventObject e) {
-    
-        if(isCellSelected(row, column)){
-        return super.editCellAt(row, column, e);
-    }
-    return false; 
-    }
 
     
     

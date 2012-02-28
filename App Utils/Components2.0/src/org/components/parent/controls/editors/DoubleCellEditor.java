@@ -15,20 +15,11 @@ import org.biz.app.ui.util.ComponentFactory;
  *
  * @author nnjj
  */
-public class DoubleCellEditor extends  CellEditor {
+public class DoubleCellEditor extends CellEditor {
 
     JTextField component;
     JTable tbl;
     // This method is called when a cell value is edited by the user.
-
-    @Override
-    public boolean stopCellEditing() {
-        boolean b = false;
-        if (isCellValid()) {           
-                 b = super.stopCellEditing();
-        }
-        return b;
-    }
 
     public DoubleCellEditor(JTable jt) {
         init(jt);
@@ -50,25 +41,23 @@ public class DoubleCellEditor extends  CellEditor {
         ComponentFactory.createDoubleTextField(component);
         component.addActionListener(new AbstractAction() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
-                stopCellEditing();
-             
+
+                if (isCellValid()) {
+                    stopCellEditing();
+                }
             }
         });
 
     }
 
-   
-
-    public boolean isCellValid() {
-        return true;
-    }
-
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int rowIndex, int vColIndex) {
-  
+
         // 'value' is value contained in the cell located at (rowIndex, vColIndex)
-      
+
         // Configure the component with the specified value
         ((JTextField) component).setText("" + value);
         ((JTextField) component).selectAll();
@@ -79,6 +68,7 @@ public class DoubleCellEditor extends  CellEditor {
 
     // This method is called when editing is completed.
     // It must return the new value to be stored in the cell.
+    @Override
     public Object getCellEditorValue() {
         String s = ((JTextField) component).getText();
         if (!"".equals(s)) {
@@ -88,6 +78,7 @@ public class DoubleCellEditor extends  CellEditor {
         return null;
     }
 
+    @Override
     public JTextField getComponent() {
         return component;
     }

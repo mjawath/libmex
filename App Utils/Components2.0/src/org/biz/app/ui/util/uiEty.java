@@ -7,9 +7,11 @@ package org.biz.app.ui.util;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
@@ -28,6 +30,17 @@ public class uiEty {
 
     public static void setcombomodel(String[] str, JComboBox box) {
         box.setModel(new DefaultComboBoxModel(str));
+    }
+
+    public static void cmbModelWithoutNull(String[] str, JComboBox box) {
+
+        ArrayList<String> vec=new ArrayList<String>();
+        for (String st : str) {
+            if(st!=null){
+            vec.add(st);
+            }
+        }
+        box.setModel(new DefaultComboBoxModel(vec.toArray()));
     }
 
     public static void loadcombo(JComboBox com, Set lst) {
@@ -248,7 +261,7 @@ public class uiEty {
             return x;
         }
     }
-    
+
     // specified rows cols value
     public static String colToStrE(JTable txtcom,int row ,int col) {
         Object x = TableUtil.getValueat(txtcom, row,col);
@@ -258,7 +271,7 @@ public class uiEty {
             return x.toString();
         }
     }
-    
+
     // specified rows cols value
     public static String colToStr(JTable txtcom,int row ,int col) {
         Object x = TableUtil.getValueat(txtcom, row,col);
@@ -290,7 +303,7 @@ public class uiEty {
         }
         return null;
     }
-    
+
     public static Double colToDbl(JTable txtcom, int col) {
         Object x = TableUtil.getSelectedValue(txtcom, col);
         if (x != null) {
@@ -443,7 +456,7 @@ public class uiEty {
 
     }
 
-   static int x=-99; 
+   static int x=-99;
     public static void setKeyAction(JComponent component,Action escpli,int keycode){
 
         String xx="act"+ ++x;
@@ -454,11 +467,11 @@ public class uiEty {
     public static void main(String[] args) {
         System.out.println(nowTimesStamp());
     }
-    
+
     public static  Double getmultyply(Double d1,Double d2 ){
         BigDecimal b1=new BigDecimal(d1==null?0:d1);
         BigDecimal b2=new BigDecimal(d1==null?0:d2);
-        return b1.multiply(b2).doubleValue();            
+        return b1.multiply(b2).doubleValue();
     }
-    
+
 }
