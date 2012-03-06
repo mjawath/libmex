@@ -68,111 +68,111 @@ public class InvoiceMasterUI2 extends TabPanelUI {
 //       jd.setSize(300,300);
 //       jd.setVisible(true);
         //
-         lineItemPanel = new SalesLineItemPanel() {
-        
-        @Override
-        public SalesInvoiceLineItem panelToEty() {
-        SalesInvoiceLineItem sl = super.panelToEty();
-        //validated line
-        //update table row
-        //add to list
-        addsales(sl);
-        //replace selected row
-        //                addToTable(lineItems);
-        
-        System.out.println(sl);
-        return sl;
-        }
-        
-        public void selectEty() {
-        //get selected row 
-        //get line item from list 
-        //set seleceted object to lineitempanel
-        SalesInvoiceLineItem sl = InvoiceMasterUI2.this.getSelectedLine();
-        salesline = sl;
-        pc.setPopDesable(true);
-        etyToPanel();
-        pc.setPopDesable(false);
-        System.out.println("obje   selected  ");
-        
-        }
-        
-        @Override
-        public void action() {
-        System.out.println("sales line item  ...*** ");
-        SalesInvoiceLineItem sl = super.panelToEty();
-        Object id = sl.getId();
-        if(id==null){
-        sl.setId(System.currentTimeMillis()+"tt");
-        }
-        etyToRow(sl);
-        
-        //check lineittem id is null then if its need a new row insert a new row  
-        //or move to next row
-        
-        if (id == null) {
-        setnewrow();
-        
-        }
-        
-        }
+        lineItemPanel = new SalesLineItemPanel(jf) {
+
+            @Override
+            public SalesInvoiceLineItem panelToEty() {
+                SalesInvoiceLineItem sl = super.panelToEty();
+                //validated line
+                //update table row
+                //add to list
+                addsales(sl);
+                //replace selected row
+                //                addToTable(lineItems);
+
+                System.out.println(sl);
+                return sl;
+            }
+
+            public void selectEty() {
+                //get selected row 
+                //get line item from list 
+                //set seleceted object to lineitempanel
+                SalesInvoiceLineItem sl = InvoiceMasterUI2.this.getSelectedLine();
+                salesline = sl;
+                pc.setPopDesable(true);
+                etyToPanel();
+                pc.setPopDesable(false);
+                System.out.println("obje   selected  ");
+
+            }
+
+            @Override
+            public void action() {
+                System.out.println("sales line item  ...*** ");
+                SalesInvoiceLineItem sl = super.panelToEty();
+                Object id = sl.getId();
+                if (id == null) {
+                    sl.setId(System.currentTimeMillis() + "tt");
+                }
+                etyToRow(sl);
+
+                //check lineittem id is null then if its need a new row insert a new row  
+                //or move to next row
+
+                if (id == null) {
+                    setnewrow();
+
+                }
+
+            }
         };
-        
-                lineItemPanel.setTable(tblInvoice);
+
+        lineItemPanel.setTable(tblInvoice);
         lineItemPanel.setcTextField1(lineItemPanel.getItemFiled());
         System.gc();
         pc = new PagedPopUpPanel(lineItemPanel.getItemFiled()) {
-        
-        @Override
-        public void search(String qry) {
-        try {
-        
-        pc.setList(itemService.getDao().byCode(qry));
-        } catch (Exception e) {
-        e.printStackTrace();
-        }
-        }
-        
-        @Override
-        public void action() {
-        
-        String ob = pc.getSelectedID();
-        Item item = null;
-        //find Item
-        for (Item it : listItem) {
-        if (ob.equals(it.getId())) {
-        pc.setSelectedObject(it);
-        item = it;
-        break;
-        }
-        }
-        int sr = tblInvoice.getSelectedRow();
-        System.out.println("sr " + sr);
-        //                loadUnit(item);
-        SalesInvoiceLineItem lineItem = lineItemPanel.panelToEty();
-        //                if current row valid 
-        lineItem.setItem(item);
-        //                replace row
-        addsales(lineItem);
+
+            @Override
+            public void search(String qry) {
+                try {
+
+                    pc.setList(itemService.getDao().byCode(qry));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void action() {
+
+                String ob = pc.getSelectedID();
+                Item item = null;
+                //find Item
+                for (Item it : listItem) {
+                    if (ob.equals(it.getId())) {
+                        pc.setSelectedObject(it);
+                        item = it;
+                        break;
+                    }
+                }
+                int sr = tblInvoice.getSelectedRow();
+                System.out.println("sr " + sr);
+                //                loadUnit(item);
+                SalesInvoiceLineItem lineItem = lineItemPanel.panelToEty();
+                //                if current row valid 
+                lineItem.setItem(item);
+                //                replace row
+                addsales(lineItem);
 //        lineItemPanel.moveNextFocus();
-        //                 lineItemPanel.getItemdescFiled().setInputVerifier(new InputVerifier() {
-        //
-        //                    @Override
-        //                    public boolean verify(JComponent input) {
-        //                        throw new UnsupportedOperationException("Not supported yet.");
-        //                    }
-        //                });
-        
-        
-        }
-        
-        @Override
-        public Object[] data(Object item) {
-        Item it = (Item) item;
-        return new Object[]{it.getId(), it.getCode(), it.getDescription()};
-        }
+                //                 lineItemPanel.getItemdescFiled().setInputVerifier(new InputVerifier() {
+                //
+                //                    @Override
+                //                    public boolean verify(JComponent input) {
+                //                        throw new UnsupportedOperationException("Not supported yet.");
+                //                    }
+                //                });
+
+
+            }
+
+            @Override
+            public Object[] data(Object item) {
+                Item it = (Item) item;
+                return new Object[]{it.getId(), it.getCode(), it.getDescription()};
+            }
         };
-         
+
         uiEty.setKeyAction(tblInvoice, new AbstractAction() {
 
             public void actionPerformed(ActionEvent e) {
@@ -251,6 +251,7 @@ public class InvoiceMasterUI2 extends TabPanelUI {
 
 
         listStaff = new ArrayList<Staff>();
+        
         salesPopup = new PagedPopUpPanel(tsalesman) {
 
             @Override
@@ -722,7 +723,7 @@ public class InvoiceMasterUI2 extends TabPanelUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
-   
+
 
         /*
         invoice.setId(EntityService.getKeys());
@@ -738,7 +739,7 @@ public class InvoiceMasterUI2 extends TabPanelUI {
         lineItems.add(new SalesInvoiceLineItem());
         addToTable(lineItems);        
         
-         */        JFrame jf = (JFrame) Sessions.getObj("mainui");
+         */ JFrame jf = (JFrame) Sessions.getObj("mainui");
         JDialog jd = new JDialog(jf);
 
         jd.setSize(200, 300);
