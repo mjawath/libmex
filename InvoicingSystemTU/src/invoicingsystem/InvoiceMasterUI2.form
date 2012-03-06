@@ -280,17 +280,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Container class="org.components.containers.CPanel" name="cPanel4">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="380" width="230" height="120"/>
-        </Constraint>
-      </Constraints>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-    </Container>
     <Component class="org.components.controls.CLabel" name="cLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Date"/>
@@ -307,7 +296,7 @@
     <Container class="org.components.containers.CPanel" name="cPanel3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="500" y="10" width="170" height="110"/>
+          <AbsoluteConstraints x="510" y="10" width="170" height="110"/>
         </Constraint>
       </Constraints>
 
@@ -396,7 +385,7 @@
     <Container class="org.components.containers.CPanel" name="cPanel5">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="240" y="10" width="250" height="110"/>
+          <AbsoluteConstraints x="250" y="10" width="250" height="110"/>
         </Constraint>
       </Constraints>
 
@@ -534,7 +523,7 @@
         <Component class="org.components.controls.TableEditable" name="tblInvoice">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="2">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="false" title="id" type="java.lang.String"/>
                 <Column editable="false" title="Item Code" type="java.lang.String"/>
                 <Column editable="false" title="Desc" type="java.lang.String"/>
