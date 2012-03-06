@@ -150,6 +150,17 @@ public class TableUtil {
 
     }
 
+    
+    public static void replacerowValues(JTable jTable, Object[] row, int point) {
+        point = jTable.convertRowIndexToModel(point);
+        for (int i = 0; i < row.length; i++) {
+            Object va = row[i];
+            getdtm(jTable).setValueAt(va, point, i);
+        }
+        
+        
+    }
+    
     public static void removerow(JTable jTable, int point) {
         point = jTable.convertRowIndexToModel(point);
         getdtm(jTable).removeRow(point);
@@ -378,15 +389,16 @@ public class TableUtil {
         int r = jt.getRowCount();
         if (e == KeyEvent.VK_DOWN) {
             if (x + 1 < r) {
-
-                jt.getSelectionModel().setSelectionInterval(x + 1, x + 1);
+            jt.changeSelection(x + 1, x + 1, false, false);
+//                jt.getSelectionModel().setSelectionInterval(x + 1, x + 1);
                 return;
             }
 
         }
         if (e == KeyEvent.VK_UP) {
             if (x - 1 >= 0 && x - 1 < r) {
-                jt.getSelectionModel().setSelectionInterval(x - 1, x - 1);
+//                jt.getSelectionModel().setSelectionInterval(x - 1, x - 1);
+                jt.changeSelection(x - 1, x - 1,false, false);
             }
         }
 

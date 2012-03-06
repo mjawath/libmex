@@ -132,7 +132,7 @@ public class TableEditable extends PxTable {
             super.changeSelection(rowIndex, columnIndex, toggle, extend);
             action.commitChanges(sr);
 //            editCellAt(rowIndex, columnIndex);
-            prepareEditor(this.getCellEditor(rowIndex, columnIndex), rowIndex, columnIndex);
+//            prepareEditor(this.getCellEditor(rowIndex, columnIndex), rowIndex, columnIndex);
         }
     }
 
@@ -147,7 +147,11 @@ public class TableEditable extends PxTable {
             if (isSelected && hasFocus) {
                 c.setBackground(Color.red);
             }
-
+            int sr=table.getSelectedRow();
+            int sc=table.getSelectedColumn();
+//            if (sr==row && sc== column) {
+//                c.setBackground(Color.red);
+//            }
 
             // Formatting
             return c;
