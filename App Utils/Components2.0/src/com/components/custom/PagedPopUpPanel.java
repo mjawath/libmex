@@ -23,8 +23,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.biz.app.ui.util.TableUtil;
 import org.components.controls.CPopupMenu;
 import org.components.parent.controls.editors.TablePopUpCellEditor;
@@ -43,6 +41,7 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
     String selectedID ;
     String pageKey;
     List list;
+    Boolean popupDisabled=false;
 
     
     
@@ -66,6 +65,9 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
         this.selectedObject = selectedObject;
     }
     
+    public void setPopDesable(Boolean disable){
+        popupDisabled=disable;
+    }
 
     public JTable getTbl() {
         return tbl;
@@ -124,7 +126,7 @@ public abstract class PagedPopUpPanel extends javax.swing.JPanel {
 
     public void showPopUp() {
         try {
-            if (!jpm.isVisible()) {
+            if (!jpm.isVisible() && !popupDisabled) {
                 jpm.setFocusable(false);
                 this.setSize(600, 300);
                 jpm.setSize(200, 200);                
