@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import org.biz.invoicesystem.entity.BEO;
 import org.biz.invoicesystem.entity.master.Customer;
 import org.biz.invoicesystem.entity.master.Staff;
 
@@ -23,7 +24,7 @@ import org.biz.invoicesystem.entity.master.Staff;
  * @author mjawath
  */
 @Entity
-public class SalesInvoice implements Serializable {
+public class SalesInvoice extends BEO implements Serializable {
 
     @Id
     private String id;//timestamp + random string + domain level generated string 

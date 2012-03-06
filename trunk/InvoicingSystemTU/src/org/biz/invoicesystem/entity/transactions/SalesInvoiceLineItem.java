@@ -4,6 +4,7 @@
  */
 package org.biz.invoicesystem.entity.transactions;
 
+import org.biz.invoicesystem.entity.BEO;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import org.biz.invoicesystem.entity.master.Item;
  * @author mjawath
  */
 @Entity
-public class SalesInvoiceLineItem implements Serializable  {
+public class SalesInvoiceLineItem extends BEO implements Serializable  {
     @Id
     private String id;
     private String description;
