@@ -10,14 +10,19 @@
  */
 package invoicingsystem;
 
-import com.sun.awt.AWTUtilities;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
@@ -32,12 +37,20 @@ import org.biz.app.ui.util.uiEty;
 public class LineItemPanel extends javax.swing.JDialog {
 
     Object lineitem;
+
     public LineItemPanel(JFrame jf) {
-        super(jf,true);
+        super(jf, true);
+        init();
     }
+
     /** Creates new form LineItemPanel */
     public LineItemPanel() {
         super();
+        init();
+
+    }
+
+    private void init() {
 
         setModal(true);
 
@@ -55,21 +68,19 @@ public class LineItemPanel extends javax.swing.JDialog {
 
     }
 
-
-    
     public void showWithoutFocus() {
-               
-                int x = (int) jt.getLocationOnScreen().x;
-                int y = (int) jt.getLocationOnScreen().y;
-                int sr = jt.getSelectedRow();
-                int hight = (sr + 1) * jt.getRowHeight();
-                LineItemPanel.this.setLocation(x, y + hight);
+
+        int x = (int) jt.getLocationOnScreen().x;
+        int y = (int) jt.getLocationOnScreen().y;
+        int sr = jt.getSelectedRow();
+        int hight = (sr + 1) * jt.getRowHeight();
+        LineItemPanel.this.setLocation(x, y + hight);
 //                lineItemDialogPanel.setFocusable(false);
 //                LineItemPanel.this.showWithoutFocus();
 //                    LineItemPanel.this.
-                    selectEty();
-                
-               
+        selectEty();
+
+
 //        setFocusableWindowState(false);
         this.setVisible(true);
 //        setFocusableWindowState(true);
@@ -124,23 +135,36 @@ public class LineItemPanel extends javax.swing.JDialog {
             }
         }, KeyEvent.VK_DOWN);
 
-        
+
         jt.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
-                
-                if(!e.getValueIsAdjusting()){       
+
+                if (!e.getValueIsAdjusting()) {
                     showWithoutFocus();
                 }
             }
         });
-//        addFocusListener(new FocusAdapter() {
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                LineItemPanel.this.setVisible(false);
-//            }
-//        });
+       jt.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusLost(FocusEvent e) {
+//                for (Component component : LineItemPanel.this.getComponents()) {
+//                    if(component.isFocusOwner()){
+//                        LineItemPanel.this.setVisible(false);
+//                    }
+//                }
+                
+            }
+        });
+       addWindowFocusListener(new WindowAdapter() {
+
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                        LineItemPanel.this.setVisible(false);
+            }
+       
+       });
 //        addw
 //        cTextField1.addKeyListener(new KeyAdapter() {
 //
@@ -150,15 +174,17 @@ public class LineItemPanel extends javax.swing.JDialog {
 //            }
 //        });
     }
- 
+
     public Object panelToEty() {
-    return null;
+        return null;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(251, 237, 163));
         getContentPane().setLayout(null);
 
         pack();
@@ -173,9 +199,10 @@ public class LineItemPanel extends javax.swing.JDialog {
     public JTextField getcTextField1() {
         return cTextField1;
     }
-      public void dispatchEventx(KeyEvent event) {
+
+    public void dispatchEventx(KeyEvent event) {
         System.out.println("qffffff" + event + event.getComponent());
-                cTextField1.requestFocus();
+        cTextField1.requestFocus();
         KeyboardFocusManager.getCurrentKeyboardFocusManager().redispatchEvent(cTextField1, event);
 
         event.consume();
@@ -184,12 +211,10 @@ public class LineItemPanel extends javax.swing.JDialog {
     public void setcTextField1(JTextField cTextField1) {
         this.cTextField1 = cTextField1;
     }
-
-      protected JTextField cTextField1;
+    protected JTextField cTextField1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    public  void selectEty() {
-    
+    public void selectEty() {
     }
 }

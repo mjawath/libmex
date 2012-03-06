@@ -31,6 +31,44 @@ public class SalesLineItemPanel extends LineItemPanel {
 
         public SalesLineItemPanel(JFrame jf) {
         super(jf);
+        initComponents();
+        
+        al = new ArrayList();
+        al.add(titemcode);
+        al.add(tdescription);
+        al.add(tqty);
+        al.add(tprice);
+        al.add(tunit);
+        for (Object ct : al) {
+            Component com = (Component) ct;
+            com.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        moveNextFocus();                        
+                        e.consume();
+                    }
+                }
+            });
+
+        }
+
+        tunit.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                    action();
+                    titemcode.requestFocus();
+//                rowToEty();
+                    e.consume();
+                }
+
+            }
+        });
+        
         }
     /** Creates new form LineItemPanel */
     public SalesLineItemPanel() {
@@ -110,8 +148,7 @@ public class SalesLineItemPanel extends LineItemPanel {
         tunit = new org.components.controls.CTextField();
         tlinetotal = new org.components.controls.CTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setBackground(new java.awt.Color(247, 230, 130));
         getContentPane().add(titemcode);
         titemcode.setBounds(20, 30, 122, 25);
         getContentPane().add(tdescription);
@@ -154,6 +191,7 @@ public class SalesLineItemPanel extends LineItemPanel {
         salesline=(SalesInvoiceLineItem)lineitem;
         
     }
+    
     public void etyToPanel() {
     Item it= salesline.getItem();
     if(it!=null){
