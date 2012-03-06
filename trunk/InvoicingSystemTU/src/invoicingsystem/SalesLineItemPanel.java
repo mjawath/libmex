@@ -10,6 +10,9 @@
  */
 package invoicingsystem;
 
+import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -33,7 +36,7 @@ public class SalesLineItemPanel extends LineItemPanel {
     public SalesLineItemPanel() {
         super();
         initComponents();
-        /*
+        
         al = new ArrayList();
         al.add(titemcode);
         al.add(tdescription);
@@ -79,7 +82,7 @@ public class SalesLineItemPanel extends LineItemPanel {
                 Component comp = (Component) al.get(++id);
                 comp.requestFocus();
             }
-        }*/
+        }
     }
 
     @Override
