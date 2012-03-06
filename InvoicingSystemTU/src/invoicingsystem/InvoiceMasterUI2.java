@@ -55,7 +55,7 @@ public class InvoiceMasterUI2 extends TabPanelUI {
     public InvoiceMasterUI2() {
         initComponents();
 
-//        init();
+        init();
     }
 
     @Override
@@ -118,7 +118,7 @@ public class InvoiceMasterUI2 extends TabPanelUI {
         }
         };
         
-        //        lineItemPanel.setTable(tblInvoice);
+                lineItemPanel.setTable(tblInvoice);
         lineItemPanel.setcTextField1(lineItemPanel.getItemFiled());
         System.gc();
         pc = new PagedPopUpPanel(lineItemPanel.getItemFiled()) {
@@ -722,7 +722,7 @@ public class InvoiceMasterUI2 extends TabPanelUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cButton1ActionPerformed
-        init();
+   
 
         /*
         invoice.setId(EntityService.getKeys());
